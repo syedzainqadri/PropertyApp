@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/categories.dart';
-
-import 'color_scheme.dart';
+import '../Utils/color_scheme.dart';
+import 'categories.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({Key? key}) : super(key: key);

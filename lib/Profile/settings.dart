@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/account_details.dart';
 
-import 'color_scheme.dart';
+import '../Utils/color_scheme.dart';
+import 'account_details.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);

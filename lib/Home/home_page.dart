@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/categories.dart';
-import 'package:realestapp/color_scheme.dart';
-import 'package:realestapp/list_widget.dart';
+import '../AddListings/list_widget.dart';
+import '../Categories/categories.dart';
+import '../Utils/color_scheme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

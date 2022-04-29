@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/chat_ui.dart';
 
-import 'color_scheme.dart';
+import '../Utils/color_scheme.dart';
+import 'chat_ui.dart';
 
 class ConversationPage extends StatefulWidget{
   const ConversationPage({Key? key}) : super(key: key);

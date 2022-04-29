@@ -14,3 +14,23 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+
+# Development Notes:
+1 Sign In
+2 Sign Up
+3 Sign In with Phone
+4 Sign Up with Phone
+5 OTP Verification
+6 Home Page
+7 Categories Page
+8 Conversations Page
+9 Search Page
+10 User Profile
+11 Account Details
+12 My Listings
+13 My Favorites
+14 Membership
+15 Settings
+16 Chat UI

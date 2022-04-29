@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:realestapp/color_scheme.dart';
 
-import 'item_widget.dart';
+import '../Home/item_widget.dart';
+import '../Utils/color_scheme.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);

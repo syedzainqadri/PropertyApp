@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/color_scheme.dart';
 
-import 'list_widget.dart';
+import '../AddListings/list_widget.dart';
+import '../Utils/color_scheme.dart';
 
-class MyFavorites extends StatefulWidget {
-  const MyFavorites({Key? key}) : super(key: key);
+class MyListings extends StatefulWidget {
+  const MyListings({Key? key}) : super(key: key);
 
   @override
-  State<MyFavorites> createState() => _MyFavoritesState();
+  State<MyListings> createState() => _MyListingsState();
 }
 
-class _MyFavoritesState extends State<MyFavorites> {
+class _MyListingsState extends State<MyListings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class _MyFavoritesState extends State<MyFavorites> {
         elevation: 0.0,
         centerTitle: true,
         title: const Text(
-          'My Favorites',
+          'My Listings',
           style: TextStyle(color: lightGreen),
         ),
         leading: GestureDetector(
@@ -43,19 +43,19 @@ class _MyFavoritesState extends State<MyFavorites> {
           shrinkWrap: true,
           children: [
             listWidget('house1', '1500 Suffix Street', 'San Francisco, CA', true),
-            listWidget('house2', '1500 Suffix Street', 'San Francisco, CA', true),
-            listWidget('house3', '1500 Suffix Street', 'San Francisco, CA', true),
+            listWidget('house2', '1500 Suffix Street', 'San Francisco, CA', false),
+            listWidget('house3', '1500 Suffix Street', 'San Francisco, CA', false),
             listWidget('condo1', '1500 Suffix Street', 'San Francisco, CA', true),
             listWidget('condo2', '1500 Suffix Street', 'San Francisco, CA', true),
             listWidget('apartment', '1500 Suffix Street', 'San Francisco, CA', true),
-            listWidget('land', '1500 Suffix Street', 'San Francisco, CA', true),
-            listWidget('townhouse', '1500 Suffix Street', 'San Francisco, CA', true),
-            listWidget('building', '1500 Suffix Street', 'San Francisco, CA', true),
+            listWidget('land', '1500 Suffix Street', 'San Francisco, CA', false),
+            listWidget('townhouse', '1500 Suffix Street', 'San Francisco, CA', false),
+            listWidget('building', '1500 Suffix Street', 'San Francisco, CA', false),
             listWidget('townhouse1', '1500 Suffix Street', 'San Francisco, CA', true),
-            listWidget('house1', '1500 Suffix Street', 'San Francisco, CA', true),
-            listWidget('land', '1500 Suffix Street', 'San Francisco, CA', true),
+            listWidget('house1', '1500 Suffix Street', 'San Francisco, CA', false),
+            listWidget('land', '1500 Suffix Street', 'San Francisco, CA', false),
             listWidget('townhouse1', '1500 Suffix Street', 'San Francisco, CA', true),
-            listWidget('land', '1500 Suffix Street', 'San Francisco, CA', true),
+            listWidget('land', '1500 Suffix Street', 'San Francisco, CA', false),
           ],
         ),
       ),

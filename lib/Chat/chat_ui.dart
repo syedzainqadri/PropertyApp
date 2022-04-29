@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'color_scheme.dart';
+import '../Utils/color_scheme.dart';
 
 class ChatUi extends StatefulWidget {
   final String title,image;

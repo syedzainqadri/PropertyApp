@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'add_listing.dart';
-import 'color_scheme.dart';
+import '../AddListings/add_listing.dart';
+import '../Home/item_widget.dart';
+import '../Utils/color_scheme.dart';
 import 'filters.dart';
-import 'item_widget.dart';
 
 class Category extends StatelessWidget {
   final String title;

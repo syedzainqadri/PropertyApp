@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
-import 'color_scheme.dart';
+import '../Utils/color_scheme.dart';
 
 class Filter extends StatefulWidget {
   const Filter({Key? key}) : super(key: key);

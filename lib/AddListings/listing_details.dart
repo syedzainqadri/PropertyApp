@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'color_scheme.dart';
+import '../Utils/color_scheme.dart';
 
 class ListingDetails extends StatefulWidget {
   final String street,price,image;

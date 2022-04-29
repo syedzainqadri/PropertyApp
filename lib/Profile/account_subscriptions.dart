@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'color_scheme.dart';
+
+import '../Utils/color_scheme.dart';
 
 class AccountSubscription extends StatefulWidget {
   const AccountSubscription({Key? key}) : super(key: key);

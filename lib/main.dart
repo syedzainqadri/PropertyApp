@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:realestapp/color_scheme.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/sign_in.dart';
-import 'package:realestapp/sign_up.dart';
-
-import 'contants.dart';
+import 'Auth/sign_in.dart';
+import 'Auth/sign_up.dart';
+import 'Utils/color_scheme.dart';
+import 'Utils/constants.dart';
 
 void main() {
   runApp(const MyApp());

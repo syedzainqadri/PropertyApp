@@ -1,13 +1,13 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/settings.dart';
+import '../Auth/sign_in.dart';
 import 'account_details.dart';
-import 'color_scheme.dart';
+import '../Utils/color_scheme.dart';
 import 'my_favorites.dart';
 import 'my_listings.dart';
-import 'sign_in.dart';
 import 'account_subscriptions.dart';
+import 'settings.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);

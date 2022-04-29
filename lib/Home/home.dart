@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:realestapp/add_listing.dart';
-import 'package:realestapp/categories_page.dart';
-import 'package:realestapp/conversation_page.dart';
-
-import 'color_scheme.dart';
+import '../AddListings/add_listing.dart';
+import '../Categories/categories_page.dart';
+import '../Chat/conversation_page.dart';
+import '../Profile/profile.dart';
+import '../Search/search_page.dart';
+import '../Utils/color_scheme.dart';
 import 'home_page.dart';
-import 'profile.dart';
-import 'search_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

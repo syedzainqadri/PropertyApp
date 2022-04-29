@@ -1,21 +1,18 @@
-
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:realestapp/color_scheme.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/contants.dart';
-
-import 'home.dart';
-import 'sign_in_phone.dart';
-
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+import '../Home/home.dart';
+import 'sign_up_phone.dart';
+import '../Utils/constants.dart';
+import '../Utils/color_scheme.dart';
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +37,7 @@ class _SignInState extends State<SignIn> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Sign In',
+                'Create New Account',
                 style: TextStyle(
                   color: lightGreen,
                   fontWeight: FontWeight.bold,
@@ -50,41 +47,66 @@ class _SignInState extends State<SignIn> {
               const SizedBox(
                 height: 25,
               ),
+              Center(
+                child: Badge(
+                  badgeColor: lightGreen,
+                  badgeContent: const Icon(
+                    Icons.camera_alt,
+                    color: white,
+                  ),
+                  position: const BadgePosition(bottom: 1, end: 1),
+                  child: Container(
+                    width: 120,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: mediumGrey),
+                      image: const DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage('assets/images/1.png'),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              textField('First Name', false),
+              const SizedBox(
+                height: 15,
+              ),
+              textField('Last Name', false),
+              const SizedBox(
+                height: 15,
+              ),
               textField('E-mail address', false),
               const SizedBox(
                 height: 15,
               ),
-              textField('Password', false),
-              const SizedBox(
-                height: 35,
-              ),
-              defaultButton('Log In', const Home()),
+              textField('Password', true),
               const SizedBox(
                 height: 15,
               ),
-            const  Center(child:  Text('OR')),
+              textField('Confirm Password', true),
               const SizedBox(
                 height: 15,
               ),
-              socialButton('Facebook Login',  const FaIcon(FontAwesomeIcons.facebook), darkBlue),
+              defaultButton('Sign Up', const Home()),
               const SizedBox(
                 height: 15,
               ),
-              socialButton('Google Login', const FaIcon(FontAwesomeIcons.google), brightRed),
+              const Center(child: Text('OR')),
               const SizedBox(
                 height: 15,
-              ),
-              socialButton('LinkedIn Login',  const FaIcon(FontAwesomeIcons.linkedin),mediumBlue),
-              const SizedBox(
-                height: 40,
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const SignInPhone());
+                  Get.to(const SignUpPhone());
                 },
                 child: const Center(
-                  child:  Text(
-                    'Login with phone number',
+                  child: Text(
+                    'Sign up with phone number',
                     style: TextStyle(
                       color: lightBlue,
                       fontSize: 15,

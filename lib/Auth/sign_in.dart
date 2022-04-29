@@ -1,23 +1,20 @@
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../Home/home.dart';
+import '../Utils/color_scheme.dart';
 import 'package:get/get.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/otp_field_style.dart';
-import 'package:otp_text_field/style.dart';
-import 'package:realestapp/home.dart';
-import 'color_scheme.dart';
-import 'contants.dart';
-import 'sign_in.dart';
+import '../Utils/constants.dart';
+import 'sign_in_phone.dart';
 
-class VerifyPhone extends StatefulWidget {
-  const VerifyPhone({Key? key}) : super(key: key);
+class SignIn extends StatefulWidget {
+  const SignIn({Key? key}) : super(key: key);
 
   @override
-  State<VerifyPhone> createState() => _VerifyPhoneState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _VerifyPhoneState extends State<VerifyPhone> {
-  OtpFieldController otpController = OtpFieldController();
+class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,35 +49,23 @@ class _VerifyPhoneState extends State<VerifyPhone> {
               const SizedBox(
                 height: 25,
               ),
-              SizedBox(
-                width: double.infinity,
-                child: OTPTextField(
-                    controller: otpController,
-                    otpFieldStyle: OtpFieldStyle(
-                      focusBorderColor: lightGreen,
-                    ),
-                    length: 6,
-                    width: MediaQuery.of(context).size.width,
-                    textFieldAlignment: MainAxisAlignment.spaceAround,
-                    fieldWidth: 35,
-                    fieldStyle: FieldStyle.box,
-                    outlineBorderRadius: 8,
-                    style: const TextStyle(fontSize: 17),
-                    onChanged: (pin) {},
-                    onCompleted: (pin) {
-                      if(pin == '123456'){
-                        Get.to(const Home());
-                      }
-                    }),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              const Center(child: Text('OR')),
+              textField('E-mail address', false),
               const SizedBox(
                 height: 15,
               ),
-              socialButton('Facebook Login', const FaIcon(FontAwesomeIcons.facebook), darkBlue),
+              textField('Password', false),
+              const SizedBox(
+                height: 35,
+              ),
+              defaultButton('Log In', const Home()),
+              const SizedBox(
+                height: 15,
+              ),
+            const  Center(child:  Text('OR')),
+              const SizedBox(
+                height: 15,
+              ),
+              socialButton('Facebook Login',  const FaIcon(FontAwesomeIcons.facebook), darkBlue),
               const SizedBox(
                 height: 15,
               ),
@@ -94,11 +79,11 @@ class _VerifyPhoneState extends State<VerifyPhone> {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const SignIn());
+                  Get.to(const SignInPhone());
                 },
                 child: const Center(
-                  child: Text(
-                    'Login with Email',
+                  child:  Text(
+                    'Login with phone number',
                     style: TextStyle(
                       color: lightBlue,
                       fontSize: 15,

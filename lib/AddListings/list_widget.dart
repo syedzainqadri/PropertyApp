@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/listing_details.dart';
 
-import 'color_scheme.dart';
+import '../Utils/color_scheme.dart';
+import 'listing_details.dart';
 
 listWidget(image, street, city, isFovorite) {
   return SizedBox(

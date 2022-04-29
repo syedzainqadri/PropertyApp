@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/listing_details.dart';
 
-import 'color_scheme.dart';
+import '../AddListings/listing_details.dart';
+import '../Utils/color_scheme.dart';
 
 itemWidget(image, street, date, location, price) {
     return GestureDetector(

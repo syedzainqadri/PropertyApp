@@ -1,26 +1,27 @@
+import 'package:badges/badges.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:country_code_picker/country_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:realestapp/color_scheme.dart';
+import '../Utils/color_scheme.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/contants.dart';
-import 'package:realestapp/verify_phone.dart';
 
-class SignInPhone extends StatefulWidget {
-  const SignInPhone({Key? key}) : super(key: key);
+import '../Utils/constants.dart';
+import 'verify_phone.dart';
+
+class SignUpPhone extends StatefulWidget {
+  const SignUpPhone({Key? key}) : super(key: key);
 
   @override
-  State<SignInPhone> createState() => _SignInPhoneState();
+  State<SignUpPhone> createState() => _SignUpPhoneState();
 }
 
-class _SignInPhoneState extends State<SignInPhone> {
+class _SignUpPhoneState extends State<SignUpPhone> {
   final _phoneFocus = FocusNode();
+  bool isActive = false;
   @override
   Widget build(BuildContext context) {
-    
- // FocusScopeNode currentFocus = FocusScope.of(context);
+    //FocusScopeNode currentFocus = FocusScope.of(context);
     return MaterialApp(
       supportedLocales: const [
         Locale("af"),
@@ -121,7 +122,7 @@ class _SignInPhoneState extends State<SignInPhone> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Sign In',
+                  'Create New Account',
                   style: TextStyle(
                     color: lightGreen,
                     fontWeight: FontWeight.bold,
@@ -131,12 +132,48 @@ class _SignInPhoneState extends State<SignInPhone> {
                 const SizedBox(
                   height: 25,
                 ),
+                Center(
+                  child: Badge(
+                    badgeColor: lightGreen,
+                    badgeContent: const Icon(
+                      Icons.camera_alt,
+                      color: white,
+                    ),
+                    position: const BadgePosition(bottom: 1, end: 1),
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: mediumGrey),
+                        image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/1.png'),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                textField('First Name', false),
+                const SizedBox(
+                  height: 15,
+                ),
+                textField('Last Name', false),
+                const SizedBox(
+                  height: 15,
+                ),
                 Container(
                   width: double.infinity,
                   height: 60,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
-                    border: Border.all(color: _phoneFocus.hasPrimaryFocus?lightGreen:darkGrey),
+                    border: Border.all(
+                        color: isActive
+                            ? lightGreen
+                            : darkGrey),
                   ),
                   child: Row(
                     children: [
@@ -147,14 +184,21 @@ class _SignInPhoneState extends State<SignInPhone> {
                           borderRadius: BorderRadius.circular(7),
                         ),
                       ),
-                       Expanded(
-                        child: TextField(
-                          focusNode: _phoneFocus,
-                          cursorColor: lightGreen,
-                          decoration: const InputDecoration(
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            hintText: 'Phone number',
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              isActive = true;
+                            });
+                          },
+                          child: TextField(
+                            focusNode: _phoneFocus,
+                            cursorColor: lightGreen,
+                            decoration: const InputDecoration(
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                              hintText: 'Phone number',
+                            ),
                           ),
                         ),
                       ),
@@ -172,25 +216,13 @@ class _SignInPhoneState extends State<SignInPhone> {
                 const SizedBox(
                   height: 15,
                 ),
-              socialButton('Facebook Login', const FaIcon(FontAwesomeIcons.facebook), darkBlue),
-              const SizedBox(
-                height: 15,
-              ),
-              socialButton('Google Login', const FaIcon(FontAwesomeIcons.google), brightRed),
-              const SizedBox(
-                height: 15,
-              ),
-              socialButton('LinkedIn Login',  const FaIcon(FontAwesomeIcons.linkedin),mediumBlue),
-                const SizedBox(
-                  height: 40,
-                ),
                 GestureDetector(
                   onTap: () {
                     Get.back();
                   },
                   child: const Center(
                     child: Text(
-                      'Login with E-mail',
+                      'Sign up with E-mail',
                       style: TextStyle(
                         color: lightBlue,
                         fontSize: 15,
