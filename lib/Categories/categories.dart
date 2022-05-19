@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/listings_controller.dart';
+import 'package:realestapp/Models/AllListings/all_listings.dart';
 import '../AddListings/add_listing.dart';
 import '../Home/item_widget.dart';
 import '../Utils/color_scheme.dart';
@@ -29,7 +31,7 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   int _radioValue = 0;
-
+  ListingController _listingController = ListingController();
   void _handleRadioValueChange(int value) {
     setState(() {
       _radioValue = value;
@@ -47,8 +49,23 @@ class _CategoryPageState extends State<CategoryPage> {
     });
   }
 
+   List<AllListings> listings=[];
   bool showFilters = false;
   bool showSort = false;
+  getListings() async {
+    var result =await _listingController.getAllListing();
+    var allListing =  result['data'] as List;
+    listings = allListing
+        .map((listingsJson) => AllListings.fromJson(listingsJson))
+        .toList();
+       print( listings.length);
+  }
+  @override
+  void initState() {
+     getListings();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -164,7 +181,7 @@ class _CategoryPageState extends State<CategoryPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: ListView.builder(
-                      itemCount: 10,
+                      itemCount: listings.length,
                       itemBuilder: (context, position) {
                         return itemWidget('house1', '1500 SX Street',
                             "10/03/2022", "San Fransico, CA", "12,434,55");

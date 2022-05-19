@@ -69,7 +69,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                     onChanged: (pin) {},
                     onCompleted: (pin) {
                       if(pin == '123456'){
-                        Get.to(const Home());
+                       // Get.to(const Home());
                       }
                     }),
               ),

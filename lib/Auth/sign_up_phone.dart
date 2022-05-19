@@ -19,6 +19,7 @@ class SignUpPhone extends StatefulWidget {
 class _SignUpPhoneState extends State<SignUpPhone> {
   final _phoneFocus = FocusNode();
   bool isActive = false;
+  final controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     //FocusScopeNode currentFocus = FocusScope.of(context);
@@ -157,11 +158,11 @@ class _SignUpPhoneState extends State<SignUpPhone> {
                 const SizedBox(
                   height: 15,
                 ),
-                textField('First Name', false),
+                textField('First Name', false,controller),
                 const SizedBox(
                   height: 15,
                 ),
-                textField('Last Name', false),
+                textField('Last Name', false,controller),
                 const SizedBox(
                   height: 15,
                 ),

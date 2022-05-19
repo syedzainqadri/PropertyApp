@@ -5,13 +5,16 @@ import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import '../AddListings/add_listing.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';
+import '../Models/user_model.dart';
 import '../Profile/profile.dart';
 import '../Search/search_page.dart';
 import '../Utils/color_scheme.dart';
 import 'home_page.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  
+  final UserModel user;
+  const Home({Key? key,required this.user,}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -19,7 +22,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
-  bool hasAction = false;
+  bool hasAction = true;
   String title = 'Home';
   late PageController _pageController;
   OtpFieldController otpController = OtpFieldController();
@@ -28,6 +31,7 @@ class _HomeState extends State<Home> {
     super.initState();
     _pageController = PageController();
   }
+
 
   @override
   void dispose() {
@@ -50,7 +54,7 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
             onTap: () {
-              Get.to(const Profile());
+              Get.to(Profile(user: widget.user,));
             },
             child: Container(
               width: 30,
@@ -60,9 +64,9 @@ class _HomeState extends State<Home> {
                 border: Border.all(
                   color: mediumGrey,
                 ),
-                image: const DecorationImage(
+                image:  DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/images/4.png'),
+                  image: NetworkImage(widget.user.picture),
                 ),
               ),
             ),

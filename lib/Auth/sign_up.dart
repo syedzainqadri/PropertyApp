@@ -1,10 +1,13 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/sign_up_controller.dart';
 import '../Home/home.dart';
+import '../Models/user_model.dart';
 import 'sign_up_phone.dart';
 import '../Utils/constants.dart';
 import '../Utils/color_scheme.dart';
+
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
 
@@ -13,6 +16,13 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  late UserModel user;
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+  final SignUpController _signUpController = SignUpController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,27 +82,37 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(
                 height: 15,
               ),
-              textField('First Name', false),
+              textField('First Name', false, firstNameController),
               const SizedBox(
                 height: 15,
               ),
-              textField('Last Name', false),
+              textField('Last Name', false, lastNameController),
               const SizedBox(
                 height: 15,
               ),
-              textField('E-mail address', false),
+              textField('E-mail address', false, emailController),
               const SizedBox(
                 height: 15,
               ),
-              textField('Password', true),
+              textField('Password', true, passwordController),
               const SizedBox(
                 height: 15,
               ),
-              textField('Confirm Password', true),
+              textField('Confirm Password', true, confirmPasswordController),
               const SizedBox(
                 height: 15,
               ),
-              defaultButton('Sign Up', const Home()),
+              defaultButton('Sign Up', () async{
+            user =  await  _signUpController.signUp(
+                    emailController.text,
+                    emailController.text,
+                    passwordController.text,
+                    firstNameController.text,
+                    lastNameController.text,
+                    emailController.text);
+                    
+                Get.to(Home(user: user,));
+              }),
               const SizedBox(
                 height: 15,
               ),

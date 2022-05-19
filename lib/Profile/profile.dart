@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Auth/sign_in.dart';
+import '../Models/user_model.dart';
 import 'account_details.dart';
 import '../Utils/color_scheme.dart';
 import 'my_favorites.dart';
@@ -10,7 +11,8 @@ import 'account_subscriptions.dart';
 import 'settings.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  final UserModel user;
+  const Profile({Key? key, required this.user}) : super(key: key);
 
   @override
   State<Profile> createState() => _ProfileState();
@@ -61,9 +63,9 @@ class _ProfileState extends State<Profile> {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(color: mediumGrey),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: AssetImage('assets/images/1.png'),
+                        image: NetworkImage(widget.user.picture.toString()),
                       ),
                     ),
                   ),
@@ -71,9 +73,9 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(
                   height: 15,
                 ),
-                const Text(
-                  "Mark Sacca",
-                  style: TextStyle(
+                 Text(
+                  "${widget.user.firstName} ${widget.user.lastName}",
+                  style: const TextStyle(
                     color: darkGrey,
                     fontSize: 22,
                     fontWeight: FontWeight.w500,

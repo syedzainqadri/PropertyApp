@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 
 import 'color_scheme.dart';
 
-textField(hintText, obscureText) {
+textField(hintText, obscureText,controller) {
   return TextField(
+    controller: controller,
     obscureText: obscureText,
     cursorColor: lightGreen,
     decoration: InputDecoration(
@@ -24,16 +25,14 @@ textField(hintText, obscureText) {
   );
 }
 
-defaultButton(title, screen) {
+defaultButton(title,onPressed) {
   return Padding(
     padding: const EdgeInsets.only(left: 28.0, right: 28.0),
     child: SizedBox(
       width: double.infinity,
       height: 60,
       child: ElevatedButton(
-        onPressed: () {
-          Get.to(screen);
-        },
+        onPressed: onPressed,
         child: Text(
           title,
           style: const TextStyle(

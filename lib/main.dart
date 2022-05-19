@@ -52,7 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
           const SizedBox(
             height: 45,
           ),
-          defaultButton('Log In', const SignIn()),
+          defaultButton('Log In', (){
+            Get.to(const SignIn());
+          }),
           const SizedBox(
             height: 20,
           ),

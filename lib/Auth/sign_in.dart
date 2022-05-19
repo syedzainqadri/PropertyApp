@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:realestapp/Controllers/sign_in_controller.dart';
 import '../Home/home.dart';
+import '../Models/user_model.dart';
 import '../Utils/color_scheme.dart';
 import 'package:get/get.dart';
 import '../Utils/constants.dart';
@@ -15,6 +16,10 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
+ late UserModel user;
+  final SignInController _signInController = SignInController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,31 +54,42 @@ class _SignInState extends State<SignIn> {
               const SizedBox(
                 height: 25,
               ),
-              textField('E-mail address', false),
+              textField('E-mail address', false, emailController),
               const SizedBox(
                 height: 15,
               ),
-              textField('Password', false),
+              textField('Password', false, passwordController),
               const SizedBox(
                 height: 35,
               ),
-              defaultButton('Log In', const Home()),
+              defaultButton(
+                'Log In',
+                () async{
+                   user = UserModel.fromJson(await _signInController.signIn(
+                      emailController.text, passwordController.text));
+                  Get.to(Home(user: user,));
+                 
+                },
+              ),
               const SizedBox(
                 height: 15,
               ),
-            const  Center(child:  Text('OR')),
+              const Center(child: Text('OR')),
               const SizedBox(
                 height: 15,
               ),
-              socialButton('Facebook Login',  const FaIcon(FontAwesomeIcons.facebook), darkBlue),
+              socialButton('Facebook Login',
+                  const FaIcon(FontAwesomeIcons.facebook), darkBlue),
               const SizedBox(
                 height: 15,
               ),
-              socialButton('Google Login', const FaIcon(FontAwesomeIcons.google), brightRed),
+              socialButton('Google Login',
+                  const FaIcon(FontAwesomeIcons.google), brightRed),
               const SizedBox(
                 height: 15,
               ),
-              socialButton('LinkedIn Login',  const FaIcon(FontAwesomeIcons.linkedin),mediumBlue),
+              socialButton('LinkedIn Login',
+                  const FaIcon(FontAwesomeIcons.linkedin), mediumBlue),
               const SizedBox(
                 height: 40,
               ),
@@ -82,7 +98,7 @@ class _SignInState extends State<SignIn> {
                   Get.to(const SignInPhone());
                 },
                 child: const Center(
-                  child:  Text(
+                  child: Text(
                     'Login with phone number',
                     style: TextStyle(
                       color: lightBlue,
