@@ -15,42 +15,44 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-CategoriesController _categoriesController = CategoriesController();
-List<CategoryModel> categories=[];   
-getCategories()async{
-var response = await _categoriesController.getAllCategories();
-var data = jsonDecode(response);
-var categoryObjsJson = data as List;
-   setState(() {
-     
+  CategoriesController _categoriesController = CategoriesController();
+  List<CategoryModel> categories = [];
+  getCategories() async {
+    var response = await _categoriesController.getAllCategories();
+    var data = jsonDecode(response);
+    var categoryObjsJson = data as List;
+    setState(() {
       categories = categoryObjsJson
-        .map((categoryJson) => CategoryModel.fromJson((categoryJson)))
-        .toList();
-   });
+          .map((categoryJson) => CategoryModel.fromJson((categoryJson)))
+          .toList();
+    });
+  }
 
-}
   @override
   void initState() {
-getCategories();
+    getCategories();
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-                      itemCount: categories.length,
-                      itemBuilder: (context, position) {
-                        return categoriesWidget(categories[position].icon.url, categories[position].name,categories[position].term_id);
-                      },//listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
-
-                    );
+      itemCount: categories.length,
+      itemBuilder: (context, position) {
+        return categoriesWidget(categories[position].icon.url,
+            categories[position].name, categories[position].term_id);
+      }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+    );
   }
 }
 
-categoriesWidget(image, title,id) {
+categoriesWidget(image, title, id) {
   return GestureDetector(
     onTap: () {
-      Get.to(Category(title: title, id: id,));
+      Get.to(Category(
+        title: title,
+        id: id,
+      ));
     },
     child: Padding(
       padding: const EdgeInsets.only(top: 8.0, left: 12.0, right: 12.0),

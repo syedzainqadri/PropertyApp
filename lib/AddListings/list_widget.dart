@@ -26,7 +26,7 @@ listWidget(image, street, city, isFovorite) {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage('assets/images/$image.png'),
+                      image: NetworkImage(image),
                     ),
                   ),
                 ),
@@ -69,23 +69,23 @@ listWidget(image, street, city, isFovorite) {
             fontSize: 16,
           ),
         ),
-        const SizedBox(
-          height: 6,
-        ),
-        RatingBar.builder(
-          initialRating: 3,
-          minRating: 1,
-          itemSize: 25,
-          direction: Axis.horizontal,
-          allowHalfRating: true,
-          itemCount: 5,
-          itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
-          itemBuilder: (context, _) => const Icon(
-            Icons.star,
-            color: lightGreen,
-          ),
-          onRatingUpdate: (rating) {},
-        ),
+        // const SizedBox(
+        //   height: 6,
+        // ),
+        // RatingBar.builder(
+        //   initialRating: 3,
+        //   minRating: 1,
+        //   itemSize: 25,
+        //   direction: Axis.horizontal,
+        //   allowHalfRating: true,
+        //   itemCount: 5,
+        //   itemPadding: const EdgeInsets.symmetric(horizontal: 1.0),
+        //   itemBuilder: (context, _) => const Icon(
+        //     Icons.star,
+        //     color: lightGreen,
+        //   ),
+        //   onRatingUpdate: (rating) {},
+        // ),
       ],
     ),
   );

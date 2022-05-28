@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:realestapp/Controllers/profile_controller.dart';
 import '../Auth/sign_in.dart';
 import '../Models/user_model.dart';
 import 'account_details.dart';
@@ -19,6 +23,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  ProfileController _profileController = ProfileController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,15 +62,20 @@ class _ProfileState extends State<Profile> {
                     color: white,
                   ),
                   position: const BadgePosition(bottom: 1, end: 1),
-                  child: Container(
-                    width: 120,
-                    height: 120,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(color: mediumGrey),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(widget.user.picture.toString()),
+                  child: GestureDetector(
+                    onTap: (){
+                      uploadPicutre();
+                    },
+                    child: Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: mediumGrey),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(widget.user.picture.toString()),
+                        ),
                       ),
                     ),
                   ),
@@ -125,6 +135,12 @@ class _ProfileState extends State<Profile> {
         ],
       ),
     );
+  }
+
+  uploadPicutre() async{
+    XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
+   await _profileController.changeProfile('Waleed','Abdullah',picture);
+   // return File(picture!.path);
   }
 
   profileParameters(text, icon, color, screen) {
