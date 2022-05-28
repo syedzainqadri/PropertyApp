@@ -1,6 +1,12 @@
-class SignInModel{
-  final String username,password;
+import 'dart:convert';
 
-  SignInModel(this.username, this.password);
+class SignInModel{
+  late String token_type,token;
+
+  SignInModel.fromJson(result){
+      var data = jsonDecode(result);
+    token_type = data['token_type'];
+    token = data['jwt_token'];
+  }
 
 }

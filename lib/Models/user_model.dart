@@ -7,10 +7,7 @@ class UserModel {
   late bool isAdmin;
   late int id;
 
-  UserModel.fromJson(response) {
-    var result = json.decode(response);
-
-    var data = result['user'];
+  UserModel.fromJson(data) {
     firstName = data['first_name'];
     lastName = data['last_name'];
     id = data['id'];

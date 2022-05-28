@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:realestapp/Auth/sign_up.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
+import 'package:realestapp/Models/sign_in_model.dart';
 import '../Home/home.dart';
 import '../Models/user_model.dart';
 import '../Utils/color_scheme.dart';
@@ -17,7 +18,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  late UserModel user;
+  late SignInModel user;
   final SignInController _signInController = SignInController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -68,10 +69,13 @@ class _SignInState extends State<SignIn> {
                   defaultButton(
                     'Log In',
                     () async {
-                      user = UserModel.fromJson(await _signInController.signIn(
-                          emailController.text, passwordController.text));
+                      var result = await _signInController.signIn(
+                          emailController.text, passwordController.text);
+                      setState(() {
+                        user = SignInModel.fromJson(result);
+                      });
                       Get.to(Home(
-                        user: user,
+                        signInModel: user,
                       ));
                     },
                   ),

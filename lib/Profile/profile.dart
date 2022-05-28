@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:badges/badges.dart';
@@ -5,7 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestapp/Controllers/profile_controller.dart';
+import 'package:realestapp/Models/sign_in_model.dart';
 import '../Auth/sign_in.dart';
+import '../Controllers/user_controller.dart';
 import '../Models/user_model.dart';
 import 'account_details.dart';
 import '../Utils/color_scheme.dart';
@@ -15,7 +18,7 @@ import 'account_subscriptions.dart';
 import 'settings.dart';
 
 class Profile extends StatefulWidget {
-  final UserModel user;
+  final SignInModel user;
   const Profile({Key? key, required this.user}) : super(key: key);
 
   @override
@@ -24,14 +27,24 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   final ProfileController _profileController = ProfileController();
+
+  UserController userController = UserController();
   late UserModel user;
+  getUser() async {
+    var myUser =
+        await userController.getUser(widget.user.token_type, widget.user.token);
+
+    setState(() {
+      user = UserModel.fromJson(myUser);
+    });
+  }
+
   @override
   void initState() {
-    setState(() {
-      user = widget.user;
-    });
+    getUser();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +84,7 @@ class _ProfileState extends State<Profile> {
                   ),
                   position: const BadgePosition(bottom: 1, end: 1),
                   child: GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       uploadPicutre();
                     },
                     child: Container(
@@ -91,7 +104,7 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(
                   height: 15,
                 ),
-                 Text(
+                Text(
                   "${user.firstName} ${user.lastName}",
                   style: const TextStyle(
                     color: darkGrey,
@@ -145,12 +158,13 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  uploadPicutre() async{
-    XFile? picture = (await ImagePicker().pickImage(source: ImageSource.gallery));
-  var response = await _profileController.changeProfile('Waleed','Khan',File(picture!.path));
-  setState(() {
-    user = UserModel.fromJson(response);
-  });
+  uploadPicutre() async {
+    XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
+    var response = await _profileController.changeProfile(
+        widget.user.token_type, widget.user.token, File(picture!.path));
+    setState(() {
+      user = UserModel.fromJson(jsonDecode(response));
+    });
   }
 
   profileParameters(text, icon, color, screen) {

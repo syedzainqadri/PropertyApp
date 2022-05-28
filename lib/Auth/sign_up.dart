@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:realestapp/Auth/sign_in.dart';
 import 'package:realestapp/Controllers/sign_up_controller.dart';
 import '../Home/home.dart';
+import '../Models/sign_in_model.dart';
 import '../Models/user_model.dart';
 import '../Utils/constants.dart';
 import '../Utils/color_scheme.dart';
@@ -16,7 +17,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  late UserModel user;
+  late SignInModel user;
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
@@ -114,7 +115,7 @@ class _SignUpState extends State<SignUp> {
                         lastNameController.text,
                         emailController.text);
                     Get.to(Home(
-                      user: user,
+                      signInModel: user,
                     ));
                   }),
                   const SizedBox(

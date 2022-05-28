@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:realestapp/Controllers/user_controller.dart';
+import 'package:realestapp/Models/sign_in_model.dart';
 import '../AddListings/add_listing.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';
@@ -12,10 +14,10 @@ import '../Utils/color_scheme.dart';
 import 'home_page.dart';
 
 class Home extends StatefulWidget {
-  final UserModel user;
+  final SignInModel signInModel;
   const Home({
     Key? key,
-    required this.user,
+    required this.signInModel,
   }) : super(key: key);
 
   @override
@@ -28,11 +30,23 @@ class _HomeState extends State<Home> {
   String title = 'Home';
   late PageController _pageController;
   OtpFieldController otpController = OtpFieldController();
+  UserController userController = UserController();
   late UserModel user;
+  bool notIntialized = true;
+  getUser() async {
+   var myUser= await userController.getUser(widget.signInModel.token_type, widget.signInModel.token);
+   
+   setState(() {
+     
+      user = UserModel.fromJson(myUser);
+   });
+  }
+
   @override
   void initState() {
+    getUser();
     setState(() {
-      user = widget.user;
+      notIntialized = false;
     });
     super.initState();
     _pageController = PageController();
@@ -46,7 +60,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return notIntialized? const Center(child: CircularProgressIndicator(),):
+    Scaffold(
       appBar: AppBar(
         backgroundColor: transparent,
         elevation: 0.0,
@@ -60,7 +75,7 @@ class _HomeState extends State<Home> {
           child: GestureDetector(
             onTap: () {
               Get.to(Profile(
-                user: user,
+                user: widget.signInModel,
               ));
             },
             child: Container(
