@@ -22,13 +22,13 @@ class _AddListingState extends State<AddListing> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
-  late List<AllListingsCategories> locations;
-  late String _selectedCategory;
-  late String _selectedLocation;
+  List<AllListingsCategories> locations = [];
+  String _selectedLocation = '';
+  String _selectedCategory = '';
   bool editFilters = false;
   List<File>? imageFiles = [];
-  int locationId = 0;
-  int categoryId = 0;
+  var locationId = 0;
+  var categoryId = 0;
   final CategoriesController _categoriesController = CategoriesController();
   List<CategoryModel> categories = [];
   getCategories() async {
@@ -36,9 +36,9 @@ class _AddListingState extends State<AddListing> {
     var data = jsonDecode(response);
     var categoryObjsJson = data as List;
     setState(() {
-      categories = categoryObjsJson
+      categories.addAll(categoryObjsJson
           .map((categoryJson) => CategoryModel.fromJson((categoryJson)))
-          .toList();
+          .toList());
       _selectedCategory = categories[0].name;
     });
   }
@@ -47,23 +47,40 @@ class _AddListingState extends State<AddListing> {
   getLocations() async {
     var myLocations = await _locationController.getAllLocations() as List;
     setState(() {
-      locations =
-          myLocations.map((e) => AllListingsCategories.fromJson(e)).toList();
+      locations.addAll(
+          myLocations.map((e) => AllListingsCategories.fromJson(e)).toList());
+
       _selectedLocation = locations[0].name;
     });
   }
-  addListing()async{
+
+  addListing() async {
     locations.map((e) {
-      setState(() {
-        e.name == _selectedLocation? locationId = e.term_id:null;
-      });
+      if (e.name == _selectedLocation) {
+        setState(() {
+          locationId = e.term_id;
+        });
+      }
     });
-     categories.map((e) {
-      setState(() {
-        e.name == _selectedCategory? categoryId = e.term_id:null;
-      });
+    categories.map((e) {
+      if (e.name == _selectedCategory) {
+        setState(() {
+          categoryId = e.term_id;
+        });
+      }
     });
-   await _locationController.addListing(locationId, categoryId, 'rent', titleController.text.toString(), 'approved', priceController.text.toString(), priceController.text.toString(), 'is-new', descriptionController.text.toString(), imageFiles);
+  
+    await _locationController.addListing(
+        locationId,
+        categoryId,
+        'rent',
+        titleController.text.toString(),
+        'approved',
+        priceController.text.toString(),
+        priceController.text.toString(),
+        'is-new',
+        descriptionController.text.toString(),
+        imageFiles);
   }
 
   @override
@@ -395,7 +412,7 @@ class _AddListingState extends State<AddListing> {
                                       itemCount: imageFiles?.length,
                                       itemBuilder: (context, index) {
                                         return imageContainer(
-                                           imageFiles![index]);
+                                            imageFiles![index]);
                                       }),
                                 ),
                               ],
@@ -408,8 +425,8 @@ class _AddListingState extends State<AddListing> {
                               height: 50,
                               width: double.infinity,
                               child: ElevatedButton(
-                                  onPressed: (){
-                                     addListing();
+                                  onPressed: () {
+                                    addListing();
                                   },
                                   style: ElevatedButton.styleFrom(
                                     primary: lightGreen,
@@ -504,7 +521,7 @@ class _AddListingState extends State<AddListing> {
 
   _getFromGallery() async {
     List<XFile>? images = await ImagePicker().pickMultiImage();
-    for(int i=0;i<images!.length;i++){
+    for (int i = 0; i < images!.length; i++) {
       setState(() {
         imageFiles!.add(File(images[0].path));
       });

@@ -25,7 +25,7 @@ addListing(locationId, categoryId, listingType, title, status, price, priceUnit,
       'Accept': 'application/json',
       'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
     },
-    body: <String, String>{
+    body: <String, dynamic>{
       'locations': locationId,
       'category_id': categoryId,
       'listing_type': listingType,
