@@ -1,6 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:realestapp/Models/AllListings/all_listings_categories.dart';
 
+import '../Controllers/categories_controller.dart';
+import '../Controllers/get_locations_controller.dart';
+import '../Models/Categories/category_model.dart';
 import '../Utils/color_scheme.dart';
 
 class AddListing extends StatefulWidget {
@@ -14,26 +22,58 @@ class _AddListingState extends State<AddListing> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
-  final locationController = TextEditingController();
-  String _selectedCategory = 'House';
+  late List<AllListingsCategories> locations;
+  late String _selectedCategory;
+  late String _selectedLocation;
   bool editFilters = false;
-  final List<String> _categories = [
-    'House',
-    'Condo',
-    'Apartment',
-    'Town House',
-    'Land',
-    'Building',
-    'Recently Sold'
-  ];
+  List<File>? imageFiles = [];
+  int locationId = 0;
+  int categoryId = 0;
+  final CategoriesController _categoriesController = CategoriesController();
+  List<CategoryModel> categories = [];
+  getCategories() async {
+    var response = await _categoriesController.getAllCategories();
+    var data = jsonDecode(response);
+    var categoryObjsJson = data as List;
+    setState(() {
+      categories = categoryObjsJson
+          .map((categoryJson) => CategoryModel.fromJson((categoryJson)))
+          .toList();
+      _selectedCategory = categories[0].name;
+    });
+  }
+
+  final LocationController _locationController = LocationController();
+  getLocations() async {
+    var myLocations = await _locationController.getAllLocations() as List;
+    setState(() {
+      locations =
+          myLocations.map((e) => AllListingsCategories.fromJson(e)).toList();
+      _selectedLocation = locations[0].name;
+    });
+  }
+  addListing()async{
+    locations.map((e) {
+      setState(() {
+        e.name == _selectedLocation? locationId = e.term_id:null;
+      });
+    });
+     categories.map((e) {
+      setState(() {
+        e.name == _selectedCategory? categoryId = e.term_id:null;
+      });
+    });
+   await _locationController.addListing(locationId, categoryId, 'rent', titleController.text.toString(), 'approved', priceController.text.toString(), priceController.text.toString(), 'is-new', descriptionController.text.toString(), imageFiles);
+  }
+
   @override
   void initState() {
+    getCategories();
+    getLocations();
     super.initState();
     titleController.text = '2bd Condo - Park View';
     descriptionController.text = 'Amazing View in a luxury building';
     priceController.text = '\$123,1231,23';
-    locationController.text =
-        '1030 Market Park Steet San Fransico, CA, 94130, USA';
   }
 
   @override
@@ -208,13 +248,13 @@ class _AddListingState extends State<AddListing> {
                                     _selectedCategory = newValue.toString();
                                   });
                                 },
-                                items: _categories.map((category) {
+                                items: categories.map((category) {
                                   return DropdownMenuItem(
                                     child: Text(
-                                      category,
+                                      category.name,
                                       textAlign: TextAlign.end,
                                     ),
-                                    value: category,
+                                    value: category.name,
                                   );
                                 }).toList(),
                               ),
@@ -266,20 +306,41 @@ class _AddListingState extends State<AddListing> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              SizedBox(
-                                width: 190,
-                                child: TextField(
-                                  maxLines: 2,
-                                  textAlign: TextAlign.end,
-                                  textAlignVertical: TextAlignVertical.center,
-                                  controller: locationController,
-                                  cursorColor: lightGreen,
-                                  decoration: const InputDecoration(
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                  ),
-                                ),
+                              DropdownButton(
+                                alignment: AlignmentDirectional.centerEnd,
+                                underline: const SizedBox(),
+                                iconSize: 0.0,
+                                value: _selectedLocation,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    _selectedLocation = newValue.toString();
+                                  });
+                                },
+                                items: locations.map((location) {
+                                  return DropdownMenuItem(
+                                    child: Text(
+                                      location.name,
+                                      textAlign: TextAlign.end,
+                                    ),
+                                    value: location.name,
+                                  );
+                                }).toList(),
                               ),
+
+                              // SizedBox(
+                              //   width: 190,
+                              //   child: TextField(
+                              //     maxLines: 2,
+                              //     textAlign: TextAlign.end,
+                              //     textAlignVertical: TextAlignVertical.center,
+                              //     controller: locationController,
+                              //     cursorColor: lightGreen,
+                              //     decoration: const InputDecoration(
+                              //       enabledBorder: InputBorder.none,
+                              //       focusedBorder: InputBorder.none,
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                           const SizedBox(
@@ -299,51 +360,43 @@ class _AddListingState extends State<AddListing> {
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/house1.png'),
-                                        fit: BoxFit.cover),
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(18),
+                                GestureDetector(
+                                  onTap: () async {
+                                    await _getFromGallery();
+                                  },
+                                  child: Container(
+                                    width: 100,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                      color: lightGreen,
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.circular(18),
+                                    ),
+                                    child: const Icon(
+                                      Icons.camera_alt,
+                                      size: 40,
+                                      color: white,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                Container(
-                                  width: 100,
+                                SizedBox(
+                                  width: 200,
                                   height: 100,
-                                  decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/house3.png'),
-                                        fit: BoxFit.cover),
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    color: lightGreen,
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(18),
-                                  ),
-                                  child: const Icon(
-                                    Icons.camera_alt,
-                                    size: 40,
-                                    color: white,
-                                  ),
+                                  child: ListView.builder(
+                                      physics: const ScrollPhysics(),
+                                      shrinkWrap: true,
+                                      primary: false,
+                                      reverse: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: imageFiles?.length,
+                                      itemBuilder: (context, index) {
+                                        return imageContainer(
+                                           imageFiles![index]);
+                                      }),
                                 ),
                               ],
                             ),
@@ -355,7 +408,9 @@ class _AddListingState extends State<AddListing> {
                               height: 50,
                               width: double.infinity,
                               child: ElevatedButton(
-                                  onPressed: () {},
+                                  onPressed: (){
+                                     addListing();
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     primary: lightGreen,
                                     onSurface: white,
@@ -444,6 +499,34 @@ class _AddListingState extends State<AddListing> {
               )
             : const Offstage(),
       ],
+    );
+  }
+
+  _getFromGallery() async {
+    List<XFile>? images = await ImagePicker().pickMultiImage();
+    for(int i=0;i<images!.length;i++){
+      setState(() {
+        imageFiles!.add(File(images[0].path));
+      });
+    }
+  }
+
+  imageContainer(file) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: FileImage(
+                file,
+              ),
+              fit: BoxFit.cover),
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(18),
+        ),
+      ),
     );
   }
 

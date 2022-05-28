@@ -44,10 +44,8 @@ class ListingController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    var x = jsonDecode(response.body)['data'] as List;
-    var mylist =
-        x.map((listingsJson) => AllListings.fromJson(listingsJson)).toList();
-        print(mylist[0].ad_type);
     return response.body;
   }
+
+
 }

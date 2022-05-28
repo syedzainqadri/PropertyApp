@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/categories_controller.dart';
+import 'package:realestapp/Models/Categories/category_model.dart';
 import '../Utils/color_scheme.dart';
 import 'categories.dart';
 
@@ -11,35 +15,42 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
+CategoriesController _categoriesController = CategoriesController();
+List<CategoryModel> categories=[];   
+getCategories()async{
+var response = await _categoriesController.getAllCategories();
+var data = jsonDecode(response);
+var categoryObjsJson = data as List;
+   setState(() {
+     
+      categories = categoryObjsJson
+        .map((categoryJson) => CategoryModel.fromJson((categoryJson)))
+        .toList();
+   });
+
+}
+  @override
+  void initState() {
+getCategories();
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const SizedBox(
-            height: 15,
-          ),
-          categoriesWidget('house1', 'Houses'),
-          categoriesWidget('condo1', 'Condos'),
-          categoriesWidget('apartment', 'Apartments'),
-          categoriesWidget('building', 'Buildings'),
-          categoriesWidget('townhouse', 'Town Houses'),
-          categoriesWidget('land', 'Land'),
-          const SizedBox(
-            height: 15,
-          ),
-        ],
-      ),
-    );
+    return ListView.builder(
+                      itemCount: categories.length,
+                      itemBuilder: (context, position) {
+                        return categoriesWidget(categories[position].icon.url, categories[position].name,categories[position].term_id);
+                      },//listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+
+                    );
   }
 }
 
-categoriesWidget(image, title) {
+categoriesWidget(image, title,id) {
   return GestureDetector(
     onTap: () {
-      Get.to(Category(title: title));
+      Get.to(Category(title: title, id: id,));
     },
     child: Padding(
       padding: const EdgeInsets.only(top: 8.0, left: 12.0, right: 12.0),
@@ -52,7 +63,7 @@ categoriesWidget(image, title) {
               borderRadius: BorderRadius.circular(12),
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/images/$image.png'),
+                image: NetworkImage(image),
               ),
             ),
           ),

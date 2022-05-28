@@ -38,9 +38,9 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  categoryCard('house2', 'Houses'),
-                  categoryCard('condo2', 'Condos'),
-                  categoryCard('apartment', 'Apartments'),
+                  categoryCard('house2', 'Houses',1),
+                  categoryCard('condo2', 'Condos',2),
+                  categoryCard('apartment', 'Apartments',3),
                 ],
               ),
             ),
@@ -82,12 +82,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  categoryCard(image, name) {
+  categoryCard(image, name,id) {
     return Padding(
       padding: const EdgeInsets.only(right: 12.0),
       child: GestureDetector(
         onTap: () {
-          Get.to(Category(title: name));
+          Get.to(Category(title: name,id: id,));
         },
         child: Container(
           height: 120,

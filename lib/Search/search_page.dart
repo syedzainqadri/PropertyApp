@@ -41,15 +41,15 @@ class _SearchPageState extends State<SearchPage> {
           const SizedBox(
             height: 15,
           ),
-           Expanded(
-                  child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, position) {
-                      return itemWidget('house1', '1500 SX Street',
-                          "10/03/2022", "San Fransico, CA", "12,434,55");
-                    },
-                  ),
-                ),
+          //  Expanded(
+          //         child: ListView.builder(
+          //           itemCount: 10,
+          //           itemBuilder: (context, position) {
+          //             return itemWidget('house1', '1500 SX Street',
+          //                 "10/03/2022", "San Fransico, CA", "12,434,55");
+          //           },
+          //         ),
+          //       ),
         ],
       ),
     );

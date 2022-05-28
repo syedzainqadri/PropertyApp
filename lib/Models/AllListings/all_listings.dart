@@ -1,10 +1,9 @@
 // ignore_for_file: non_constant_identifier_names
 
-
 import 'package:realestapp/Models/AllListings/contact.dart';
 import 'package:realestapp/Models/AllListings/store.dart';
 
-import 'categories.dart';
+import 'all_listings_categories.dart';
 import 'images.dart';
 import 'price_units.dart';
 
@@ -19,10 +18,11 @@ class AllListings {
       status,
       created_at,
       created_at_gmt;
-  late int author_id,listing_id, view_count;
-  late PriceUnits price_units;
+  late int author_id, listing_id, view_count;
   late AllListingsCategories categories;
-  late List<ImageModel> images;
+  List<ImageModel> images = [];
+  List<PriceUnits> price_units = [];
+
   late ContactModel contact;
   late StoreModel store;
 
@@ -42,12 +42,15 @@ class AllListings {
     created_at = data['created_at'];
     created_at_gmt = data['created_at_gmt'];
     view_count = data['view_count'];
-    price_units = PriceUnits.fromJson(data['price_units']);
-    categories = AllListingsCategories.fromJson(data['categories']);
-    var imgObjsJson = data['tags'] as List;
+    var priceObjsJson = data['price_units'] as List;
+    price_units = priceObjsJson
+        .map((priceJson) => PriceUnits.fromJson(priceJson))
+        .toList();
+    categories = AllListingsCategories.fromJson(data['categories'][0]);
+    var imgObjsJson =( data['images']??[]) as List;
     images =
         imgObjsJson.map((imgJson) => ImageModel.fromJson(imgJson)).toList();
-        contact = ContactModel.fromJson(data['categories']);
-        store =  StoreModel.fromJson(data['store']);
+    contact = ContactModel.fromJson(data['contact']);
+    store = StoreModel.fromJson(data['store']);
   }
 }

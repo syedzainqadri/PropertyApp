@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
@@ -9,13 +11,14 @@ import 'filters.dart';
 
 class Category extends StatelessWidget {
   final String title;
-  const Category({Key? key, required this.title}) : super(key: key);
+  final int id;
+  const Category({Key? key, required this.title, required this.id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: CategoryPage(
-        title: title,
+        title: title, id: id,
       ),
     );
   }
@@ -23,7 +26,8 @@ class Category extends StatelessWidget {
 
 class CategoryPage extends StatefulWidget {
   final String title;
-  const CategoryPage({Key? key, required this.title}) : super(key: key);
+  final int id;
+  const CategoryPage({Key? key, required this.title, required this.id}) : super(key: key);
 
   @override
   State<CategoryPage> createState() => _CategoryPageState();
@@ -53,12 +57,22 @@ class _CategoryPageState extends State<CategoryPage> {
   bool showFilters = false;
   bool showSort = false;
   getListings() async {
-    var result =await _listingController.getAllListing();
-    var allListing =  result['data'] as List;
-    listings = allListing
+    
+      var response =await _listingController.getAllListing();
+    setState(() {
+    var data = jsonDecode(response);
+    var allListing =  data['data'] as List;
+     var tempListing = allListing
         .map((listingsJson) => AllListings.fromJson(listingsJson))
         .toList();
-       print( listings.length);
+         for(int i=0;i<tempListing.length;i++){
+      if(tempListing[i].categories.term_id == widget.id){
+          listings.add(tempListing[i]);
+        }
+    }
+        
+    });
+   
   }
   @override
   void initState() {
@@ -183,9 +197,9 @@ class _CategoryPageState extends State<CategoryPage> {
                     child: ListView.builder(
                       itemCount: listings.length,
                       itemBuilder: (context, position) {
-                        return itemWidget('house1', '1500 SX Street',
-                            "10/03/2022", "San Fransico, CA", "12,434,55");
-                      },
+                        return itemWidget(listings[position]);
+                      },//listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+
                     ),
                   ),
                 ),
