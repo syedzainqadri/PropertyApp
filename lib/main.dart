@@ -1,7 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'Auth/sign_in.dart';
-import 'Auth/sign_up.dart';
 import 'Utils/color_scheme.dart';
 import 'Utils/constants.dart';
 
@@ -28,6 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
