@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../Auth/sign_up.dart';
 import 'color_scheme.dart';
 
-textField(hintText, obscureText,controller) {
+textField(hintText, obscureText, controller) {
   return TextField(
     controller: controller,
     obscureText: obscureText,
@@ -25,55 +26,80 @@ textField(hintText, obscureText,controller) {
   );
 }
 
-defaultButton(title,onPressed) {
-  return Padding(
-    padding: const EdgeInsets.only(left: 28.0, right: 28.0),
-    child: SizedBox(
-      width: double.infinity,
-      height: 60,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: white,
-            fontSize: 20,
-          ),
+defaultButton(title, onPressed) {
+  return SizedBox(
+    width: double.infinity,
+    height: 60,
+    child: ElevatedButton(
+      onPressed: onPressed,
+      child: Text(
+        title,
+        style: const TextStyle(
+          color: white,
+          fontSize: 20,
         ),
-        style: ElevatedButton.styleFrom(
-          primary: lightGreen,
-          elevation: 0.0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: lightGreen,
+        elevation: 0.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
     ),
   );
 }
 
 socialButton(title, icon, color) {
-  return Padding(
-    padding: const EdgeInsets.only(left: 28.0, right: 28.0),
-    child: SizedBox(
+  return SizedBox(
+    width: double.infinity,
+    height: 60,
+    child: ElevatedButton.icon(
+      icon: icon,
+      onPressed: () {},
+      label: Text(
+        title,
+        style: const TextStyle(
+          color: white,
+          fontSize: 20,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: color,
+        elevation: 0.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      ),
+    ),
+  );
+}
+
+class SignupButton extends StatelessWidget {
+  const SignupButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
       width: double.infinity,
       height: 60,
-      child: ElevatedButton.icon(
-        icon: icon,
-        onPressed: () {},
-        label: Text(
-          title,
-          style: const TextStyle(
-            color: white,
+      child: ElevatedButton(
+        onPressed: () {
+          Get.to(const SignUp());
+        },
+        child: const Text(
+          'Sign Up',
+          style: TextStyle(
+            color: lightGreen,
             fontSize: 20,
           ),
         ),
         style: ElevatedButton.styleFrom(
-          primary: color,
+          primary: transparent,
           elevation: 0.0,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+          side: const BorderSide(color: darkGrey),
         ),
       ),
-    ),
-  );
+    );
+  }
 }

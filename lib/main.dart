@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const GetMaterialApp(
-      home:  MyHomePage(),
+      debugShowCheckedModeBanner: false,
+      home: MyHomePage(),
     );
   }
 }
@@ -30,61 +31,39 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Icon(
-            Icons.location_pin,
-            color: lightGreen,
-            size: 120,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const Text(
-            'Welcome to Real Estate',
-            style: TextStyle(
+      body: Padding(
+        padding: const EdgeInsets.only(left: 28.0, right: 28.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.location_pin,
               color: lightGreen,
-              fontSize: 30,
+              size: 120,
             ),
-          ),
-          const SizedBox(
-            height: 45,
-          ),
-          defaultButton('Log In', (){
-            Get.to(const SignIn());
-          }),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 28.0, right: 28.0),
-            child: SizedBox(
-              width: double.infinity,
-              height: 60,
-              child: ElevatedButton(
-                onPressed: () {
-                  Get.to(const SignUp());
-                },
-                child: const Text(
-                  'Sign Up',
-                  style: TextStyle(
-                    color: lightGreen,
-                    fontSize: 20,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: transparent,
-                  elevation: 0.0,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  side: const BorderSide(color: darkGrey),
-                ),
+            const SizedBox(
+              height: 20,
+            ),
+            const Text(
+              'Welcome to Real Estate',
+              style: TextStyle(
+                color: lightGreen,
+                fontSize: 28,
               ),
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 45,
+            ),
+            defaultButton('Log In', () {
+              Get.to(const SignIn());
+            }),
+            const SizedBox(
+              height: 20,
+            ),
+            const SignupButton(),
+          ],
+        ),
       ),
     );
   }
