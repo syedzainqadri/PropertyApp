@@ -12,9 +12,11 @@ import '../Utils/color_scheme.dart';
 import 'home_page.dart';
 
 class Home extends StatefulWidget {
-  
   final UserModel user;
-  const Home({Key? key,required this.user,}) : super(key: key);
+  const Home({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -26,12 +28,15 @@ class _HomeState extends State<Home> {
   String title = 'Home';
   late PageController _pageController;
   OtpFieldController otpController = OtpFieldController();
+  late UserModel user;
   @override
   void initState() {
+    setState(() {
+      user = widget.user;
+    });
     super.initState();
     _pageController = PageController();
   }
-
 
   @override
   void dispose() {
@@ -54,7 +59,9 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
             onTap: () {
-              Get.to(Profile(user: widget.user,));
+              Get.to(Profile(
+                user: user,
+              ));
             },
             child: Container(
               width: 30,
@@ -64,18 +71,18 @@ class _HomeState extends State<Home> {
                 border: Border.all(
                   color: mediumGrey,
                 ),
-                image:  DecorationImage(
+                image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(widget.user.picture),
+                  image: NetworkImage(user.picture),
                 ),
               ),
             ),
           ),
         ),
         actions: hasAction
-            ?  [
+            ? [
                 GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     Get.to(const AddListing());
                   },
                   child: const Padding(
@@ -86,14 +93,14 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-               const Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(
                     Icons.map,
                     color: lightGreen,
                   ),
                 ),
-               const SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
               ]
@@ -202,7 +209,7 @@ class _HomeState extends State<Home> {
                     children: [
                       Text(
                         street,
-                        style:const TextStyle(
+                        style: const TextStyle(
                           color: darkGrey,
                           fontSize: 15,
                         ),
@@ -218,7 +225,7 @@ class _HomeState extends State<Home> {
                   ),
                   Text(
                     location,
-                    style:const TextStyle(
+                    style: const TextStyle(
                       color: darkGrey,
                       fontSize: 15,
                     ),

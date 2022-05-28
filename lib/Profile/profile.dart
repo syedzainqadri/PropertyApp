@@ -23,7 +23,15 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  ProfileController _profileController = ProfileController();
+  final ProfileController _profileController = ProfileController();
+  late UserModel user;
+  @override
+  void initState() {
+    setState(() {
+      user = widget.user;
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +82,7 @@ class _ProfileState extends State<Profile> {
                         border: Border.all(color: mediumGrey),
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(widget.user.picture.toString()),
+                          image: NetworkImage(user.picture.toString()),
                         ),
                       ),
                     ),
@@ -84,7 +92,7 @@ class _ProfileState extends State<Profile> {
                   height: 15,
                 ),
                  Text(
-                  "${widget.user.firstName} ${widget.user.lastName}",
+                  "${user.firstName} ${user.lastName}",
                   style: const TextStyle(
                     color: darkGrey,
                     fontSize: 22,
@@ -138,9 +146,11 @@ class _ProfileState extends State<Profile> {
   }
 
   uploadPicutre() async{
-    XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
-   await _profileController.changeProfile('Waleed','Abdullah',picture);
-   // return File(picture!.path);
+    XFile? picture = (await ImagePicker().pickImage(source: ImageSource.gallery));
+  var response = await _profileController.changeProfile('Waleed','Khan',File(picture!.path));
+  setState(() {
+    user = UserModel.fromJson(response);
+  });
   }
 
   profileParameters(text, icon, color, screen) {
