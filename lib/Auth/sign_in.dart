@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:realestapp/Auth/sign_up.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
+import 'package:realestapp/Controllers/user_controller.dart';
 import 'package:realestapp/Models/sign_in_model.dart';
 import '../Home/home.dart';
 import '../Models/user_model.dart';
@@ -22,6 +23,7 @@ class _SignInState extends State<SignIn> {
   final SignInController _signInController = SignInController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final userController = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +79,9 @@ class _SignInState extends State<SignIn> {
                       Get.to(Home(
                         signInModel: user,
                       ));
+                      Get.find<UserController>().updateUser(UserModel.fromJson(
+                          await Get.find<UserController>()
+                              .getUser(user.token_type, user.token)));
                     },
                   ),
                   const SizedBox(
