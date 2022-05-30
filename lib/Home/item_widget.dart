@@ -8,7 +8,7 @@ import '../Utils/color_scheme.dart';
 itemWidget(AllListings listing) {
     return GestureDetector(
       onTap: (){
-       // Get.to(ListingDetails(street: street, price: price, image: image));
+      // Get.to(ListingDetails(street: street, price: price, image: image));
        //'', 
        //listings[position].title,
           //                listings[position].created_at.substring(0,10), listings[position].contact.locations[0].name, listings[position].price);

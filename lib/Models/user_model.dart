@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-//import 'package:get/get.dart';
+import 'package:get/get.dart';
 
 class UserModel {
   late String firstName, lastName, categoryId, email, userName, phone, picture;
@@ -17,5 +15,5 @@ class UserModel {
     picture = data['pp_thumb_url'];
     isAdmin = data['isAdmin'];
   }
+  UserModel();
 }
- 

@@ -87,7 +87,10 @@ class _ProfileState extends State<Profile> {
                     onTap: () {
                       uploadPicutre();
                     },
-                    child: Container(
+                    child: GetX<UserController>(
+                      init: UserController(),
+                      builder: (_){
+                        return Container(
                       width: 120,
                       height: 120,
                       decoration: BoxDecoration(
@@ -95,9 +98,11 @@ class _ProfileState extends State<Profile> {
                         border: Border.all(color: mediumGrey),
                         image: DecorationImage(
                           fit: BoxFit.cover,
-                          image: NetworkImage(user.picture.toString()),
+                          image: NetworkImage(_.user.value.picture),
                         ),
                       ),
+                    );
+                      },
                     ),
                   ),
                 ),
@@ -105,7 +110,7 @@ class _ProfileState extends State<Profile> {
                   height: 15,
                 ),
                 Text(
-                  "${user.firstName} ${user.lastName}",
+                  "${Get.find<UserController>().user.value.firstName} ${Get.find<UserController>().user.value.lastName}",
                   style: const TextStyle(
                     color: darkGrey,
                     fontSize: 22,

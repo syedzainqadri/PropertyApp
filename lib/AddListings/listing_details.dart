@@ -2,18 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:realestapp/Models/AllListings/images.dart';
 import '../Utils/color_scheme.dart';
 
 class ListingDetails extends StatefulWidget {
-  final String street,price,image;
+  final String street, price,description;
+  final List<ImageModel> image;
 
-  const ListingDetails({Key? key, required this.street, required this.price, required this.image}) : super(key: key);
+  const ListingDetails(
+      {Key? key,
+      required this.street,
+      required this.price,
+      required this.image, required this.description})
+      : super(key: key);
 
   @override
   State<ListingDetails> createState() => _ListingDetailsState();
 }
 
 class _ListingDetailsState extends State<ListingDetails> {
+  List<Widget> images = [];
+  @override
+  void initState() {
+    for (int i = 0; i < widget.image.length; i++) {
+      images.add(Image.network(
+        widget.image[i].url,
+        fit: BoxFit.cover,
+      ));
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,20 +77,7 @@ class _ListingDetailsState extends State<ListingDetails> {
               initialPage: 0,
               indicatorColor: lightGreen,
               indicatorBackgroundColor: mediumGrey,
-              children: [
-                Image.asset(
-                  'assets/images/${widget.image}.png',
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  'assets/images/house2.png',
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  'assets/images/house3.png',
-                  fit: BoxFit.cover,
-                ),
-              ],
+              children: images,
               autoPlayInterval: 3000,
               isLoop: true,
             ),
@@ -103,9 +109,9 @@ class _ListingDetailsState extends State<ListingDetails> {
                   const SizedBox(
                     height: 15,
                   ),
-                  const Text(
-                    'Get detailed land land reform information in Kenya. Latest details on expropriation without compensation. Spatial Data. Land rights. SDGs. Land investments. Services: Open data, Cadastral administration, Land titles.',
-                    style: TextStyle(
+                   Text(
+                    widget.description,
+                    style: const TextStyle(
                       color: mediumGrey,
                       fontSize: 16,
                     ),
@@ -146,7 +152,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                   const SizedBox(
                     height: 10,
                   ),
-                 const Text(
+                  const Text(
                     'Extra Info',
                     style: TextStyle(
                       color: darkGrey,
@@ -166,7 +172,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                   const SizedBox(
                     height: 10,
                   ),
-                const  Text(
+                  const Text(
                     'Reviews',
                     style: TextStyle(
                       color: darkGrey,
@@ -215,7 +221,7 @@ class _ListingDetailsState extends State<ListingDetails> {
           Text(
             value,
             textAlign: TextAlign.right,
-            style:const TextStyle(
+            style: const TextStyle(
               color: mediumGrey,
               fontSize: 15,
             ),
@@ -266,7 +272,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                     Text(
                       date,
                       maxLines: 1,
-                      style:const TextStyle(
+                      style: const TextStyle(
                           fontSize: 14,
                           color: mediumGrey,
                           overflow: TextOverflow.clip),

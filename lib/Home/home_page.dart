@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  CategoriesController _categoriesController = CategoriesController();
+  final CategoriesController _categoriesController = CategoriesController();
   List<CategoryModel> categories = [];
   getCategories() async {
     var response = await _categoriesController.getAllCategories();
@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
               itemCount: listings.length,
               itemBuilder: (context, index) {
                 return listWidget(
-                    listings[index].images[0].url, listings[index].title, listings[index].contact.locations[0].name, true);
+                    listings[index].images, listings[index].title, listings[index].contact.locations[0].name,listings[index].price, true);
               },
             ),
           ),

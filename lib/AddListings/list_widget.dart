@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../Utils/color_scheme.dart';
 import 'listing_details.dart';
 
-listWidget(image, street, city, isFovorite) {
+listWidget(image, street, city,price, isFovorite) {
   return SizedBox(
     width: 160,
     child: Column(
@@ -16,7 +16,7 @@ listWidget(image, street, city, isFovorite) {
           width: 160,
           child: GestureDetector(
             onTap: (){
-              Get.to(ListingDetails(image: image, street: street, price: '12,322,65',));
+              Get.to(ListingDetails(image: image, street: street, price: price, description: '',));
             },
             child: Stack(
               children: [
@@ -26,7 +26,7 @@ listWidget(image, street, city, isFovorite) {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(image),
+                      image: NetworkImage(image[0].url),
                     ),
                   ),
                 ),

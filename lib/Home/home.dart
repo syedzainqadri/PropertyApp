@@ -30,164 +30,164 @@ class _HomeState extends State<Home> {
   String title = 'Home';
   late PageController _pageController;
   OtpFieldController otpController = OtpFieldController();
-  UserController userController = UserController();
-  late UserModel user;
   bool notIntialized = true;
-  getUser() async {
-   var myUser= await userController.getUser(widget.signInModel.token_type, widget.signInModel.token);
-   
-   setState(() {
-     
-      user = UserModel.fromJson(myUser);
-   });
-  }
 
   @override
   void initState() {
-    getUser();
     setState(() {
       notIntialized = false;
     });
-    super.initState();
     _pageController = PageController();
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return notIntialized
+        ? const Center(
+            child: CircularProgressIndicator(),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              backgroundColor: transparent,
+              elevation: 0.0,
+              centerTitle: true,
+              title: Text(
+                title,
+                style: const TextStyle(color: lightGreen),
+              ),
+              leading: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(Profile(
+                      user: widget.signInModel,
+                    ));
+                  },
+                  child: GetX<UserController>(
+                    init: UserController(),
+                    builder: (_){
+                      return Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: mediumGrey,
+                      ),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            _.user.value.picture,
+                      ),
+                    ),
+                  ),
+                );
+                    },
+                  ),
+              ),
+              ),
+              actions: hasAction
+                  ? [
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(const AddListing());
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.add,
+                            color: lightGreen,
+                          ),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.map,
+                          color: lightGreen,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    ]
+                  : [],
+            ),
+            body: SizedBox.expand(
+              child: PageView(
+                controller: _pageController,
+                onPageChanged: (index) {
+                  setState(() => _currentIndex = index);
+                  index == 0
+                      ? setState(() {
+                          title = 'Home';
+                          hasAction = true;
+                        })
+                      : index == 1
+                          ? setState(() {
+                              title = 'Categories';
+                              hasAction = false;
+                            })
+                          : index == 2
+                              ? setState(() {
+                                  title = 'Conversations';
+                                  hasAction = false;
+                                })
+                              : setState(() {
+                                  title = 'Search';
+                                  hasAction = false;
+                                });
+                },
+                children: const <Widget>[
+                  HomePage(),
+                  CategoriesPage(),
+                  ConversationPage(),
+                  SearchPage(),
+                ],
+              ),
+            ),
+            bottomNavigationBar: BottomNavyBar(
+              selectedIndex: _currentIndex,
+              onItemSelected: (index) {
+                setState(() => _currentIndex = index);
+                _pageController.jumpToPage(index);
+              },
+              items: <BottomNavyBarItem>[
+                BottomNavyBarItem(
+                  title: const Text('Home'),
+                  icon: const Icon(Icons.home),
+                  activeColor: lightGreen,
+                  inactiveColor: mediumGrey,
+                ),
+                BottomNavyBarItem(
+                  title: const Text('Categories'),
+                  icon: const Icon(Icons.category),
+                  activeColor: lightGreen,
+                  inactiveColor: mediumGrey,
+                ),
+                BottomNavyBarItem(
+                  title: const Text('Conversation'),
+                  icon: const Icon(Icons.chat),
+                  activeColor: lightGreen,
+                  inactiveColor: mediumGrey,
+                ),
+                BottomNavyBarItem(
+                  title: const Text('Search'),
+                  icon: const Icon(Icons.search),
+                  activeColor: lightGreen,
+                  inactiveColor: mediumGrey,
+                ),
+              ],
+            ),
+          );
   }
 
   @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return notIntialized? const Center(child: CircularProgressIndicator(),):
-    Scaffold(
-      appBar: AppBar(
-        backgroundColor: transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: Text(
-          title,
-          style: const TextStyle(color: lightGreen),
-        ),
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: GestureDetector(
-            onTap: () {
-              Get.to(Profile(
-                user: widget.signInModel,
-              ));
-            },
-            child: Container(
-              width: 30,
-              height: 30,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: mediumGrey,
-                ),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(user.picture),
-                ),
-              ),
-            ),
-          ),
-        ),
-        actions: hasAction
-            ? [
-                GestureDetector(
-                  onTap: () {
-                    Get.to(const AddListing());
-                  },
-                  child: const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.add,
-                      color: lightGreen,
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.map,
-                    color: lightGreen,
-                  ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-              ]
-            : [],
-      ),
-      body: SizedBox.expand(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() => _currentIndex = index);
-            index == 0
-                ? setState(() {
-                    title = 'Home';
-                    hasAction = true;
-                  })
-                : index == 1
-                    ? setState(() {
-                        title = 'Categories';
-                        hasAction = false;
-                      })
-                    : index == 2
-                        ? setState(() {
-                            title = 'Conversations';
-                            hasAction = false;
-                          })
-                        : setState(() {
-                            title = 'Search';
-                            hasAction = false;
-                          });
-          },
-          children: const <Widget>[
-            HomePage(),
-            CategoriesPage(),
-            ConversationPage(),
-            SearchPage(),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: _currentIndex,
-        onItemSelected: (index) {
-          setState(() => _currentIndex = index);
-          _pageController.jumpToPage(index);
-        },
-        items: <BottomNavyBarItem>[
-          BottomNavyBarItem(
-            title: const Text('Home'),
-            icon: const Icon(Icons.home),
-            activeColor: lightGreen,
-            inactiveColor: mediumGrey,
-          ),
-          BottomNavyBarItem(
-            title: const Text('Categories'),
-            icon: const Icon(Icons.category),
-            activeColor: lightGreen,
-            inactiveColor: mediumGrey,
-          ),
-          BottomNavyBarItem(
-            title: const Text('Conversation'),
-            icon: const Icon(Icons.chat),
-            activeColor: lightGreen,
-            inactiveColor: mediumGrey,
-          ),
-          BottomNavyBarItem(
-            title: const Text('Search'),
-            icon: const Icon(Icons.search),
-            activeColor: lightGreen,
-            inactiveColor: mediumGrey,
-          ),
-        ],
-      ),
-    );
   }
 
   itemWidget(image, street, date, location, price) {
