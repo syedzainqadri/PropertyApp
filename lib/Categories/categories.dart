@@ -76,6 +76,7 @@ class _CategoryPageState extends State<CategoryPage> {
   }
   @override
   void initState() {
+    
      getListings();
     super.initState();
   }

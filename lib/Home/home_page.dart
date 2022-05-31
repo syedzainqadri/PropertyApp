@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       var data = jsonDecode(response);
       var allListing = data['data'] as List;
-     listings = allListing
+      listings = allListing
           .map((listingsJson) => AllListings.fromJson(listingsJson))
           .toList();
     });
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-             SizedBox(
+          SizedBox(
             height: 500,
             width: double.infinity,
             child: GridView.builder(
@@ -115,7 +115,14 @@ class _HomePageState extends State<HomePage> {
               itemCount: listings.length,
               itemBuilder: (context, index) {
                 return listWidget(
-                    listings[index].images, listings[index].title, listings[index].contact.locations[0].name,listings[index].price, true);
+                    listings[index].images,
+                    listings[index].title,
+                    listings[index].contact.locations[0].name,
+                    listings[index].price,
+                    true,
+                    'This is description',
+                    listings[index].listing_id,
+                    );
               },
             ),
           ),

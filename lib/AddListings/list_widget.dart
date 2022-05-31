@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 
 import '../Utils/color_scheme.dart';
 import 'listing_details.dart';
 
-listWidget(image, street, city,price, isFovorite) {
+listWidget(image, street, city,price, isFovorite,description,listingId) {
   return SizedBox(
     width: 160,
     child: Column(
@@ -16,7 +15,7 @@ listWidget(image, street, city,price, isFovorite) {
           width: 160,
           child: GestureDetector(
             onTap: (){
-              Get.to(ListingDetails(image: image, street: street, price: price, description: '',));
+              Get.to(ListingDetails(image: image, street: street, price: price, description: description,listingId: listingId,));
             },
             child: Stack(
               children: [
