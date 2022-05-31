@@ -2,18 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:realestapp/Controllers/review_controller.dart';
 import 'package:realestapp/Models/AllListings/images.dart';
 import '../Utils/color_scheme.dart';
 
 class ListingDetails extends StatefulWidget {
-  final String street, price,description;
+  final String street, price, description;
+  final int listingId;
   final List<ImageModel> image;
 
   const ListingDetails(
       {Key? key,
       required this.street,
       required this.price,
-      required this.image, required this.description})
+      required this.image,
+      required this.description,
+      required this.listingId})
       : super(key: key);
 
   @override
@@ -22,6 +26,7 @@ class ListingDetails extends StatefulWidget {
 
 class _ListingDetailsState extends State<ListingDetails> {
   List<Widget> images = [];
+  ReviewController reviewController = Get.put(ReviewController());
   @override
   void initState() {
     for (int i = 0; i < widget.image.length; i++) {
@@ -30,7 +35,13 @@ class _ListingDetailsState extends State<ListingDetails> {
         fit: BoxFit.cover,
       ));
     }
+    getReviews();
     super.initState();
+  }
+
+  getReviews() async {
+    Get.find<ReviewController>().updateReview(
+        await Get.find<ReviewController>().getReviews(widget.listingId));
   }
 
   @override
@@ -109,7 +120,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                   const SizedBox(
                     height: 15,
                   ),
-                   Text(
+                  Text(
                     widget.description,
                     style: const TextStyle(
                       color: mediumGrey,
@@ -182,16 +193,19 @@ class _ListingDetailsState extends State<ListingDetails> {
                   const SizedBox(
                     height: 20,
                   ),
-                  SizedBox(
-                    height: 300,
-                    child: ListView.builder(
-                        itemCount: 6,
-                        itemBuilder: ((context, index) => review(
-                            '1',
-                            'Frank',
-                            '12/03/2021',
-                            'A very good propery I have found A very good propery I have found'))),
-                  ),
+                  
+                         SizedBox(
+                          height: 300,
+                          child: Obx(()=> ListView.builder(
+                              itemCount: reviewController.reviews.length,
+                              itemBuilder: ((context, index) => review(
+                                  '1',
+                                reviewController.reviews[index],
+                                  _.reviews.value.reviews[index].date.substring(1, 8),
+                                   _.reviews.value.reviews[index].content,
+                                  _.reviews.value.reviews[index].rating)))
+                                  ),
+                        ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -231,7 +245,7 @@ class _ListingDetailsState extends State<ListingDetails> {
     );
   }
 
-  review(image, name, date, reviewText) {
+  review(image, name, date, reviewText, initialRating) {
     return Padding(
       padding:
           const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 16.0),
@@ -283,7 +297,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                   width: 25,
                 ),
                 RatingBar.builder(
-                  initialRating: 3,
+                  ignoreGestures: true,
+                  initialRating: initialRating,
                   minRating: 1,
                   itemSize: 25,
                   direction: Axis.horizontal,
