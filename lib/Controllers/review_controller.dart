@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:realestapp/Models/review_model.dart';
 
 class ReviewController extends GetxController {
-  var reviews = <Review>[].obs;
+  var reviewList = Review(data: [], pagination: Pagination(currentPage: 0, perPage: 0, total: 0, totalPages: 0)).obs;
  
 
   fetchReviews(listingId) async {
@@ -17,6 +17,10 @@ class ReviewController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    return jsonDecode(response.body);
+    var reviews = reviewFromJson(response.body);
+    if(reviews == null){
+      
+    reviewList.value = reviews;
+    }
   }
 }
