@@ -10,16 +10,17 @@ itemWidget(AllListings listing) {
   final reviewController = Get.put(ReviewController());
   return GestureDetector(
     onTap: () async {
-      
-      await reviewController.fetchReviews(listing.listing_id);
-      Get.to(ListingDetails(
-        street: listing.title,
-        price: listing.price,
-        image: listing.images,
-        description: '',
-        listingId: listing.listing_id,
-      ));
-
+      try {
+        await reviewController.fetchReviews(listing.listing_id);
+      } finally {
+        Get.to(ListingDetails(
+          street: listing.title,
+          price: listing.price,
+          image: listing.images,
+          description: '',
+          listingId: listing.listing_id,
+        ));
+      }
     },
     child: Padding(
       padding: const EdgeInsets.all(8.0),

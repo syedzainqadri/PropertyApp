@@ -17,14 +17,17 @@ listWidget(image, street, city, price, isFovorite, description, listingId) {
           width: 160,
           child: GestureDetector(
             onTap: () async {
-              await reviewController.fetchReviews(listingId);
-              Get.to(ListingDetails(
-                image: image,
-                street: street,
-                price: price,
-                description: description,
-                listingId: listingId,
-              ));
+              try {
+                await reviewController.fetchReviews(listingId);
+              } finally {
+                Get.to(ListingDetails(
+                  image: image,
+                  street: street,
+                  price: price,
+                  description: description,
+                  listingId: listingId,
+                ));
+              }
             },
             child: Stack(
               children: [

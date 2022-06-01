@@ -29,19 +29,10 @@ class _ProfileState extends State<Profile> {
   final ProfileController _profileController = ProfileController();
 
   UserController userController = UserController();
-  late UserModel user;
-  getUser() async {
-    var myUser =
-        await userController.getUser(widget.user.token_type, widget.user.token);
-
-    setState(() {
-      user = UserModel.fromJson(myUser);
-    });
-  }
+  bool isLoading = false;
 
   @override
   void initState() {
-    getUser();
     super.initState();
   }
 
@@ -76,36 +67,48 @@ class _ProfileState extends State<Profile> {
                 const SizedBox(
                   height: 10,
                 ),
-                Badge(
-                  badgeColor: lightGreen,
-                  badgeContent: const Icon(
-                    Icons.camera_alt,
-                    color: white,
-                  ),
-                  position: const BadgePosition(bottom: 1, end: 1),
-                  child: GestureDetector(
-                    onTap: () {
-                      uploadPicutre();
-                    },
-                    child: GetX<UserController>(
-                      init: UserController(),
-                      builder: (_){
-                        return Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: mediumGrey),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(_.user.value.picture),
+                isLoading
+                    ? Container(
+                        width: 120,
+                        height: 120,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: mediumGrey),
+                        ),
+                        child: const Center(
+                          child: CircularProgressIndicator(color: lightGreen,),
+                        ),
+                      )
+                    : Badge(
+                        badgeColor: lightGreen,
+                        badgeContent: const Icon(
+                          Icons.camera_alt,
+                          color: white,
+                        ),
+                        position: const BadgePosition(bottom: 1, end: 1),
+                        child: GestureDetector(
+                          onTap: () async {
+                            await uploadPicutre();
+                          },
+                          child: GetX<UserController>(
+                            init: UserController(),
+                            builder: (_) {
+                              return Container(
+                                width: 120,
+                                height: 120,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: mediumGrey),
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: NetworkImage(_.user.value.picture),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                       ),
-                    );
-                      },
-                    ),
-                  ),
-                ),
                 const SizedBox(
                   height: 15,
                 ),
@@ -164,11 +167,19 @@ class _ProfileState extends State<Profile> {
   }
 
   uploadPicutre() async {
+    setState(() {
+      isLoading = true;
+    });
     XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
     var response = await _profileController.changeProfile(
         widget.user.token_type, widget.user.token, File(picture!.path));
+    Get.find<UserController>()
+        .updateUser(UserModel.fromJson(await Get.find<UserController>().getUser(
+      widget.user.token_type,
+      widget.user.token,
+    )));
     setState(() {
-      user = UserModel.fromJson(jsonDecode(response));
+      isLoading = false;
     });
   }
 

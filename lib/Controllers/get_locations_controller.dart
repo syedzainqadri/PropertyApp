@@ -35,7 +35,7 @@ addListing(locationId, categoryId, listingType, title, status, price, priceUnit,
       'price_unit': priceUnit,
       'badges': badges,
       'description': description,
-      'gallery[]': images,
+      'gallery': images,
     },
   );
  print( response.body);

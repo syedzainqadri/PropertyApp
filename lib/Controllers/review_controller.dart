@@ -5,8 +5,11 @@ import 'package:http/http.dart' as http;
 import 'package:realestapp/Models/review_model.dart';
 
 class ReviewController extends GetxController {
-  var reviewList = Review(data: [], pagination: Pagination(currentPage: 0, perPage: 0, total: 0, totalPages: 0)).obs;
- 
+  var reviewList = Review(
+          data: [],
+          pagination:
+              Pagination(currentPage: 0, perPage: 0, total: 0, totalPages: 0))
+      .obs;
 
   fetchReviews(listingId) async {
     var response = await http.get(
@@ -18,9 +21,6 @@ class ReviewController extends GetxController {
       },
     );
     var reviews = reviewFromJson(response.body);
-    if(reviews == null){
-      
     reviewList.value = reviews;
-    }
   }
 }
