@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
 import 'package:realestapp/Models/AllListings/images.dart';
+import '../Models/review_model.dart';
 import '../Utils/color_scheme.dart';
 
 class ListingDetails extends StatefulWidget {
@@ -26,7 +27,7 @@ class ListingDetails extends StatefulWidget {
 
 class _ListingDetailsState extends State<ListingDetails> {
   List<Widget> images = [];
-  ReviewController reviewController = Get.put(ReviewController());
+  final ReviewController reviewController = Get.put(ReviewController());
   @override
   void initState() {
     for (int i = 0; i < widget.image.length; i++) {
@@ -35,14 +36,14 @@ class _ListingDetailsState extends State<ListingDetails> {
         fit: BoxFit.cover,
       ));
     }
-    getReviews();
+    //getReviews();
     super.initState();
   }
 
-  getReviews() async {
-    Get.find<ReviewController>().updateReview(
-        await Get.find<ReviewController>().getReviews(widget.listingId));
-  }
+  // getReviews() async {
+  //   Get.find<ReviewController>().updateReview(
+  //       await Get.find<ReviewController>().getReviews(widget.listingId));
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -193,19 +194,19 @@ class _ListingDetailsState extends State<ListingDetails> {
                   const SizedBox(
                     height: 20,
                   ),
-                  
-                         SizedBox(
-                          height: 300,
-                          child: Obx(()=> ListView.builder(
-                              itemCount: reviewController.reviews.length,
-                              itemBuilder: ((context, index) => review(
-                                  '1',
-                                reviewController.reviews[index],
-                                  _.reviews.value.reviews[index].date.substring(1, 8),
-                                   _.reviews.value.reviews[index].content,
-                                  _.reviews.value.reviews[index].rating)))
-                                  ),
-                        ),
+                  SizedBox(
+                    height: 300,
+                    child: Obx(
+                      () => ListView.builder(
+                        itemCount:
+                            reviewController.reviewList.value.data.length,
+                        itemBuilder: ((context, index) => review(
+                              '1',
+                              reviewController.reviewList.value.data[index],
+                            )),
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -245,7 +246,7 @@ class _ListingDetailsState extends State<ListingDetails> {
     );
   }
 
-  review(image, name, date, reviewText, initialRating) {
+  review(image, review) {
     return Padding(
       padding:
           const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 16.0),
@@ -277,14 +278,14 @@ class _ListingDetailsState extends State<ListingDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      review.authorName,
                       style: const TextStyle(fontSize: 16, color: darkGrey),
                     ),
                     const SizedBox(
                       height: 10,
                     ),
                     Text(
-                      date,
+                      review.date.toString().substring(0, 10),
                       maxLines: 1,
                       style: const TextStyle(
                           fontSize: 14,
@@ -298,7 +299,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                 ),
                 RatingBar.builder(
                   ignoreGestures: true,
-                  initialRating: initialRating,
+                  initialRating: review.rating.toDouble(),
                   minRating: 1,
                   itemSize: 25,
                   direction: Axis.horizontal,
@@ -314,7 +315,7 @@ class _ListingDetailsState extends State<ListingDetails> {
               ],
             ),
             Text(
-              reviewText,
+              review.content.raw,
               style: const TextStyle(fontSize: 16, color: darkGrey),
             ),
           ],
