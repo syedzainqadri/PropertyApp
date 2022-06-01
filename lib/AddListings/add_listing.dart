@@ -69,7 +69,7 @@ class _AddListingState extends State<AddListing> {
         });
       }
     });
-  
+
     await _locationController.addListing(
         locationId,
         categoryId,
@@ -88,6 +88,7 @@ class _AddListingState extends State<AddListing> {
     getCategories();
     getLocations();
     super.initState();
+    categoryId = 112;
     titleController.text = '2bd Condo - Park View';
     descriptionController.text = 'Amazing View in a luxury building';
     priceController.text = '\$123,1231,23';
@@ -523,7 +524,7 @@ class _AddListingState extends State<AddListing> {
     List<XFile>? images = await ImagePicker().pickMultiImage();
     for (int i = 0; i < images!.length; i++) {
       setState(() {
-        imageFiles!.add(File(images[0].path));
+        imageFiles!.add(File(images[i].path));
       });
     }
   }
