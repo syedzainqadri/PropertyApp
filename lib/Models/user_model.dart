@@ -1,9 +1,15 @@
 import 'package:get/get.dart';
 
 class UserModel {
-  late String firstName, lastName, categoryId, email, userName, phone, picture;
-  late bool isAdmin;
-  late int id;
+  String firstName = '';
+  String lastName = '';
+  String categoryId = '';
+  String email = '';
+  String userName = '';
+  String phone = '';
+  String picture = '';
+  bool isAdmin = false;
+  int id = 0;
 
   UserModel.fromJson(data) {
     firstName = data['first_name'];

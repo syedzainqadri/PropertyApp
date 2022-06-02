@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestapp/Controllers/profile_controller.dart';
+import 'package:realestapp/Controllers/sign_in_controller.dart';
 import 'package:realestapp/Models/sign_in_model.dart';
 import '../Auth/sign_in.dart';
 import '../Controllers/user_controller.dart';
@@ -18,17 +19,17 @@ import 'account_subscriptions.dart';
 import 'settings.dart';
 
 class Profile extends StatefulWidget {
-  final SignInModel user;
-  const Profile({Key? key, required this.user}) : super(key: key);
+  const Profile({Key? key}) : super(key: key);
 
   @override
   State<Profile> createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  final ProfileController _profileController = ProfileController();
+  final ProfileController _profileController = Get.put(ProfileController());
 
-  UserController userController = UserController();
+  UserController userController = Get.put(UserController());
+  SignInController signInController = Get.put(SignInController());
   bool isLoading = false;
 
   @override
@@ -171,12 +172,11 @@ class _ProfileState extends State<Profile> {
       isLoading = true;
     });
     XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
-    var response = await _profileController.changeProfile(
-        widget.user.token_type, widget.user.token, File(picture!.path));
+    await _profileController.changeProfile(
+         signInController.signInModel.value.token_type, signInController.signInModel.value.token,File(picture!.path));
     Get.find<UserController>()
         .updateUser(UserModel.fromJson(await Get.find<UserController>().getUser(
-      widget.user.token_type,
-      widget.user.token,
+         signInController.signInModel.value.token_type, signInController.signInModel.value.token,
     )));
     setState(() {
       isLoading = false;

@@ -26,7 +26,7 @@ class _AddListingState extends State<AddListing> {
   String _selectedLocation = '';
   String _selectedCategory = '';
   bool editFilters = false;
-  List<File>? imageFiles = [];
+  List<XFile>? imageFiles = [];
   var locationId = 0;
   var categoryId = 0;
   final CategoriesController _categoriesController = CategoriesController();
@@ -80,7 +80,7 @@ class _AddListingState extends State<AddListing> {
         priceController.text.toString(),
         'is-new',
         descriptionController.text.toString(),
-        imageFiles);
+        imageFiles!);
   }
 
   @override
@@ -413,7 +413,7 @@ class _AddListingState extends State<AddListing> {
                                       itemCount: imageFiles?.length,
                                       itemBuilder: (context, index) {
                                         return imageContainer(
-                                            imageFiles![index]);
+                                            File(imageFiles![index].path));
                                       }),
                                 ),
                               ],
@@ -524,7 +524,7 @@ class _AddListingState extends State<AddListing> {
     List<XFile>? images = await ImagePicker().pickMultiImage();
     for (int i = 0; i < images!.length; i++) {
       setState(() {
-        imageFiles!.add(File(images[i].path));
+        imageFiles!.addAll(images);
       });
     }
   }

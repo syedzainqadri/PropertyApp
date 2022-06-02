@@ -19,7 +19,6 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  late SignInModel user;
   final SignInController _signInController = SignInController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -71,17 +70,11 @@ class _SignInState extends State<SignIn> {
                   defaultButton(
                     'Log In',
                     () async {
-                      var result = await _signInController.signIn(
+                      await _signInController.signIn(
                           emailController.text, passwordController.text);
-                      setState(() {
-                        user = SignInModel.fromJson(result);
-                      });
-                      Get.to(Home(
-                        signInModel: user,
-                      ));
                       Get.find<UserController>().updateUser(UserModel.fromJson(
-                          await Get.find<UserController>()
-                              .getUser(user.token_type, user.token)));
+                          await Get.find<UserController>().getUser(_signInController.signInModel.value.token_type,_signInController.signInModel.value.token,)));
+                      Get.to(const Home());
                     },
                   ),
                   const SizedBox(

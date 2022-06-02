@@ -7,17 +7,14 @@ import 'package:realestapp/Models/sign_in_model.dart';
 import '../AddListings/add_listing.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';
-import '../Models/user_model.dart';
 import '../Profile/profile.dart';
 import '../Search/search_page.dart';
 import '../Utils/color_scheme.dart';
 import 'home_page.dart';
 
 class Home extends StatefulWidget {
-  final SignInModel signInModel;
   const Home({
     Key? key,
-    required this.signInModel,
   }) : super(key: key);
 
   @override
@@ -61,32 +58,31 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(Profile(
-                      user: widget.signInModel,
+                    Get.to(const Profile(
                     ));
                   },
                   child: GetX<UserController>(
                     init: UserController(),
-                    builder: (_){
+                    builder: (_) {
                       return Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        color: mediumGrey,
-                      ),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            _.user.value.picture,
-                      ),
-                    ),
-                  ),
-                );
+                        width: 30,
+                        height: 30,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: mediumGrey,
+                          ),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                              _.user.value.picture,
+                            ),
+                          ),
+                        ),
+                      );
                     },
                   ),
-              ),
+                ),
               ),
               actions: hasAction
                   ? [

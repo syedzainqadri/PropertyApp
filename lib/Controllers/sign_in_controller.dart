@@ -1,12 +1,12 @@
-
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../Models/sign_in_model.dart';
-class SignInController extends GetxController{
 
-signIn(username,password) async {
+class SignInController extends GetxController {
+  Rx<SignInModel> signInModel = SignInModel().obs;
+
+  signIn(username, password) async {
     var response = await http.post(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/login"),
       headers: <String, String>{
@@ -18,10 +18,6 @@ signIn(username,password) async {
         'password': password.toString(),
       }),
     );
-    // var result = jsonDecode(response.body);
-    // var data = result['user'];
-    // print(data['first_name']);
-
-    return response.body;
-}
+    signInModel.value = SignInModel.fromJson(response.body);
+  }
 }

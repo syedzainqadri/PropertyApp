@@ -108,15 +108,13 @@ class _SignUpState extends State<SignUp> {
                   ),
                   defaultButton('Sign Up', () async {
                     user = await _signUpController.signUp(
-                        emailController.text,
+                        'walid433',
                         emailController.text,
                         passwordController.text,
                         firstNameController.text,
                         lastNameController.text,
-                        emailController.text);
-                    Get.to(Home(
-                      signInModel: user,
-                    ));
+                        '+123134123323');
+                    Get.to(const Home());
                   }),
                   const SizedBox(
                     height: 15,
