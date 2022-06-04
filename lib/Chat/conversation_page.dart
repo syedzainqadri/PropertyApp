@@ -40,7 +40,7 @@ chat(image, name, message) {
     padding: const EdgeInsets.only(left:12.0,bottom: 16),
     child: GestureDetector(
       onTap: () {
-        Get.to(ChatUi(title: name,image: image));
+        //Get.to(ChatUi(title: name,image: image));
       },
       child: SizedBox(
         height: 60,

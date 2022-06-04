@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:realestapp/Chat/chat_ui.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
 import 'package:realestapp/Models/AllListings/images.dart';
 import '../Models/review_model.dart';
@@ -65,15 +66,19 @@ class _ListingDetailsState extends State<ListingDetails> {
               size: 35,
               color: lightGreen,
             )),
-        actions: const [
+        actions:  [
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.more_horiz,
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: (){
+                Get.to(ChatUi(listingId: widget.listingId,title: widget.street,));
+              }, 
+              icon:const Icon(
+              Icons.chat_sharp,
               color: lightGreen,
-            ),
+            ),),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
         ],

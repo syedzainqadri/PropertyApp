@@ -2,12 +2,17 @@ import 'package:chat_composer/chat_composer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/chat_controller.dart';
 
+import '../Controllers/sign_in_controller.dart';
 import '../Utils/color_scheme.dart';
 
 class ChatUi extends StatefulWidget {
-  final String title,image;
-  const ChatUi({Key? key, required this.title, required this.image}) : super(key: key);
+  final int listingId;
+  final String title;
+
+  const ChatUi({Key? key, required this.listingId, required this.title})
+      : super(key: key);
 
   @override
   State<ChatUi> createState() => _ChatUiState();
@@ -16,6 +21,9 @@ class ChatUi extends StatefulWidget {
 class _ChatUiState extends State<ChatUi> {
   List<Widget> list = [];
   TextEditingController con = TextEditingController();
+  ChatController chatController = Get.put(ChatController());
+
+  SignInController signInController = Get.put(SignInController());
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,25 +38,25 @@ class _ChatUiState extends State<ChatUi> {
                 Get.back();
               },
               child: const Icon(Icons.navigate_before, size: 35, color: white)),
-              actions: [
-                Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: mediumGrey,
-              ),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/${widget.image}.png'),
-              ),
-            ),
-          ),
-        ),
-              ],
+          actions: const [
+            //         Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Container(
+            //     width: 40,
+            //     height: 40,
+            //     decoration: BoxDecoration(
+            //       shape: BoxShape.circle,
+            //       border: Border.all(
+            //         color: mediumGrey,
+            //       ),
+            //       image: DecorationImage(
+            //         fit: BoxFit.cover,
+            //         image: AssetImage('assets/images/${widget.image}.png'),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+          ],
         ),
         body: Column(
           children: [
@@ -62,6 +70,11 @@ class _ChatUiState extends State<ChatUi> {
             ChatComposer(
               controller: con,
               onReceiveText: (str) {
+                chatController.startChatConversation(
+                    signInController.signInModel.value.token_type,
+                    signInController.signInModel.value.token,
+                    widget.listingId,
+                    str);
                 setState(() {
                   list.add(sentMessage(str.toString()));
                   list.add(recieveMessage(str.toString()));
@@ -114,58 +127,59 @@ class _ChatUiState extends State<ChatUi> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const SizedBox(width: 10,),
+        const SizedBox(
+          width: 10,
+        ),
         Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 250),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            
-          color: lightGreen,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              message,
-              style: const TextStyle(color: white,fontSize: 17),
+          padding: const EdgeInsets.all(8.0),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 250),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: lightGreen,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  message,
+                  style: const TextStyle(color: white, fontSize: 17),
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    )
+        )
       ],
     );
   }
-  
+
   recieveMessage(message) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        const SizedBox(width: 10,),
+        const SizedBox(
+          width: 10,
+        ),
         Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 250),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            
-          color: lightGrey,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              message,
-              style: const TextStyle(color: darkGrey,fontSize: 17),
+          padding: const EdgeInsets.all(8.0),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 250),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: lightGrey,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  message,
+                  style: const TextStyle(color: darkGrey, fontSize: 17),
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    )
+        )
       ],
     );
   }
 }
-
