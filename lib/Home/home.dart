@@ -7,6 +7,7 @@ import 'package:realestapp/Models/sign_in_model.dart';
 import '../AddListings/add_listing.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';
+import '../Controllers/membership_controller.dart';
 import '../Profile/profile.dart';
 import '../Search/search_page.dart';
 import '../Utils/color_scheme.dart';
@@ -28,7 +29,7 @@ class _HomeState extends State<Home> {
   late PageController _pageController;
   OtpFieldController otpController = OtpFieldController();
   bool notIntialized = true;
-
+  MembershipController membershipController = Get.put(MembershipController());
   @override
   void initState() {
     setState(() {
@@ -58,6 +59,7 @@ class _HomeState extends State<Home> {
                 padding: const EdgeInsets.all(8.0),
                 child: GestureDetector(
                   onTap: () {
+                    membershipController.getMembershipPlans();
                     Get.to(const Profile(
                     ));
                   },

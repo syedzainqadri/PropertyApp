@@ -11,8 +11,8 @@ class ChatController extends GetxController {
     var response = await http.post(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my/chat/conversation"),
       headers: <String, String>{
-       'Content-Type':
-            "multipart/form-data",
+        'Content-Type':
+            "multipart/form-data; boundary='<calculated when request is sent>'",
         'Connection': 'keep-alive',
         'Content-Length': '<calculated when request is sent>',
         'Host': '<calculated when request is sent>',
@@ -24,7 +24,7 @@ class ChatController extends GetxController {
       },
       body: body,
     );
-    print(Utf8Codec().decode(response.bodyBytes) + '*****##############');
+    print(const Utf8Codec().decode(response.bodyBytes) + '*****##############');
     sendChatConversation(listingId, text, jsonDecode(response.body)['con_id']);
   }
 
@@ -44,6 +44,7 @@ class ChatController extends GetxController {
       },
       body: body,
     );
+    print(text + text +text);
     sendChatMessage(conId, jsonDecode(response.body)['message_id']);
   }
 
