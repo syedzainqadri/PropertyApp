@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/listing_detail_controller.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
 
 import '../Utils/color_scheme.dart';
@@ -7,6 +8,7 @@ import 'listing_details.dart';
 
 listWidget(image, street, city, price, isFovorite, description, listingId) {
   final ReviewController reviewController = Get.put(ReviewController());
+  final ListingDetailsController listingDetailsController = Get.put(ListingDetailsController());
   return SizedBox(
     width: 160,
     child: Column(
@@ -18,15 +20,10 @@ listWidget(image, street, city, price, isFovorite, description, listingId) {
           child: GestureDetector(
             onTap: () async {
               try {
+                await listingDetailsController.getListingById(listingId);
                 await reviewController.fetchReviews(listingId);
               } finally {
-                Get.to(ListingDetails(
-                  image: image,
-                  street: street,
-                  price: price,
-                  description: description,
-                  listingId: listingId,
-                ));
+                Get.to(const ListingDetails());
               }
             },
             child: Stack(

@@ -4,22 +4,19 @@ import 'package:realestapp/Controllers/review_controller.dart';
 import 'package:realestapp/Models/AllListings/all_listings.dart';
 
 import '../AddListings/listing_details.dart';
+import '../Controllers/listing_detail_controller.dart';
 import '../Utils/color_scheme.dart';
 
 itemWidget(AllListings listing) {
   final reviewController = Get.put(ReviewController());
+  final listingDetailsController = Get.put(ListingDetailsController());
   return GestureDetector(
     onTap: () async {
       try {
+        listingDetailsController.getListingById(listing.listing_id);
         await reviewController.fetchReviews(listing.listing_id);
       } finally {
-        Get.to(ListingDetails(
-          street: listing.title,
-          price: listing.price,
-          image: listing.images,
-          description: '',
-          listingId: listing.listing_id,
-        ));
+        Get.to(const ListingDetails());
       }
     },
     child: Padding(

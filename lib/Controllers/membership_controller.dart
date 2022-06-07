@@ -1,9 +1,32 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:realestapp/Models/checkout_model.dart';
 import 'package:realestapp/Models/membership_model.dart';
 
 class MembershipController extends GetxController {
   var membershipPlans = List<Membership>.empty(growable: true).obs;
+  var checkoutData = Checkout(
+          id: 0,
+          price: '',
+          method: '',
+          status: '',
+          transactionId: '',
+          orderKey: '',
+          paidDate: '',
+          createdDate: DateTime(0),
+          gateway: Gateway(
+              title: '', description: '', icon: null, id: '', instructions: ''),
+          plan: Plan(
+              description: '',
+              id: 0,
+              price: '',
+              title: '',
+              visible: 0,
+              regularAds: 0,
+              type: ''),
+          result: '',
+          redirect: '')
+      .obs;
 
   getMembershipPlans() async {
     var response = await http.get(
@@ -35,6 +58,6 @@ class MembershipController extends GetxController {
           'plan_id': planId,
         });
 
-    print(response.body);
+    checkoutData.value = checkoutFromJson(response.body);
   }
 }

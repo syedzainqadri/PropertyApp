@@ -1,39 +1,43 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:realestapp/Chat/chat_ui.dart';
+import 'package:realestapp/Controllers/listing_detail_controller.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
-import 'package:realestapp/Models/AllListings/images.dart';
 import '../Models/review_model.dart';
 import '../Utils/color_scheme.dart';
 
 class ListingDetails extends StatefulWidget {
-  final String street, price, description;
-  final int listingId;
-  final List<ImageModel> image;
 
-  const ListingDetails(
-      {Key? key,
-      required this.street,
-      required this.price,
-      required this.image,
-      required this.description,
-      required this.listingId})
-      : super(key: key);
+  const ListingDetails({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<ListingDetails> createState() => _ListingDetailsState();
 }
 
 class _ListingDetailsState extends State<ListingDetails> {
+  final Completer<GoogleMapController> _controller = Completer();
+ ListingDetailsController listingDetailsController = Get.put(ListingDetailsController());
+
+  // CameraPosition listingLocation = const CameraPosition(
+  //   target: LatLng( listingDetailsController.listingDetail.value., -122.085749655962),
+  //   zoom: 14.4746,
+  // );
   List<Widget> images = [];
   final ReviewController reviewController = Get.put(ReviewController());
   @override
   void initState() {
-    for (int i = 0; i < widget.image.length; i++) {
+    for (int i = 0;
+        i < listingDetailsController.listingDetail.value.images.length;
+        i++) {
       images.add(Image.network(
-        widget.image[i].url,
+        Get.find<ListingDetailsController>().listingDetail.value.images[i].url,
         fit: BoxFit.cover,
       ));
     }
@@ -54,7 +58,7 @@ class _ListingDetailsState extends State<ListingDetails> {
         elevation: 0.0,
         centerTitle: true,
         title: Text(
-          widget.street,
+          listingDetailsController.listingDetail.value.title,
           style: const TextStyle(color: lightGreen),
         ),
         leading: GestureDetector(
@@ -66,17 +70,22 @@ class _ListingDetailsState extends State<ListingDetails> {
               size: 35,
               color: lightGreen,
             )),
-        actions:  [
+        actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
-              onPressed: (){
-                Get.to(ChatUi(listingId: widget.listingId,title: widget.street,));
-              }, 
-              icon:const Icon(
-              Icons.chat_sharp,
-              color: lightGreen,
-            ),),
+              onPressed: () {
+                Get.to(ChatUi(
+                  listingId:
+                      listingDetailsController.listingDetail.value.listingId,
+                  title: listingDetailsController.listingDetail.value.title,
+                ));
+              },
+              icon: const Icon(
+                Icons.chat_sharp,
+                color: lightGreen,
+              ),
+            ),
           ),
           const SizedBox(
             width: 10,
@@ -108,14 +117,14 @@ class _ListingDetailsState extends State<ListingDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        widget.street,
+                        listingDetailsController.listingDetail.value.title,
                         style: const TextStyle(
                           color: darkGrey,
                           fontSize: 18,
                         ),
                       ),
                       Text(
-                        '\$${widget.price}',
+                        '\$${listingDetailsController.listingDetail.value.price}',
                         style: const TextStyle(
                           color: darkGrey,
                           fontSize: 18,
@@ -127,7 +136,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                     height: 15,
                   ),
                   Text(
-                    widget.description,
+                    listingDetailsController.listingDetail.value.description,
                     style: const TextStyle(
                       color: mediumGrey,
                       fontSize: 16,
@@ -149,15 +158,18 @@ class _ListingDetailsState extends State<ListingDetails> {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               width: double.infinity,
               height: 300,
-              decoration: const BoxDecoration(
-                shape: BoxShape.rectangle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('assets/images/map.png'),
-                ),
+              child: GoogleMap(
+                mapType: MapType.hybrid,
+                initialCameraPosition: CameraPosition(
+    target: LatLng( listingDetailsController.listingDetail.value.contact.latitude, -122.085749655962),
+    zoom: 14.4746,
+  )
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                },
               ),
             ),
             Padding(
@@ -199,18 +211,21 @@ class _ListingDetailsState extends State<ListingDetails> {
                   const SizedBox(
                     height: 20,
                   ),
-                  SizedBox(
-                    height: 300,
-                    child: Obx(
-                      () =>  reviewController.reviewList.value.pagination!=null?ListView.builder(
-                        itemCount:
-                            reviewController.reviewList.value.data.length,
-                        itemBuilder: ((context, index) => review(
-                              reviewController.reviewList.value.data[index],
-                            )),
-                      ):const Text('No Reviews for this Listing'),
-                    ),
-                  ),
+                  // SizedBox(
+                  //   height: 300,
+                  //   child: Obx(
+                  //     () => reviewController.reviewList.value.pagination != null
+                  //         ? ListView.builder(
+                  //             itemCount:
+                  //                 reviewController.reviewList.value.data.length,
+                  //             itemBuilder: ((context, index) => review(
+                  //                   reviewController
+                  //                       .reviewList.value.data[index],
+                  //                 )),
+                  //           )
+                  //         : const Text('No Reviews for this Listing'),
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -252,82 +267,80 @@ class _ListingDetailsState extends State<ListingDetails> {
 
   review(Data review) {
     return Padding(
-            padding: const EdgeInsets.only(
-                left: 8.0, right: 8.0, top: 8.0, bottom: 16.0),
-            child: SizedBox(
-              width: double.infinity,
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: mediumGrey),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                review.authorAvatarUrls.entries.first.value),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            review.authorName,
-                            style:
-                                const TextStyle(fontSize: 16, color: darkGrey),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            review.date.toString().substring(0, 10),
-                            maxLines: 1,
-                            style: const TextStyle(
-                                fontSize: 14,
-                                color: mediumGrey,
-                                overflow: TextOverflow.clip),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        width: 25,
-                      ),
-                      RatingBar.builder(
-                        ignoreGestures: true,
-                        initialRating: review.rating.toDouble(),
-                        minRating: 1,
-                        itemSize: 25,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemPadding:
-                            const EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => const Icon(
-                          Icons.star,
-                          color: lightGreen,
-                        ),
-                        onRatingUpdate: (rating) {},
-                      ),
-                    ],
+      padding:
+          const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0, bottom: 16.0),
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: mediumGrey),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                          review.authorAvatarUrls.entries.first.value),
+                    ),
                   ),
-                  Text(
-                    review.content.raw,
-                    style: const TextStyle(fontSize: 16, color: darkGrey),
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      review.authorName,
+                      style: const TextStyle(fontSize: 16, color: darkGrey),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      review.date.toString().substring(0, 10),
+                      maxLines: 1,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          color: mediumGrey,
+                          overflow: TextOverflow.clip),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 25,
+                ),
+                RatingBar.builder(
+                  ignoreGestures: true,
+                  initialRating: review.rating.toDouble(),
+                  minRating: 1,
+                  itemSize: 25,
+                  direction: Axis.horizontal,
+                  allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: lightGreen,
                   ),
-                ],
-              ),
+                  onRatingUpdate: (rating) {},
+                ),
+              ],
             ),
-          );
+            Text(
+              review.content.raw,
+              style: const TextStyle(fontSize: 16, color: darkGrey),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

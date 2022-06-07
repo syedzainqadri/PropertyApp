@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/chat_controller.dart';
+import 'package:realestapp/Controllers/user_controller.dart';
 
 import '../Controllers/sign_in_controller.dart';
 import '../Utils/color_scheme.dart';
@@ -22,6 +23,7 @@ class _ChatUiState extends State<ChatUi> {
   List<Widget> list = [];
   TextEditingController con = TextEditingController();
   ChatController chatController = Get.put(ChatController());
+  UserController userController = Get.put(UserController());
 
   SignInController signInController = Get.put(SignInController());
   @override
@@ -61,11 +63,19 @@ class _ChatUiState extends State<ChatUi> {
         body: Column(
           children: [
             Expanded(
-              child: ListView.builder(
-                  itemCount: list.length,
-                  itemBuilder: (_, pos) {
-                    return list[pos];
-                  }),
+              child: Obx(() {
+                return ListView.builder(
+                    itemCount: chatController.messages.value.messages.length,
+                    itemBuilder: (_, pos) {
+                      return int.parse(chatController
+                                  .messages.value.messages[pos].sourceId) ==
+                              userController.user.value.id
+                          ? sentMessage(chatController
+                              .messages.value.messages[pos].message)
+                          : recieveMessage(chatController
+                              .messages.value.messages[pos].message);
+                    });
+              }),
             ),
             ChatComposer(
               controller: con,
