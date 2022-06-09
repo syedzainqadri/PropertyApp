@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
-import 'package:realestapp/Models/AllListings/all_listings.dart';
 
 import '../AddListings/listing_details.dart';
 import '../Controllers/listing_detail_controller.dart';
+import '../Models/all_listing_model.dart';
 import '../Utils/color_scheme.dart';
 
-itemWidget(AllListings listing) {
+itemWidget(Datum listing) {
   final reviewController = Get.put(ReviewController());
   final listingDetailsController = Get.put(ListingDetailsController());
   return GestureDetector(
     onTap: () async {
       try {
-        listingDetailsController.getListingById(listing.listing_id);
-        await reviewController.fetchReviews(listing.listing_id);
+        listingDetailsController.getListingById(listing.listingId);
+        await reviewController.fetchReviews(listing.listingId);
       } finally {
         Get.to(const ListingDetails());
       }
@@ -33,9 +33,9 @@ itemWidget(AllListings listing) {
                 shape: BoxShape.rectangle,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(listing.images.isEmpty
+                  image: NetworkImage(listing.images!.isEmpty
                       ? 'https://i.pinimg.com/originals/77/4a/0c/774a0cb09e5f59c351c7221667a77acf.jpg'
-                      : listing.images[0].url),
+                      : listing.images![0].url.toString()),
                 ),
               ),
             ),
@@ -53,7 +53,7 @@ itemWidget(AllListings listing) {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        listing.title,
+                        listing.title.toString(),
                         maxLines: 2,
                         style: const TextStyle(
                           color: darkGrey,
@@ -61,7 +61,7 @@ itemWidget(AllListings listing) {
                         ),
                       ),
                       Text(
-                        'Added on ${listing.created_at.substring(0, 10)}',
+                        'Added on ${listing.createdAt.toString().substring(0, 10)}',
                         style: const TextStyle(
                           color: mediumGrey,
                           fontSize: 15,
@@ -73,11 +73,11 @@ itemWidget(AllListings listing) {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        listing.contact.locations.length < 2
-                            ? listing.contact.locations[0].name
-                            : listing.contact.locations[1].name +
+                        listing.contact!.locations!.length < 2
+                            ? listing.contact!.locations![0].name.toString()
+                            : listing.contact!.locations![1].name.toString() +
                                 ', ' +
-                                listing.contact.locations[0].name,
+                                listing.contact!.locations![0].name.toString(),
                         style: const TextStyle(
                           color: darkGrey,
                           fontSize: 15,

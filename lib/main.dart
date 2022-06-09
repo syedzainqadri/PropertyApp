@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/chat_controller.dart';
+import 'package:realestapp/Controllers/listings_controller.dart';
 import 'Auth/sign_in.dart';
 import 'Home/home.dart';
 import 'Utils/color_scheme.dart';
@@ -10,8 +11,8 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   await GetStorage.init();
   GetStorage().writeIfNull('isLoggedIn', false);
-  Get.put(ChatController());
   if (GetStorage().read('isLoggedIn')) {
+    Get.put(ListingController());
     Get.put(ChatController());
   }
   runApp(const MyApp());

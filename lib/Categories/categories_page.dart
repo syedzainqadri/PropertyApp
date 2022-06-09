@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Models/Categories/category_model.dart';
+import '../Controllers/listings_controller.dart';
 import '../Utils/color_scheme.dart';
 import 'categories.dart';
 
@@ -15,32 +16,20 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  CategoriesController _categoriesController = CategoriesController();
-  List<CategoryModel> categories = [];
-  getCategories() async {
-    var response = await _categoriesController.getAllCategories();
-    var data = jsonDecode(response);
-    var categoryObjsJson = data as List;
-    setState(() {
-      categories = categoryObjsJson
-          .map((categoryJson) => CategoryModel.fromJson((categoryJson)))
-          .toList();
-    });
-  }
-
   @override
   void initState() {
-    getCategories();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: categories.length,
+      itemCount: Get.find<ListingController>().categories.length,
       itemBuilder: (context, position) {
-        return categoriesWidget(categories[position].icon.url,
-            categories[position].name, categories[position].term_id);
+        return categoriesWidget(
+            Get.find<ListingController>().categories.value[position].icon!.url,
+            Get.find<ListingController>().categories.value[position].name,
+            Get.find<ListingController>().categories.value[position].termId);
       }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
     );
   }

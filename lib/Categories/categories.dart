@@ -1,11 +1,9 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
-import 'package:realestapp/Models/AllListings/all_listings.dart';
-import '../AddListings/add_listing.dart';
 import '../Home/item_widget.dart';
+import '../Models/all_listing_model.dart';
 import '../Utils/color_scheme.dart';
 import 'filters.dart';
 
@@ -35,7 +33,6 @@ class CategoryPage extends StatefulWidget {
 
 class _CategoryPageState extends State<CategoryPage> {
   int _radioValue = 0;
-  ListingController _listingController = ListingController();
   void _handleRadioValueChange(int value) {
     setState(() {
       _radioValue = value;
@@ -57,19 +54,13 @@ class _CategoryPageState extends State<CategoryPage> {
   bool showFilters = false;
   bool showSort = false;
   getListings() async {
-    
-      var response =await _listingController.getAllListing();
     setState(() {
-    var data = jsonDecode(response);
-    var allListing =  data['data'] as List;
-     var tempListing = allListing
-        .map((listingsJson) => AllListings.fromJson(listingsJson))
-        .toList();
-         for(int i=0;i<tempListing.length;i++){
-      if(tempListing[i].categories.term_id == widget.id){
-          listings.add(tempListing[i]);
-        }
-    }
+  
+    //      for(int i=0;i<Get.find<ListingController>().allListings.value.data!.length;i++){
+    //   if(Get.find<ListingController>().allListings.value.data![i].categories![0].termId == widget.id){
+    //       listings.add(Get.find<ListingController>().allListings.value.data[i]);
+    //     }
+    // }
         
     });
    
@@ -89,7 +80,7 @@ class _CategoryPageState extends State<CategoryPage> {
           Scaffold(
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                Get.to(const AddListing());
+              //  Get.to(const AddListing());
               },
               child: const Icon(Icons.add),
               foregroundColor: white,
@@ -151,7 +142,7 @@ class _CategoryPageState extends State<CategoryPage> {
                           shadowColor: transparent,
                         ),
                         onPressed: () {
-                          Get.to(const Filter());
+                          Get.to(const MyFilters());
                         },
                         label: const Text(
                           'Filters',
@@ -196,9 +187,9 @@ class _CategoryPageState extends State<CategoryPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: ListView.builder(
-                      itemCount: listings.length,
+                      itemCount: Get.find<ListingController>().allListings.value.data!.length,
                       itemBuilder: (context, position) {
-                        return itemWidget(listings[position]);
+                        return itemWidget(Get.find<ListingController>().allListings.value.data![position]);
                       },//listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
 
                     ),

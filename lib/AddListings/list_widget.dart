@@ -8,7 +8,8 @@ import 'listing_details.dart';
 
 listWidget(image, street, city, price, isFovorite, description, listingId) {
   final ReviewController reviewController = Get.put(ReviewController());
-  final ListingDetailsController listingDetailsController = Get.put(ListingDetailsController());
+  final ListingDetailsController listingDetailsController =
+      Get.put(ListingDetailsController());
   return SizedBox(
     width: 160,
     child: Column(
@@ -34,7 +35,7 @@ listWidget(image, street, city, price, isFovorite, description, listingId) {
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(image[0].url),
+                      image: NetworkImage(image[0].url.toString()),
                     ),
                   ),
                 ),

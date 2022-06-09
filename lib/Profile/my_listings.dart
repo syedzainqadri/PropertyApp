@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/listings_controller.dart';
 
 import '../AddListings/list_widget.dart';
 import '../Utils/color_scheme.dart';
@@ -34,29 +35,15 @@ class _MyListingsState extends State<MyListings> {
             )),
       ),
       body: Center(
-        child: GridView.count(
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
           padding: const EdgeInsets.only(left:18.0),
-          crossAxisCount: 2,
           scrollDirection: Axis.vertical,
-          crossAxisSpacing: 20.0,
-          mainAxisSpacing: 20.0,
           shrinkWrap: true,
-          children: [
-            // listWidget('house1', '1500 Suffix Street', 'San Francisco, CA', true),
-            // listWidget('house2', '1500 Suffix Street', 'San Francisco, CA', false),
-            // listWidget('house3', '1500 Suffix Street', 'San Francisco, CA', false),
-            // listWidget('condo1', '1500 Suffix Street', 'San Francisco, CA', true),
-            // listWidget('condo2', '1500 Suffix Street', 'San Francisco, CA', true),
-            // listWidget('apartment', '1500 Suffix Street', 'San Francisco, CA', true),
-            // listWidget('land', '1500 Suffix Street', 'San Francisco, CA', false),
-            // listWidget('townhouse', '1500 Suffix Street', 'San Francisco, CA', false),
-            // listWidget('building', '1500 Suffix Street', 'San Francisco, CA', false),
-            // listWidget('townhouse1', '1500 Suffix Street', 'San Francisco, CA', true),
-            // listWidget('house1', '1500 Suffix Street', 'San Francisco, CA', false),
-            // listWidget('land', '1500 Suffix Street', 'San Francisco, CA', false),
-            // listWidget('townhouse1', '1500 Suffix Street', 'San Francisco, CA', true),
-            // listWidget('land', '1500 Suffix Street', 'San Francisco, CA', false),
-          ],
+          itemCount: Get.find<ListingController>().allListings.value.data?.length,
+          itemBuilder: (context,index){
+            return listWidget(Get.find<ListingController>().myListings.value.data![index].images, Get.find<ListingController>().myListings.value.data![index].title.toString(),  Get.find<ListingController>().myListings.value.data![index].contact!.locations![0].name.toString(),Get.find<ListingController>().myListings.value.data![index].price.toString(),false,'',Get.find<ListingController>().myListings.value.data![index].listingId);
+          },
         ),
       ),
     );

@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../Utils/color_scheme.dart';
 
-class Filter extends StatefulWidget {
-  const Filter({Key? key}) : super(key: key);
+class MyFilters extends StatefulWidget {
+  const MyFilters({Key? key}) : super(key: key);
 
   @override
-  State<Filter> createState() => _FilterState();
+  State<MyFilters> createState() => _MyFiltersState();
 }
 
-class _FilterState extends State<Filter> {
+class _MyFiltersState extends State<MyFilters> {
   RangeValues _currentRangeValues = const RangeValues(0, 30);
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class _FilterState extends State<Filter> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          'Filters',
+          'MyFilterss',
           style: TextStyle(
             color: darkGrey,
           ),

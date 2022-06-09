@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:realestapp/Models/AllListings/all_listings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../AddListings/list_widget.dart';
@@ -17,36 +16,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ListingController _listingController = ListingController();
-  List<AllListings> listings = [];
-  getListings() async {
-    var response = await _listingController.getAllListing();
-    setState(() {
-      var data = jsonDecode(response);
-      var allListing = data['data'] as List;
-      listings = allListing
-          .map((listingsJson) => AllListings.fromJson(listingsJson))
-          .toList();
-    });
-  }
+ 
 
   final CategoriesController _categoriesController = CategoriesController();
-  List<CategoryModel> categories = [];
-  getCategories() async {
-    var response = await _categoriesController.getAllCategories();
-    var data = jsonDecode(response);
-    var categoryObjsJson = data as List;
-    setState(() {
-      categories = categoryObjsJson
-          .map((categoryJson) => CategoryModel.fromJson((categoryJson)))
-          .toList();
-    });
-  }
+
 
   @override
   void initState() {
-    getListings();
-    getCategories();
     super.initState();
   }
 
@@ -77,12 +53,12 @@ class _HomePageState extends State<HomePage> {
                   width: double.infinity,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: categories.length,
+                    itemCount: Get.find<ListingController>().categories.value.length,
                     itemBuilder: (context, position) {
                       return categoryCard(
-                          categories[position].icon.url,
-                          categories[position].name,
-                          categories[position].term_id);
+                           Get.find<ListingController>().categories.value[position].icon!.url,
+                          Get.find<ListingController>().categories.value[position].name,
+                          Get.find<ListingController>().categories.value[position].termId);
                     }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
                   ),
                 ),
@@ -112,16 +88,16 @@ class _HomePageState extends State<HomePage> {
                   crossAxisCount: 2),
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: listings.length,
+              itemCount: Get.find<ListingController>().allListings.value.data?.length,
               itemBuilder: (context, index) {
                 return listWidget(
-                    listings[index].images,
-                    listings[index].title,
-                    listings[index].contact.locations[0].name,
-                    listings[index].price,
+                    Get.find<ListingController>().allListings.value.data![index].images,
+                    Get.find<ListingController>().allListings.value.data![index].title.toString(),
+                    Get.find<ListingController>().allListings.value.data![index].contact!.locations![0].name.toString(),
+                   Get.find<ListingController>().allListings.value.data![index].price.toString(),
                     true,
                     'This is description',
-                    listings[index].listing_id,
+                    Get.find<ListingController>().allListings.value.data?[index].listingId,
                     );
               },
             ),
