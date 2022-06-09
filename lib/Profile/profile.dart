@@ -102,7 +102,7 @@ class _ProfileState extends State<Profile> {
                                   border: Border.all(color: mediumGrey),
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(_.user.value.picture),
+                                    image: NetworkImage(_.user.value.ppThumbUrl.toString()),
                                   ),
                                 ),
                               );
@@ -174,10 +174,7 @@ class _ProfileState extends State<Profile> {
     XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
     await _profileController.changeProfile(
          signInController.signInModel.value.token_type, signInController.signInModel.value.token,File(picture!.path));
-    Get.find<UserController>()
-        .updateUser(UserModel.fromJson(await Get.find<UserController>().getUser(
-         signInController.signInModel.value.token_type, signInController.signInModel.value.token,
-    )));
+    Get.find<UserController>().getUser();
     setState(() {
       isLoading = false;
     });

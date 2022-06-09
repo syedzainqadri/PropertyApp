@@ -12,7 +12,6 @@ import '../Models/review_model.dart';
 import '../Utils/color_scheme.dart';
 
 class ListingDetails extends StatefulWidget {
-
   const ListingDetails({
     Key? key,
   }) : super(key: key);
@@ -23,7 +22,8 @@ class ListingDetails extends StatefulWidget {
 
 class _ListingDetailsState extends State<ListingDetails> {
   final Completer<GoogleMapController> _controller = Completer();
- ListingDetailsController listingDetailsController = Get.put(ListingDetailsController());
+  ListingDetailsController listingDetailsController =
+      Get.put(ListingDetailsController());
 
   // CameraPosition listingLocation = const CameraPosition(
   //   target: LatLng( listingDetailsController.listingDetail.value., -122.085749655962),
@@ -164,9 +164,13 @@ class _ListingDetailsState extends State<ListingDetails> {
               child: GoogleMap(
                 mapType: MapType.hybrid,
                 initialCameraPosition: CameraPosition(
-    target: LatLng( listingDetailsController.listingDetail.value.contact.latitude, -122.085749655962),
-    zoom: 14.4746,
-  )
+                  target: LatLng(
+                      double.parse(listingDetailsController
+                          .listingDetail.value.contact.latitude.toString()),
+                      double.parse(listingDetailsController
+                          .listingDetail.value.contact.longitude.toString())),
+                  zoom: 14.4746,
+                ),
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },

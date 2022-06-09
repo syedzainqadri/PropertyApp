@@ -1,12 +1,19 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/chat_controller.dart';
 import 'Auth/sign_in.dart';
+import 'Home/home.dart';
 import 'Utils/color_scheme.dart';
 import 'Utils/constants.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
+  GetStorage().writeIfNull('isLoggedIn', false);
+  Get.put(ChatController());
+  if (GetStorage().read('isLoggedIn')) {
+    Get.put(ChatController());
+  }
   runApp(const MyApp());
 }
 
@@ -15,9 +22,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
+      home: GetStorage().read('isLoggedIn') ? const Home() : const MyHomePage(),
     );
   }
 }
@@ -29,7 +36,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

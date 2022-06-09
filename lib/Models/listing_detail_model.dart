@@ -28,7 +28,6 @@ class ListingDetail {
     required this.url,
     required this.description,
     required this.videoUrls,
-    required this.author,
     required this.customFields,
     required this.related,
     required this.review,
@@ -57,7 +56,6 @@ class ListingDetail {
   String url;
   String description;
   List<String> videoUrls;
-  List<dynamic> author;
   List<CustomField> customFields;
   List<Related> related;
   Review review;
@@ -87,7 +85,6 @@ class ListingDetail {
         url: json["url"],
         description: json["description"],
         videoUrls: List<String>.from(json["video_urls"].map((x) => x)),
-        author: List<dynamic>.from(json["author"].map((x) => x)),
         customFields: List<CustomField>.from(
             json["custom_fields"].map((x) => CustomField.fromJson(x))),
         related:

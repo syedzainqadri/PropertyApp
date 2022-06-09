@@ -40,7 +40,6 @@ class ListingDetailsController extends GetxController {
           url: '',
           description: '',
           videoUrls: [],
-          author: [],
           customFields: [],
           related: [],
           review: Review(rating: Rating(average: '', count: 0)))

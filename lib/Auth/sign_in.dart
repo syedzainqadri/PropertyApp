@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:realestapp/Auth/sign_up.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
 import 'package:realestapp/Controllers/user_controller.dart';
@@ -72,9 +73,11 @@ class _SignInState extends State<SignIn> {
                     () async {
                       await _signInController.signIn(
                           emailController.text, passwordController.text);
-                      Get.find<UserController>().updateUser(UserModel.fromJson(
-                          await Get.find<UserController>().getUser(_signInController.signInModel.value.token_type,_signInController.signInModel.value.token,)));
-                      Get.to(const Home());
+
+                      GetStorage().write('isLoggedIn', true);
+                      GetStorage().write(
+                          'token', _signInController.signInModel.value.token);
+                      Get.offAll(const Home());
                     },
                   ),
                   const SizedBox(

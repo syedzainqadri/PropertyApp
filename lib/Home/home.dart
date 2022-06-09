@@ -27,7 +27,6 @@ class _HomeState extends State<Home> {
   bool hasAction = true;
   String title = 'Home';
   late PageController _pageController;
-  OtpFieldController otpController = OtpFieldController();
   bool notIntialized = true;
   MembershipController membershipController = Get.put(MembershipController());
   @override
@@ -77,7 +76,7 @@ class _HomeState extends State<Home> {
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                              _.user.value.picture,
+                              _.user.value.ppThumbUrl.toString(),
                             ),
                           ),
                         ),
