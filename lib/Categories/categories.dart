@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
+import '../AddListings/add_listing.dart';
 import '../Home/item_widget.dart';
 import '../Models/all_listing_model.dart';
 import '../Utils/color_scheme.dart';
@@ -32,6 +33,8 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  
+  final ListingController listingController = Get.put(ListingController());
   int _radioValue = 0;
   void _handleRadioValueChange(int value) {
     setState(() {
@@ -50,25 +53,11 @@ class _CategoryPageState extends State<CategoryPage> {
     });
   }
 
-   List<AllListings> listings=[];
   bool showFilters = false;
   bool showSort = false;
-  getListings() async {
-    setState(() {
-  
-    //      for(int i=0;i<Get.find<ListingController>().allListings.value.data!.length;i++){
-    //   if(Get.find<ListingController>().allListings.value.data![i].categories![0].termId == widget.id){
-    //       listings.add(Get.find<ListingController>().allListings.value.data[i]);
-    //     }
-    // }
-        
-    });
-   
-  }
+
   @override
   void initState() {
-    
-     getListings();
     super.initState();
   }
 
@@ -80,7 +69,7 @@ class _CategoryPageState extends State<CategoryPage> {
           Scaffold(
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-              //  Get.to(const AddListing());
+           Get.to(const AddListing());
               },
               child: const Icon(Icons.add),
               foregroundColor: white,
@@ -187,10 +176,14 @@ class _CategoryPageState extends State<CategoryPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 8.0),
                     child: ListView.builder(
-                      itemCount: Get.find<ListingController>().allListings.value.data!.length,
+                      itemCount: listingController.allListings.value.data!.length,
                       itemBuilder: (context, position) {
-                        return itemWidget(Get.find<ListingController>().allListings.value.data![position]);
-                      },//listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+                        if(listingController.allListings.value.data![position].categories![0].termId==widget.id){
+                          
+                        return itemWidget(listingController.allListings.value.data![position]);
+                        }
+                        return const Offstage();
+                      },
 
                     ),
                   ),

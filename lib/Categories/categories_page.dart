@@ -16,6 +16,7 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
+  final ListingController listingController = Get.put(ListingController());
   @override
   void initState() {
     super.initState();
@@ -24,14 +25,20 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: Get.find<ListingController>().categories.length,
+      itemCount: listingController.categories.length,
       itemBuilder: (context, position) {
         return categoriesWidget(
-            Get.find<ListingController>().categories.value[position].icon!.url,
-            Get.find<ListingController>().categories.value[position].name,
-            Get.find<ListingController>().categories.value[position].termId);
+            listingController.categories.value[position].icon!.url,
+            listingController.categories.value[position].name,
+            listingController.categories.value[position].termId);
       }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
     );
+  }
+
+  @override
+  void dispose() {
+    listingController.dispose();
+    super.dispose();
   }
 }
 
