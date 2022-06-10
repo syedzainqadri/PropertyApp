@@ -53,10 +53,6 @@ class _AddListingState extends State<AddListing> {
       _selectedCategory = categoriesController.categories[0].name!;
     });
     super.initState();
-    categoryId = 112;
-    titleController.text = '2bd Condo - Park View';
-    descriptionController.text = 'Amazing View in a luxury building';
-    priceController.text = '\$123,1231,23';
   }
 
   @override
