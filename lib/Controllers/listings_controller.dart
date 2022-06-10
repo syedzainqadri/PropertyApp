@@ -3,13 +3,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:realestapp/Models/all_listing_model.dart';
 
-import '../Models/Categories/category_model.dart';
+import '../Models/locations_model.dart';
 
 class ListingController extends GetxController {
   var allListings = AllListings().obs;
   var myListings = AllListings().obs;
   var favoriteListings = AllListings().obs;
-  // var locations = <Categories>[].obs;
+  var locations = <LocationsModel>[].obs;
   final token = GetStorage().read('token');
 
   @override
@@ -17,7 +17,7 @@ class ListingController extends GetxController {
     getAllListing();
     getMyListing();
     getMyFavorites();
-    // getLocation();
+    getLocation();
     super.onInit();
   }
 
@@ -71,19 +71,19 @@ class ListingController extends GetxController {
     favoriteListings.value = allListingsFromJson(response.body);
   }
 
-  // getLocation() async {
-  //   String url = 'https://lagosabuja.com/wp-json/rtcl/v1/locations';
-  //   var response = await http.get(
-  //     Uri.parse(url),
-  //     headers: <String, String>{
-  //       'Accept': 'application/json',
-  //       'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-  //       'Authorization': 'Bearer $token',
-  //     },
-  //   );
+  getLocation() async {
+    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/locations';
+    var response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Accept': 'application/json',
+        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'Authorization': 'Bearer $token',
+      },
+    );
 
-  //   locations.value = categoriesFromJson(response.body);
-  // }
+    locations.value = locationsModelFromJson(response.body);
+  }
 
   addListing(locationId, categoryId, listingType, title, status, price,
       priceUnit, badges, description, images) async {
