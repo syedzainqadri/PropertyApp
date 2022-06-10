@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 
+import '../Controllers/LocationController.dart';
 import '../Controllers/listings_controller.dart';
 import '../Utils/color_scheme.dart';
 
@@ -19,6 +20,8 @@ class _AddListingState extends State<AddListing> {
   final ListingController listingController = Get.put(ListingController());
   final CategoriesController categoriesController =
       Get.put(CategoriesController());
+  final LocationsController locationsController =
+      Get.put(LocationsController());
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
@@ -46,7 +49,7 @@ class _AddListingState extends State<AddListing> {
   @override
   void initState() {
     setState(() {
-      // _selectedLocation = listingController.locations[0].name!;
+      _selectedLocation = locationsController.locations[0].name!;
       _selectedCategory = categoriesController.categories[0].name!;
     });
     super.initState();
@@ -218,26 +221,27 @@ class _AddListingState extends State<AddListing> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              // DropdownButton(
-                              //   alignment: AlignmentDirectional.centerEnd,
-                              //   underline: const SizedBox(),
-                              //   iconSize: 0.0,
-                              //   value: _selectedCategory,
-                              //   onChanged: (newValue) {
-                              //     setState(() {
-                              //       _selectedCategory = newValue.toString();
-                              //     });
-                              //   },
-                              //   items: listingController.categories.map((category) {
-                              //     return DropdownMenuItem(
-                              //       child: Text(
-                              //         category.name.toString(),
-                              //         textAlign: TextAlign.end,
-                              //       ),
-                              //       value: category.name.toString(),
-                              //     );
-                              //   }).toList(),
-                              // ),
+                              DropdownButton(
+                                alignment: AlignmentDirectional.centerEnd,
+                                underline: const SizedBox(),
+                                iconSize: 0.0,
+                                value: _selectedCategory,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    _selectedCategory = newValue.toString();
+                                  });
+                                },
+                                items: listingController.categories
+                                    .map((category) {
+                                  return DropdownMenuItem(
+                                    child: Text(
+                                      category.name.toString(),
+                                      textAlign: TextAlign.end,
+                                    ),
+                                    value: category.name.toString(),
+                                  );
+                                }).toList(),
+                              ),
                             ],
                           ),
                           const SizedBox(
