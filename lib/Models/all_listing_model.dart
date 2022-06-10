@@ -137,6 +137,45 @@ class Category {
       );
 }
 
+class Locations {
+  Locations({
+    this.termId,
+    this.name,
+    this.slug,
+    this.termGroup,
+    this.termTaxonomyId,
+    this.taxonomy,
+    this.description,
+    this.parent,
+    this.count,
+    this.filter,
+  });
+
+  int? termId;
+  String? name;
+  String? slug;
+  int? termGroup;
+  int? termTaxonomyId;
+  Taxonomy? taxonomy;
+  String? description;
+  int? parent;
+  int? count;
+  Filter? filter;
+
+  factory Locations.fromJson(Map<String, dynamic> json) => Locations(
+        termId: json["term_id"],
+        name: json["name"],
+        slug: json["slug"],
+        termGroup: json["term_group"],
+        termTaxonomyId: json["term_taxonomy_id"],
+        taxonomy: taxonomyValues.map![json["taxonomy"]],
+        description: json["description"],
+        parent: json["parent"],
+        count: json["count"],
+        filter: filterValues.map![json["filter"]],
+      );
+}
+
 enum Filter { RAW }
 
 final filterValues = EnumValues({"raw": Filter.RAW});
@@ -163,7 +202,7 @@ class Contact {
     this.geoAddress,
   });
 
-  List<Category>? locations;
+  List<Locations>? locations;
   String? latitude;
   String? longitude;
   bool? hideMap;
@@ -176,8 +215,8 @@ class Contact {
   String? geoAddress;
 
   factory Contact.fromJson(Map<String, dynamic> json) => Contact(
-        locations: List<Category>.from(
-            json["locations"].map((x) => Category.fromJson(x))),
+        locations: List<Locations>.from(
+            json["locations"].map((x) => Locations.fromJson(x))),
         latitude: json["latitude"],
         longitude: json["longitude"],
         hideMap: json["hide_map"],
