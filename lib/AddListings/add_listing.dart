@@ -121,6 +121,7 @@ class _AddListingState extends State<AddListing> {
                               decoration: const InputDecoration(
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
+                                hintText: 'Your Title'
                               ),
                             ),
                           ),
@@ -164,6 +165,7 @@ class _AddListingState extends State<AddListing> {
                               decoration: const InputDecoration(
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
+                                hintText: 'Please Add your Description'
                               ),
                             ),
                           ),
@@ -202,6 +204,7 @@ class _AddListingState extends State<AddListing> {
                                   decoration: const InputDecoration(
                                     enabledBorder: InputBorder.none,
                                     focusedBorder: InputBorder.none,
+                                    hintText: 'Enter the Price',
                                   ),
                                 ),
                               ),

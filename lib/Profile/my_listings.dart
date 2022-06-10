@@ -34,17 +34,49 @@ class _MyListingsState extends State<MyListings> {
               size: 35,
             )),
       ),
-      body: Center(
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-          padding: const EdgeInsets.only(left:18.0),
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: Get.find<ListingController>().allListings.value.data?.length,
-          itemBuilder: (context,index){
-            return listWidget(Get.find<ListingController>().myListings.value.data![index].images, Get.find<ListingController>().myListings.value.data![index].title.toString(),  Get.find<ListingController>().myListings.value.data![index].contact!.locations![0].name.toString(),Get.find<ListingController>().myListings.value.data![index].price.toString(),false,'',Get.find<ListingController>().myListings.value.data![index].listingId);
-          },
-        ),
+      body: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2),
+        padding: const EdgeInsets.only(left: 18.0),
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount:
+            Get.find<ListingController>().myListings.value.data?.length,
+        itemBuilder: (context, index) {
+          return listWidget(
+              Get.find<ListingController>()
+                  .myListings
+                  .value
+                  .data![index]
+                  .images,
+              Get.find<ListingController>()
+                  .myListings
+                  .value
+                  .data![index]
+                  .title
+                  .toString(),
+              Get.find<ListingController>()
+                  .myListings
+                  .value
+                  .data![index]
+                  .contact!
+                  .locations![0]
+                  .name
+                  .toString(),
+              Get.find<ListingController>()
+                  .myListings
+                  .value
+                  .data![index]
+                  .price
+                  .toString(),
+              false,
+              '',
+              Get.find<ListingController>()
+                  .myListings
+                  .value
+                  .data![index]
+                  .listingId);
+        },
       ),
     );
   }

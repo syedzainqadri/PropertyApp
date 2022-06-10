@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:realestapp/Controllers/listing_detail_controller.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
 
+import '../Controllers/listings_controller.dart';
 import '../Utils/color_scheme.dart';
 import 'listing_details.dart';
 
@@ -11,9 +12,14 @@ listWidget(image, title, city, price, isFovorite, description, listingId) {
   final ListingDetailsController listingDetailsController =
       Get.put(ListingDetailsController());
 
+  final listingController = Get.put(ListingController());
+
   return Padding(
     padding: const EdgeInsets.all(8.0),
     child: GestureDetector(
+      onLongPress: () {
+        listingController.addToFavorites(listingId);
+      },
       onTap: () async {
         try {
           await listingDetailsController.getListingById(listingId);

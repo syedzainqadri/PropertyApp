@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/listings_controller.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
 
 import '../AddListings/listing_details.dart';
@@ -10,7 +11,11 @@ import '../Utils/color_scheme.dart';
 itemWidget(Datum listing) {
   final reviewController = Get.put(ReviewController());
   final listingDetailsController = Get.put(ListingDetailsController());
+  final listingController = Get.put(ListingController());
   return GestureDetector(
+    onLongPress: (){
+      listingController.addToFavorites(listing.listingId);
+    },
     onTap: () async {
       try {
         listingDetailsController.getListingById(listing.listingId);
