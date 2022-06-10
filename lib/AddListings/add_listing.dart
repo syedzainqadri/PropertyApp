@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:realestapp/Controllers/categories_controller.dart';
 
 import '../Controllers/listings_controller.dart';
 import '../Utils/color_scheme.dart';
@@ -16,6 +17,8 @@ class AddListing extends StatefulWidget {
 
 class _AddListingState extends State<AddListing> {
   final ListingController listingController = Get.put(ListingController());
+  final CategoriesController categoriesController =
+      Get.put(CategoriesController());
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   final priceController = TextEditingController();
@@ -44,7 +47,7 @@ class _AddListingState extends State<AddListing> {
   void initState() {
     setState(() {
       // _selectedLocation = listingController.locations[0].name!;
-      // _selectedCategory = listingController.categories[0].name!;
+      _selectedCategory = categoriesController.categories[0].name!;
     });
     super.initState();
     categoryId = 112;

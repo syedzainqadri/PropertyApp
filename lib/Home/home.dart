@@ -138,7 +138,7 @@ class _HomeState extends State<Home> {
                 },
                 children: const <Widget>[
                   HomePage(),
-                  // CategoriesPage(),
+                  CategoriesPage(),
                   ConversationPage(),
                   SearchPage(),
                 ],
