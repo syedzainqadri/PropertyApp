@@ -1,10 +1,11 @@
 import 'dart:convert';
 
-List<Categories> categoriesFromJson(String str) =>
-    List<Categories>.from(json.decode(str).map((x) => Categories.fromJson(x)));
+List<CategoriesModel> categoriesFromJson(String str) =>
+    List<CategoriesModel>.from(
+        json.decode(str).map((x) => CategoriesModel.fromJson(x)));
 
-class Categories {
-  Categories({
+class CategoriesModel {
+  CategoriesModel({
     this.termId,
     this.name,
     this.slug,
@@ -30,7 +31,8 @@ class Categories {
   String? filter;
   Icon? icon;
 
-  factory Categories.fromJson(Map<String, dynamic> json) => Categories(
+  factory CategoriesModel.fromJson(Map<String, dynamic> json) =>
+      CategoriesModel(
         termId: json["term_id"],
         name: json["name"],
         slug: json["slug"],

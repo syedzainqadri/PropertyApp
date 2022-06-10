@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -16,7 +15,6 @@ class AddListing extends StatefulWidget {
 }
 
 class _AddListingState extends State<AddListing> {
-  
   final ListingController listingController = Get.put(ListingController());
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
@@ -28,10 +26,7 @@ class _AddListingState extends State<AddListing> {
   var locationId = 0;
   var categoryId = 0;
 
- 
-
   addListing() async {
-  
     await listingController.addListing(
         locationId,
         categoryId,
@@ -48,8 +43,8 @@ class _AddListingState extends State<AddListing> {
   @override
   void initState() {
     setState(() {
-      _selectedLocation = listingController.locations[0].name!;
-      _selectedCategory = listingController.categories[0].name!;
+      // _selectedLocation = listingController.locations[0].name!;
+      // _selectedCategory = listingController.categories[0].name!;
     });
     super.initState();
     categoryId = 112;
@@ -220,26 +215,26 @@ class _AddListingState extends State<AddListing> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              DropdownButton(
-                                alignment: AlignmentDirectional.centerEnd,
-                                underline: const SizedBox(),
-                                iconSize: 0.0,
-                                value: _selectedCategory,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    _selectedCategory = newValue.toString();
-                                  });
-                                },
-                                items: listingController.categories.map((category) {
-                                  return DropdownMenuItem(
-                                    child: Text(
-                                      category.name.toString(),
-                                      textAlign: TextAlign.end,
-                                    ),
-                                    value: category.name.toString(),
-                                  );
-                                }).toList(),
-                              ),
+                              // DropdownButton(
+                              //   alignment: AlignmentDirectional.centerEnd,
+                              //   underline: const SizedBox(),
+                              //   iconSize: 0.0,
+                              //   value: _selectedCategory,
+                              //   onChanged: (newValue) {
+                              //     setState(() {
+                              //       _selectedCategory = newValue.toString();
+                              //     });
+                              //   },
+                              //   items: listingController.categories.map((category) {
+                              //     return DropdownMenuItem(
+                              //       child: Text(
+                              //         category.name.toString(),
+                              //         textAlign: TextAlign.end,
+                              //       ),
+                              //       value: category.name.toString(),
+                              //     );
+                              //   }).toList(),
+                              // ),
                             ],
                           ),
                           const SizedBox(
@@ -288,26 +283,26 @@ class _AddListingState extends State<AddListing> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              DropdownButton(
-                                alignment: AlignmentDirectional.centerEnd,
-                                underline: const SizedBox(),
-                                iconSize: 0.0,
-                                value: _selectedLocation,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    _selectedLocation = newValue.toString();
-                                  });
-                                },
-                                items: listingController.locations.value.map((location) {
-                                  return DropdownMenuItem(
-                                    child: Text(
-                                      location.name.toString(),
-                                      textAlign: TextAlign.end,
-                                    ),
-                                    value: location.name.toString(),
-                                  );
-                                }).toList(),
-                              ),
+                              // DropdownButton(
+                              //   alignment: AlignmentDirectional.centerEnd,
+                              //   underline: const SizedBox(),
+                              //   iconSize: 0.0,
+                              //   value: _selectedLocation,
+                              //   onChanged: (newValue) {
+                              //     setState(() {
+                              //       _selectedLocation = newValue.toString();
+                              //     });
+                              //   },
+                              //   items: listingController.locations.value.map((location) {
+                              //     return DropdownMenuItem(
+                              //       child: Text(
+                              //         location.name.toString(),
+                              //         textAlign: TextAlign.end,
+                              //       ),
+                              //       value: location.name.toString(),
+                              //     );
+                              //   }).toList(),
+                              // ),
 
                               // SizedBox(
                               //   width: 190,

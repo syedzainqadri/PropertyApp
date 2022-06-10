@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Bindings/bindings.dart';
+import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/chat_controller.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
 import 'Auth/sign_in.dart';
@@ -9,11 +11,13 @@ import 'Utils/constants.dart';
 import 'package:get_storage/get_storage.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   GetStorage().writeIfNull('isLoggedIn', false);
   if (GetStorage().read('isLoggedIn')) {
     Get.put(ListingController());
     Get.put(ChatController());
+    Get.put(CategoriesController());
   }
   runApp(const MyApp());
 }
@@ -24,6 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      initialBinding: MyBindings(),
       debugShowCheckedModeBanner: false,
       home: GetStorage().read('isLoggedIn') ? const Home() : const MyHomePage(),
     );

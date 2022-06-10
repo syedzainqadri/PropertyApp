@@ -16,10 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
- 
-
-  final CategoriesController _categoriesController = CategoriesController();
-
+  // final CategoriesController _categoriesController = CategoriesController();
 
   @override
   void initState() {
@@ -28,6 +25,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final listingController = Get.find<ListingController>();
+    final categoriesController = Get.find<CategoriesController>();
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -48,19 +47,29 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                SizedBox(
-                  height: 120,
-                  width: double.infinity,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: Get.find<ListingController>().categories.value.length,
-                    itemBuilder: (context, position) {
-                      return categoryCard(
-                           Get.find<ListingController>().categories.value[position].icon!.url,
-                          Get.find<ListingController>().categories.value[position].name,
-                          Get.find<ListingController>().categories.value[position].termId);
-                    }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
-                  ),
+                Obx(
+                  () => categoriesController.categories.value == null
+                      ? const CircularProgressIndicator(
+                          color: Colors.greenAccent,
+                        )
+                      : SizedBox(
+                          height: 120,
+                          width: double.infinity,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount:
+                                categoriesController.categories.value.length,
+                            itemBuilder: (context, position) {
+                              return categoryCard(
+                                  categoriesController
+                                      .categories.value[position].icon!.url,
+                                  categoriesController
+                                      .categories.value[position].name,
+                                  categoriesController
+                                      .categories.value[position].termId);
+                            }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+                          ),
+                        ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -79,28 +88,36 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          SizedBox(
-            height: 500,
-            width: double.infinity,
-            child: GridView.builder(
-              padding: const EdgeInsets.only(left: 18.0),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: Get.find<ListingController>().allListings.value.data?.length,
-              itemBuilder: (context, index) {
-                return listWidget(
-                    Get.find<ListingController>().allListings.value.data![index].images,
-                    Get.find<ListingController>().allListings.value.data![index].title.toString(),
-                    Get.find<ListingController>().allListings.value.data![index].contact!.locations![0].name.toString(),
-                   Get.find<ListingController>().allListings.value.data![index].price.toString(),
-                    true,
-                    'This is description',
-                    Get.find<ListingController>().allListings.value.data?[index].listingId,
-                    );
-              },
-            ),
+          Obx(
+            () => listingController.allListings.value.data == null
+                ? const CircularProgressIndicator(
+                    color: Colors.greenAccent,
+                  )
+                : GridView.builder(
+                    physics: const ScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: listingController.allListings.value.data?.length,
+                    itemBuilder: (context, index) {
+                      return listWidget(
+                        listingController.allListings.value.data?[index].images,
+                        listingController.allListings.value.data?[index].title
+                            .toString(),
+                        listingController.allListings.value.data?[index]
+                            .contact!.locations![0].name
+                            .toString(),
+                        listingController.allListings.value.data?[index].price
+                            .toString(),
+                        true,
+                        'This is description',
+                        listingController
+                            .allListings.value.data?[index].listingId,
+                      );
+                    },
+                  ),
           ),
         ],
       ),

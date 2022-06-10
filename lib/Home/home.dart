@@ -59,8 +59,7 @@ class _HomeState extends State<Home> {
                 child: GestureDetector(
                   onTap: () {
                     membershipController.getMembershipPlans();
-                    Get.to(const Profile(
-                    ));
+                    Get.to(const Profile());
                   },
                   child: GetX<UserController>(
                     init: UserController(),
@@ -89,7 +88,7 @@ class _HomeState extends State<Home> {
                   ? [
                       GestureDetector(
                         onTap: () {
-                    Get.to(const AddListing());
+                          Get.to(const AddListing());
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
@@ -139,7 +138,7 @@ class _HomeState extends State<Home> {
                 },
                 children: const <Widget>[
                   HomePage(),
-                  CategoriesPage(),
+                  // CategoriesPage(),
                   ConversationPage(),
                   SearchPage(),
                 ],

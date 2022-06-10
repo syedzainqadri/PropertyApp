@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -12,30 +9,16 @@ class ListingController extends GetxController {
   var allListings = AllListings().obs;
   var myListings = AllListings().obs;
   var favoriteListings = AllListings().obs;
-  var categories = <Categories>[].obs;
-  var locations = <Categories>[].obs;
+  // var locations = <Categories>[].obs;
   final token = GetStorage().read('token');
 
   @override
   onInit() {
     getAllListing();
-    getCategories();
     getMyListing();
     getMyFavorites();
-    getLocation();
+    // getLocation();
     super.onInit();
-  }
-
-  getCategories() async {
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/categories';
-    var response = await http.get(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Accept': 'application/json',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-      },
-    );
-    categories.value = categoriesFromJson(response.body);
   }
 
   getListingTypes() async {
@@ -87,23 +70,20 @@ class ListingController extends GetxController {
 
     favoriteListings.value = allListingsFromJson(response.body);
   }
- 
 
-  getLocation() async {
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/locations';
-    var response = await http.get(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Accept': 'application/json',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-        'Authorization': 'Bearer $token',
-      },
-    );
+  // getLocation() async {
+  //   String url = 'https://lagosabuja.com/wp-json/rtcl/v1/locations';
+  //   var response = await http.get(
+  //     Uri.parse(url),
+  //     headers: <String, String>{
+  //       'Accept': 'application/json',
+  //       'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+  //       'Authorization': 'Bearer $token',
+  //     },
+  //   );
 
-    locations.value = categoriesFromJson(response.body);
-  }
-
-  
+  //   locations.value = categoriesFromJson(response.body);
+  // }
 
   addListing(locationId, categoryId, listingType, title, status, price,
       priceUnit, badges, description, images) async {
