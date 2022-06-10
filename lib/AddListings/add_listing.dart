@@ -231,7 +231,7 @@ class _AddListingState extends State<AddListing> {
                                     _selectedCategory = newValue.toString();
                                   });
                                 },
-                                items: listingController.categories
+                                items: categoriesController.categories
                                     .map((category) {
                                   return DropdownMenuItem(
                                     child: Text(
@@ -290,41 +290,41 @@ class _AddListingState extends State<AddListing> {
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
-                              // DropdownButton(
-                              //   alignment: AlignmentDirectional.centerEnd,
-                              //   underline: const SizedBox(),
-                              //   iconSize: 0.0,
-                              //   value: _selectedLocation,
-                              //   onChanged: (newValue) {
-                              //     setState(() {
-                              //       _selectedLocation = newValue.toString();
-                              //     });
-                              //   },
-                              //   items: listingController.locations.value.map((location) {
-                              //     return DropdownMenuItem(
-                              //       child: Text(
-                              //         location.name.toString(),
-                              //         textAlign: TextAlign.end,
-                              //       ),
-                              //       value: location.name.toString(),
-                              //     );
-                              //   }).toList(),
-                              // ),
-
-                              // SizedBox(
-                              //   width: 190,
-                              //   child: TextField(
-                              //     maxLines: 2,
-                              //     textAlign: TextAlign.end,
-                              //     textAlignVertical: TextAlignVertical.center,
-                              //     controller: locationController,
-                              //     cursorColor: lightGreen,
-                              //     decoration: const InputDecoration(
-                              //       enabledBorder: InputBorder.none,
-                              //       focusedBorder: InputBorder.none,
-                              //     ),
-                              //   ),
-                              // ),
+                              DropdownButton(
+                                alignment: AlignmentDirectional.centerEnd,
+                                underline: const SizedBox(),
+                                iconSize: 0.0,
+                                value: _selectedLocation,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    _selectedLocation = newValue.toString();
+                                  });
+                                },
+                                items: locationsController.locations.value
+                                    .map((location) {
+                                  return DropdownMenuItem(
+                                    child: Text(
+                                      location.name.toString(),
+                                      textAlign: TextAlign.end,
+                                    ),
+                                    value: location.name.toString(),
+                                  );
+                                }).toList(),
+                              ),
+                              SizedBox(
+                                width: 190,
+                                child: TextField(
+                                  maxLines: 2,
+                                  textAlign: TextAlign.end,
+                                  textAlignVertical: TextAlignVertical.center,
+                                  controller: locationController,
+                                  cursorColor: lightGreen,
+                                  decoration: const InputDecoration(
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                           const SizedBox(
