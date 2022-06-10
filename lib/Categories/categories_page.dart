@@ -47,7 +47,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
 categoriesWidget(image, title, id) {
   return GestureDetector(
     onTap: () {
-      Get.to(Category(
+      Get.to(CategoryPage(
         title: title,
         id: id,
       ));

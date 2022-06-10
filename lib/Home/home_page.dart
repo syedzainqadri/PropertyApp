@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
       padding: const EdgeInsets.only(right: 12.0),
       child: GestureDetector(
         onTap: () {
-          Get.to(Category(
+          Get.to(CategoryPage(
             title: name,
             id: id,
           ));
