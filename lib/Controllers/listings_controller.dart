@@ -11,7 +11,7 @@ class ListingController extends GetxController {
   var favoriteListings = AllListings().obs;
   var locations = <LocationsModel>[].obs;
   final token = GetStorage().read('token');
-
+var categories;
   @override
   onInit() {
     getAllListing();
