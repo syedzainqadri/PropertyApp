@@ -311,20 +311,20 @@ class _AddListingState extends State<AddListing> {
                                   );
                                 }).toList(),
                               ),
-                              SizedBox(
-                                width: 190,
-                                child: TextField(
-                                  maxLines: 2,
-                                  textAlign: TextAlign.end,
-                                  textAlignVertical: TextAlignVertical.center,
-                                  controller: locationController,
-                                  cursorColor: lightGreen,
-                                  decoration: const InputDecoration(
-                                    enabledBorder: InputBorder.none,
-                                    focusedBorder: InputBorder.none,
-                                  ),
-                                ),
-                              ),
+                              // SizedBox(
+                              //   width: 190,
+                              //   child: TextField(
+                              //     maxLines: 2,
+                              //     textAlign: TextAlign.end,
+                              //     textAlignVertical: TextAlignVertical.center,
+                              //     controller: locationController,
+                              //     cursorColor: lightGreen,
+                              //     decoration: const InputDecoration(
+                              //       enabledBorder: InputBorder.none,
+                              //       focusedBorder: InputBorder.none,
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                           const SizedBox(
@@ -394,6 +394,8 @@ class _AddListingState extends State<AddListing> {
                               child: ElevatedButton(
                                   onPressed: () {
                                     addListing();
+
+                                    Get.put(ListingController());
                                   },
                                   style: ElevatedButton.styleFrom(
                                     primary: lightGreen,

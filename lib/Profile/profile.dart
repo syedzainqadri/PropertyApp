@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestapp/Controllers/profile_controller.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
@@ -31,7 +32,7 @@ class _ProfileState extends State<Profile> {
   UserController userController = Get.put(UserController());
   SignInController signInController = Get.put(SignInController());
   bool isLoading = false;
-
+  final signOut = GetStorage();
   @override
   void initState() {
     super.initState();
@@ -149,7 +150,10 @@ class _ProfileState extends State<Profile> {
               Center(
                   child: GestureDetector(
                 onTap: () {
-                  Get.to(const SignIn());
+                  
+                  signOut.remove('token');
+                  signOut.write('isLoggedIn', false);
+                  Get.offAll(const SignIn());
                 },
                 child: const Text(
                   'Logout',
@@ -173,7 +177,7 @@ class _ProfileState extends State<Profile> {
     });
     XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
     await _profileController.changeProfile(
-         signInController.signInModel.value.token_type, signInController.signInModel.value.token,File(picture!.path));
+         File(picture!.path));
     Get.find<UserController>().getUser();
     setState(() {
       isLoading = false;
