@@ -113,10 +113,10 @@ class ListingController extends GetxController {
         'Authorization': 'Bearer $token',
       },
       body: <String, dynamic>{
-        'listing_id': listingId,
+        'listing_id': listingId.toString(),
       },
     );
 
-print(response.body);
+print(response.body+'*****************');
   }
 }

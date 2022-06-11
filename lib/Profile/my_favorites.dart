@@ -13,6 +13,7 @@ class MyFavorites extends StatefulWidget {
 }
 
 class _MyFavoritesState extends State<MyFavorites> {
+  final listingController = Get.put(ListingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,50 +35,33 @@ class _MyFavoritesState extends State<MyFavorites> {
               size: 35,
             )),
       ),
-      body: GridView.builder(
-        gridDelegate:
-            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        padding: const EdgeInsets.only(left: 18.0),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount:
-            Get.find<ListingController>().favoriteListings.value.data?.length,
-        itemBuilder: (context, index) {
-          return listWidget(
-              Get.find<ListingController>()
-                  .favoriteListings
-                  .value
-                  .data![index]
-                  .images,
-              Get.find<ListingController>()
-                  .favoriteListings
-                  .value
-                  .data![index]
-                  .title
-                  .toString(),
-              Get.find<ListingController>()
-                  .favoriteListings
-                  .value
-                  .data![index]
-                  .contact!
-                  .locations![0]
-                  .name
-                  .toString(),
-              Get.find<ListingController>()
-                  .favoriteListings
-                  .value
-                  .data![index]
-                  .price
-                  .toString(),
-              true,
-              '',
-              Get.find<ListingController>()
-                  .favoriteListings
-                  .value
-                  .data![index]
-                  .listingId);
-        },
-      ),
+      body: Obx(() {
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2),
+          padding: const EdgeInsets.only(left: 18.0),
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount:
+              Get.find<ListingController>().favoriteListings.value.data?.length,
+          itemBuilder: (context, index) {
+            return listWidget(
+                context,
+                listingController.favoriteListings.value.data![index].images,
+                listingController.favoriteListings.value.data![index].title
+                    .toString(),
+                listingController.favoriteListings.value.data![index].contact!
+                    .locations![0].name
+                    .toString(),
+                listingController.favoriteListings.value.data![index].price
+                    .toString(),
+                true,
+                '',
+                listingController
+                    .favoriteListings.value.data![index].listingId);
+          },
+        );
+      }),
     );
   }
 }

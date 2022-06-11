@@ -13,6 +13,7 @@ class MyListings extends StatefulWidget {
 }
 
 class _MyListingsState extends State<MyListings> {
+  final listingController = Get.put(ListingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,50 +35,32 @@ class _MyListingsState extends State<MyListings> {
               size: 35,
             )),
       ),
-      body: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2),
-        padding: const EdgeInsets.only(left: 18.0),
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount:
-            Get.find<ListingController>().myListings.value.data?.length,
-        itemBuilder: (context, index) {
-          return listWidget(
-              Get.find<ListingController>()
-                  .myListings
-                  .value
-                  .data![index]
-                  .images,
-              Get.find<ListingController>()
-                  .myListings
-                  .value
-                  .data![index]
-                  .title
-                  .toString(),
-              Get.find<ListingController>()
-                  .myListings
-                  .value
-                  .data![index]
-                  .contact!
-                  .locations![0]
-                  .name
-                  .toString(),
-              Get.find<ListingController>()
-                  .myListings
-                  .value
-                  .data![index]
-                  .price
-                  .toString(),
-              false,
-              '',
-              Get.find<ListingController>()
-                  .myListings
-                  .value
-                  .data![index]
-                  .listingId);
-        },
-      ),
+      body: Obx(() {
+        return GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2),
+          padding: const EdgeInsets.only(left: 18.0),
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount:
+              Get.find<ListingController>().myListings.value.data?.length,
+          itemBuilder: (context, index) {
+            return listWidget(
+                context,
+                listingController.myListings.value.data![index].images,
+                listingController.myListings.value.data![index].title
+                    .toString(),
+                listingController
+                    .myListings.value.data![index].contact!.locations![0].name
+                    .toString(),
+                listingController.myListings.value.data![index].price
+                    .toString(),
+                false,
+                '',
+                listingController.myListings.value.data![index].listingId);
+          },
+        );
+      }),
     );
   }
 }

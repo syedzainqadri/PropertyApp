@@ -7,7 +7,7 @@ import '../Controllers/listings_controller.dart';
 import '../Utils/color_scheme.dart';
 import 'listing_details.dart';
 
-listWidget(image, title, city, price, isFovorite, description, listingId) {
+listWidget(context,image, title, city, price, isFovorite, description, listingId) {
   final ReviewController reviewController = Get.put(ReviewController());
   final ListingDetailsController listingDetailsController =
       Get.put(ListingDetailsController());
@@ -19,6 +19,7 @@ listWidget(image, title, city, price, isFovorite, description, listingId) {
     child: GestureDetector(
       onLongPress: () {
         listingController.addToFavorites(listingId);
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to Favorites')));
       },
       onTap: () async {
         try {

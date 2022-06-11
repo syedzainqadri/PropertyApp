@@ -5,6 +5,11 @@ import 'package:realestapp/Auth/sign_up.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
 import 'package:realestapp/Controllers/user_controller.dart';
 import 'package:realestapp/Models/sign_in_model.dart';
+import '../Controllers/LocationController.dart';
+import '../Controllers/categories_controller.dart';
+import '../Controllers/chat_controller.dart';
+import '../Controllers/listing_type_controller.dart';
+import '../Controllers/listings_controller.dart';
 import '../Home/home.dart';
 import '../Models/user_model.dart';
 import '../Utils/color_scheme.dart';
@@ -77,6 +82,13 @@ class _SignInState extends State<SignIn> {
                       GetStorage().write('isLoggedIn', true);
                       GetStorage().write(
                           'token', _signInController.signInModel.value.token);
+
+                      Get.put(ListingController());
+                      Get.put(ChatController());
+                      Get.put(CategoriesController());
+                      Get.put(LocationsController());
+
+                      Get.put(ListingTypeController());
                       Get.offAll(const Home());
                     },
                   ),

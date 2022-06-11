@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Bindings/bindings.dart';
+import 'package:realestapp/Controllers/LocationController.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/chat_controller.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
 import 'Auth/sign_in.dart';
+import 'Controllers/listing_type_controller.dart';
 import 'Home/home.dart';
 import 'Utils/color_scheme.dart';
 import 'Utils/constants.dart';
@@ -18,6 +20,8 @@ void main() async {
     Get.put(ListingController());
     Get.put(ChatController());
     Get.put(CategoriesController());
+    Get.put(LocationsController());
+    Get.put(ListingTypeController());
   }
   runApp(const MyApp());
 }

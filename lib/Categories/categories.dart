@@ -164,7 +164,7 @@ class _CategoryPageState extends State<CategoryPage> {
                       if (listingController.allListings.value.data![position]
                               .categories![0].termId ==
                           widget.id) {
-                        return itemWidget(listingController
+                        return itemWidget(context,listingController
                             .allListings.value.data![position]);
                       }
                       return const Offstage();

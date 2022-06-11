@@ -8,13 +8,14 @@ import '../Controllers/listing_detail_controller.dart';
 import '../Models/all_listing_model.dart';
 import '../Utils/color_scheme.dart';
 
-itemWidget(Datum listing) {
+itemWidget(context,Datum listing) {
   final reviewController = Get.put(ReviewController());
   final listingDetailsController = Get.put(ListingDetailsController());
   final listingController = Get.put(ListingController());
   return GestureDetector(
     onLongPress: (){
       listingController.addToFavorites(listing.listingId);
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to Favorites')));
     },
     onTap: () async {
       try {

@@ -102,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                     shrinkWrap: true,
                     itemCount: listingController.allListings.value.data?.length,
                     itemBuilder: (context, index) {
-                      return listWidget(
+                      return listWidget(context,
                         listingController.allListings.value.data?[index].images,
                         listingController.allListings.value.data?[index].title
                             .toString(),

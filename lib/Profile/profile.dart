@@ -78,7 +78,9 @@ class _ProfileState extends State<Profile> {
                           border: Border.all(color: mediumGrey),
                         ),
                         child: const Center(
-                          child: CircularProgressIndicator(color: lightGreen,),
+                          child: CircularProgressIndicator(
+                            color: lightGreen,
+                          ),
                         ),
                       )
                     : Badge(
@@ -92,23 +94,22 @@ class _ProfileState extends State<Profile> {
                           onTap: () async {
                             await uploadPicutre();
                           },
-                          child: GetX<UserController>(
-                            init: UserController(),
-                            builder: (_) {
-                              return Container(
-                                width: 120,
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(color: mediumGrey),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: NetworkImage(_.user.value.ppThumbUrl.toString()),
-                                  ),
+                          child: Obx(() {
+                            return Container(
+                              width: 120,
+                              height: 120,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: mediumGrey),
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(userController
+                                      .user.value.ppThumbUrl
+                                      .toString()),
                                 ),
-                              );
-                            },
-                          ),
+                              ),
+                            );
+                          }),
                         ),
                       ),
                 const SizedBox(
@@ -150,7 +151,6 @@ class _ProfileState extends State<Profile> {
               Center(
                   child: GestureDetector(
                 onTap: () {
-                  
                   signOut.remove('token');
                   signOut.write('isLoggedIn', false);
                   Get.offAll(const SignIn());
@@ -176,8 +176,7 @@ class _ProfileState extends State<Profile> {
       isLoading = true;
     });
     XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
-    await _profileController.changeProfile(
-         File(picture!.path));
+    await _profileController.changeProfile(File(picture!.path));
     Get.find<UserController>().getUser();
     setState(() {
       isLoading = false;
