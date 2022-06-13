@@ -71,7 +71,7 @@ class ListingController extends GetxController {
   }
 
   addListing(locationId, categoryId, listingType, title, status, price,
-      priceUnit, badges, description, images) async {
+      priceUnit, badges, description, images,customFields) async {
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -97,6 +97,7 @@ class ListingController extends GetxController {
     request.fields['price_unit'] = priceUnit;
     request.fields['badges'] = badges;
     request.fields['description'] = description;
+    request.fields['custom_fields'] = customFields;
 
     var res = await request.send();
     var response = await http.Response.fromStream(res);
