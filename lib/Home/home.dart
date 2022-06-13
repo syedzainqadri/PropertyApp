@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:otp_text_field/otp_field.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:realestapp/Controllers/user_controller.dart';
-import 'package:realestapp/Models/sign_in_model.dart';
-import '../AddListings/add_listing.dart';
+import '../AddListings/add_listings.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';
 import '../Controllers/membership_controller.dart';
