@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:realestapp/Controllers/LocationController.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/listing_config_controller.dart';
 import 'package:realestapp/Controllers/listing_type_controller.dart';
@@ -20,6 +21,7 @@ import '../Models/Categories/category_model.dart' hide Icon;
 import '../Models/selected_fields_model.dart';
 import '../Utils/color_scheme.dart';
 import '../Utils/constants.dart';
+import 'select_country.dart';
 
 class AddListing extends StatefulWidget {
   const AddListing({Key? key}) : super(key: key);
@@ -43,9 +45,10 @@ class _AddListingState extends State<AddListing> {
   final priceEndController = TextEditingController();
   final descriptionController = TextEditingController();
   final titleController = TextEditingController();
+
+  final locationsController = Get.put(LocationsController());
   List<dynamic> amenities = [false];
   List<SelectedFieldsModel>? selectedFields;
-
   List<XFile>? imageFiles = [];
   @override
   void initState() {
@@ -83,6 +86,12 @@ class _AddListingState extends State<AddListing> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                height: 10,
+              ),
+              defaultButton('Add Location', () {
+                Get.to(const SelectCountry());
+              }),
               const Text(
                 'Listing Type',
                 style: TextStyle(color: darkGrey, fontSize: 20),
@@ -534,7 +543,22 @@ class _AddListingState extends State<AddListing> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () {
-                  listingsController.addListing(112, 112, listingType.id, titleController.text, 'approved', pricingTypes=='price'?priceController.text:priceStartController.text+'-'+priceEndController.text, '', '', descriptionController.text, imageFiles, []);
+                  listingsController.addListing(
+                      locationsController.userLocationId,
+                      category.termId,
+                      listingType.id,
+                      titleController.text,
+                      'approved',
+                      pricingTypes == 'price'
+                          ? priceController.text
+                          : priceStartController.text +
+                              '-' +
+                              priceEndController.text,
+                      '',
+                      '',
+                      descriptionController.text,
+                      imageFiles,
+                      []);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: lightGreen,
