@@ -54,17 +54,19 @@ class _SelectCountryState extends State<SelectCountry> {
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 60,
+                  height: 80,
                   decoration: BoxDecoration(
                       color: lightGreen,
                       border: Border.all(
-                          color: darkGrey, style: BorderStyle.solid)),
-                  child: Text(
-                    locationsController.locations.value[index].name,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: white,
-                      fontSize: 20,
+                          color: white, style: BorderStyle.solid)),
+                  child: Center(
+                    child: Text(
+                      locationsController.locations.value[index].name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: white,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),

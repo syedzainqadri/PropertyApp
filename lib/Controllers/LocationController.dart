@@ -29,7 +29,7 @@ class LocationsController extends GetxController {
   }
 
   getSubLocation(locationId) async {
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/locations';
+    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/locations?parent_id=$locationId';
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

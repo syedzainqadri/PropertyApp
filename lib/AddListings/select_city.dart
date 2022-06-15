@@ -45,24 +45,26 @@ class _SelectCityState extends State<SelectCity> {
             itemCount: locationsController.subLocations.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () {
-                  locationsController.userLocationId =
-                      locationsController.subLocations.value[index].termId;
+                onTap: () async {
+                  locationsController.userLocationId.value =
+                      await locationsController.subLocations.value[index].termId;
                   Get.offAll(const AddListing());
                 },
                 child: Container(
                   width: double.infinity,
-                  height: 60,
+                  height: 80,
                   decoration: BoxDecoration(
                       color: lightGreen,
                       border: Border.all(
-                          color: darkGrey, style: BorderStyle.solid)),
-                  child: Text(
-                    locationsController.subLocations.value[index].name,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: white,
-                      fontSize: 20,
+                          color: white, style: BorderStyle.solid)),
+                  child: Center(
+                    child: Text(
+                      locationsController.subLocations.value[index].name,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: white,
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),
