@@ -7,7 +7,9 @@ import 'package:realestapp/Utils/color_scheme.dart';
 import '../Controllers/LocationController.dart';
 
 class SelectCity extends StatefulWidget {
-  const SelectCity({Key? key,}) : super(key: key);
+  const SelectCity({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<SelectCity> createState() => _SelectCityState();
@@ -39,37 +41,42 @@ class _SelectCityState extends State<SelectCity> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
-        child: ListView.builder(
-            itemCount: locationsController.subLocations.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () async {
-                  locationsController.userLocationId.value =
-                      await locationsController.subLocations.value[index].termId;
-                  Get.offAll(const AddListing());
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: lightGreen,
-                      border: Border.all(
-                          color: white, style: BorderStyle.solid)),
-                  child: Center(
-                    child: Text(
-                      locationsController.subLocations.value[index].name,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: white,
-                        fontSize: 20,
+      body: Obx(
+        () => Padding(
+          padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
+          child: ListView.builder(
+              itemCount: locationsController.subLocations.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () async {
+                    locationsController.updateLocationName(
+                        await locationsController
+                            .subLocations.value[index].termId,
+                        await locationsController
+                            .subLocations.value[index].name);
+                    Get.offAll(const AddListing());
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: lightGreen,
+                        border:
+                            Border.all(color: white, style: BorderStyle.solid)),
+                    child: Center(
+                      child: Text(
+                        locationsController.subLocations.value[index].name,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: white,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-            }),
+                );
+              }),
+        ),
       ),
     );
   }

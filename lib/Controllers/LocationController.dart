@@ -7,6 +7,7 @@ class LocationsController extends GetxController {
   var locations = <LocationsModel>[].obs;
   var subLocations = <LocationsModel>[].obs;
   var userLocationId = 0.obs;
+  var userLocationName = ''.obs;
   final token = GetStorage().read('token');
 
   @override
@@ -29,7 +30,8 @@ class LocationsController extends GetxController {
   }
 
   getSubLocation(locationId) async {
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/locations?parent_id=$locationId';
+    String url =
+        'https://lagosabuja.com/wp-json/rtcl/v1/locations?parent_id=$locationId';
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -40,5 +42,10 @@ class LocationsController extends GetxController {
     );
 
     subLocations.value = locationsModelFromJson(response.body);
+  }
+
+  updateLocationName(id, name) {
+    userLocationId.value = id;
+    userLocationName.value = name;
   }
 }

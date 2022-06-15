@@ -89,28 +89,54 @@ class _AddListingState extends State<AddListing> {
               const SizedBox(
                 height: 10,
               ),
-              SizedBox(
-    width: 160,
-    height: 40,
-    child: ElevatedButton(
-      onPressed: (){
-         Get.to(const SelectCountry());
-      },
-      child: const Text(
-        'Add Location',
-        style:  TextStyle(
-          color: white,
-          fontSize: 18,
-        ),
-      ),
-      style: ElevatedButton.styleFrom(
-        primary: lightGreen,
-        elevation: 0.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      ),
-    ),
-  ),
-             
+              Obx(
+                () => Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 14.0, bottom: 14.0),
+                      child: SizedBox(
+                        width: 200,
+                        height: 46,
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            Get.to(const SelectCountry());
+                          },
+                          icon: const Icon(Icons.add),
+                          label: const Text(
+                            'Add Location',
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 18,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: lightGreen,
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    locationsController.userLocationId.value != 0
+                        ? Chip(
+                            deleteIcon: const Icon(
+                              Icons.close,
+                            ),
+                            onDeleted: () {
+                              locationsController.updateLocationName(0, '');
+                            },
+                            label: Text(locationsController
+                                .userLocationName.value
+                                .toString()),
+                          )
+                        : const Offstage(),
+                  ],
+                ),
+              ),
               const Text(
                 'Listing Type',
                 style: TextStyle(color: darkGrey, fontSize: 20),
@@ -563,7 +589,7 @@ class _AddListingState extends State<AddListing> {
             child: ElevatedButton(
                 onPressed: () {
                   listingsController.addListing(
-                      locationsController.userLocationId,
+                      locationsController.userLocationId.value,
                       category.termId,
                       listingType.id,
                       titleController.text,

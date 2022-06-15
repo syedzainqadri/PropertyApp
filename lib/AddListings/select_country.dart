@@ -41,37 +41,39 @@ class _SelectCountryState extends State<SelectCountry> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
-        child: ListView.builder(
-            itemCount: locationsController.locations.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  locationsController.getSubLocation(
-                      locationsController.locations.value[index].termId);
-                  Get.to(const SelectCity());
-                },
-                child: Container(
-                  width: double.infinity,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: lightGreen,
-                      border: Border.all(
-                          color: white, style: BorderStyle.solid)),
-                  child: Center(
-                    child: Text(
-                      locationsController.locations.value[index].name,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: white,
-                        fontSize: 20,
+      body: Obx(
+        () => Padding(
+          padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
+          child: ListView.builder(
+              itemCount: locationsController.locations.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    locationsController.getSubLocation(
+                        locationsController.locations.value[index].termId);
+                    Get.to(const SelectCity());
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: lightGreen,
+                        border:
+                            Border.all(color: white, style: BorderStyle.solid)),
+                    child: Center(
+                      child: Text(
+                        locationsController.locations.value[index].name,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: white,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              );
-            }),
+                );
+              }),
+        ),
       ),
     );
   }
