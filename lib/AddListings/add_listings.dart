@@ -89,9 +89,28 @@ class _AddListingState extends State<AddListing> {
               const SizedBox(
                 height: 10,
               ),
-              defaultButton('Add Location', () {
-                Get.to(const SelectCountry());
-              }),
+              SizedBox(
+    width: 160,
+    height: 40,
+    child: ElevatedButton(
+      onPressed: (){
+         Get.to(const SelectCountry());
+      },
+      child: const Text(
+        'Add Location',
+        style:  TextStyle(
+          color: white,
+          fontSize: 18,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: lightGreen,
+        elevation: 0.0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      ),
+    ),
+  ),
+             
               const Text(
                 'Listing Type',
                 style: TextStyle(color: darkGrey, fontSize: 20),
