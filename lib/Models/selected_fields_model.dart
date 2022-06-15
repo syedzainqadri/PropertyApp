@@ -1,8 +1,9 @@
-class SelectedFieldsModel{
-   var id;
-   var choiceId;
-   var choiceName;
+import 'listing_configuration_model.dart';
 
-  SelectedFieldsModel(this.id, this.choiceId,this.choiceName);
+class SelectedFieldsModel{
+   int id;
+   Choice choice;
+
+  SelectedFieldsModel(this.id,this.choice);
 
 }

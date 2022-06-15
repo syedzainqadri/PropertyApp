@@ -70,40 +70,6 @@ class ListingController extends GetxController {
     favoriteListings.value = allListingsFromJson(response.body);
   }
 
-  addListing(locationId, categoryId, listingType, title, status, price,
-      priceUnit, badges, description, images,customFields) async {
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
-
-    var request = http.MultipartRequest('POST', Uri.parse(url));
-    for (int i = 0; i < images.length; i++) {
-      String fileName = images![i].path.split("/").last;
-      var stream = http.ByteStream(images[i].openRead())..cast();
-      var length = await images[i].length();
-      var multipartFileSign =
-          http.MultipartFile('gallery[]', stream, length, filename: fileName);
-      request.files.add(multipartFileSign);
-    }
-
-    request.headers['Content-Type'] = 'application/json; charset=UTF-8';
-    request.headers['X-API-KEY'] = '835c5442-20ca-4d51-9e32-fae11c35fd42';
-    request.headers['Authorization'] = 'Bearer $token';
-
-    request.fields['locations'] = locationId.toString();
-    request.fields['category_id'] = categoryId.toString();
-    request.fields['listing_type'] = listingType;
-    request.fields['title'] = title;
-    request.fields['status'] = status;
-    request.fields['price'] = price;
-    request.fields['price_unit'] = priceUnit;
-    request.fields['badges'] = badges;
-    request.fields['description'] = description;
-    request.fields['custom_fields'] = customFields;
-
-    var res = await request.send();
-    var response = await http.Response.fromStream(res);
-    print(response.body);
-  }
-
   addToFavorites(listingId) async {
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/favourites';
     var response = await http.post(
@@ -118,6 +84,43 @@ class ListingController extends GetxController {
       },
     );
 
-print(response.body+'*****************');
+    print(response.body + '*****************');
+  }
+
+  addListing(locationId, categoryId, listingType, title, status, price,
+      priceUnit, badges, description, images, customFields) async {
+    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    for (int i = 0; i < images.length; i++) {
+      String fileName = images![i].path.split("/").last;
+      var stream = http.ByteStream(images[i].openRead())..cast();
+      var length = await images[i].length();
+      var multipartFileSign =
+          http.MultipartFile('gallery[]', stream, length, filename: fileName);
+      request.files.add(multipartFileSign);
+    }
+
+    request.headers.addAll({
+      'Content-Type': 'application/json; charset=UTF-8',
+      'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+      'Authorization': 'Bearer $token'
+    });
+    request.fields.addAll({
+      'locations': locationId.toString(),
+      'category_id': categoryId.toString(),
+      'listing_type': listingType.toString(),
+      'title': title.toString(),
+      'status': status.toString(),
+      'price': price.toString(),
+      'price_unit': priceUnit.toString(),
+      'badges': badges.toString(),
+      'description': description.toString(),
+     // 'custom_fields[$id]': customFields.toString(),
+    });
+
+    var res = await request.send();
+    var response = await http.Response.fromStream(res);
+    print(response.body);
   }
 }

@@ -3,17 +3,14 @@
 import 'dart:io';
 
 import 'package:chips_choice/chips_choice.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
-import 'package:grouped_buttons/grouped_buttons.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestapp/Controllers/LocationController.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/listing_config_controller.dart';
 import 'package:realestapp/Controllers/listing_type_controller.dart';
-import 'package:realestapp/Models/all_listing_model.dart';
 import 'package:realestapp/Models/listing_configuration_model.dart';
 import 'package:realestapp/Models/listing_types_model.dart';
 import '../Controllers/listings_controller.dart';
@@ -40,15 +37,15 @@ class _AddListingState extends State<AddListing> {
   var listingType;
   var priceTypes;
   var pricingTypes;
+  var custom;
   final priceController = TextEditingController();
   final priceStartController = TextEditingController();
   final priceEndController = TextEditingController();
   final descriptionController = TextEditingController();
   final titleController = TextEditingController();
-
   final locationsController = Get.put(LocationsController());
   List<dynamic> amenities = [false];
-  List<SelectedFieldsModel>? selectedFields;
+  List<SelectedFieldsModel>? selectedFields=[];
   List<XFile>? imageFiles = [];
   @override
   void initState() {
@@ -302,11 +299,11 @@ class _AddListingState extends State<AddListing> {
                                               child: RadioGroup<Choice>.builder(
                                                 activeColor: lightGreen,
                                                 direction: Axis.horizontal,
-                                                groupValue:
-                                                    selectedFields?[index]
-                                                        .choiceName,
-                                                onChanged: (value) =>
+                                                groupValue: custom,
+                                                onChanged: (value) {
                                                     setState(() {
+                                                      custom = value;
+                                                      print(custom.id);
                                                   selectedFields?.add(
                                                       SelectedFieldsModel(
                                                           listingConfigController
@@ -315,9 +312,9 @@ class _AddListingState extends State<AddListing> {
                                                               .customFields[
                                                                   index]
                                                               .id,
-                                                          value?.id,
-                                                          value?.name));
-                                                }),
+                                                          value!));
+                                                          print(selectedFields);
+                                                });},
                                                 items: listingConfigController
                                                     .listingConfig
                                                     .value
@@ -438,9 +435,9 @@ class _AddListingState extends State<AddListing> {
                                                       direction:
                                                           Axis.horizontal,
                                                       groupValue:
-                                                          selectedFields?[index]
-                                                              .choiceName,
-                                                      onChanged: (value) =>
+                                                          selectedFields![index]
+                                                              .choice,
+                                                      onChanged: (value) {
                                                           setState(() {
                                                         selectedFields?.add(
                                                             SelectedFieldsModel(
@@ -450,9 +447,20 @@ class _AddListingState extends State<AddListing> {
                                                                     .customFields[
                                                                         index]
                                                                     .id,
-                                                                value?.id,
-                                                                value?.name));
-                                                      }),
+                                                                value!,
+                                                                ));
+                                                      });
+                                                      print(
+                                                        listingConfigController
+                                                                    .listingConfig
+                                                                    .value
+                                                                    .customFields[
+                                                                        index]
+                                                                    .id+'*********'+
+                                                                value?.id+'*********'+
+                                                                value
+                                                      );
+                                                      },
                                                       items:
                                                           listingConfigController
                                                               .listingConfig
@@ -588,6 +596,7 @@ class _AddListingState extends State<AddListing> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () {
+                  print(selectedFields.toString());
                   listingsController.addListing(
                       locationsController.userLocationId.value,
                       category.termId,
