@@ -88,7 +88,7 @@ class ListingController extends GetxController {
   }
 
   addListing(locationId, categoryId, listingType, title, status, price,
-      priceUnit, badges, description, images, customFields) async {
+      priceUnit, badges, description, images, customFields,amenities) async {
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -100,6 +100,13 @@ class ListingController extends GetxController {
           http.MultipartFile('gallery[]', stream, length, filename: fileName);
       request.files.add(multipartFileSign);
     }
+    // for(int i=0;i<10;i++){
+    //   request.fields.addAll(
+    //     {
+    //       'custom_fields[${customFields.id}]': customFields.itemId,
+    //     }
+    //   );
+    // }
 
     request.headers.addAll({
       'Content-Type': 'application/json; charset=UTF-8',
@@ -116,7 +123,7 @@ class ListingController extends GetxController {
       'price_unit': priceUnit.toString(),
       'badges': badges.toString(),
       'description': description.toString(),
-     // 'custom_fields[$id]': customFields.toString(),
+      'custom_fields[4216]': amenities.toString(),
     });
 
     var res = await request.send();

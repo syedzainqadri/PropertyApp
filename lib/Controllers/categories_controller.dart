@@ -1,13 +1,11 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../Models/Categories/category_model.dart';
-import '../Models/sign_in_model.dart';
+import '../Models/locations_model.dart';
 
 class CategoriesController extends GetxController {
   var categories = <CategoriesModel>[].obs;
-
+  var subCategories = <LocationsModel>[].obs;
   @override
   onInit() {
     getCategories();
@@ -30,9 +28,10 @@ class CategoriesController extends GetxController {
       print('${response.statusCode} : ${response.body}');
     }
   }
-  
+
   getSubCategories(categoryId) async {
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/categories?parent_id=$categoryId';
+    String url =
+        'https://lagosabuja.com/wp-json/rtcl/v1/categories?parent_id=$categoryId';
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -41,7 +40,7 @@ class CategoriesController extends GetxController {
       },
     );
     if (response.statusCode == 200) {
-      categories.value = categoriesFromJson(response.body);
+      subCategories.value = locationsModelFromJson(response.body);
       print('my getCategories is called ${response.body}');
     } else {
       print('${response.statusCode} : ${response.body}');
