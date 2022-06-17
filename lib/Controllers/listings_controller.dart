@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:realestapp/Models/all_listing_model.dart';
+import 'package:realestapp/Models/selected_fields_model.dart';
 
 import '../Models/Categories/category_model.dart';
 import '../Models/locations_model.dart';
@@ -88,7 +89,7 @@ class ListingController extends GetxController {
   }
 
   addListing(locationId, categoryId, listingType, title, status, price,
-      priceUnit, badges, description, images, customFields,amenities) async {
+      priceUnit, badges, description, images,List<SelectedFieldsModel> customFields,amenities) async {
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -100,13 +101,13 @@ class ListingController extends GetxController {
           http.MultipartFile('gallery[]', stream, length, filename: fileName);
       request.files.add(multipartFileSign);
     }
-    // for(int i=0;i<10;i++){
-    //   request.fields.addAll(
-    //     {
-    //       'custom_fields[${customFields.id}]': customFields.itemId,
-    //     }
-    //   );
-    // }
+    customFields.forEach((element) { 
+      request.fields.addAll(
+        {
+          'custom_fields[${element.id}]': element.choice.id.toString(),
+        }
+      );
+    });
 
     request.headers.addAll({
       'Content-Type': 'application/json; charset=UTF-8',
@@ -123,9 +124,9 @@ class ListingController extends GetxController {
       'price_unit': priceUnit.toString(),
       'badges': badges.toString(),
       'description': description.toString(),
-      'custom_fields[4216]': amenities.toString(),
+      'custom_fields[_field_4216]': amenities.toString(),
     });
-
+    print(amenities.toString());
     var res = await request.send();
     var response = await http.Response.fromStream(res);
     print(response.body);

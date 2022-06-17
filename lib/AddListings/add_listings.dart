@@ -36,12 +36,11 @@ class _AddListingState extends State<AddListing> {
   bool subCategorySelected = false;
   final listingsController = Get.put(ListingController());
   var category;
- var subCategory;
+  var subCategory;
   var listingType;
   var priceTypes;
   var pricingTypes;
-  var custom;
-  List<String> myAmenities = [];
+  List<String> myAmenities = List<String>.empty(growable:true);
   final priceController = TextEditingController();
   final priceStartController = TextEditingController();
   final priceEndController = TextEditingController();
@@ -49,7 +48,7 @@ class _AddListingState extends State<AddListing> {
   final titleController = TextEditingController();
   final locationsController = Get.put(LocationsController());
   List<dynamic> amenities = [false];
-  List<SelectedFieldsModel>? selectedFields = [];
+  List<SelectedFieldsModel>? selectedFields =  List<SelectedFieldsModel>.empty(growable: true);
   List<XFile>? imageFiles = [];
   @override
   void initState() {
@@ -185,23 +184,26 @@ class _AddListingState extends State<AddListing> {
               const SizedBox(
                 height: 10,
               ),
-              categorySelected?ChipsChoice<LocationsModel>.single(
-                choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                wrapped: true,
-                value: subCategory,
-                choiceItems:
-                    C2Choice.listFrom<LocationsModel, LocationsModel>(
-                  source: categoriesController.subCategories.value,
-                  value: (i, v) => v,
-                  label: (i, v) => v.name,
-                ),
-                onChanged: (val) async {
-                  await listingConfigController.getConfiguration(val.termId);
-                  setState(() {
-                    subCategorySelected = true;
-                  });
-                },
-              ):const Offstage(),
+              categorySelected
+                  ? ChipsChoice<LocationsModel>.single(
+                      choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                      wrapped: true,
+                      value: subCategory,
+                      choiceItems:
+                          C2Choice.listFrom<LocationsModel, LocationsModel>(
+                        source: categoriesController.subCategories.value,
+                        value: (i, v) => v,
+                        label: (i, v) => v.name,
+                      ),
+                      onChanged: (val) async {
+                        await listingConfigController
+                            .getConfiguration(val.termId);
+                        setState(() {
+                          subCategorySelected = true;
+                        });
+                      },
+                    )
+                  : const Offstage(),
               const SizedBox(
                 height: 10,
               ),
@@ -348,9 +350,8 @@ class _AddListingState extends State<AddListing> {
                                                                     position] =
                                                                 !amenities[
                                                                     position];
-                                                            if (value == true) {
-                                                              myAmenities.add(
-                                                                  listingConfigController
+                                                              myAmenities.addAll(
+                                                                 value!? listingConfigController
                                                                       .listingConfig
                                                                       .value
                                                                       .customFields[
@@ -358,8 +359,8 @@ class _AddListingState extends State<AddListing> {
                                                                       .options
                                                                       .choices[
                                                                           position]
-                                                                      .name);
-                                                            }
+                                                                      .id:null);
+                                                            
                                                           });
                                                         },
                                                         checkColor: white,
@@ -408,11 +409,21 @@ class _AddListingState extends State<AddListing> {
                                                       Choice>.builder(
                                                     activeColor: lightGreen,
                                                     direction: Axis.horizontal,
-                                                    groupValue: custom,
+                                                    groupValue:
+                                                        selectedFields![index]
+                                                            .choice,
                                                     onChanged: (value) {
                                                       setState(() {
-                                                        custom = value;
-                                                        // print( custom[index].id);
+                                                        selectedFields!.insert(
+                                                            index,
+                                                            SelectedFieldsModel(
+                                                                listingConfigController
+                                                                    .listingConfig
+                                                                    .value
+                                                                    .customFields[
+                                                                        index]
+                                                                    .id,
+                                                                value!));
                                                       });
                                                     },
                                                     items:
@@ -463,11 +474,22 @@ class _AddListingState extends State<AddListing> {
                                                         activeColor: lightGreen,
                                                         direction:
                                                             Axis.horizontal,
-                                                        groupValue: custom,
+                                                        groupValue:
+                                                            selectedFields![
+                                                                    index]
+                                                                .choice,
                                                         onChanged: (value) {
                                                           setState(() {
-                                                            custom = value;
-                                                            // print( custom[index].id);
+                                                            selectedFields!.insert(
+                                                                index,
+                                                                SelectedFieldsModel(
+                                                                    listingConfigController
+                                                                        .listingConfig
+                                                                        .value
+                                                                        .customFields[
+                                                                            index]
+                                                                        .id,
+                                                                    value!));
                                                           });
                                                         },
                                                         items:
@@ -609,7 +631,7 @@ class _AddListingState extends State<AddListing> {
                   print(selectedFields.toString());
                   listingsController.addListing(
                       locationsController.userLocationId.value,
-                      208,//var category;
+                      208, //var category;
                       listingType.id,
                       titleController.text,
                       'approved',
@@ -622,7 +644,8 @@ class _AddListingState extends State<AddListing> {
                       '',
                       descriptionController.text,
                       imageFiles,
-                      [],myAmenities);
+                      selectedFields!,
+                      myAmenities);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: lightGreen,
