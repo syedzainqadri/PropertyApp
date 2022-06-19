@@ -22,7 +22,9 @@ class _SignUpState extends State<SignUp> {
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final phoneController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final userNameController = TextEditingController();
   final SignUpController _signUpController = SignUpController();
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,15 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(
                     height: 15,
                   ),
+                  textField('Phone No', false, phoneController),
+                  const SizedBox(
+                    height: 15,
+                  ),
                   textField('E-mail address', false, emailController),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  textField('User Name', false, userNameController),
                   const SizedBox(
                     height: 15,
                   ),
@@ -108,12 +118,12 @@ class _SignUpState extends State<SignUp> {
                   ),
                   defaultButton('Sign Up', () async {
                     user = await _signUpController.signUp(
-                        'walid433',
+                        userNameController.text,
                         emailController.text,
                         passwordController.text,
                         firstNameController.text,
                         lastNameController.text,
-                        '+123134123323');
+                        phoneController.text);
                     Get.to(const Home());
                   }),
                   const SizedBox(
