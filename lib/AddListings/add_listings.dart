@@ -40,7 +40,7 @@ class _AddListingState extends State<AddListing> {
   var listingType;
   var priceTypes;
   var pricingTypes;
-  List<String> myAmenities = List<String>.empty(growable:true);
+  var myAmenities = List<String>.empty(growable:true);
   final priceController = TextEditingController();
   final priceStartController = TextEditingController();
   final priceEndController = TextEditingController();
@@ -48,7 +48,7 @@ class _AddListingState extends State<AddListing> {
   final titleController = TextEditingController();
   final locationsController = Get.put(LocationsController());
   List<dynamic> amenities = [false];
-  List<SelectedFieldsModel>? selectedFields =  List<SelectedFieldsModel>.empty(growable: true);
+  var selectedFields =  List<SelectedFieldsModel>.empty(growable: true);
   List<XFile>? imageFiles = [];
   @override
   void initState() {
@@ -175,6 +175,7 @@ class _AddListingState extends State<AddListing> {
                   await categoriesController.getSubCategories(val.termId);
                   setState(() {
                     categorySelected = true;
+                    category = val;
                     pricingTypes = PricType();
                     pricingTypes.id = '';
                     pricingTypes.name = '';
@@ -200,6 +201,7 @@ class _AddListingState extends State<AddListing> {
                             .getConfiguration(val.termId);
                         setState(() {
                           subCategorySelected = true;
+                          subCategory = val;
                         });
                       },
                     )
@@ -410,11 +412,11 @@ class _AddListingState extends State<AddListing> {
                                                     activeColor: lightGreen,
                                                     direction: Axis.horizontal,
                                                     groupValue:
-                                                        selectedFields![index]
+                                                        selectedFields[index]
                                                             .choice,
                                                     onChanged: (value) {
                                                       setState(() {
-                                                        selectedFields!.insert(
+                                                        selectedFields.insert(
                                                             index,
                                                             SelectedFieldsModel(
                                                                 listingConfigController
@@ -475,12 +477,12 @@ class _AddListingState extends State<AddListing> {
                                                         direction:
                                                             Axis.horizontal,
                                                         groupValue:
-                                                            selectedFields![
+                                                            selectedFields[
                                                                     index]
                                                                 .choice,
                                                         onChanged: (value) {
                                                           setState(() {
-                                                            selectedFields!.insert(
+                                                            selectedFields.insert(
                                                                 index,
                                                                 SelectedFieldsModel(
                                                                     listingConfigController
@@ -644,7 +646,7 @@ class _AddListingState extends State<AddListing> {
                       '',
                       descriptionController.text,
                       imageFiles,
-                      selectedFields!,
+                      selectedFields,
                       myAmenities);
                 },
                 style: ElevatedButton.styleFrom(
