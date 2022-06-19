@@ -1,5 +1,6 @@
 // ignore_for_file: import_of_legacy_library_into_null_safe
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:chips_choice/chips_choice.dart';
@@ -345,7 +346,7 @@ class _AddListingState extends State<AddListing> {
                                                                 position];
                                                         if (value!) {
                                                           myAmenities.add(
-                                                             "\"${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}\"");
+                                                             "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}");
                                                         }
                                                       });
                                                     },
@@ -625,7 +626,7 @@ class _AddListingState extends State<AddListing> {
                       descriptionController.text,
                       imageFiles,
                       selectedFields,
-                      myAmenities);
+                      jsonEncode(myAmenities));
                 },
                 style: ElevatedButton.styleFrom(
                   primary: lightGreen,
