@@ -50,7 +50,8 @@ class _AddListingState extends State<AddListing> {
   final locationsController = Get.put(LocationsController());
   List<dynamic> amenities = [false];
   List<SelectedFieldsModel> selectedFields = List<SelectedFieldsModel>.filled(
-      20, SelectedFieldsModel(0, Choice(id: '0', name: '0')),growable: true);
+      20, SelectedFieldsModel(0, Choice(id: '0', name: '0')),
+      growable: true);
   List<XFile>? imageFiles = [];
   @override
   void initState() {
@@ -342,17 +343,10 @@ class _AddListingState extends State<AddListing> {
                                                         amenities[position] =
                                                             !amenities[
                                                                 position];
-                                                        myAmenities.add(value!
-                                                            ? listingConfigController
-                                                                .listingConfig
-                                                                .value
-                                                                .customFields[
-                                                                    index]
-                                                                .options
-                                                                .choices[
-                                                                    position]
-                                                                .id
-                                                            : null);
+                                                        if (value!) {
+                                                          myAmenities.add(
+                                                             "\"${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}\"");
+                                                        }
                                                       });
                                                     },
                                                     checkColor: white,
@@ -417,7 +411,7 @@ class _AddListingState extends State<AddListing> {
                                                   setState(() {
                                                     customField = val;
                                                     selectedFields.insert(
-                                                      index,
+                                                        index,
                                                         SelectedFieldsModel(
                                                             listingConfigController
                                                                 .listingConfig
@@ -481,7 +475,7 @@ class _AddListingState extends State<AddListing> {
                                                       setState(() {
                                                         customField = val;
                                                         selectedFields.insert(
-                                                          index,
+                                                            index,
                                                             SelectedFieldsModel(
                                                                 listingConfigController
                                                                     .listingConfig
@@ -495,7 +489,7 @@ class _AddListingState extends State<AddListing> {
                                                   ),
                                                 ],
                                               )
-                                        : const Offstage();
+                                            : const Offstage();
                               })),
                           const SizedBox(
                             height: 10,

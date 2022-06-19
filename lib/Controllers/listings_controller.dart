@@ -135,8 +135,9 @@ class ListingController extends GetxController {
       'price_unit': priceUnit.toString(),
       'badges': badges.toString(),
       'description': description.toString(),
-      'custom_fields[_field_4216]': amenities.toString(),
+      'custom_fields[4216]': amenities.toString(),
     });
+    print(amenities);
     print(amenities.toString());
     var res = await request.send();
     var response = await http.Response.fromStream(res);
