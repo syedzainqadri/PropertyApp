@@ -291,22 +291,96 @@ class _AddListingState extends State<AddListing> {
                               item.name,
                             ),
                           ),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 1000,
-                            child: ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: listingConfigController
-                                    .listingConfig.value.customFields.length,
-                                itemBuilder: ((context, index) {
-                                  return listingConfigController.listingConfig
-                                              .value.customFields[index].type ==
-                                          'checkbox'
-                                      ? SizedBox(
-                                          height: 900,
-                                          width: double.infinity,
-                                          child: Column(
+                          ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: listingConfigController
+                                  .listingConfig.value.customFields.length,
+                              itemBuilder: ((context, index) {
+                                return listingConfigController.listingConfig
+                                            .value.customFields[index].type ==
+                                        'checkbox'
+                                    ? Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          listingConfigController
+                                              .listingConfig
+                                              .value
+                                              .customFields[index]
+                                              .label,
+                                          style: const TextStyle(
+                                              color: darkGrey,
+                                              fontSize: 20),
+                                        ),
+                                        ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemCount:
+                                              listingConfigController
+                                                  .listingConfig
+                                                  .value
+                                                  .customFields[index]
+                                                  .options
+                                                  .choices
+                                                  .length,
+                                          itemBuilder:
+                                              (context, position) {
+                                            amenities.add(false);
+                                            return Row(
+                                              children: [
+                                                const SizedBox(width: 10),
+                                                Checkbox(
+                                                  value:
+                                                      amenities[position],
+                                                  onChanged:
+                                                      (bool? value) {
+                                                    setState(() {
+                                                      amenities[
+                                                              position] =
+                                                          !amenities[
+                                                              position];
+                                                      myAmenities.add(value!
+                                                          ? listingConfigController
+                                                              .listingConfig
+                                                              .value
+                                                              .customFields[
+                                                                  index]
+                                                              .options
+                                                              .choices[
+                                                                  position]
+                                                              .id
+                                                          : null);
+                                                    });
+                                                  },
+                                                  checkColor: white,
+                                                  activeColor: lightGreen,
+                                                ),
+                                                Text(
+                                                  "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
+                                                  style: const TextStyle(
+                                                      fontSize: 17.0),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    )
+                                    : listingConfigController
+                                                .listingConfig
+                                                .value
+                                                .customFields[index]
+                                                .type ==
+                                            'radio'
+                                        ? Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             crossAxisAlignment:
@@ -325,187 +399,106 @@ class _AddListingState extends State<AddListing> {
                                                     color: darkGrey,
                                                     fontSize: 20),
                                               ),
-                                              ListView.builder(
-                                                shrinkWrap: true,
-                                                physics:
-                                                    const NeverScrollableScrollPhysics(),
-                                                itemCount:
-                                                    listingConfigController
-                                                        .listingConfig
-                                                        .value
-                                                        .customFields[index]
-                                                        .options
-                                                        .choices
-                                                        .length,
-                                                itemBuilder:
-                                                    (context, position) {
-                                                  amenities.add(false);
-                                                  return Row(
-                                                    children: [
-                                                      const SizedBox(width: 10),
-                                                      Checkbox(
-                                                        value:
-                                                            amenities[position],
-                                                        onChanged:
-                                                            (bool? value) {
-                                                          setState(() {
-                                                            amenities[
-                                                                    position] =
-                                                                !amenities[
-                                                                    position];
-                                                            myAmenities.addAll(value!
-                                                                ? listingConfigController
-                                                                    .listingConfig
-                                                                    .value
-                                                                    .customFields[
-                                                                        index]
-                                                                    .options
-                                                                    .choices[
-                                                                        position]
-                                                                    .id
-                                                                : null);
-                                                          });
-                                                        },
-                                                        checkColor: white,
-                                                        activeColor: lightGreen,
-                                                      ),
-                                                      Text(
-                                                        "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
-                                                        style: const TextStyle(
-                                                            fontSize: 17.0),
-                                                      ),
-                                                    ],
-                                                  );
+                                              ChipsChoice<Choice>.single(
+                                                choiceStyle:
+                                                    const C2ChoiceStyle(
+                                                        color: lightGreen),
+                                                wrapped: true,
+                                                value: customField,
+                                                choiceItems: C2Choice
+                                                    .listFrom<Choice, Choice>(
+                                                  source:
+                                                      listingConfigController
+                                                          .listingConfig
+                                                          .value
+                                                          .customFields[index]
+                                                          .options
+                                                          .choices,
+                                                  value: (i, v) => v,
+                                                  label: (i, v) => v.name,
+                                                ),
+                                                onChanged: (val) {
+                                                  setState(() {
+                                                    customField = val;
+                                                    selectedFields.insert(
+                                                        index,
+                                                        SelectedFieldsModel(
+                                                            listingConfigController
+                                                                .listingConfig
+                                                                .value
+                                                                .customFields[
+                                                                    index]
+                                                                .id,
+                                                            val));
+                                                  });
                                                 },
                                               ),
-                                            ],
-                                          ))
-                                      : listingConfigController
-                                                  .listingConfig
-                                                  .value
-                                                  .customFields[index]
-                                                  .type ==
-                                              'radio'
-                                          ? Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const SizedBox(
-                                                  height: 20,
+                                               ],
+                                          )
+                                             
+                                        : listingConfigController
+                                                    .listingConfig
+                                                    .value
+                                                    .customFields[index]
+                                                    .type ==
+                                                'select'
+                                            ? Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Text(
+                                                listingConfigController
+                                                    .listingConfig
+                                                    .value
+                                                    .customFields[index]
+                                                    .label,
+                                                style: const TextStyle(
+                                                    color: darkGrey,
+                                                    fontSize: 20),
+                                              ),
+                                              ChipsChoice<Choice>.single(
+                                                choiceStyle:
+                                                    const C2ChoiceStyle(
+                                                        color: lightGreen),
+                                                wrapped: true,
+                                                value: customField,
+                                                choiceItems: C2Choice
+                                                    .listFrom<Choice, Choice>(
+                                                  source:
+                                                      listingConfigController
+                                                          .listingConfig
+                                                          .value
+                                                          .customFields[index]
+                                                          .options
+                                                          .choices,
+                                                  value: (i, v) => v,
+                                                  label: (i, v) => v.name,
                                                 ),
-                                                Text(
-                                                  listingConfigController
-                                                      .listingConfig
-                                                      .value
-                                                      .customFields[index]
-                                                      .label,
-                                                  style: const TextStyle(
-                                                      color: darkGrey,
-                                                      fontSize: 20),
-                                                ),
-                                                ChipsChoice<Choice>.single(
-                                                  choiceStyle:
-                                                      const C2ChoiceStyle(
-                                                          color: lightGreen),
-                                                  wrapped: true,
-                                                  value: customField,
-                                                  choiceItems: C2Choice
-                                                      .listFrom<Choice, Choice>(
-                                                    source:
-                                                        listingConfigController
-                                                            .listingConfig
-                                                            .value
-                                                            .customFields[index]
-                                                            .options
-                                                            .choices,
-                                                    value: (i, v) => v,
-                                                    label: (i, v) => v.name,
-                                                  ),
-                                                  onChanged: (val) {
-                                                    setState(() {
-                                                      customField = val;
-                                                      selectedFields.insert(
-                                                          index,
-                                                          SelectedFieldsModel(
-                                                              listingConfigController
-                                                                  .listingConfig
-                                                                  .value
-                                                                  .customFields[
-                                                                      index]
-                                                                  .id,
-                                                              val));
-                                                    });
-                                                  },
-                                                ),
-                                                 ],
-                                            )
-                                               
-                                          : listingConfigController
-                                                      .listingConfig
-                                                      .value
-                                                      .customFields[index]
-                                                      .type ==
-                                                  'select'
-                                              ? Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                const SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Text(
-                                                  listingConfigController
-                                                      .listingConfig
-                                                      .value
-                                                      .customFields[index]
-                                                      .label,
-                                                  style: const TextStyle(
-                                                      color: darkGrey,
-                                                      fontSize: 20),
-                                                ),
-                                                ChipsChoice<Choice>.single(
-                                                  choiceStyle:
-                                                      const C2ChoiceStyle(
-                                                          color: lightGreen),
-                                                  wrapped: true,
-                                                  value: customField,
-                                                  choiceItems: C2Choice
-                                                      .listFrom<Choice, Choice>(
-                                                    source:
-                                                        listingConfigController
-                                                            .listingConfig
-                                                            .value
-                                                            .customFields[index]
-                                                            .options
-                                                            .choices,
-                                                    value: (i, v) => v,
-                                                    label: (i, v) => v.name,
-                                                  ),
-                                                  onChanged: (val) {
-                                                    setState(() {
-                                                      customField = val;
-                                                      selectedFields.insert(
-                                                          index,
-                                                          SelectedFieldsModel(
-                                                              listingConfigController
-                                                                  .listingConfig
-                                                                  .value
-                                                                  .customFields[
-                                                                      index]
-                                                                  .id,
-                                                              val));
-                                                    });
-                                                  },
-                                                ),
-                                                 ],
-                                            )
-                                              : const Offstage();
-                                })),
-                          ),
+                                                onChanged: (val) {
+                                                  setState(() {
+                                                    customField = val;
+                                                    selectedFields.insert(
+                                                        index,
+                                                        SelectedFieldsModel(
+                                                            listingConfigController
+                                                                .listingConfig
+                                                                .value
+                                                                .customFields[
+                                                                    index]
+                                                                .id,
+                                                            val));
+                                                  });
+                                                },
+                                              ),
+                                               ],
+                                          )
+                                            : const Offstage();
+                              })),
                           const SizedBox(
                             height: 10,
                           ),
