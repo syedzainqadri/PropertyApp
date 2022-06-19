@@ -40,7 +40,8 @@ class _AddListingState extends State<AddListing> {
   var listingType;
   var priceTypes;
   var pricingTypes;
-  var myAmenities = List<String>.empty(growable:true);
+  var customField;
+  var myAmenities = List<String>.empty(growable: true);
   final priceController = TextEditingController();
   final priceStartController = TextEditingController();
   final priceEndController = TextEditingController();
@@ -48,7 +49,7 @@ class _AddListingState extends State<AddListing> {
   final titleController = TextEditingController();
   final locationsController = Get.put(LocationsController());
   List<dynamic> amenities = [false];
-  var selectedFields =  List<SelectedFieldsModel>.empty(growable: true);
+  var selectedFields = List<SelectedFieldsModel>.empty(growable: true);
   List<XFile>? imageFiles = [];
   @override
   void initState() {
@@ -352,17 +353,17 @@ class _AddListingState extends State<AddListing> {
                                                                     position] =
                                                                 !amenities[
                                                                     position];
-                                                              myAmenities.addAll(
-                                                                 value!? listingConfigController
-                                                                      .listingConfig
-                                                                      .value
-                                                                      .customFields[
-                                                                          index]
-                                                                      .options
-                                                                      .choices[
-                                                                          position]
-                                                                      .id:null);
-                                                            
+                                                            myAmenities.addAll(value!
+                                                                ? listingConfigController
+                                                                    .listingConfig
+                                                                    .value
+                                                                    .customFields[
+                                                                        index]
+                                                                    .options
+                                                                    .choices[
+                                                                        position]
+                                                                    .id
+                                                                : null);
                                                           });
                                                         },
                                                         checkColor: white,
@@ -404,45 +405,43 @@ class _AddListingState extends State<AddListing> {
                                                       color: darkGrey,
                                                       fontSize: 20),
                                                 ),
-                                                SingleChildScrollView(
-                                                  scrollDirection:
-                                                      Axis.horizontal,
-                                                  child: RadioGroup<
-                                                      Choice>.builder(
-                                                    activeColor: lightGreen,
-                                                    direction: Axis.horizontal,
-                                                    groupValue:
-                                                        selectedFields[index]
-                                                            .choice,
-                                                    onChanged: (value) {
-                                                      setState(() {
-                                                        selectedFields.insert(
-                                                            index,
-                                                            SelectedFieldsModel(
-                                                                listingConfigController
-                                                                    .listingConfig
-                                                                    .value
-                                                                    .customFields[
-                                                                        index]
-                                                                    .id,
-                                                                value!));
-                                                      });
-                                                    },
-                                                    items:
+                                                ChipsChoice<Choice>.single(
+                                                  choiceStyle:
+                                                      const C2ChoiceStyle(
+                                                          color: lightGreen),
+                                                  wrapped: true,
+                                                  value: customField,
+                                                  choiceItems: C2Choice
+                                                      .listFrom<Choice, Choice>(
+                                                    source:
                                                         listingConfigController
                                                             .listingConfig
                                                             .value
                                                             .customFields[index]
                                                             .options
                                                             .choices,
-                                                    itemBuilder: (item) =>
-                                                        RadioButtonBuilder(
-                                                      item.name,
-                                                    ),
+                                                    value: (i, v) => v,
+                                                    label: (i, v) => v.name,
                                                   ),
+                                                  onChanged: (val) {
+                                                    setState(() {
+                                                      customField = val;
+                                                      selectedFields.insert(
+                                                          index,
+                                                          SelectedFieldsModel(
+                                                              listingConfigController
+                                                                  .listingConfig
+                                                                  .value
+                                                                  .customFields[
+                                                                      index]
+                                                                  .id,
+                                                              val));
+                                                    });
+                                                  },
                                                 ),
-                                              ],
+                                                 ],
                                             )
+                                               
                                           : listingConfigController
                                                       .listingConfig
                                                       .value
@@ -450,66 +449,60 @@ class _AddListingState extends State<AddListing> {
                                                       .type ==
                                                   'select'
                                               ? Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    Text(
-                                                      listingConfigController
-                                                          .listingConfig
-                                                          .value
-                                                          .customFields[index]
-                                                          .label,
-                                                      style: const TextStyle(
-                                                          color: darkGrey,
-                                                          fontSize: 20),
-                                                    ),
-                                                    SingleChildScrollView(
-                                                      scrollDirection:
-                                                          Axis.horizontal,
-                                                      child: RadioGroup<
-                                                          Choice>.builder(
-                                                        activeColor: lightGreen,
-                                                        direction:
-                                                            Axis.horizontal,
-                                                        groupValue:
-                                                            selectedFields[
-                                                                    index]
-                                                                .choice,
-                                                        onChanged: (value) {
-                                                          setState(() {
-                                                            selectedFields.insert(
-                                                                index,
-                                                                SelectedFieldsModel(
-                                                                    listingConfigController
-                                                                        .listingConfig
-                                                                        .value
-                                                                        .customFields[
-                                                                            index]
-                                                                        .id,
-                                                                    value!));
-                                                          });
-                                                        },
-                                                        items:
-                                                            listingConfigController
-                                                                .listingConfig
-                                                                .value
-                                                                .customFields[
-                                                                    index]
-                                                                .options
-                                                                .choices,
-                                                        itemBuilder: (item) =>
-                                                            RadioButtonBuilder(
-                                                          item.name,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Text(
+                                                  listingConfigController
+                                                      .listingConfig
+                                                      .value
+                                                      .customFields[index]
+                                                      .label,
+                                                  style: const TextStyle(
+                                                      color: darkGrey,
+                                                      fontSize: 20),
+                                                ),
+                                                ChipsChoice<Choice>.single(
+                                                  choiceStyle:
+                                                      const C2ChoiceStyle(
+                                                          color: lightGreen),
+                                                  wrapped: true,
+                                                  value: customField,
+                                                  choiceItems: C2Choice
+                                                      .listFrom<Choice, Choice>(
+                                                    source:
+                                                        listingConfigController
+                                                            .listingConfig
+                                                            .value
+                                                            .customFields[index]
+                                                            .options
+                                                            .choices,
+                                                    value: (i, v) => v,
+                                                    label: (i, v) => v.name,
+                                                  ),
+                                                  onChanged: (val) {
+                                                    setState(() {
+                                                      customField = val;
+                                                      selectedFields.insert(
+                                                          index,
+                                                          SelectedFieldsModel(
+                                                              listingConfigController
+                                                                  .listingConfig
+                                                                  .value
+                                                                  .customFields[
+                                                                      index]
+                                                                  .id,
+                                                              val));
+                                                    });
+                                                  },
+                                                ),
+                                                 ],
+                                            )
                                               : const Offstage();
                                 })),
                           ),
@@ -689,3 +682,43 @@ class _AddListingState extends State<AddListing> {
     );
   }
 }
+
+ // SingleChildScrollView(
+                                                //   scrollDirection:
+                                                //       Axis.horizontal,
+                                                //   child: RadioGroup<
+                                                //       Choice>.builder(
+                                                //     activeColor: lightGreen,
+                                                //     direction: Axis.horizontal,
+                                                //     groupValue:
+                                                //         selectedFields[index]
+                                                //             .choice,
+                                                //     onChanged: (value) {
+                                                //       setState(() {
+                                                //         selectedFields.insert(
+                                                //             index,
+                                                //             SelectedFieldsModel(
+                                                //                 listingConfigController
+                                                //                     .listingConfig
+                                                //                     .value
+                                                //                     .customFields[
+                                                //                         index]
+                                                //                     .id,
+                                                //                 value!));
+                                                //       });
+                                                //     },
+                                                //     items:
+                                                //         listingConfigController
+                                                //             .listingConfig
+                                                //             .value
+                                                //             .customFields[index]
+                                                //             .options
+                                                //             .choices,
+                                                //     itemBuilder: (item) =>
+                                                //         RadioButtonBuilder(
+                                                //       item.name,
+                                                //     ),
+                                                //   ),
+                                                // ),
+                                            //   ],
+                                            // )
