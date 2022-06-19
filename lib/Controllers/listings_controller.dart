@@ -88,8 +88,19 @@ class ListingController extends GetxController {
     print(response.body + '*****************');
   }
 
-  addListing(locationId, categoryId, listingType, title, status, price,
-      priceUnit, badges, description, images,List<SelectedFieldsModel> customFields,amenities) async {
+  addListing(
+      locationId,
+      categoryId,
+      listingType,
+      title,
+      status,
+      price,
+      priceUnit,
+      badges,
+      description,
+      images,
+      List<SelectedFieldsModel> customFields,
+      amenities) async {
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -101,12 +112,12 @@ class ListingController extends GetxController {
           http.MultipartFile('gallery[]', stream, length, filename: fileName);
       request.files.add(multipartFileSign);
     }
-    customFields.forEach((element) { 
-      request.fields.addAll(
-        {
+    customFields.forEach((element) {
+      if (element.id != 0) {
+        request.fields.addAll({
           'custom_fields[${element.id}]': element.choice.id.toString(),
-        }
-      );
+        });
+      }
     });
 
     request.headers.addAll({
