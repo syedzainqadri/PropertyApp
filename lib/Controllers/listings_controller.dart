@@ -10,30 +10,12 @@ import '../Models/locations_model.dart';
 class ListingController extends GetxController {
   var isLoading = false.obs;
   var allListings = AllListings().obs;
-  var myListings = AllListings().obs;
-  var favoriteListings = AllListings().obs;
   final token = GetStorage().read('token');
 
   @override
   onInit() {
     getAllListing();
-    getMyListing();
-    getMyFavorites();
     super.onInit();
-  }
-
-  getListingTypes() async {
-    isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing-types';
-    var response = await http.get(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Accept': 'application/json',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-      },
-    );
-    print('All Listing Type response is ${response.body}');
-    isLoading.value = false;
   }
 
   getAllListing() async {
@@ -49,59 +31,6 @@ class ListingController extends GetxController {
     allListings.value = allListingsFromJson(response.body);
     print('All Listing response is ${response.body}');
     isLoading.value = false;
-  }
-
-  getMyListing() async {
-    isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/listings';
-    var response = await http.get(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Accept': 'application/json',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-        'Authorization': 'Bearer $token',
-      },
-    );
-    myListings.value = allListingsFromJson(response.body);
-    print('My Listing response is ${response.body}');
-    isLoading.value = false;
-  }
-
-  getMyFavorites() async {
-    isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/favourites';
-    var response = await http.get(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Accept': 'application/json',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-        'Authorization': 'Bearer $token',
-      },
-    );
-
-    favoriteListings.value = allListingsFromJson(response.body);
-    print('My Favorites response is ${response.body}');
-    isLoading.value = false;
-  }
-
-  addToFavorites(listingId) async {
-    isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/favourites';
-    var response = await http.post(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Accept': 'application/json',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-        'Authorization': 'Bearer $token',
-      },
-      body: <String, dynamic>{
-        'listing_id': listingId.toString(),
-      },
-    );
-    print('Ad to Favorites response is ${response.body}');
-    isLoading.value = false;
-
-    // print(response.body + '*****************');
   }
 
   addListing(

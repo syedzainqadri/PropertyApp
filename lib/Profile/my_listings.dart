@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
+import 'package:realestapp/Controllers/my_listings_controller.dart';
 
 import '../AddListings/list_widget.dart';
 import '../Utils/color_scheme.dart';
@@ -13,7 +14,7 @@ class MyListings extends StatefulWidget {
 }
 
 class _MyListingsState extends State<MyListings> {
-  final listingController = Get.put(ListingController());
+  final myListingController = Get.put(MyListingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,25 +43,21 @@ class _MyListingsState extends State<MyListings> {
           padding: const EdgeInsets.only(left: 18.0),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          itemCount:
-              Get.find<ListingController>().myListings.value.data?.length,
+          itemCount: myListingController.myListings.value.data?.length,
           itemBuilder: (context, index) {
             return ListingCard(
-                image: listingController
-                    .favoriteListings.value.data![index].images,
-                title: listingController
-                    .favoriteListings.value.data![index].title
+                image: myListingController.myListings.value.data![index].images,
+                title: myListingController.myListings.value.data![index].title
                     .toString(),
-                city: listingController.favoriteListings.value.data![index]
-                    .contact!.locations![0].name
+                city: myListingController
+                    .myListings.value.data![index].contact!.locations![0].name
                     .toString(),
-                price: listingController
-                    .favoriteListings.value.data![index].price
+                price: myListingController.myListings.value.data![index].price
                     .toString(),
                 isFovorite: true,
                 description: '',
-                listingId: listingController
-                    .favoriteListings.value.data![index].listingId);
+                listingId: myListingController
+                    .myListings.value.data![index].listingId);
           },
         );
       }),

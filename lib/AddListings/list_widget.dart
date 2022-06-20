@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/favorite_listing_controller.dart';
 import 'package:realestapp/Controllers/listing_detail_controller.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
 
@@ -30,7 +31,7 @@ class ListingCard extends StatelessWidget {
   final ListingDetailsController listingDetailsController =
       Get.put(ListingDetailsController());
 
-  final listingController = Get.put(ListingController());
+  final favoriteListingController = Get.put(FavoriteListingController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class ListingCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onLongPress: () {
-          listingController.addToFavorites(listingId);
+          favoriteListingController.addToFavorites(listingId);
           ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(content: Text('Added to Favorites')));
         },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/favorite_listing_controller.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
 
@@ -11,10 +12,10 @@ import '../Utils/color_scheme.dart';
 itemWidget(context,Datum listing) {
   final reviewController = Get.put(ReviewController());
   final listingDetailsController = Get.put(ListingDetailsController());
-  final listingController = Get.put(ListingController());
+  final favoriteListingController = Get.put(FavoriteListingController());
   return GestureDetector(
     onLongPress: (){
-      listingController.addToFavorites(listing.listingId);
+      favoriteListingController.addToFavorites(listing.listingId);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to Favorites')));
     },
     onTap: () async {

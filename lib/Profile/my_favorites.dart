@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../AddListings/list_widget.dart';
+import '../Controllers/favorite_listing_controller.dart';
 import '../Controllers/listings_controller.dart';
 import '../Utils/color_scheme.dart';
 
@@ -13,7 +14,7 @@ class MyFavorites extends StatefulWidget {
 }
 
 class _MyFavoritesState extends State<MyFavorites> {
-  final listingController = Get.put(ListingController());
+  final favoriteListingController = Get.put(FavoriteListingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,23 +44,23 @@ class _MyFavoritesState extends State<MyFavorites> {
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount:
-              Get.find<ListingController>().favoriteListings.value.data?.length,
+              favoriteListingController.favoriteListings.value.data?.length,
           itemBuilder: (context, index) {
             return ListingCard(
-                image: listingController
+                image: favoriteListingController
                     .favoriteListings.value.data![index].images,
-                title: listingController
+                title: favoriteListingController
                     .favoriteListings.value.data![index].title
                     .toString(),
-                city: listingController.favoriteListings.value.data![index]
-                    .contact!.locations![0].name
+                city: favoriteListingController.favoriteListings.value
+                    .data![index].contact!.locations![0].name
                     .toString(),
-                price: listingController
+                price: favoriteListingController
                     .favoriteListings.value.data![index].price
                     .toString(),
                 isFovorite: true,
                 description: '',
-                listingId: listingController
+                listingId: favoriteListingController
                     .favoriteListings.value.data![index].listingId);
           },
         );
