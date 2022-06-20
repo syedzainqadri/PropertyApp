@@ -5,7 +5,7 @@ import 'package:realestapp/Auth/sign_up.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
 import 'package:realestapp/Controllers/user_controller.dart';
 import 'package:realestapp/Models/sign_in_model.dart';
-import '../Controllers/LocationController.dart';
+import '../Controllers/location_controller.dart';
 import '../Controllers/categories_controller.dart';
 import '../Controllers/chat_controller.dart';
 import '../Controllers/favorite_listing_controller.dart';

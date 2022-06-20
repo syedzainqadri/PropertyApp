@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:realestapp/AddListings/select_city.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
 
-import '../Controllers/LocationController.dart';
+import '../Controllers/location_controller.dart';
 
 //select_country.dart
 class SelectCountry extends StatefulWidget {

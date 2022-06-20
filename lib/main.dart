@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Bindings/bindings.dart';
-import 'package:realestapp/Controllers/LocationController.dart';
+import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/chat_controller.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/AddListings/add_listings.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
-import '../Controllers/LocationController.dart';
+import '../Controllers/location_controller.dart';
 
 class SelectCity extends StatefulWidget {
   const SelectCity({

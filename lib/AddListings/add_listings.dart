@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:realestapp/Controllers/LocationController.dart';
+import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/listing_config_controller.dart';
 import 'package:realestapp/Controllers/listing_type_controller.dart';
