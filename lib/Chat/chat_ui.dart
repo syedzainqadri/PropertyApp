@@ -80,11 +80,7 @@ class _ChatUiState extends State<ChatUi> {
             ChatComposer(
               controller: con,
               onReceiveText: (str) {
-                chatController.startChatConversation(
-                    signInController.signInModel.value.token_type,
-                    signInController.signInModel.value.token,
-                    widget.listingId,
-                    str);
+                chatController.startChatConversation(widget.listingId, str);
                 setState(() {
                   list.add(sentMessage(str.toString()));
                   list.add(recieveMessage(str.toString()));

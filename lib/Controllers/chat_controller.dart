@@ -29,7 +29,7 @@ class ChatController extends GetxController {
     super.onInit();
   }
 
-  startChatConversation(tokenType, token, listingId, text) async {
+  startChatConversation(listingId, text) async {
     var permas = {"listing_id": listingId, "text": text};
     var response = await http.post(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my/chat/conversation"),
@@ -40,7 +40,7 @@ class ChatController extends GetxController {
       },
       body: jsonEncode(permas),
     );
-    sendChatConversation(listingId, text, jsonDecode(response.body)['con_id']);
+   await sendChatConversation(listingId, text, jsonDecode(response.body)['con_id']);
 
     print(response.body);
   }
@@ -60,7 +60,7 @@ class ChatController extends GetxController {
       },
       body: body,
     );
-    sendChatMessage(conId, jsonDecode(response.body)['message_id'], listingId);
+    await sendChatMessage(conId, jsonDecode(response.body)['message_id'], listingId);
 
     print(response.body);
   }
@@ -76,23 +76,22 @@ class ChatController extends GetxController {
             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkiLCJuYW1lIjoiemFpbnN5ZWQiLCJpYXQiOjE2NTE4NzYxODQsImV4cCI6MTY1MTk2MjU4NH0.m9irHZq07FM9fewh3h1OrJOq6ISLmnfb5pvSlCLxsCw',
       },
     );
-    getAllMessages(listingId);
+    await getAllMessages(listingId);
     print(response.body);
   }
 
   getAllMessages(listingId) async {
     var response = await http.get(
       Uri.parse(
-          "https://lagosabuja.com/wp-json/rtcl/v1//my/chat/check?listing_id=$listingId"),
+          "https://lagosabuja.com/wp-json/rtcl/v1/my/chat/check?listing_id=$listingId"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
         'Authorization': 'Bearer $token',
       },
     );
-    messages.value = messagesFromJson(response.body);
-
-    print(response.body);
+   messages.value = messagesFromJson(response.body);
+    print('All Messages API Hit '+response.body);
   }
 
   getAllChats() async {
