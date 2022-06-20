@@ -7,19 +7,29 @@
         {
             "name": "PropertyApp",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "flutterMode": "debug",
+            "args": [
+                "--no-sound-null-safety"
+            ]
         },
         {
             "name": "PropertyApp (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "args": [
+                "--no-sound-null-safety"
+            ]
         },
         {
             "name": "PropertyApp (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "flutterMode": "release",
+            "args": [
+                "--no-sound-null-safety"
+            ]
         }
     ]
 }
