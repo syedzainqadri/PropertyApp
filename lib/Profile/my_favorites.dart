@@ -45,19 +45,21 @@ class _MyFavoritesState extends State<MyFavorites> {
           itemCount:
               Get.find<ListingController>().favoriteListings.value.data?.length,
           itemBuilder: (context, index) {
-            return listWidget(
-                context,
-                listingController.favoriteListings.value.data![index].images,
-                listingController.favoriteListings.value.data![index].title
+            return ListingCard(
+                image: listingController
+                    .favoriteListings.value.data![index].images,
+                title: listingController
+                    .favoriteListings.value.data![index].title
                     .toString(),
-                listingController.favoriteListings.value.data![index].contact!
-                    .locations![0].name
+                city: listingController.favoriteListings.value.data![index]
+                    .contact!.locations![0].name
                     .toString(),
-                listingController.favoriteListings.value.data![index].price
+                price: listingController
+                    .favoriteListings.value.data![index].price
                     .toString(),
-                true,
-                '',
-                listingController
+                isFovorite: true,
+                description: '',
+                listingId: listingController
                     .favoriteListings.value.data![index].listingId);
           },
         );

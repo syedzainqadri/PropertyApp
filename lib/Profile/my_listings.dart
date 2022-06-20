@@ -45,19 +45,22 @@ class _MyListingsState extends State<MyListings> {
           itemCount:
               Get.find<ListingController>().myListings.value.data?.length,
           itemBuilder: (context, index) {
-            return listWidget(
-                context,
-                listingController.myListings.value.data![index].images,
-                listingController.myListings.value.data![index].title
+            return ListingCard(
+                image: listingController
+                    .favoriteListings.value.data![index].images,
+                title: listingController
+                    .favoriteListings.value.data![index].title
                     .toString(),
-                listingController
-                    .myListings.value.data![index].contact!.locations![0].name
+                city: listingController.favoriteListings.value.data![index]
+                    .contact!.locations![0].name
                     .toString(),
-                listingController.myListings.value.data![index].price
+                price: listingController
+                    .favoriteListings.value.data![index].price
                     .toString(),
-                false,
-                '',
-                listingController.myListings.value.data![index].listingId);
+                isFovorite: true,
+                description: '',
+                listingId: listingController
+                    .favoriteListings.value.data![index].listingId);
           },
         );
       }),

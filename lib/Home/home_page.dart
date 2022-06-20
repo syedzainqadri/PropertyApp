@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Home/widgets/CategoryCard.dart';
 import '../AddListings/list_widget.dart';
 import '../Categories/categories.dart';
 import '../Controllers/categories_controller.dart';
@@ -47,29 +48,32 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Obx(
-                  () => categoriesController.categories.value == null
-                      ? const CircularProgressIndicator(
-                          color: Colors.greenAccent,
-                        )
-                      : SizedBox(
-                          height: 120,
-                          width: double.infinity,
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount:
-                                categoriesController.categories.value.length,
-                            itemBuilder: (context, position) {
-                              return categoryCard(
-                                  categoriesController
-                                      .categories.value[position].icon!.url,
-                                  categoriesController
-                                      .categories.value[position].name,
-                                  categoriesController
-                                      .categories.value[position].termId);
-                            }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Obx(
+                    () => categoriesController.categories.value == null
+                        ? const CircularProgressIndicator(
+                            color: Colors.greenAccent,
+                          )
+                        : SizedBox(
+                            height: 120,
+                            width: double.infinity,
+                            child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount:
+                                  categoriesController.categories.value.length,
+                              itemBuilder: (context, position) {
+                                return CategoryCard(
+                                    image: categoriesController
+                                        .categories.value[position].icon!.url,
+                                    name: categoriesController
+                                        .categories.value[position].name,
+                                    id: categoriesController
+                                        .categories.value[position].termId);
+                              }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+                            ),
                           ),
-                        ),
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -102,61 +106,27 @@ class _HomePageState extends State<HomePage> {
                     shrinkWrap: true,
                     itemCount: listingController.allListings.value.data?.length,
                     itemBuilder: (context, index) {
-                      return listWidget(context,
-                        listingController.allListings.value.data?[index].images,
-                        listingController.allListings.value.data?[index].title
+                      return ListingCard(
+                        image: listingController
+                            .allListings.value.data?[index].images,
+                        title: listingController
+                            .allListings.value.data?[index].title
                             .toString(),
-                        listingController.allListings.value.data?[index]
+                        city: listingController.allListings.value.data?[index]
                             .contact!.locations![0].name
                             .toString(),
-                        listingController.allListings.value.data?[index].price
+                        price: listingController
+                            .allListings.value.data?[index].price
                             .toString(),
-                        true,
-                        'This is description',
-                        listingController
+                        isFovorite: true,
+                        description: 'This is description',
+                        listingId: listingController
                             .allListings.value.data?[index].listingId,
                       );
                     },
                   ),
           ),
         ],
-      ),
-    );
-  }
-
-  categoryCard(image, name, id) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 12.0),
-      child: GestureDetector(
-        onTap: () {
-          Get.to(CategoryPage(
-            title: name,
-            id: id,
-          ));
-        },
-        child: Container(
-          height: 120,
-          width: 120,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Card(
-            elevation: 1.0,
-            child: Column(children: [
-              Container(
-                width: 120,
-                height: 90,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(image),
-                  ),
-                ),
-              ),
-              Center(child: Text(name)),
-            ]),
-          ),
-        ),
       ),
     );
   }
