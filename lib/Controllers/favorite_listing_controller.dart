@@ -10,7 +10,7 @@ class FavoriteListingController extends GetxController {
 
   @override
   onInit() {
-    getMyFavorites();
+    // getMyFavorites();
     super.onInit();
   }
 

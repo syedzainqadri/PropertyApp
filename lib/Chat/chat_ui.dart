@@ -26,105 +26,108 @@ class _ChatUiState extends State<ChatUi> {
   UserController userController = Get.put(UserController());
 
   SignInController signInController = Get.put(SignInController());
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          elevation: 0.0,
-          centerTitle: true,
-          backgroundColor: lightGreen,
-          title: Text(widget.title),
-          leading: GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.navigate_before, size: 35, color: white)),
-          actions: const [
-            //         Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Container(
-            //     width: 40,
-            //     height: 40,
-            //     decoration: BoxDecoration(
-            //       shape: BoxShape.circle,
-            //       border: Border.all(
-            //         color: mediumGrey,
-            //       ),
-            //       image: DecorationImage(
-            //         fit: BoxFit.cover,
-            //         image: AssetImage('assets/images/${widget.image}.png'),
-            //       ),
-            //     ),
-            //   ),
-            // ),
-          ],
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: Obx(() {
-                return ListView.builder(
-                    itemCount: chatController.messages.value.messages.length,
-                    itemBuilder: (_, pos) {
-                      return int.parse(chatController
-                                  .messages.value.messages[pos].sourceId) ==
-                              userController.user.value.id
-                          ? sentMessage(chatController
-                              .messages.value.messages[pos].message)
-                          : recieveMessage(chatController
-                              .messages.value.messages[pos].message);
-                    });
-              }),
+    var con_id = chatController.messages.value.conId;
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        centerTitle: true,
+        backgroundColor: lightGreen,
+        title: Text(widget.title),
+        leading: GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: const Icon(Icons.navigate_before, size: 35, color: white)),
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: Obx(() {
+              return ListView.builder(
+                  itemCount: chatController.messages.value.messages.length,
+                  itemBuilder: (_, pos) {
+                    return int.parse(Get.find<ChatController>()
+                                    .messages
+                                    .value
+                                    .messages[pos]
+                                    .sourceId
+                                // chatController
+                                //           .messages.value.messages[pos].sourceId
+                                ) ==
+                            userController.user.value.id
+                        ? sentMessage(Get.find<ChatController>()
+                                .messages
+                                .value
+                                .messages[pos]
+                                .message
+                            // chatController.messages.value.messages[pos].message
+                            )
+                        : recieveMessage(Get.find<ChatController>()
+                                .messages
+                                .value
+                                .messages[pos]
+                                .message
+                            // chatController
+                            //   .messages.value.messages[pos].message
+                            );
+                  });
+            }),
+          ),
+          ChatComposer(
+            controller: con,
+            onReceiveText: (str) {
+              print("This conversation id is : ${con_id}");
+              con_id != null
+                  ? chatController.sendChatConversation(widget.listingId, str,
+                      chatController.messages.value.conId)
+                  : chatController.startChatConversation(widget.listingId, str);
+
+              setState(() {
+                list.add(sentMessage(str.toString()));
+                list.add(recieveMessage(str.toString()));
+                con.text = '';
+              });
+            },
+            onRecordEnd: (path) {
+              setState(() {
+                //  list.add('AUDIO PATH : ' + path!);
+              });
+            },
+            textPadding: EdgeInsets.zero,
+            leading: CupertinoButton(
+              padding: EdgeInsets.zero,
+              child: const Icon(
+                Icons.insert_emoticon_outlined,
+                size: 25,
+                color: Colors.grey,
+              ),
+              onPressed: () {},
             ),
-            ChatComposer(
-              controller: con,
-              onReceiveText: (str) {
-                chatController.startChatConversation(widget.listingId, str);
-                setState(() {
-                  list.add(sentMessage(str.toString()));
-                  list.add(recieveMessage(str.toString()));
-                  con.text = '';
-                });
-              },
-              onRecordEnd: (path) {
-                setState(() {
-                  //  list.add('AUDIO PATH : ' + path!);
-                });
-              },
-              textPadding: EdgeInsets.zero,
-              leading: CupertinoButton(
+            actions: [
+              CupertinoButton(
                 padding: EdgeInsets.zero,
                 child: const Icon(
-                  Icons.insert_emoticon_outlined,
+                  Icons.attach_file_rounded,
                   size: 25,
                   color: Colors.grey,
                 ),
                 onPressed: () {},
               ),
-              actions: [
-                CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: const Icon(
-                    Icons.attach_file_rounded,
-                    size: 25,
-                    color: Colors.grey,
-                  ),
-                  onPressed: () {},
+              CupertinoButton(
+                padding: EdgeInsets.zero,
+                child: const Icon(
+                  Icons.camera_alt_rounded,
+                  size: 25,
+                  color: Colors.grey,
                 ),
-                CupertinoButton(
-                  padding: EdgeInsets.zero,
-                  child: const Icon(
-                    Icons.camera_alt_rounded,
-                    size: 25,
-                    color: Colors.grey,
-                  ),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ],
-        ),
+                onPressed: () {},
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

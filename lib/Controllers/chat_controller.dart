@@ -22,7 +22,7 @@ class ChatController extends GetxController {
           messages: List<Message>.empty(growable: true))
       .obs;
   var allChats = List<AllChats>.empty(growable: true).obs;
-  
+
   @override
   onInit() {
     getAllChats();
@@ -40,7 +40,9 @@ class ChatController extends GetxController {
       },
       body: jsonEncode(permas),
     );
-   await sendChatConversation(listingId, text, jsonDecode(response.body)['con_id']);
+    await sendChatConversation(
+        listingId, text, jsonDecode(response.body)['con_id']);
+    var data = jsonDecode(response.body);
 
     print(response.body);
   }
@@ -60,7 +62,8 @@ class ChatController extends GetxController {
       },
       body: body,
     );
-    await sendChatMessage(conId, jsonDecode(response.body)['message_id'], listingId);
+    await sendChatMessage(
+        conId, jsonDecode(response.body)['message_id'], listingId);
 
     print(response.body);
   }
@@ -90,8 +93,8 @@ class ChatController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-   messages.value = messagesFromJson(response.body);
-    print('All Messages API Hit '+response.body);
+    messages.value = messagesFromJson(response.body);
+    print('All Messages API Hit ' + response.body);
   }
 
   getAllChats() async {
