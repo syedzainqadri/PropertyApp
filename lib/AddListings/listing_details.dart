@@ -34,10 +34,10 @@ class _ListingDetailsState extends State<ListingDetails> {
   @override
   void initState() {
     for (int i = 0;
-        i < listingDetailsController.listingDetail.value.images.length;
+        i < listingDetailsController.listingDetail.value.listing.images.length;
         i++) {
       images.add(Image.network(
-        Get.find<ListingDetailsController>().listingDetail.value.images[i].url,
+        Get.find<ListingDetailsController>().listingDetail.value.listing..images[i].url,
         fit: BoxFit.cover,
       ));
     }
@@ -58,7 +58,7 @@ class _ListingDetailsState extends State<ListingDetails> {
         elevation: 0.0,
         centerTitle: true,
         title: Text(
-          listingDetailsController.listingDetail.value.title,
+          listingDetailsController.listingDetail.value.listing.title,
           style: const TextStyle(color: lightGreen),
         ),
         leading: GestureDetector(
@@ -77,8 +77,8 @@ class _ListingDetailsState extends State<ListingDetails> {
               onPressed: () {
                 Get.to(ChatUi(
                   listingId:
-                      listingDetailsController.listingDetail.value.listingId,
-                  title: listingDetailsController.listingDetail.value.title,
+                      listingDetailsController.listingDetail.value.listing.listingId,
+                  title: listingDetailsController.listingDetail.value.listing.title,
                 ));
               },
               icon: const Icon(
@@ -117,14 +117,14 @@ class _ListingDetailsState extends State<ListingDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        listingDetailsController.listingDetail.value.title,
+                        listingDetailsController.listingDetail.value.listing.title,
                         style: const TextStyle(
                           color: darkGrey,
                           fontSize: 18,
                         ),
                       ),
                       Text(
-                        '\$${listingDetailsController.listingDetail.value.price}',
+                        '\$${listingDetailsController.listingDetail.value.listing.price}',
                         style: const TextStyle(
                           color: darkGrey,
                           fontSize: 18,
@@ -136,7 +136,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                     height: 15,
                   ),
                   Text(
-                    listingDetailsController.listingDetail.value.description,
+                    listingDetailsController.listingDetail.value.listing.description,
                     style: const TextStyle(
                       color: mediumGrey,
                       fontSize: 16,
@@ -166,9 +166,9 @@ class _ListingDetailsState extends State<ListingDetails> {
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
                       double.parse(listingDetailsController
-                          .listingDetail.value.contact.latitude.toString()),
+                          .listingDetail.value.listing.contact.latitude.toString()),
                       double.parse(listingDetailsController
-                          .listingDetail.value.contact.longitude.toString())),
+                          .listingDetail.value.listing.contact.longitude.toString())),
                   zoom: 14.4746,
                 ),
                 onMapCreated: (GoogleMapController controller) {
