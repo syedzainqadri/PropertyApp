@@ -52,18 +52,18 @@ class Config {
   var videoUrls;
 
   factory Config.fromJson(Map<String, dynamic> json) => Config(
-        bhs: json["bhs"],
-        pricingTypes: List<PricType>.from(
-            json["pricing_types"].map((x) => PricType.fromJson(x))),
-        priceTypes: List<PricType>.from(
-            json["price_types"].map((x) => PricType.fromJson(x))),
-        currency: json["currency"],
-        currencySymbol: json["currency_symbol"],
-        priceUnits: List<dynamic>.from(json["price_units"].map((x) => x)),
-        hiddenFields: List<dynamic>.from(json["hidden_fields"].map((x) => x)),
-        gallery: Gallery.fromJson(json["gallery"]),
-        limit: Limit.fromJson(json["limit"]),
-        videoUrls: json["video_urls"],
+      // bhs: json["bhs"],
+      // pricingTypes: List<PricType>.from(
+      //     json["pricing_types"].map((x) => PricType.fromJson(x))),
+      // priceTypes: List<PricType>.from(
+      //     json["price_types"].map((x) => PricType.fromJson(x))),
+      // currency: json["currency"],
+      // currencySymbol: json["currency_symbol"],
+      // priceUnits: List<dynamic>.from(json["price_units"].map((x) => x)),
+      // hiddenFields: List<dynamic>.from(json["hidden_fields"].map((x) => x)),
+      // gallery: Gallery.fromJson(json["gallery"]),
+      // limit: Limit.fromJson(json["limit"]),
+      // videoUrls: json["video_urls"],
       );
 }
 

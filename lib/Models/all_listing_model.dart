@@ -438,11 +438,11 @@ class Pagination {
   int? totalPages;
 
   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
-        total: json["total"],
-        count: json["count"],
-        perPage: json["per_page"],
-        currentPage: json["current_page"],
-        totalPages: json["total_pages"],
+      // total: json["total"],
+      // count: json["count"],
+      // perPage: json["per_page"],
+      // currentPage: json["current_page"],
+      // totalPages: json["total_pages"],
       );
 }
 

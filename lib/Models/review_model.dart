@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 
 Review reviewFromJson(String str) => Review.fromJson(json.decode(str));
@@ -112,4 +110,3 @@ class Pagination {
         totalPages: json["total_pages"],
       );
 }
-

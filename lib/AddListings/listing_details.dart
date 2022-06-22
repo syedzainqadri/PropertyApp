@@ -7,7 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:realestapp/Chat/chat_ui.dart';
 import 'package:realestapp/Controllers/listing_detail_controller.dart';
-import 'package:realestapp/Controllers/review_controller.dart';
+// import 'package:realestapp/Controllers/review_controller.dart';
 import '../Models/review_model.dart';
 import '../Utils/color_scheme.dart';
 
@@ -30,14 +30,15 @@ class _ListingDetailsState extends State<ListingDetails> {
   //   zoom: 14.4746,
   // );
   List<Widget> images = [];
-  final ReviewController reviewController = Get.put(ReviewController());
+  // final ReviewController reviewController = Get.put(ReviewController());
   @override
   void initState() {
     for (int i = 0;
         i < listingDetailsController.listingDetail.value.listing.images.length;
         i++) {
       images.add(Image.network(
-        Get.find<ListingDetailsController>().listingDetail.value.listing..images[i].url,
+        Get.find<ListingDetailsController>().listingDetail.value.listing
+          ..images[i].url,
         fit: BoxFit.cover,
       ));
     }
@@ -76,9 +77,10 @@ class _ListingDetailsState extends State<ListingDetails> {
             child: IconButton(
               onPressed: () {
                 Get.to(ChatUi(
-                  listingId:
-                      listingDetailsController.listingDetail.value.listing.listingId,
-                  title: listingDetailsController.listingDetail.value.listing.title,
+                  listingId: listingDetailsController
+                      .listingDetail.value.listing.listingId,
+                  title: listingDetailsController
+                      .listingDetail.value.listing.title,
                 ));
               },
               icon: const Icon(
@@ -117,7 +119,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        listingDetailsController.listingDetail.value.listing.title,
+                        listingDetailsController
+                            .listingDetail.value.listing.title,
                         style: const TextStyle(
                           color: darkGrey,
                           fontSize: 18,
@@ -136,7 +139,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                     height: 15,
                   ),
                   Text(
-                    listingDetailsController.listingDetail.value.listing.description,
+                    listingDetailsController
+                        .listingDetail.value.listing.description,
                     style: const TextStyle(
                       color: mediumGrey,
                       fontSize: 16,
@@ -166,9 +170,11 @@ class _ListingDetailsState extends State<ListingDetails> {
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
                       double.parse(listingDetailsController
-                          .listingDetail.value.listing.contact.latitude.toString()),
+                          .listingDetail.value.listing.contact.latitude
+                          .toString()),
                       double.parse(listingDetailsController
-                          .listingDetail.value.listing.contact.longitude.toString())),
+                          .listingDetail.value.listing.contact.longitude
+                          .toString())),
                   zoom: 14.4746,
                 ),
                 onMapCreated: (GoogleMapController controller) {
