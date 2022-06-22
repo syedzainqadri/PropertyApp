@@ -21,39 +21,50 @@ class CategoryCard extends StatelessWidget {
             id: id,
           ));
         },
-        child: Container(
-          height: 140,
-          width: 120,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Card(
-            elevation: 1.0,
-            child: Column(children: [
-              Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(
+                      3.0,
+                      3.0,
+                    ),
+                    blurRadius: 2.0,
+                    spreadRadius: 1.0,
+                  ), //BoxShadow//BoxShadow
+                ],
+              ),
+              child: Container(
                 width: 120,
                 height: 90,
                 decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
                   image: DecorationImage(
                     fit: BoxFit.fitWidth,
                     image: NetworkImage(image),
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              Center(
-                  child: Text(
-                name,
-                maxLines: 1,
-                style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: .5),
-              )),
-            ]),
-          ),
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Text(
+              '$name'.toUpperCase(),
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          ],
         ),
       ),
     );

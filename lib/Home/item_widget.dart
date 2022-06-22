@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/favorite_listing_controller.dart';
-import 'package:realestapp/Controllers/listings_controller.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
-
 import '../AddListings/listing_details.dart';
 import '../Controllers/listing_detail_controller.dart';
 import '../Models/all_listing_model.dart';
 import '../Utils/color_scheme.dart';
 
-itemWidget(context,Datum listing) {
+itemWidget(context, Datum listing) {
   final reviewController = Get.put(ReviewController());
   final listingDetailsController = Get.put(ListingDetailsController());
   final favoriteListingController = Get.put(FavoriteListingController());
   return GestureDetector(
-    onLongPress: (){
+    onLongPress: () {
       favoriteListingController.addToFavorites(listing.listingId);
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Added to Favorites')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Added to Favorites')));
     },
     onTap: () async {
       try {
         listingDetailsController.getListingById(listing.listingId);
         await reviewController.fetchReviews(listing.listingId);
       } finally {
-        Get.to(const ListingDetails());
+        Get.to(ListingDetails());
       }
     },
     child: Padding(

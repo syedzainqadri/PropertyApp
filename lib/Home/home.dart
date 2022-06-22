@@ -53,10 +53,10 @@ class _HomeState extends State<Home> {
                 style: const TextStyle(color: lightGreen),
               ),
               leading: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
                 child: GestureDetector(
-                  onTap: () {
-                    membershipController.getMembershipPlans();
+                  onTap: () async {
+                    await membershipController.getMembershipPlans();
                     Get.to(const Profile());
                   },
                   child: GetX<UserController>(
@@ -90,21 +90,15 @@ class _HomeState extends State<Home> {
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.add,
-                            color: lightGreen,
+                          child: CircleAvatar(
+                            backgroundColor: lightGreen,
+                            radius: 30,
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.map,
-                          color: lightGreen,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10,
                       ),
                     ]
                   : [],

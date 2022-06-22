@@ -12,7 +12,17 @@ import '../Models/review_model.dart';
 import '../Utils/color_scheme.dart';
 
 class ListingDetails extends StatefulWidget {
-  const ListingDetails({
+  var title;
+  var id;
+  var price;
+  List<Widget>? images;
+  var description;
+  ListingDetails({
+    this.description,
+    this.id,
+    this.price,
+    this.title,
+    this.images,
     Key? key,
   }) : super(key: key);
 
@@ -31,20 +41,20 @@ class _ListingDetailsState extends State<ListingDetails> {
   // );
   List<Widget> images = [];
   // final ReviewController reviewController = Get.put(ReviewController());
-  @override
-  void initState() {
-    for (int i = 0;
-        i < listingDetailsController.listingDetail.value.listing.images.length;
-        i++) {
-      images.add(Image.network(
-        Get.find<ListingDetailsController>().listingDetail.value.listing
-          ..images[i].url,
-        fit: BoxFit.cover,
-      ));
-    }
-    //getReviews();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   for (int i = 0;
+  //       i < listingDetailsController.listingDetail.value.listing.images.length;
+  //       i++) {
+  //     images.add(Image.network(
+  //       Get.find<ListingDetailsController>().listingDetail.value.listing
+  //         ..images[i].url,
+  //       fit: BoxFit.cover,
+  //     ));
+  //   }
+  //   //getReviews();
+  //   super.initState();
+  // }
 
   // getReviews() async {
   //   Get.find<ReviewController>().updateReview(
@@ -59,7 +69,7 @@ class _ListingDetailsState extends State<ListingDetails> {
         elevation: 0.0,
         centerTitle: true,
         title: Text(
-          listingDetailsController.listingDetail.value.listing.title,
+          widget.title,
           style: const TextStyle(color: lightGreen),
         ),
         leading: GestureDetector(
@@ -76,12 +86,7 @@ class _ListingDetailsState extends State<ListingDetails> {
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {
-                Get.to(ChatUi(
-                  listingId: listingDetailsController
-                      .listingDetail.value.listing.listingId,
-                  title: listingDetailsController
-                      .listingDetail.value.listing.title,
-                ));
+                Get.to(ChatUi(listingId: widget.id, title: widget.title));
               },
               icon: const Icon(
                 Icons.chat_sharp,
@@ -105,7 +110,7 @@ class _ListingDetailsState extends State<ListingDetails> {
               initialPage: 0,
               indicatorColor: lightGreen,
               indicatorBackgroundColor: mediumGrey,
-              children: images,
+              children: widget.images!,
               autoPlayInterval: 3000,
               isLoop: true,
             ),
@@ -119,15 +124,14 @@ class _ListingDetailsState extends State<ListingDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        listingDetailsController
-                            .listingDetail.value.listing.title,
+                        widget.title,
                         style: const TextStyle(
                           color: darkGrey,
                           fontSize: 18,
                         ),
                       ),
                       Text(
-                        '\$${listingDetailsController.listingDetail.value.listing.price}',
+                        '\$${widget.price}',
                         style: const TextStyle(
                           color: darkGrey,
                           fontSize: 18,

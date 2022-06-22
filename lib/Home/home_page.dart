@@ -29,24 +29,24 @@ class _HomePageState extends State<HomePage> {
     final listingController = Get.find<ListingController>();
     final categoriesController = Get.find<CategoriesController>();
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
+      child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Categories',
+                  'All Categories',
                   style: TextStyle(
                     color: darkGrey,
-                    fontSize: 22,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),
@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.greenAccent,
                           )
                         : SizedBox(
-                            height: 120,
+                            height: 140,
                             width: double.infinity,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
@@ -75,14 +75,14 @@ class _HomePageState extends State<HomePage> {
                           ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
                 const Text(
                   'Top Listings',
                   style: TextStyle(
                     color: darkGrey,
-                    fontSize: 22,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -91,42 +91,43 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-          ),
-          Obx(
-            () => listingController.allListings.value.data == null
-                ? const CircularProgressIndicator(
-                    color: Colors.greenAccent,
-                  )
-                : GridView.builder(
-                    physics: const ScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: listingController.allListings.value.data?.length,
-                    itemBuilder: (context, index) {
-                      return ListingCard(
-                        image: listingController
-                            .allListings.value.data?[index].images,
-                        title: listingController
-                            .allListings.value.data?[index].title
-                            .toString(),
-                        city: listingController.allListings.value.data?[index]
-                            .contact!.locations![0].name
-                            .toString(),
-                        price: listingController
-                            .allListings.value.data?[index].price
-                            .toString(),
-                        isFovorite: true,
-                        description: 'This is description',
-                        listingId: listingController
-                            .allListings.value.data?[index].listingId,
-                      );
-                    },
-                  ),
-          ),
-        ],
+            Obx(
+              () => listingController.allListings.value.data == null
+                  ? const CircularProgressIndicator(
+                      color: Colors.greenAccent,
+                    )
+                  : GridView.builder(
+                      physics: const ScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount:
+                          listingController.allListings.value.data?.length,
+                      itemBuilder: (context, index) {
+                        return ListingCard(
+                          image: listingController
+                              .allListings.value.data?[index].images,
+                          title: listingController
+                              .allListings.value.data?[index].title
+                              .toString(),
+                          city: listingController.allListings.value.data?[index]
+                              .contact!.locations![0].name
+                              .toString(),
+                          price: listingController
+                              .allListings.value.data?[index].price
+                              .toString(),
+                          isFovorite: true,
+                          description: 'This is description',
+                          listingId: listingController
+                              .allListings.value.data?[index].listingId,
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }
