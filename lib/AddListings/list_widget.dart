@@ -38,18 +38,14 @@ class ListingCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onLongPress: () {
-          favoriteListingController.addToFavorites(listingId);
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Added to Favorites')));
-        },
         onTap: () async {
           try {
-            await listingDetailsController.getListingById(listingId);
-            await reviewController.fetchReviews(listingId);
+            // await listingDetailsController.getListingById(listingId);
+            // await reviewController.fetchReviews(listingId);
           } finally {
-            Get.to(const ListingDetails());
+            // Get.to(ListingDetails(listingId: listingId.toString()));
           }
+          Get.to(ListingDetails(listingId: listingId.toString()));
         },
         child: Card(
           child: Column(
@@ -58,7 +54,7 @@ class ListingCard extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 100,
+                    height: 90,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.cover,
@@ -66,21 +62,26 @@ class ListingCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  isFovorite
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Icon(
-                                Icons.favorite,
-                                size: 25,
-                                color: lightGreen,
-                              ),
+                  Positioned(
+                    top: -11,
+                    right: -6,
+                    child: isFovorite
+                        ? IconButton(
+                            onPressed: () {
+                              favoriteListingController
+                                  .addToFavorites(listingId);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Added to Favorites')));
+                            },
+                            icon: const Icon(
+                              Icons.favorite,
+                              size: 26,
+                              color: lightGreen,
                             ),
-                          ],
-                        )
-                      : const Offstage(),
+                          )
+                        : const Offstage(),
+                  ),
                 ],
               ),
               Padding(
@@ -93,7 +94,7 @@ class ListingCard extends StatelessWidget {
                       title,
                       style: const TextStyle(
                         color: darkGrey,
-                        fontSize: 18,
+                        fontSize: 16,
                       ),
                     ),
                     const SizedBox(
@@ -103,7 +104,7 @@ class ListingCard extends StatelessWidget {
                       city,
                       style: const TextStyle(
                         color: mediumDarkGrey,
-                        fontSize: 16,
+                        fontSize: 14,
                       ),
                     ),
                   ],

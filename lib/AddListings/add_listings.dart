@@ -145,19 +145,19 @@ class _AddListingState extends State<AddListing> {
                 'Listing Type',
                 style: TextStyle(color: darkGrey, fontSize: 20),
               ),
-              ChipsChoice<ListingTypes>.single(
-                choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                wrapped: true,
-                value: listingType,
-                choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
-                  source: listingTypeController.listingTypes.value,
-                  value: (i, v) => v,
-                  label: (i, v) => v.name,
-                ),
-                onChanged: (val) {
-                  setState(() => listingType = val);
-                },
-              ),
+              // ChipsChoice<ListingTypes>.single(
+              //   choiceStyle: const C2ChoiceStyle(color: lightGreen),
+              //   wrapped: true,
+              //   value: listingType,
+              //   choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
+              //     source: listingTypeController.listingTypes.value,
+              //     value: (i, v) => v,
+              //     label: (i, v) => v.name,
+              //   ),
+              //   onChanged: (val) {
+              //     setState(() => listingType = val);
+              //   },
+              // ),
               const SizedBox(
                 height: 10,
               ),
@@ -165,439 +165,439 @@ class _AddListingState extends State<AddListing> {
                 'Category',
                 style: TextStyle(color: darkGrey, fontSize: 20),
               ),
-              ChipsChoice<CategoriesModel>.single(
-                choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                wrapped: true,
-                value: category,
-                choiceItems:
-                    C2Choice.listFrom<CategoriesModel, CategoriesModel>(
-                  source: categoriesController.categories.value,
-                  value: (i, v) => v,
-                  label: (i, v) => v.name,
-                ),
-                onChanged: (val) async {
-                  await categoriesController.getSubCategories(val.termId);
-                  setState(() {
-                    categorySelected = true;
-                    category = val;
-                    pricingTypes = PricType();
-                    pricingTypes.id = '';
-                    pricingTypes.name = '';
-                  });
-                },
-              ),
+              // ChipsChoice<CategoriesModel>.single(
+              //   choiceStyle: const C2ChoiceStyle(color: lightGreen),
+              //   wrapped: true,
+              //   value: category,
+              //   choiceItems:
+              //       C2Choice.listFrom<CategoriesModel, CategoriesModel>(
+              //     source: categoriesController.categories.value,
+              //     value: (i, v) => v,
+              //     label: (i, v) => v.name,
+              //   ),
+              //   onChanged: (val) async {
+              //     await categoriesController.getSubCategories(val.termId);
+              //     setState(() {
+              //       categorySelected = true;
+              //       category = val;
+              //       pricingTypes = PricType();
+              //       pricingTypes.id = '';
+              //       pricingTypes.name = '';
+              //     });
+              //   },
+              // ),
               const SizedBox(
                 height: 10,
               ),
-              categorySelected
-                  ? ChipsChoice<LocationsModel>.single(
-                      choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                      wrapped: true,
-                      value: subCategory,
-                      choiceItems:
-                          C2Choice.listFrom<LocationsModel, LocationsModel>(
-                        source: categoriesController.subCategories.value,
-                        value: (i, v) => v,
-                        label: (i, v) => v.name,
-                      ),
-                      onChanged: (val) async {
-                        await listingConfigController
-                            .getConfiguration(val.termId);
-                        setState(() {
-                          subCategorySelected = true;
-                          subCategory = val;
-                        });
-                      },
-                    )
-                  : const Offstage(),
+              // categorySelected
+              //     ? ChipsChoice<LocationsModel>.single(
+              //         choiceStyle: const C2ChoiceStyle(color: lightGreen),
+              //         wrapped: true,
+              //         value: subCategory,
+              //         choiceItems:
+              //             C2Choice.listFrom<LocationsModel, LocationsModel>(
+              //           source: categoriesController.subCategories.value,
+              //           value: (i, v) => v,
+              //           label: (i, v) => v.name,
+              //         ),
+              //         onChanged: (val) async {
+              //           await listingConfigController
+              //               .getConfiguration(val.termId);
+              //           setState(() {
+              //             subCategorySelected = true;
+              //             subCategory = val;
+              //           });
+              //         },
+              //       )
+              //     : const Offstage(),
               const SizedBox(
                 height: 10,
               ),
-              subCategorySelected
-                  ? Obx(() {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Pricing Type',
-                            style: TextStyle(color: darkGrey, fontSize: 20),
-                          ),
-                          ChipsChoice<PricType>.single(
-                            choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                            wrapped: true,
-                            value: pricingTypes,
-                            choiceItems: C2Choice.listFrom<PricType, PricType>(
-                              source: listingConfigController
-                                  .listingConfig.value.config.pricingTypes,
-                              value: (i, v) => v,
-                              label: (i, v) => v.name,
-                            ),
-                            onChanged: (val) {
-                              setState(() => pricingTypes = val);
-                            },
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          pricingTypes.id == ''
-                              ? const Offstage()
-                              : pricingTypes.id == 'price'
-                                  ? textField('Price', false, priceController)
-                                  : pricingTypes.id == 'range'
-                                      ? Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2.5,
-                                              child: textField('Start', false,
-                                                  priceStartController),
-                                            ),
-                                            const Text('To'),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2.5,
-                                              child: textField('End', false,
-                                                  priceEndController),
-                                            ),
-                                          ],
-                                        )
-                                      : const Offstage(),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          const Text(
-                            'Price Type',
-                            style: TextStyle(color: darkGrey, fontSize: 20),
-                          ),
-                          RadioGroup<PricType>.builder(
-                            activeColor: lightGreen,
-                            direction: Axis.horizontal,
-                            groupValue: priceTypes,
-                            onChanged: (value) => setState(() {
-                              print(listingConfigController.listingConfig.value
-                                  .customFields[0].options.choices[0].name);
-                              priceTypes = value;
-                            }),
-                            items: listingConfigController
-                                .listingConfig.value.config.priceTypes,
-                            itemBuilder: (item) => RadioButtonBuilder(
-                              item.name,
-                            ),
-                          ),
-                          ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: listingConfigController
-                                  .listingConfig.value.customFields.length,
-                              itemBuilder: ((context, index) {
-                                return listingConfigController.listingConfig
-                                            .value.customFields[index].type ==
-                                        'checkbox'
-                                    ? Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            listingConfigController
-                                                .listingConfig
-                                                .value
-                                                .customFields[index]
-                                                .label,
-                                            style: const TextStyle(
-                                                color: darkGrey, fontSize: 20),
-                                          ),
-                                          ListView.builder(
-                                            shrinkWrap: true,
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            itemCount: listingConfigController
-                                                .listingConfig
-                                                .value
-                                                .customFields[index]
-                                                .options
-                                                .choices
-                                                .length,
-                                            itemBuilder: (context, position) {
-                                              amenities.add(false);
-                                              return Row(
-                                                children: [
-                                                  const SizedBox(width: 10),
-                                                  Checkbox(
-                                                    value: amenities[position],
-                                                    onChanged: (bool? value) {
-                                                      setState(() {
-                                                        amenities[position] =
-                                                            !amenities[
-                                                                position];
-                                                        if (value!) {
-                                                          myAmenities.add(
-                                                             "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}");
-                                                        }
-                                                      });
-                                                    },
-                                                    checkColor: white,
-                                                    activeColor: lightGreen,
-                                                  ),
-                                                  Text(
-                                                    "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
-                                                    style: const TextStyle(
-                                                        fontSize: 17.0),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      )
-                                    : listingConfigController
-                                                .listingConfig
-                                                .value
-                                                .customFields[index]
-                                                .type ==
-                                            'radio'
-                                        ? Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                height: 20,
-                                              ),
-                                              Text(
-                                                listingConfigController
-                                                    .listingConfig
-                                                    .value
-                                                    .customFields[index]
-                                                    .label,
-                                                style: const TextStyle(
-                                                    color: darkGrey,
-                                                    fontSize: 20),
-                                              ),
-                                              ChipsChoice<Choice>.single(
-                                                choiceStyle:
-                                                    const C2ChoiceStyle(
-                                                        color: lightGreen),
-                                                wrapped: true,
-                                                value: selectedFields[index]
-                                                    .choice,
-                                                choiceItems: C2Choice.listFrom<
-                                                    Choice, Choice>(
-                                                  source:
-                                                      listingConfigController
-                                                          .listingConfig
-                                                          .value
-                                                          .customFields[index]
-                                                          .options
-                                                          .choices,
-                                                  value: (i, v) => v,
-                                                  label: (i, v) => v.name,
-                                                ),
-                                                onChanged: (val) {
-                                                  setState(() {
-                                                    customField = val;
-                                                    selectedFields.insert(
-                                                        index,
-                                                        SelectedFieldsModel(
-                                                            listingConfigController
-                                                                .listingConfig
-                                                                .value
-                                                                .customFields[
-                                                                    index]
-                                                                .id,
-                                                            val));
-                                                  });
-                                                },
-                                              ),
-                                            ],
-                                          )
-                                        : listingConfigController
-                                                    .listingConfig
-                                                    .value
-                                                    .customFields[index]
-                                                    .type ==
-                                                'select'
-                                            ? Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  const SizedBox(
-                                                    height: 20,
-                                                  ),
-                                                  Text(
-                                                    listingConfigController
-                                                        .listingConfig
-                                                        .value
-                                                        .customFields[index]
-                                                        .label,
-                                                    style: const TextStyle(
-                                                        color: darkGrey,
-                                                        fontSize: 20),
-                                                  ),
-                                                  ChipsChoice<Choice>.single(
-                                                    choiceStyle:
-                                                        const C2ChoiceStyle(
-                                                            color: lightGreen),
-                                                    wrapped: true,
-                                                    value: selectedFields[index]
-                                                        .choice,
-                                                    choiceItems:
-                                                        C2Choice.listFrom<
-                                                            Choice, Choice>(
-                                                      source:
-                                                          listingConfigController
-                                                              .listingConfig
-                                                              .value
-                                                              .customFields[
-                                                                  index]
-                                                              .options
-                                                              .choices,
-                                                      value: (i, v) => v,
-                                                      label: (i, v) => v.name,
-                                                    ),
-                                                    onChanged: (val) {
-                                                      setState(() {
-                                                        customField = val;
-                                                        selectedFields.insert(
-                                                            index,
-                                                            SelectedFieldsModel(
-                                                                listingConfigController
-                                                                    .listingConfig
-                                                                    .value
-                                                                    .customFields[
-                                                                        index]
-                                                                    .id,
-                                                                val));
-                                                      });
-                                                    },
-                                                  ),
-                                                ],
-                                              )
-                                            : const Offstage();
-                              })),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Title',
-                            style: TextStyle(color: darkGrey, fontSize: 20),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          textField('Title', false, titleController),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Description',
-                            style: TextStyle(color: darkGrey, fontSize: 20),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextField(
-                            controller: descriptionController,
-                            obscureText: false,
-                            cursorColor: lightGreen,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: const BorderSide(
-                                    color: mediumGrey,
-                                    style: BorderStyle.solid,
-                                    width: 1),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: const BorderSide(
-                                    color: lightGreen,
-                                    style: BorderStyle.solid,
-                                    width: 1),
-                              ),
-                              fillColor: white,
-                              hintText: 'Description',
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Add Photos',
-                            style: TextStyle(
-                              color: darkGrey,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () async {
-                                    await _getFromGallery();
-                                  },
-                                  child: Container(
-                                    width: 100,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      color: lightGreen,
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(18),
-                                    ),
-                                    child: const Icon(
-                                      Icons.camera_alt,
-                                      size: 40,
-                                      color: white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                SizedBox(
-                                  width: 200,
-                                  height: 100,
-                                  child: ListView.builder(
-                                      physics: const ScrollPhysics(),
-                                      shrinkWrap: true,
-                                      primary: false,
-                                      reverse: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: imageFiles?.length,
-                                      itemBuilder: (context, index) {
-                                        return imageContainer(
-                                            File(imageFiles![index].path));
-                                      }),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    })
-                  : const Offstage(),
+              // subCategorySelected
+              //     ? Obx(() {
+              //         return Column(
+              //           mainAxisAlignment: MainAxisAlignment.start,
+              //           crossAxisAlignment: CrossAxisAlignment.start,
+              //           children: [
+              //             const Text(
+              //               'Pricing Type',
+              //               style: TextStyle(color: darkGrey, fontSize: 20),
+              //             ),
+              //             ChipsChoice<PricType>.single(
+              //               choiceStyle: const C2ChoiceStyle(color: lightGreen),
+              //               wrapped: true,
+              //               value: pricingTypes,
+              //               choiceItems: C2Choice.listFrom<PricType, PricType>(
+              //                 source: listingConfigController
+              //                     .listingConfig.value.config.pricingTypes,
+              //                 value: (i, v) => v,
+              //                 label: (i, v) => v.name,
+              //               ),
+              //               onChanged: (val) {
+              //                 setState(() => pricingTypes = val);
+              //               },
+              //             ),
+              //             const SizedBox(
+              //               height: 15,
+              //             ),
+              //             pricingTypes.id == ''
+              //                 ? const Offstage()
+              //                 : pricingTypes.id == 'price'
+              //                     ? textField('Price', false, priceController)
+              //                     : pricingTypes.id == 'range'
+              //                         ? Row(
+              //                             mainAxisAlignment:
+              //                                 MainAxisAlignment.spaceEvenly,
+              //                             children: [
+              //                               SizedBox(
+              //                                 width: MediaQuery.of(context)
+              //                                         .size
+              //                                         .width /
+              //                                     2.5,
+              //                                 child: textField('Start', false,
+              //                                     priceStartController),
+              //                               ),
+              //                               const Text('To'),
+              //                               SizedBox(
+              //                                 width: MediaQuery.of(context)
+              //                                         .size
+              //                                         .width /
+              //                                     2.5,
+              //                                 child: textField('End', false,
+              //                                     priceEndController),
+              //                               ),
+              //                             ],
+              //                           )
+              //                         : const Offstage(),
+              //             const SizedBox(
+              //               height: 15,
+              //             ),
+              //             const SizedBox(
+              //               height: 15,
+              //             ),
+              //             const Text(
+              //               'Price Type',
+              //               style: TextStyle(color: darkGrey, fontSize: 20),
+              //             ),
+              //             RadioGroup<PricType>.builder(
+              //               activeColor: lightGreen,
+              //               direction: Axis.horizontal,
+              //               groupValue: priceTypes,
+              //               onChanged: (value) => setState(() {
+              //                 print(listingConfigController.listingConfig.value
+              //                     .customFields[0].options.choices[0].name);
+              //                 priceTypes = value;
+              //               }),
+              //               items: listingConfigController
+              //                   .listingConfig.value.config.priceTypes,
+              //               itemBuilder: (item) => RadioButtonBuilder(
+              //                 item.name,
+              //               ),
+              //             ),
+              //             ListView.builder(
+              //                 shrinkWrap: true,
+              //                 physics: const NeverScrollableScrollPhysics(),
+              //                 itemCount: listingConfigController
+              //                     .listingConfig.value.customFields.length,
+              //                 itemBuilder: ((context, index) {
+              //                   return listingConfigController.listingConfig
+              //                               .value.customFields[index].type ==
+              //                           'checkbox'
+              //                       ? Column(
+              //                           mainAxisAlignment:
+              //                               MainAxisAlignment.start,
+              //                           crossAxisAlignment:
+              //                               CrossAxisAlignment.start,
+              //                           children: [
+              //                             const SizedBox(
+              //                               height: 20,
+              //                             ),
+              //                             Text(
+              //                               listingConfigController
+              //                                   .listingConfig
+              //                                   .value
+              //                                   .customFields[index]
+              //                                   .label,
+              //                               style: const TextStyle(
+              //                                   color: darkGrey, fontSize: 20),
+              //                             ),
+              //                             ListView.builder(
+              //                               shrinkWrap: true,
+              //                               physics:
+              //                                   const NeverScrollableScrollPhysics(),
+              //                               itemCount: listingConfigController
+              //                                   .listingConfig
+              //                                   .value
+              //                                   .customFields[index]
+              //                                   .options
+              //                                   .choices
+              //                                   .length,
+              //                               itemBuilder: (context, position) {
+              //                                 amenities.add(false);
+              //                                 return Row(
+              //                                   children: [
+              //                                     const SizedBox(width: 10),
+              //                                     Checkbox(
+              //                                       value: amenities[position],
+              //                                       onChanged: (bool? value) {
+              //                                         setState(() {
+              //                                           amenities[position] =
+              //                                               !amenities[
+              //                                                   position];
+              //                                           if (value!) {
+              //                                             myAmenities.add(
+              //                                                "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}");
+              //                                           }
+              //                                         });
+              //                                       },
+              //                                       checkColor: white,
+              //                                       activeColor: lightGreen,
+              //                                     ),
+              //                                     Text(
+              //                                       "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
+              //                                       style: const TextStyle(
+              //                                           fontSize: 17.0),
+              //                                     ),
+              //                                   ],
+              //                                 );
+              //                               },
+              //                             ),
+              //                           ],
+              //                         )
+              //                       : listingConfigController
+              //                                   .listingConfig
+              //                                   .value
+              //                                   .customFields[index]
+              //                                   .type ==
+              //                               'radio'
+              //                           ? Column(
+              //                               mainAxisAlignment:
+              //                                   MainAxisAlignment.start,
+              //                               crossAxisAlignment:
+              //                                   CrossAxisAlignment.start,
+              //                               children: [
+              //                                 const SizedBox(
+              //                                   height: 20,
+              //                                 ),
+              //                                 Text(
+              //                                   listingConfigController
+              //                                       .listingConfig
+              //                                       .value
+              //                                       .customFields[index]
+              //                                       .label,
+              //                                   style: const TextStyle(
+              //                                       color: darkGrey,
+              //                                       fontSize: 20),
+              //                                 ),
+              //                                 ChipsChoice<Choice>.single(
+              //                                   choiceStyle:
+              //                                       const C2ChoiceStyle(
+              //                                           color: lightGreen),
+              //                                   wrapped: true,
+              //                                   value: selectedFields[index]
+              //                                       .choice,
+              //                                   choiceItems: C2Choice.listFrom<
+              //                                       Choice, Choice>(
+              //                                     source:
+              //                                         listingConfigController
+              //                                             .listingConfig
+              //                                             .value
+              //                                             .customFields[index]
+              //                                             .options
+              //                                             .choices,
+              //                                     value: (i, v) => v,
+              //                                     label: (i, v) => v.name,
+              //                                   ),
+              //                                   onChanged: (val) {
+              //                                     setState(() {
+              //                                       customField = val;
+              //                                       selectedFields.insert(
+              //                                           index,
+              //                                           SelectedFieldsModel(
+              //                                               listingConfigController
+              //                                                   .listingConfig
+              //                                                   .value
+              //                                                   .customFields[
+              //                                                       index]
+              //                                                   .id,
+              //                                               val));
+              //                                     });
+              //                                   },
+              //                                 ),
+              //                               ],
+              //                             )
+              //                           : listingConfigController
+              //                                       .listingConfig
+              //                                       .value
+              //                                       .customFields[index]
+              //                                       .type ==
+              //                                   'select'
+              //                               ? Column(
+              //                                   mainAxisAlignment:
+              //                                       MainAxisAlignment.start,
+              //                                   crossAxisAlignment:
+              //                                       CrossAxisAlignment.start,
+              //                                   children: [
+              //                                     const SizedBox(
+              //                                       height: 20,
+              //                                     ),
+              //                                     Text(
+              //                                       listingConfigController
+              //                                           .listingConfig
+              //                                           .value
+              //                                           .customFields[index]
+              //                                           .label,
+              //                                       style: const TextStyle(
+              //                                           color: darkGrey,
+              //                                           fontSize: 20),
+              //                                     ),
+              //                                     ChipsChoice<Choice>.single(
+              //                                       choiceStyle:
+              //                                           const C2ChoiceStyle(
+              //                                               color: lightGreen),
+              //                                       wrapped: true,
+              //                                       value: selectedFields[index]
+              //                                           .choice,
+              //                                       choiceItems:
+              //                                           C2Choice.listFrom<
+              //                                               Choice, Choice>(
+              //                                         source:
+              //                                             listingConfigController
+              //                                                 .listingConfig
+              //                                                 .value
+              //                                                 .customFields[
+              //                                                     index]
+              //                                                 .options
+              //                                                 .choices,
+              //                                         value: (i, v) => v,
+              //                                         label: (i, v) => v.name,
+              //                                       ),
+              //                                       onChanged: (val) {
+              //                                         setState(() {
+              //                                           customField = val;
+              //                                           selectedFields.insert(
+              //                                               index,
+              //                                               SelectedFieldsModel(
+              //                                                   listingConfigController
+              //                                                       .listingConfig
+              //                                                       .value
+              //                                                       .customFields[
+              //                                                           index]
+              //                                                       .id,
+              //                                                   val));
+              //                                         });
+              //                                       },
+              //                                     ),
+              //                                   ],
+              //                                 )
+              //                               : const Offstage();
+              //                 })),
+              //             const SizedBox(
+              //               height: 10,
+              //             ),
+              //             const Text(
+              //               'Title',
+              //               style: TextStyle(color: darkGrey, fontSize: 20),
+              //             ),
+              //             const SizedBox(
+              //               height: 10,
+              //             ),
+              //             textField('Title', false, titleController),
+              //             const SizedBox(
+              //               height: 10,
+              //             ),
+              //             const Text(
+              //               'Description',
+              //               style: TextStyle(color: darkGrey, fontSize: 20),
+              //             ),
+              //             const SizedBox(
+              //               height: 10,
+              //             ),
+              //             TextField(
+              //               controller: descriptionController,
+              //               obscureText: false,
+              //               cursorColor: lightGreen,
+              //               decoration: InputDecoration(
+              //                 enabledBorder: OutlineInputBorder(
+              //                   borderRadius: BorderRadius.circular(30),
+              //                   borderSide: const BorderSide(
+              //                       color: mediumGrey,
+              //                       style: BorderStyle.solid,
+              //                       width: 1),
+              //                 ),
+              //                 focusedBorder: OutlineInputBorder(
+              //                   borderRadius: BorderRadius.circular(30),
+              //                   borderSide: const BorderSide(
+              //                       color: lightGreen,
+              //                       style: BorderStyle.solid,
+              //                       width: 1),
+              //                 ),
+              //                 fillColor: white,
+              //                 hintText: 'Description',
+              //               ),
+              //             ),
+              //             const SizedBox(
+              //               height: 10,
+              //             ),
+              //             const Text(
+              //               'Add Photos',
+              //               style: TextStyle(
+              //                 color: darkGrey,
+              //                 fontSize: 20,
+              //                 fontWeight: FontWeight.w400,
+              //               ),
+              //             ),
+              //             const SizedBox(
+              //               height: 12,
+              //             ),
+              //             SingleChildScrollView(
+              //               scrollDirection: Axis.horizontal,
+              //               child: Row(
+              //                 children: [
+              //                   GestureDetector(
+              //                     onTap: () async {
+              //                       await _getFromGallery();
+              //                     },
+              //                     child: Container(
+              //                       width: 100,
+              //                       height: 100,
+              //                       decoration: BoxDecoration(
+              //                         color: lightGreen,
+              //                         shape: BoxShape.rectangle,
+              //                         borderRadius: BorderRadius.circular(18),
+              //                       ),
+              //                       child: const Icon(
+              //                         Icons.camera_alt,
+              //                         size: 40,
+              //                         color: white,
+              //                       ),
+              //                     ),
+              //                   ),
+              //                   const SizedBox(
+              //                     width: 10,
+              //                   ),
+              //                   SizedBox(
+              //                     width: 200,
+              //                     height: 100,
+              //                     child: ListView.builder(
+              //                         physics: const ScrollPhysics(),
+              //                         shrinkWrap: true,
+              //                         primary: false,
+              //                         reverse: true,
+              //                         scrollDirection: Axis.horizontal,
+              //                         itemCount: imageFiles?.length,
+              //                         itemBuilder: (context, index) {
+              //                           return imageContainer(
+              //                               File(imageFiles![index].path));
+              //                         }),
+              //                   ),
+              //                 ],
+              //               ),
+              //             ),
+              //           ],
+              //         );
+              //       })
+              //     : const Offstage(),
             ],
           ),
         ),

@@ -5,8 +5,10 @@ import '../Models/listing_detail_model.dart';
 
 class ListingDetailsController extends GetxController {
   var listingDetail = ListingDetail().obs;
+  var isLoading = false.obs;
 
   getListingById(listingId) async {
+    isLoading.value = true;
     var response = await http.get(
       Uri.parse('https://lagosabuja.com/wp-json/rtcl/v1/listings/$listingId'),
       headers: <String, String>{
@@ -16,5 +18,6 @@ class ListingDetailsController extends GetxController {
     );
     print(response.body);
     listingDetail.value = listingDetailFromJson(response.body);
+    isLoading.value = false;
   }
 }
