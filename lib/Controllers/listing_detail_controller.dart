@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Models/listing_detail_model.dart';
 
 class ListingDetailsController extends GetxController {
-  var listingDetail = ListingDetail().obs;
+  var listingDetail = ListingsByIdModel().obs;
 
   getListingById(listingId) async {
     var response = await http.get(
@@ -15,6 +15,6 @@ class ListingDetailsController extends GetxController {
       },
     );
     print(response.body);
-    listingDetail.value = listingDetailFromJson(response.body);
+    listingDetail.value = listingsIdFromJson(response.body);
   }
 }
