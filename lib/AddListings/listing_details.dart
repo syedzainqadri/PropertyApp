@@ -40,6 +40,7 @@ class _ListingDetailsState extends State<ListingDetails> {
   //   zoom: 14.4746,
   // );
   List<Widget> images = [];
+  var listingModel = ListingDetails().obs;
   // final ReviewController reviewController = Get.put(ReviewController());
   // @override
   void initState() {
@@ -57,6 +58,12 @@ class _ListingDetailsState extends State<ListingDetails> {
     super.initState();
   }
 
+  getListingData() async {
+    listingModel.value =
+        await listingDetailsController.getListingById(widget.id);
+    Future.delayed(Duration(seconds: 2)).then((value) => setState((() {})));
+  }
+
   // getReviews() async {
   //   Get.find<ReviewController>().updateReview(
   //       await Get.find<ReviewController>().getReviews(widget.listingId));
@@ -64,6 +71,7 @@ class _ListingDetailsState extends State<ListingDetails> {
 
   @override
   Widget build(BuildContext context) {
+    var listing = Get.find<ListingDetailsController>().listingDetail.value;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: transparent,
