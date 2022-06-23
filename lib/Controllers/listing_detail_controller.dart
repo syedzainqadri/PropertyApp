@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Models/listing_detail_model.dart';
 
 class ListingDetailsController extends GetxController {
+  
   var listingDetail = ListingsByIdModel().obs;
 
   getListingById(listingId) async {
@@ -17,4 +18,5 @@ class ListingDetailsController extends GetxController {
     print(response.body);
     listingDetail.value = listingsIdFromJson(response.body);
   }
+
 }

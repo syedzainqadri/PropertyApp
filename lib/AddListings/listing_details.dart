@@ -31,43 +31,12 @@ class ListingDetails extends StatefulWidget {
 }
 
 class _ListingDetailsState extends State<ListingDetails> {
-  final Completer<GoogleMapController> _controller = Completer();
-  ListingDetailsController listingDetailsController =
-      Get.put(ListingDetailsController());
-
-  // CameraPosition listingLocation = const CameraPosition(
-  //   target: LatLng( listingDetailsController.listingDetail.value., -122.085749655962),
-  //   zoom: 14.4746,
-  // );
-  List<Widget> images = [];
-  var listingModel = ListingDetails().obs;
-  // final ReviewController reviewController = Get.put(ReviewController());
-  // @override
+  @override
   void initState() {
-    images = widget.images!.toList();
-    // for (int i = 0;
-    //     i < listingDetailsController.listingDetail.value.listing.images.length;
-    //     i++) {
-    //   images.add(Image.network(
-    //     Get.find<ListingDetailsController>().listingDetail.value.listing
-    //       ..images[i].url,
-    //     fit: BoxFit.cover,
-    //   ));
-    // }
-    //getReviews();
     super.initState();
   }
 
-  getListingData() async {
-    listingModel.value =
-        await listingDetailsController.getListingById(widget.id);
-    Future.delayed(Duration(seconds: 2)).then((value) => setState((() {})));
-  }
-
-  // getReviews() async {
-  //   Get.find<ReviewController>().updateReview(
-  //       await Get.find<ReviewController>().getReviews(widget.listingId));
-  //}
+  final listingDetailsController = Get.put(ListingDetailsController());
 
   @override
   Widget build(BuildContext context) {
@@ -110,153 +79,202 @@ class _ListingDetailsState extends State<ListingDetails> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ImageSlideshow(
-              width: double.infinity,
-              height: 200,
-              initialPage: 0,
-              indicatorColor: lightGreen,
-              indicatorBackgroundColor: mediumGrey,
-              children: images,
-              autoPlayInterval: 3000,
-              isLoop: true,
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                    itemCount:
+                listingDetailsController.listingDetail.value.images.length,
+                    itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Container(
+                  width: double.infinity,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(listingDetailsController
+                          .listingDetail.value.images[index].url),
+                    ),
+                  ),
+                ),
+              );
+                    },
+                  ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(22.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        widget.title,
-                        style: const TextStyle(
-                          color: darkGrey,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Text(
-                        '\$${widget.price}',
-                        style: const TextStyle(
-                          color: darkGrey,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ],
+            Text('${listingDetailsController.listingDetail.value.title}'),
+            Text('${listingDetailsController.listingDetail.value.price}'),
+            Text('${listingDetailsController.listingDetail.value.description}'),
+            Text('${listingDetailsController.listingDetail.value.title}'),
+             Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                    itemCount:
+               listingDetailsController.listingDetail.value.customFields.length,
+                    itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text('${listingDetailsController.listingDetail.value.customFields[index].options.choices.name}'),
+              );
+                    },
                   ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    widget.description,
-                    style: const TextStyle(
-                      color: mediumGrey,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const Text(
-                    'Location',
-                    style: TextStyle(
-                      color: darkGrey,
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
-              ),
             ),
-            // SizedBox(
-            //   width: double.infinity,
-            //   height: 300,
-            //   child: GoogleMap(
-            //     mapType: MapType.hybrid,
-            //     initialCameraPosition: CameraPosition(
-            //       target: LatLng(
-            //           double.parse(listingDetailsController
-            //               .listingDetail.value.listing.contact.latitude
-            //               .toString()),
-            //           double.parse(listingDetailsController
-            //               .listingDetail.value.listing.contact.longitude
-            //               .toString())),
-            //       zoom: 14.4746,
-            //     ),
-            //     onMapCreated: (GoogleMapController controller) {
-            //       _controller.complete(controller);
-            //     },
-            //   ),
-            // ),
-            Padding(
-              padding: const EdgeInsets.only(left: 22.0, right: 22.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    'Extra Info',
-                    style: TextStyle(
-                      color: darkGrey,
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // extraInfo('Bath', '1ba'),
-                  // extraInfo('Rent or Buy', 'Rent'),
-                  // extraInfo('Bedrooms', '1bd'),
-                  // extraInfo('Close to Public', 'Yes'),
-                  // extraInfo('New Construction', 'No'),
-                  // extraInfo('Year Built', '2000'),
-                  // extraInfo('Square Feet', '100ft - 500ft'),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  const Text(
-                    'Reviews',
-                    style: TextStyle(
-                      color: darkGrey,
-                      fontSize: 20,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // SizedBox(
-                  //   height: 300,
-                  //   child: Obx(
-                  //     () => reviewController.reviewList.value.pagination != null
-                  //         ? ListView.builder(
-                  //             itemCount:
-                  //                 reviewController.reviewList.value.data.length,
-                  //             itemBuilder: ((context, index) => review(
-                  //                   reviewController
-                  //                       .reviewList.value.data[index],
-                  //                 )),
-                  //           )
-                  //         : const Text('No Reviews for this Listing'),
-                  //   ),
-                  // ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
-            ),
+            
           ],
         ),
       ),
+      //  SingleChildScrollView(
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.start,
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: [
+      //       ImageSlideshow(
+      //         width: double.infinity,
+      //         height: 200,
+      //         initialPage: 0,
+      //         indicatorColor: lightGreen,
+      //         indicatorBackgroundColor: mediumGrey,
+      //         children: images,
+      //         autoPlayInterval: 3000,
+      //         isLoop: true,
+      //       ),
+      //       Padding(
+      //         padding: const EdgeInsets.all(22.0),
+      //         child: Column(
+      //           mainAxisAlignment: MainAxisAlignment.start,
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           children: [
+      //             Row(
+      //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //               children: [
+      //                 Text(
+      //                   widget.title,
+      //                   style: const TextStyle(
+      //                     color: darkGrey,
+      //                     fontSize: 18,
+      //                   ),
+      //                 ),
+      //                 Text(
+      //                   '\$${widget.price}',
+      //                   style: const TextStyle(
+      //                     color: darkGrey,
+      //                     fontSize: 18,
+      //                   ),
+      //                 ),
+      //               ],
+      //             ),
+      //             const SizedBox(
+      //               height: 15,
+      //             ),
+      //             Text(
+      //               widget.description,
+      //               style: const TextStyle(
+      //                 color: mediumGrey,
+      //                 fontSize: 16,
+      //               ),
+      //             ),
+      //             const SizedBox(
+      //               height: 15,
+      //             ),
+      //             const Text(
+      //               'Location',
+      //               style: TextStyle(
+      //                 color: darkGrey,
+      //                 fontSize: 20,
+      //               ),
+      //             ),
+      //             const SizedBox(
+      //               height: 5,
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //       // SizedBox(
+      //       //   width: double.infinity,
+      //       //   height: 300,
+      //       //   child: GoogleMap(
+      //       //     mapType: MapType.hybrid,
+      //       //     initialCameraPosition: CameraPosition(
+      //       //       target: LatLng(
+      //       //           double.parse(listingDetailsController
+      //       //               .listingDetail.value.listing.contact.latitude
+      //       //               .toString()),
+      //       //           double.parse(listingDetailsController
+      //       //               .listingDetail.value.listing.contact.longitude
+      //       //               .toString())),
+      //       //       zoom: 14.4746,
+      //       //     ),
+      //       //     onMapCreated: (GoogleMapController controller) {
+      //       //       _controller.complete(controller);
+      //       //     },
+      //       //   ),
+      //       // ),
+      //       Padding(
+      //         padding: const EdgeInsets.only(left: 22.0, right: 22.0),
+      //         child: Column(
+      //           crossAxisAlignment: CrossAxisAlignment.start,
+      //           mainAxisAlignment: MainAxisAlignment.start,
+      //           children: const [
+      //             SizedBox(
+      //               height: 10,
+      //             ),
+      //             Text(
+      //               'Extra Info',
+      //               style: TextStyle(
+      //                 color: darkGrey,
+      //                 fontSize: 20,
+      //               ),
+      //             ),
+      //             SizedBox(
+      //               height: 20,
+      //             ),
+      //             // extraInfo('Bath', '1ba'),
+      //             // extraInfo('Rent or Buy', 'Rent'),
+      //             // extraInfo('Bedrooms', '1bd'),
+      //             // extraInfo('Close to Public', 'Yes'),
+      //             // extraInfo('New Construction', 'No'),
+      //             // extraInfo('Year Built', '2000'),
+      //             // extraInfo('Square Feet', '100ft - 500ft'),
+      //             SizedBox(
+      //               height: 10,
+      //             ),
+      //             Text(
+      //               'Reviews',
+      //               style: TextStyle(
+      //                 color: darkGrey,
+      //                 fontSize: 20,
+      //               ),
+      //             ),
+      //             SizedBox(
+      //               height: 20,
+      //             ),
+      //             // SizedBox(
+      //             //   height: 300,
+      //             //   child: Obx(
+      //             //     () => reviewController.reviewList.value.pagination != null
+      //             //         ? ListView.builder(
+      //             //             itemCount:
+      //             //                 reviewController.reviewList.value.data.length,
+      //             //             itemBuilder: ((context, index) => review(
+      //             //                   reviewController
+      //             //                       .reviewList.value.data[index],
+      //             //                 )),
+      //             //           )
+      //             //         : const Text('No Reviews for this Listing'),
+      //             //   ),
+      //             // ),
+      //             SizedBox(
+      //               height: 20,
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 
