@@ -77,55 +77,14 @@ class _ListingDetailsState extends State<ListingDetails> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                    itemCount:
-                listingDetailsController.listingDetail.value.images.length,
-                    itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Container(
-                  width: double.infinity,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      image: NetworkImage(listingDetailsController
-                          .listingDetail.value.images[index].url),
-                    ),
-                  ),
-                ),
-              );
-                    },
-                  ),
-            ),
-            Text('${listingDetailsController.listingDetail.value.title}'),
-            Text('${listingDetailsController.listingDetail.value.price}'),
-            Text('${listingDetailsController.listingDetail.value.description}'),
-            Text('${listingDetailsController.listingDetail.value.title}'),
-             Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                    itemCount:
-               listingDetailsController.listingDetail.value.customFields.length,
-                    itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Text('${listingDetailsController.listingDetail.value.customFields[index].options.choices.name}'),
-              );
-                    },
-                  ),
-            ),
-            
-          ],
-        ),
-      ),
+      body: ListView.builder(
+                itemCount: listingDetailsController
+                    .listingDetail.value.customFields.length,
+                itemBuilder: (context, index) {
+                  return Text(
+                        '${listingDetailsController.listingDetail.value.customFields[index].label}:   ${listingDetailsController.listingDetail.value.customFields[index].value}');
+                },
+              ),
       //  SingleChildScrollView(
       //   child: Column(
       //     mainAxisAlignment: MainAxisAlignment.start,
