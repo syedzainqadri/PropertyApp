@@ -15,7 +15,7 @@ class ListingDetails extends StatefulWidget {
   var title;
   var id;
   var price;
-  List<Widget>? images;
+  var images;
   var description;
   ListingDetails({
     this.description,
@@ -42,19 +42,20 @@ class _ListingDetailsState extends State<ListingDetails> {
   List<Widget> images = [];
   // final ReviewController reviewController = Get.put(ReviewController());
   // @override
-  // void initState() {
-  //   for (int i = 0;
-  //       i < listingDetailsController.listingDetail.value.listing.images.length;
-  //       i++) {
-  //     images.add(Image.network(
-  //       Get.find<ListingDetailsController>().listingDetail.value.listing
-  //         ..images[i].url,
-  //       fit: BoxFit.cover,
-  //     ));
-  //   }
-  //   //getReviews();
-  //   super.initState();
-  // }
+  void initState() {
+    images = widget.images!.toList();
+    // for (int i = 0;
+    //     i < listingDetailsController.listingDetail.value.listing.images.length;
+    //     i++) {
+    //   images.add(Image.network(
+    //     Get.find<ListingDetailsController>().listingDetail.value.listing
+    //       ..images[i].url,
+    //     fit: BoxFit.cover,
+    //   ));
+    // }
+    //getReviews();
+    super.initState();
+  }
 
   // getReviews() async {
   //   Get.find<ReviewController>().updateReview(
@@ -110,7 +111,7 @@ class _ListingDetailsState extends State<ListingDetails> {
               initialPage: 0,
               indicatorColor: lightGreen,
               indicatorBackgroundColor: mediumGrey,
-              children: widget.images!,
+              children: images,
               autoPlayInterval: 3000,
               isLoop: true,
             ),
@@ -143,8 +144,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                     height: 15,
                   ),
                   Text(
-                    listingDetailsController
-                        .listingDetail.value.listing.description,
+                    widget.description,
                     style: const TextStyle(
                       color: mediumGrey,
                       fontSize: 16,
@@ -166,26 +166,26 @@ class _ListingDetailsState extends State<ListingDetails> {
                 ],
               ),
             ),
-            SizedBox(
-              width: double.infinity,
-              height: 300,
-              child: GoogleMap(
-                mapType: MapType.hybrid,
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(
-                      double.parse(listingDetailsController
-                          .listingDetail.value.listing.contact.latitude
-                          .toString()),
-                      double.parse(listingDetailsController
-                          .listingDetail.value.listing.contact.longitude
-                          .toString())),
-                  zoom: 14.4746,
-                ),
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                },
-              ),
-            ),
+            // SizedBox(
+            //   width: double.infinity,
+            //   height: 300,
+            //   child: GoogleMap(
+            //     mapType: MapType.hybrid,
+            //     initialCameraPosition: CameraPosition(
+            //       target: LatLng(
+            //           double.parse(listingDetailsController
+            //               .listingDetail.value.listing.contact.latitude
+            //               .toString()),
+            //           double.parse(listingDetailsController
+            //               .listingDetail.value.listing.contact.longitude
+            //               .toString())),
+            //       zoom: 14.4746,
+            //     ),
+            //     onMapCreated: (GoogleMapController controller) {
+            //       _controller.complete(controller);
+            //     },
+            //   ),
+            // ),
             Padding(
               padding: const EdgeInsets.only(left: 22.0, right: 22.0),
               child: Column(
@@ -205,13 +205,13 @@ class _ListingDetailsState extends State<ListingDetails> {
                   const SizedBox(
                     height: 20,
                   ),
-                  extraInfo('Bath', '1ba'),
-                  extraInfo('Rent or Buy', 'Rent'),
-                  extraInfo('Bedrooms', '1bd'),
-                  extraInfo('Close to Public', 'Yes'),
-                  extraInfo('New Construction', 'No'),
-                  extraInfo('Year Built', '2000'),
-                  extraInfo('Square Feet', '100ft - 500ft'),
+                  // extraInfo('Bath', '1ba'),
+                  // extraInfo('Rent or Buy', 'Rent'),
+                  // extraInfo('Bedrooms', '1bd'),
+                  // extraInfo('Close to Public', 'Yes'),
+                  // extraInfo('New Construction', 'No'),
+                  // extraInfo('Year Built', '2000'),
+                  // extraInfo('Square Feet', '100ft - 500ft'),
                   const SizedBox(
                     height: 10,
                   ),

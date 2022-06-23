@@ -14,6 +14,7 @@ class ListingCard extends StatelessWidget {
   var isFovorite;
   var description;
   var listingId;
+
   ListingCard(
       {this.image,
       this.title,
@@ -41,12 +42,13 @@ class ListingCard extends StatelessWidget {
             await listingDetailsController.getListingById(listingId);
             // await reviewController.fetchReviews(listingId);
           } finally {
-            Get.to(ListingDetails(
-              id: listingId,
-              title: title,
-              images: image[0 - 4],
-              price: price,
-            ));
+            Get.to(() => ListingDetails(
+                  id: listingId,
+                  title: title,
+                  images: image,
+                  price: price,
+                  description: description,
+                ));
           }
         },
         child: Card(
