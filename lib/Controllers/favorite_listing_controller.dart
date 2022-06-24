@@ -8,6 +8,8 @@ class FavoriteListingController extends GetxController {
   var favoriteListings = AllListings().obs;
   final token = GetStorage().read('token');
 
+  var color = false.obs;
+
   @override
   onInit() {
     // getMyFavorites();
@@ -31,6 +33,7 @@ class FavoriteListingController extends GetxController {
   }
 
   addToFavorites(listingId) async {
+    print(token);
     isLoading.value = true;
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/favourites';
     var response = await http.post(
@@ -46,5 +49,6 @@ class FavoriteListingController extends GetxController {
     );
     print('Ad to Favorites response is ${response.body}');
     isLoading.value = false;
+    color.value = true;
   }
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:realestapp/Home/widgets/CategoryCard.dart';
 import '../AddListings/list_widget.dart';
 import '../Controllers/categories_controller.dart';
+import '../Controllers/favorite_listing_controller.dart';
 import '../Controllers/listings_controller.dart';
 import '../Utils/color_scheme.dart';
 
@@ -25,11 +26,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final listingController = Get.put(ListingController());
     final categoriesController = Get.put(CategoriesController());
+    final favoriteListingController = Get.put(FavoriteListingController());
     return Obx(() {
       return listingController.isLoading.isTrue &&
               categoriesController.categories.value != null &&
-              categoriesController.subCategories.value != null
-          ? Center(child: CircularProgressIndicator())
+              categoriesController.subCategories.value != null &&
+              favoriteListingController.favoriteListings.value != null
+          ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
               child: Column(
                 children: [
@@ -114,6 +117,23 @@ class _HomePageState extends State<HomePage> {
                             itemCount: listingController
                                 .allListings.value.data?.length,
                             itemBuilder: (context, index) {
+                              bool isFav = false;
+                              for (int i = 0;
+                                  i <
+                                      listingController
+                                          .allListings.value.data!.length;
+                                  i++) {
+                                if (listingController.allListings.value
+                                        .data?[index].listingId ==
+                                    favoriteListingController.favoriteListings
+                                        .value.data?[index].listingId) {
+                                  print("matched");
+                                  setState(() {
+                                    isFav = true;
+                                  });
+                                }
+                                print("not matched");
+                              }
                               return ListingCard(
                                 image: listingController
                                     .allListings.value.data?[index].images,
@@ -126,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                                 price: listingController
                                     .allListings.value.data?[index].price
                                     .toString(),
-                                isFovorite: true,
+                                isFovorite: isFav,
                                 description: 'This is description',
                                 listingId: listingController
                                     .allListings.value.data?[index].listingId,

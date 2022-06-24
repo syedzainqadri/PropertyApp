@@ -33,6 +33,8 @@ class ListingCard extends StatelessWidget {
 
   final favoriteListingController = Get.put(FavoriteListingController());
 
+  bool color = false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,26 +64,39 @@ class ListingCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Positioned(
-                    top: -11,
-                    right: -6,
-                    child: isFovorite
-                        ? IconButton(
-                            onPressed: () {
-                              favoriteListingController
-                                  .addToFavorites(listingId);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('Added to Favorites')));
-                            },
-                            icon: const Icon(
+                  isFovorite
+                      ? Positioned(
+                          top: -11,
+                          right: -6,
+                          child: IconButton(onPressed: () {
+                            // favoriteListingController.addToFavorites(listingId);
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //     const SnackBar(
+                            //         content: Text('Added to Favorites')));
+                          }, icon: Obx(() {
+                            return const Icon(
                               Icons.favorite,
                               size: 26,
                               color: lightGreen,
-                            ),
-                          )
-                        : const Offstage(),
-                  ),
+                            );
+                          })))
+                      : Positioned(
+                          top: -11,
+                          right: -6,
+                          child: IconButton(onPressed: () {
+                            favoriteListingController.addToFavorites(listingId);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Added to Favorites')));
+                          }, icon: Obx(() {
+                            return Icon(
+                              Icons.favorite,
+                              size: 26,
+                              color: favoriteListingController.color.isTrue
+                                  ? lightGreen
+                                  : mediumGrey,
+                            );
+                          }))),
                 ],
               ),
               Padding(
