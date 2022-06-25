@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
 import 'package:realestapp/Controllers/membership_controller.dart';
 import 'package:realestapp/Controllers/payment_controller.dart';
 import 'package:realestapp/Models/payment_model.dart';
+import 'package:realestapp/Models/paymenyByIdModel.dart';
+import 'package:realestapp/Profile/PaymentResultScreen.dart';
 
 import '../Utils/color_scheme.dart';
 
 class PaymentDetails extends StatefulWidget {
-  final String title, price, type;
+  final String title;
+  final String price;
+  final String type;
   final int id;
   const PaymentDetails(
       {Key? key,
@@ -22,10 +27,13 @@ class PaymentDetails extends StatefulWidget {
 }
 
 class _PaymentDetailsState extends State<PaymentDetails> {
-  MembershipController membershipController = Get.put(MembershipController());
-  PaymentController paymentController = Get.put(PaymentController());
+  final MembershipController membershipController =
+      Get.put(MembershipController());
+  final PaymentController paymentController = Get.put(PaymentController());
+  final PaymentDetailsController paymentDetailsController =
+      Get.put(PaymentDetailsController());
   var _radioValue = 0;
-  String gatewayId = '';
+  String? gatewayId;
   void _handleRadioValueChange(value) {
     setState(() {
       _radioValue = value;
@@ -66,34 +74,71 @@ class _PaymentDetailsState extends State<PaymentDetails> {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          membershipCard(widget.title, widget.price),
-          const SizedBox(
-            height: 25,),
-          Row(
-            children:const [
-               SizedBox(
-            width: 28,),
-           Text('Select Payment Method',
-          style: TextStyle(color: lightGreen,fontSize: 22),
-          ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,),
-                    SizedBox(
-            height: 250,
-            child: ListView.builder(
-                itemCount: paymentController.paymentGateways.length,
-                itemBuilder: (context, index) {
-                  return paymentTypes(
-                      paymentController.paymentGateways.value[index]);
-                }),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            membershipCard(widget.title, widget.price),
+            const SizedBox(
+              height: 25,
+            ),
+            Row(
+              children: const [
+                SizedBox(
+                  width: 28,
+                ),
+                Text(
+                  'Select Payment Method',
+                  style: TextStyle(color: lightGreen, fontSize: 22),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                  itemCount: paymentController.paymentGateways.length,
+                  itemBuilder: (context, index) {
+                    return Row(
+                      children: [
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        Radio(
+                          value: 1,
+                          activeColor: lightGreen,
+                          groupValue: _radioValue,
+                          onChanged: (value) {
+                            setState(() {
+                              print(
+                                  "i am prinitng ${paymentController.paymentGateways.value[index].id}");
+                              gatewayId = paymentController
+                                  .paymentGateways.value[index].id;
+                              print('gateway id is: $gatewayId');
+                            });
+                            _handleRadioValueChange(value);
+                          },
+                        ),
+                        const SizedBox(
+                          width: 8.0,
+                        ),
+                        Text(
+                          paymentController.paymentGateways.value[index].title,
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 40, 40, 40),
+                              fontSize: 19),
+                        ),
+                      ],
+                    );
+                    // paymentTypes(
+                    //     paymentController.paymentGateways.value[index]);
+                  }),
+            ),
+          ],
+        ),
       ),
       persistentFooterButtons: [
         Padding(
@@ -102,9 +147,22 @@ class _PaymentDetailsState extends State<PaymentDetails> {
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
-              onPressed: () {
-                membershipController.membershipCheckout(
+              onPressed: () async {
+                await membershipController.membershipCheckout(
                     widget.type, widget.type, gatewayId, widget.id);
+                if (membershipController.checkoutData.value.result ==
+                    "success") {
+                  Get.snackbar('Order Places',
+                      "Please Make The Payment According to Instructions",
+                      snackPosition: SnackPosition.BOTTOM);
+                } else {
+                  Get.snackbar(
+                      'Order Errod', "Order Not Places. Please Try Again",
+                      snackPosition: SnackPosition.BOTTOM);
+                }
+                await paymentDetailsController
+                    .getPaymentById(membershipController.checkoutData.value.id);
+                Get.to(() => PaymentResultScreen());
               },
               child: const Text(
                 'Checkout',
@@ -244,13 +302,16 @@ class _PaymentDetailsState extends State<PaymentDetails> {
     return GestureDetector(
       onTap: () {
         setState(() {
+          print("i am prinitng ${payment.id}");
           gatewayId = payment.id;
+          print('gateway id is: $gatewayId');
         });
       },
       child: Row(
         children: [
           const SizedBox(
-            width: 25,),
+            width: 25,
+          ),
           Radio(
             value: 1,
             activeColor: lightGreen,

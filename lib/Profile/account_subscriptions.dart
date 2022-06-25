@@ -15,25 +15,13 @@ class AccountSubscription extends StatefulWidget {
 
 class _AccountSubscriptionState extends State<AccountSubscription> {
 //  int _radioValue = 0;
-  MembershipController membershipController = Get.put(MembershipController());
-  PaymentController paymentController = Get.put(PaymentController());
-  // void _handleRadioValueChange(int value) {
-  //   setState(() {
-  //     _radioValue = value;
-
-  //     switch (_radioValue) {
-  //       case 0:
-  //         break;
-  //       case 1:
-  //         break;
-  //       case 2:
-  //         break;
-  //     }
-  //   });
-  // }
+  final MembershipController membershipController =
+      Get.put(MembershipController());
+  final PaymentController paymentController = Get.put(PaymentController());
 
   @override
   Widget build(BuildContext context) {
+    var _membership = Get.find<MembershipController>();
     return Scaffold(
       backgroundColor: white,
       appBar: AppBar(
@@ -59,8 +47,8 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
         child: Obx(
           () => ListView.builder(
               itemCount: membershipController.membershipPlans.length,
-              itemBuilder: ((context, index) => membershipCard(
-                  membershipController.membershipPlans.value[index]))),
+              itemBuilder: ((context, index) =>
+                  membershipCard(_membership.membershipPlans.value[index]))),
         ),
       ),
     );
@@ -108,7 +96,7 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                 Expanded(
                   child: Container(
                     decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 194, 250, 225),
+                      color: Colors.white,
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(20),
                         bottomLeft: Radius.circular(20),
@@ -244,7 +232,15 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                           width: 10,
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            await paymentController.getPaymentGateways();
+                            Get.to(PaymentDetails(
+                              price: membership.price,
+                              title: membership.title,
+                              type: membership.type,
+                              id: membership.id,
+                            ));
+                          },
                           child: Text('\$${membership.price}'),
                           style: ElevatedButton.styleFrom(
                             primary: lightGreen,

@@ -1,16 +1,16 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/all_listing_model.dart';
+import 'package:realestapp/Models/favorite_listing_model.dart';
 
 class FavoriteListingController extends GetxController {
   var isLoading = false.obs;
-  var favoriteListings = AllListings().obs;
+  var favoriteListings = FavoriteListings().obs;
   final token = GetStorage().read('token');
 
   @override
   onInit() {
-    // getMyFavorites();
+     getMyFavorites();
     super.onInit();
   }
 
@@ -25,7 +25,7 @@ class FavoriteListingController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    favoriteListings.value = allListingsFromJson(response.body);
+    favoriteListings.value = favoriteListingsFromJson(response.body);
     print('My Favorites response is ${response.body}');
     isLoading.value = false;
   }

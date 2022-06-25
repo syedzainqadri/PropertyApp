@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -7,8 +8,14 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:realestapp/Chat/chat_ui.dart';
 import 'package:realestapp/Controllers/EmailController.dart';
 import 'package:realestapp/Controllers/listing_detail_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Models/review_model.dart';
 import '../Utils/color_scheme.dart';
+import 'Widgets/BottomSheetButton.dart';
+import 'Widgets/DescriptionTextWidget.dart';
+import 'Widgets/ImageSliderWidget.dart';
+import 'Widgets/TextArea.dart';
+import 'Widgets/TextField.dart';
 
 class ListingDetails extends StatefulWidget {
   var title;
@@ -636,4 +643,4 @@ class _ListingDetailsState extends State<ListingDetails> {
       ),
     );
   }
-}
+

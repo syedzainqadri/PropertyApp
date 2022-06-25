@@ -1,7 +1,16 @@
+// To parse this JSON data, do
+//
+//     final listingsByIdModel = listingsByIdModelFromJson(jsonString);
+
 import 'dart:convert';
 
-ListingsByIdModel listingsIdFromJson(String str) =>
+import 'package:get_storage/get_storage.dart';
+
+ListingsByIdModel listingsByIdModelFromJson(String str) =>
     ListingsByIdModel.fromJson(json.decode(str));
+
+String listingsByIdModelToJson(ListingsByIdModel data) =>
+    json.encode(data.toJson());
 
 class ListingsByIdModel {
   ListingsByIdModel({
@@ -30,6 +39,7 @@ class ListingsByIdModel {
     this.videoUrls,
     this.author,
     this.customFields,
+    this.amenities,
     this.related,
     this.review,
   });
@@ -59,6 +69,7 @@ class ListingsByIdModel {
   var videoUrls;
   var author;
   var customFields;
+  var amenities;
   var related;
   var review;
 
@@ -92,10 +103,149 @@ class ListingsByIdModel {
         author: Author.fromJson(json["author"]),
         customFields: List<CustomField>.from(
             json["custom_fields"].map((x) => CustomField.fromJson(x))),
+        amenities: Amenities.fromJson(json["amenities"]),
         related:
             List<Related>.from(json["related"].map((x) => Related.fromJson(x))),
         review: Review.fromJson(json["review"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "listing_id": listingId,
+        "author_id": authorId,
+        "title": title,
+        "pricing_type": pricingType,
+        "price": price,
+        "max_price": maxPrice,
+        "price_type": priceType,
+        "price_units": List<dynamic>.from(priceUnits.map((x) => x.toJson())),
+        "price_unit": priceUnit,
+        "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+        "ad_type": adType,
+        "status": status,
+        "images": List<dynamic>.from(images.map((x) => x.toJson())),
+        "created_at": createdAt.toIso8601String(),
+        "created_at_gmt": createdAtGmt.toIso8601String(),
+        "view_count": viewCount,
+        "promotions": List<dynamic>.from(promotions.map((x) => x)),
+        "badges": List<dynamic>.from(badges.map((x) => x)),
+        "contact": contact.toJson(),
+        "store": store.toJson(),
+        "url": url,
+        "description": description,
+        "video_urls": List<dynamic>.from(videoUrls.map((x) => x)),
+        "author": author.toJson(),
+        "custom_fields":
+            List<dynamic>.from(customFields.map((x) => x.toJson())),
+        "amenities": amenities.toJson(),
+        "related": List<dynamic>.from(related.map((x) => x.toJson())),
+        "review": review.toJson(),
+      };
+}
+
+class Amenities {
+  Amenities({
+    this.id,
+    this.metaKey,
+    this.label,
+    this.slug,
+    this.description,
+    this.searchable,
+    this.listable,
+    this.type,
+    this.required,
+    this.placeholder,
+    this.value,
+    this.icon,
+    this.options,
+  });
+
+  var id;
+  var metaKey;
+  var label;
+  var slug;
+  var description;
+  var searchable;
+  var listable;
+  var type;
+  var required;
+  var placeholder;
+  var value;
+  var icon;
+  var options;
+
+  factory Amenities.fromJson(Map<String, dynamic> json) => Amenities(
+        id: json["id"],
+        metaKey: json["meta_key"],
+        label: json["label"],
+        slug: json["slug"],
+        description: json["description"],
+        searchable: json["searchable"],
+        listable: json["listable"],
+        type: json["type"],
+        required: json["required"],
+        placeholder: json["placeholder"],
+        value: List<String>.from(json["value"].map((x) => x)),
+        icon: json["icon"],
+        options: AmenitiesOptions.fromJson(json["options"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "meta_key": metaKey,
+        "label": label,
+        "slug": slug,
+        "description": description,
+        "searchable": searchable,
+        "listable": listable,
+        "type": type,
+        "required": required,
+        "placeholder": placeholder,
+        "value": List<dynamic>.from(value.map((x) => x)),
+        "icon": icon,
+        "options": options.toJson(),
+      };
+}
+
+class AmenitiesOptions {
+  AmenitiesOptions({
+    this.optionsDefault,
+    this.choices,
+  });
+
+  var optionsDefault;
+  var choices;
+
+  factory AmenitiesOptions.fromJson(Map<String, dynamic> json) =>
+      AmenitiesOptions(
+        optionsDefault: json["default"],
+        choices: List<PurpleChoice>.from(
+            json["choices"].map((x) => PurpleChoice.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "default": optionsDefault,
+        "choices": List<dynamic>.from(choices.map((x) => x.toJson())),
+      };
+}
+
+class PurpleChoice {
+  PurpleChoice({
+    this.id,
+    this.name,
+  });
+
+  var id;
+  var name;
+
+  factory PurpleChoice.fromJson(Map<String, dynamic> json) => PurpleChoice(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+      };
 }
 
 class Author {
@@ -159,6 +309,27 @@ class Author {
         membership: Membership.fromJson(json["membership"]),
         store: json["store"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "first_name": firstName,
+        "last_name": lastName,
+        "description": description,
+        "id": id,
+        "isAdmin": isAdmin,
+        "email": email,
+        "username": username,
+        "phone": phone,
+        "whatsapp_number": whatsappNumber,
+        "website": website,
+        "locations": List<dynamic>.from(locations.map((x) => x)),
+        "zipcode": zipcode,
+        "address": address,
+        "latitude": latitude,
+        "longitude": longitude,
+        "pp_thumb_url": ppThumbUrl,
+        "membership": membership.toJson(),
+        "store": store,
+      };
 }
 
 class Membership {
@@ -183,6 +354,14 @@ class Membership {
         postedAds: json["posted_ads"],
         promotions: Promotions.fromJson(json["promotions"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "is_expired": isExpired,
+        "expired_at": expiredAt.toIso8601String(),
+        "remaining_ads": remainingAds,
+        "posted_ads": postedAds,
+        "promotions": promotions.toJson(),
+      };
 }
 
 class Promotions {
@@ -201,6 +380,12 @@ class Promotions {
         top: BumpUp.fromJson(json["_top"]),
         bumpUp: BumpUp.fromJson(json["_bump_up"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "featured": featured.toJson(),
+        "_top": top.toJson(),
+        "_bump_up": bumpUp.toJson(),
+      };
 }
 
 class BumpUp {
@@ -216,6 +401,11 @@ class BumpUp {
         ads: json["ads"],
         validate: json["validate"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "ads": ads,
+        "validate": validate,
+      };
 }
 
 class Category {
@@ -255,6 +445,19 @@ class Category {
         count: json["count"],
         filter: json["filter"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "term_id": termId,
+        "name": name,
+        "slug": slug,
+        "term_group": termGroup,
+        "term_taxonomy_id": termTaxonomyId,
+        "taxonomy": taxonomy,
+        "description": description,
+        "parent": parent,
+        "count": count,
+        "filter": filter,
+      };
 }
 
 class Contact {
@@ -298,6 +501,20 @@ class Contact {
         website: json["website"],
         geoAddress: json["geo_address"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "locations": List<dynamic>.from(locations.map((x) => x.toJson())),
+        "latitude": latitude,
+        "longitude": longitude,
+        "hide_map": hideMap,
+        "zipcode": zipcode,
+        "address": address,
+        "phone": phone,
+        "whatsapp_number": whatsappNumber,
+        "email": email,
+        "website": website,
+        "geo_address": geoAddress,
+      };
 }
 
 class CustomField {
@@ -313,6 +530,7 @@ class CustomField {
     this.required,
     this.placeholder,
     this.value,
+    this.icon,
     this.options,
     this.min,
     this.max,
@@ -330,11 +548,11 @@ class CustomField {
   var required;
   var placeholder;
   var value;
+  var icon;
   var options;
   var min;
   var max;
   var stepSize;
-  var icon;
 
   factory CustomField.fromJson(Map<String, dynamic> json) => CustomField(
         id: json["id"],
@@ -348,16 +566,37 @@ class CustomField {
         required: json["required"],
         placeholder: json["placeholder"],
         value: json["value"],
-        options:
-            json["options"] == null ? null : Options.fromJson(json["options"]),
+        icon: json["icon"],
+        options: json["options"] == null
+            ? null
+            : CustomFieldOptions.fromJson(json["options"]),
         min: json["min"] == null ? null : json["min"],
         max: json["max"] == null ? null : json["max"],
         stepSize: json["step_size"] == null ? null : json["step_size"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "meta_key": metaKey,
+        "label": label,
+        "slug": slug,
+        "description": description,
+        "searchable": searchable,
+        "listable": listable,
+        "type": type,
+        "required": required,
+        "placeholder": placeholder,
+        "value": value,
+        "icon": icon,
+        "options": options == null ? null : options.toJson(),
+        "min": min == null ? null : min,
+        "max": max == null ? null : max,
+        "step_size": stepSize == null ? null : stepSize,
+      };
 }
 
-class Options {
-  Options({
+class CustomFieldOptions {
+  CustomFieldOptions({
     this.optionsDefault,
     this.choices,
   });
@@ -365,15 +604,21 @@ class Options {
   var optionsDefault;
   var choices;
 
-  factory Options.fromJson(Map<String, dynamic> json) => Options(
+  factory CustomFieldOptions.fromJson(Map<String, dynamic> json) =>
+      CustomFieldOptions(
         optionsDefault: json["default"],
-        choices:
-            List<Choice>.from(json["choices"].map((x) => Choice.fromJson(x))),
+        choices: List<FluffyChoice>.from(
+            json["choices"].map((x) => FluffyChoice.fromJson(x))),
       );
+
+  Map<String, dynamic> toJson() => {
+        "default": optionsDefault,
+        "choices": List<dynamic>.from(choices.map((x) => x.toJson())),
+      };
 }
 
-class Choice {
-  Choice({
+class FluffyChoice {
+  FluffyChoice({
     this.id,
     this.name,
   });
@@ -381,10 +626,15 @@ class Choice {
   var id;
   var name;
 
-  factory Choice.fromJson(Map<String, dynamic> json) => Choice(
+  factory FluffyChoice.fromJson(Map<String, dynamic> json) => FluffyChoice(
         id: json["id"],
         name: json["name"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+      };
 }
 
 class Image {
@@ -427,6 +677,20 @@ class Image {
         srcH: json["src_h"],
         srcsetSizes: json["srcset_sizes"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "ID": id,
+        "title": title,
+        "caption": caption,
+        "url": url,
+        "alt": alt,
+        "src": src,
+        "srcset": srcset,
+        "sizes": sizes.toJson(),
+        "src_w": srcW,
+        "src_h": srcH,
+        "srcset_sizes": srcsetSizes,
+      };
 }
 
 class Sizes {
@@ -445,6 +709,12 @@ class Sizes {
         medium: Full.fromJson(json["medium"]),
         thumbnail: Full.fromJson(json["thumbnail"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "full": full.toJson(),
+        "medium": medium.toJson(),
+        "thumbnail": thumbnail.toJson(),
+      };
 }
 
 class Full {
@@ -463,6 +733,12 @@ class Full {
         width: json["width"],
         height: json["height"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "src": src,
+        "width": width,
+        "height": height,
+      };
 }
 
 class PriceUnit {
@@ -481,6 +757,12 @@ class PriceUnit {
         name: json["name"],
         short: json["short"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "short": short,
+      };
 }
 
 class Related {
@@ -552,6 +834,29 @@ class Related {
         contact: Contact.fromJson(json["contact"]),
         store: Store.fromJson(json["store"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "listing_id": listingId,
+        "author_id": authorId,
+        "title": title,
+        "pricing_type": pricingType,
+        "price": price,
+        "max_price": maxPrice,
+        "price_type": priceType,
+        "price_units": List<dynamic>.from(priceUnits.map((x) => x.toJson())),
+        "price_unit": priceUnit,
+        "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+        "ad_type": adType,
+        "status": status,
+        "images": List<dynamic>.from(images.map((x) => x.toJson())),
+        "created_at": createdAt.toIso8601String(),
+        "created_at_gmt": createdAtGmt.toIso8601String(),
+        "view_count": viewCount,
+        "promotions": List<dynamic>.from(promotions.map((x) => x)),
+        "badges": List<dynamic>.from(badges.map((x) => x)),
+        "contact": contact.toJson(),
+        "store": store.toJson(),
+      };
 }
 
 class Store {
@@ -567,6 +872,11 @@ class Store {
         id: json["id"],
         title: json["title"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": title,
+      };
 }
 
 class Review {
@@ -579,6 +889,10 @@ class Review {
   factory Review.fromJson(Map<String, dynamic> json) => Review(
         rating: Rating.fromJson(json["rating"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "rating": rating.toJson(),
+      };
 }
 
 class Rating {
@@ -594,4 +908,9 @@ class Rating {
         average: json["average"],
         count: json["count"],
       );
+
+  Map<String, dynamic> toJson() => {
+        "average": average,
+        "count": count,
+      };
 }
