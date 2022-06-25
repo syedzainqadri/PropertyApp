@@ -9,6 +9,7 @@ import 'Auth/sign_in.dart';
 import 'Controllers/favorite_listing_controller.dart';
 import 'Controllers/listing_type_controller.dart';
 import 'Controllers/my_listings_controller.dart';
+import 'Controllers/search_controller.dart';
 import 'Home/home.dart';
 import 'Utils/color_scheme.dart';
 import 'Utils/constants.dart';
@@ -26,6 +27,7 @@ void main() async {
     Get.put(CategoriesController());
     Get.put(LocationsController());
     Get.put(ListingTypeController());
+    Get.put(SearchController());
   }
   runApp(const MyApp());
 }

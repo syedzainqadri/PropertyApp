@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:realestapp/Controllers/search_controller.dart';
 
+import '../AddListings/list_widget.dart';
+import '../Controllers/listings_controller.dart';
 import '../Home/item_widget.dart';
 import '../Utils/color_scheme.dart';
 
@@ -11,6 +15,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final SearchController searchController = Get.put(SearchController());
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,19 +42,41 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
             ),
+            onSubmitted: (value) {
+              searchController.getSearchedListings(value);
+            },
           ),
           const SizedBox(
             height: 15,
           ),
-          //  Expanded(
-          //         child: ListView.builder(
-          //           itemCount: 10,
-          //           itemBuilder: (context, position) {
-          //             return itemWidget('house1', '1500 SX Street',
-          //                 "10/03/2022", "San Fransico, CA", "12,434,55");
-          //           },
-          //         ),
-          //       ),
+          searchController.searchListings.value.data == null
+              ? const CircularProgressIndicator(
+                  color: Colors.greenAccent,
+                )
+              : Expanded(
+                  child: Obx(() {
+                    return ListView.builder(
+                      itemCount:
+                          searchController.searchListings.value.data!.length,
+                      itemBuilder: (context, position) {
+                        return ListingCard(
+                          image: searchController
+                              .searchListings.value.data![position].images,
+                          title: searchController
+                              .searchListings.value.data![position].title,
+                          city:
+                              '${searchController.searchListings.value.data![position].contact!.locations![1].name}, ${searchController.searchListings.value.data![position].contact!.locations![0].name}',
+                          price: searchController
+                              .searchListings.value.data![position].price,
+                          isFovorite: false,
+                          description: '',
+                          listingId: searchController
+                              .searchListings.value.data![position].listingId,
+                        );
+                      },
+                    );
+                  }),
+                ),
         ],
       ),
     );
