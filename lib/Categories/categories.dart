@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/AddListings/list_widget.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
 import '../AddListings/add_listings.dart';
 import '../Home/item_widget.dart';
@@ -167,10 +168,15 @@ class _CategoryPageState extends State<CategoryPage> {
                           listingController.allListings.value.data![position]
                                   .categories![0].termId ==
                               widget.id) {
-                        return itemWidget(
-                            context,
-                            listingController
-                                .allListings.value.data![position]);
+                        return ListingCard(
+                          image:  listingController.allListings.value.data![position].images,
+                          title: listingController.allListings.value.data![position].title,
+                          city: '${listingController.allListings.value.data![position].contact!.locations![1].name}, ${listingController.allListings.value.data![position].contact!.locations![0].name}',
+                          price: listingController.allListings.value.data![position].price,
+                          isFovorite: false,
+                          description: '',
+                          listingId: listingController.allListings.value.data![position].listingId,
+                        );
                       }
                       return const Offstage();
                     },

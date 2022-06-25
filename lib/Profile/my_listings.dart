@@ -54,7 +54,7 @@ class _MyListingsState extends State<MyListings> {
                     .toString(),
                 price: myListingController.myListings.value.data![index].price
                     .toString(),
-                isFovorite: true,
+                isFovorite: false,
                 description: '',
                 listingId: myListingController
                     .myListings.value.data![index].listingId);
