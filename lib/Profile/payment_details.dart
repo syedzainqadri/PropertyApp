@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:realestapp/Controllers/membership_controller.dart';
 import 'package:realestapp/Controllers/payment_controller.dart';
 import 'package:realestapp/Models/payment_model.dart';
+import 'package:realestapp/Profile/PaymentResultScreen.dart';
 
 import '../Utils/color_scheme.dart';
 
@@ -26,11 +27,13 @@ class PaymentDetails extends StatefulWidget {
 class _PaymentDetailsState extends State<PaymentDetails> {
   MembershipController membershipController = Get.put(MembershipController());
   PaymentController paymentController = Get.put(PaymentController());
-  var _radioValue = ''.obs;
+  var _radioValue = 0;
   String? gatewayId;
   void _handleRadioValueChange(value) {
     setState(() {
-      _radioValue.value = value;
+      _radioValue = value;
+      print(value);
+      print(_radioValue);
 
       switch (_radioValue) {
         case 0:
@@ -68,38 +71,40 @@ class _PaymentDetailsState extends State<PaymentDetails> {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          membershipCard(widget.title, widget.price),
-          const SizedBox(
-            height: 25,
-          ),
-          Row(
-            children: const [
-              SizedBox(
-                width: 28,
-              ),
-              Text(
-                'Select Payment Method',
-                style: TextStyle(color: lightGreen, fontSize: 22),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            height: 250,
-            child: ListView.builder(
-                itemCount: paymentController.paymentGateways.length,
-                itemBuilder: (context, index) {
-                  return paymentTypes(
-                      paymentController.paymentGateways.value[index]);
-                }),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            membershipCard(widget.title, widget.price),
+            const SizedBox(
+              height: 25,
+            ),
+            Row(
+              children: const [
+                SizedBox(
+                  width: 28,
+                ),
+                Text(
+                  'Select Payment Method',
+                  style: TextStyle(color: lightGreen, fontSize: 22),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                  itemCount: paymentController.paymentGateways.length,
+                  itemBuilder: (context, index) {
+                    return paymentTypes(
+                        paymentController.paymentGateways.value[index]);
+                  }),
+            ),
+          ],
+        ),
       ),
       persistentFooterButtons: [
         Padding(
@@ -108,11 +113,20 @@ class _PaymentDetailsState extends State<PaymentDetails> {
             width: double.infinity,
             height: 50,
             child: ElevatedButton(
-              onPressed: () {
-                membershipController.membershipCheckout(
+              onPressed: () async {
+                await membershipController.membershipCheckout(
                     widget.type, widget.type, gatewayId, widget.id);
-                print(
-                    'objects sent to api are: ${widget.type}, ${gatewayId.toString()}, ${widget.id}');
+                if (membershipController.checkoutData.value.result ==
+                    "success") {
+                  Get.snackbar('Order Places',
+                      "Please Make The Payment According to Instructions",
+                      snackPosition: SnackPosition.BOTTOM);
+                } else {
+                  Get.snackbar(
+                      'Order Errod', "Order Not Places. Please Try Again",
+                      snackPosition: SnackPosition.BOTTOM);
+                }
+                Get.to(() => PaymentResultScreen());
               },
               child: const Text(
                 'Checkout',

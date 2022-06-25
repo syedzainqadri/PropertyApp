@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -40,7 +42,8 @@ class MembershipController extends GetxController {
           // 'created_date': DateTime.now(),
         });
     print(planId);
-    // checkoutData.value = checkoutFromJson(response.body);
-    // print(checkoutData.value.id);
+    print(response.body);
+    checkoutData.value = checkoutFromJson(response.body);
+    print(checkoutData.value.gateway.instructions);
   }
 }

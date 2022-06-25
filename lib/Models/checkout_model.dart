@@ -11,7 +11,7 @@ class Checkout {
     this.transactionId,
     this.orderKey,
     this.paidDate,
-    // this.createdDate,
+    this.createdDate,
     this.gateway,
     this.plan,
     this.result,
@@ -25,7 +25,7 @@ class Checkout {
   var transactionId;
   var orderKey;
   var paidDate;
-  // var createdDate;
+  var createdDate;
   var gateway;
   var plan;
   var result;
@@ -39,7 +39,7 @@ class Checkout {
         transactionId: json["transaction_id"],
         orderKey: json["order_key"],
         paidDate: json["paid_date"],
-        // createdDate: DateTime.parse(json["created_date"]),
+        createdDate: DateTime.parse(json["created_date"]),
         gateway: Gateway.fromJson(json["gateway"]),
         plan: Plan.fromJson(json["plan"]),
         result: json["result"],
