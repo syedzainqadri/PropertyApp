@@ -45,19 +45,19 @@ class PaymentResultScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Order Id',
                       style: TextStyle(color: lightGreen, fontSize: 14),
                     ),
                     orderDetails.paymentDetail.value.id != null
                         ? Text(orderDetails.paymentDetail.value.id.toString())
-                        : CircularProgressIndicator(),
+                        : const CircularProgressIndicator(),
                   ],
                 ),
               )
             ],
           )),
-          Center(child: Text('Payment Result Screen')),
+          const Center(child: Text('Payment Result Screen')),
         ],
       ),
     );
