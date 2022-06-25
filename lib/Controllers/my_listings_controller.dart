@@ -26,7 +26,6 @@ class MyListingController extends GetxController {
       },
     );
     myListings.value = allListingsFromJson(response.body);
-    print('My Listing response is ${response.body}');
     isLoading.value = false;
   }
 }

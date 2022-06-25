@@ -26,11 +26,7 @@ class SearchController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    print('Before Hit');
-
     searchListings.value = allListingsFromJson(response.body);
     isLoading.value = false;
-    print(searchString);
-    print("search response" + response.body);
   }
 }

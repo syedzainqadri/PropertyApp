@@ -27,6 +27,5 @@ class EmailController extends GetxController {
       },
       body: body,
     );
-    print(response.body);
   }
 }

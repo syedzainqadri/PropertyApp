@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                 //   height: 5,
                 // ),
                 const Text(
-                  'Top Listings',
+                  'All Listings',
                   style: TextStyle(
                     color: darkGrey,
                     fontSize: 18,

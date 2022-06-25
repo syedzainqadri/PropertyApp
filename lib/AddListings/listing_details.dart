@@ -42,8 +42,6 @@ class _ListingDetailsState extends State<ListingDetails> {
   Completer<GoogleMapController> _controller = Completer();
   @override
   void initState() {
-    print(
-        'the location is : ${listingDetailsController.listingDetail.value.contact.address}');
     super.initState();
   }
 

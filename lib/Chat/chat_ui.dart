@@ -79,7 +79,6 @@ class _ChatUiState extends State<ChatUi> {
           ChatComposer(
             controller: con,
             onReceiveText: (str) {
-              print("This conversation id is : ${con_id}");
               con_id != null
                   ? chatController.sendChatConversation(widget.listingId, str,
                       chatController.messages.value.conId)

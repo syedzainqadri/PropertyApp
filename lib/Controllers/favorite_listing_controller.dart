@@ -10,7 +10,7 @@ class FavoriteListingController extends GetxController {
 
   @override
   onInit() {
-     getMyFavorites();
+    getMyFavorites();
     super.onInit();
   }
 
@@ -26,7 +26,6 @@ class FavoriteListingController extends GetxController {
       },
     );
     favoriteListings.value = favoriteListingsFromJson(response.body);
-    print('My Favorites response is ${response.body}');
     isLoading.value = false;
   }
 
@@ -44,7 +43,6 @@ class FavoriteListingController extends GetxController {
         'listing_id': listingId.toString(),
       },
     );
-    print('Ad to Favorites response is ${response.body}');
     isLoading.value = false;
   }
 }

@@ -43,7 +43,8 @@ class _SelectCountryState extends State<SelectCountry> {
       ),
       body: Obx(
         () => Padding(
-          padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
+          padding: const EdgeInsets.only(
+              top: 18.0, bottom: 18.0, right: 20, left: 20),
           child: ListView.builder(
               itemCount: locationsController.locations.length,
               itemBuilder: (context, index) {
@@ -55,7 +56,7 @@ class _SelectCountryState extends State<SelectCountry> {
                   },
                   child: Container(
                     width: double.infinity,
-                    height: 80,
+                    height: 50,
                     decoration: BoxDecoration(
                         color: lightGreen,
                         border:

@@ -15,8 +15,6 @@ class MyPaymentsController extends GetxController{
   }
 
   getAllPayments() async {
-    
-    print("Payments befor hit");
     var response = await http.get(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/payments"),
       headers: <String, String>{
@@ -25,9 +23,6 @@ class MyPaymentsController extends GetxController{
         'Authorization': 'Bearer $token',
       },
     );
-    
-    print("Payments after hit");
-    print("Payments response "+response.body);
     myPayments.value = myPaymentsFromJson(response.body);
   }
 }

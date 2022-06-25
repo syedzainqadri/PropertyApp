@@ -15,6 +15,7 @@ import 'package:realestapp/Controllers/listing_type_controller.dart';
 import 'package:realestapp/Models/listing_configuration_model.dart';
 import 'package:realestapp/Models/listing_types_model.dart';
 import 'package:realestapp/Models/locations_model.dart';
+import 'package:realestapp/Profile/my_listings.dart';
 import '../Controllers/listings_controller.dart';
 import '../Models/Categories/category_model.dart' hide Icon;
 import '../Models/selected_fields_model.dart';
@@ -142,7 +143,7 @@ class _AddListingState extends State<AddListing> {
                 ),
               ),
               const Text(
-                'Listing Type',
+                'Select Listing Type',
                 style: TextStyle(color: darkGrey, fontSize: 20),
               ),
               ChipsChoice<ListingTypes>.single(
@@ -162,7 +163,7 @@ class _AddListingState extends State<AddListing> {
                 height: 10,
               ),
               const Text(
-                'Category',
+                'Select A Category',
                 style: TextStyle(color: darkGrey, fontSize: 20),
               ),
               ChipsChoice<CategoriesModel>.single(
@@ -220,7 +221,7 @@ class _AddListingState extends State<AddListing> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            'Pricing Type',
+                            'Select Pricing Type',
                             style: TextStyle(color: darkGrey, fontSize: 20),
                           ),
                           ChipsChoice<PricType>.single(
@@ -276,7 +277,7 @@ class _AddListingState extends State<AddListing> {
                             height: 15,
                           ),
                           const Text(
-                            'Price Type',
+                            'Select Negotiation Term',
                             style: TextStyle(color: darkGrey, fontSize: 20),
                           ),
                           RadioGroup<PricType>.builder(
@@ -284,8 +285,6 @@ class _AddListingState extends State<AddListing> {
                             direction: Axis.horizontal,
                             groupValue: priceTypes,
                             onChanged: (value) => setState(() {
-                              print(listingConfigController.listingConfig.value
-                                  .customFields[0].options.choices[0].name);
                               priceTypes = value;
                             }),
                             items: listingConfigController
@@ -608,9 +607,8 @@ class _AddListingState extends State<AddListing> {
             height: 50,
             width: double.infinity,
             child: ElevatedButton(
-                onPressed: () {
-                  print(selectedFields.toString());
-                  listingsController.addListing(
+                onPressed: () async {
+                  await listingsController.addListing(
                       locationsController.userLocationId.value,
                       208, //var category;
                       listingType.id,
@@ -627,6 +625,10 @@ class _AddListingState extends State<AddListing> {
                       imageFiles,
                       selectedFields,
                       jsonEncode(myAmenities));
+                  Get.to(() => MyListings());
+                  Get.snackbar('Listing Posted',
+                      'Your is listing is pending for Approval from Admin',
+                      snackPosition: SnackPosition.BOTTOM);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: lightGreen,

@@ -14,7 +14,6 @@ class OrdersController extends GetxController {
   }
 
   getAllOrders() async {
-    print("Orders befor hit");
     var response = await http.get(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/orders"),
       headers: <String, String>{
@@ -23,9 +22,6 @@ class OrdersController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-
-    print("Orders after hit");
-    print("Order response " + response.body);
     orders.value = orderFromJson(response.body);
   }
 }

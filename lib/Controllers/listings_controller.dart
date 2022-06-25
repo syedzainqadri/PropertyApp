@@ -29,7 +29,6 @@ class ListingController extends GetxController {
       },
     );
     allListings.value = allListingsFromJson(response.body);
-    print('All Listing response is ${response.body}');
     isLoading.value = false;
   }
 
@@ -83,11 +82,8 @@ class ListingController extends GetxController {
       'description': description.toString(),
       'custom_fields[4216]': amenities.toString(),
     });
-    print(amenities);
-    print(amenities.toString());
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    print(response.body);
     isLoading.value = false;
   }
 }
