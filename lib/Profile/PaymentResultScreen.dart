@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
-import 'package:realestapp/Controllers/membership_controller.dart';
 import 'package:realestapp/Home/home_page.dart';
-import 'package:realestapp/Models/checkout_model.dart';
-import 'package:realestapp/Profile/payment_details.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
 
 class PaymentResultScreen extends StatelessWidget {
