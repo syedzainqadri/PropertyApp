@@ -49,13 +49,15 @@ class _SearchPageState extends State<SearchPage> {
           const SizedBox(
             height: 15,
           ),
-          searchController.searchListings.value.data == null
+         Obx(() {
+         return  searchController.searchListings.value.data == null
               ? const CircularProgressIndicator(
                   color: Colors.greenAccent,
                 )
               : Expanded(
-                  child: Obx(() {
-                    return ListView.builder(
+                  child:  ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
                       itemCount:
                           searchController.searchListings.value.data!.length,
                       itemBuilder: (context, position) {
@@ -74,9 +76,9 @@ class _SearchPageState extends State<SearchPage> {
                               .searchListings.value.data![position].listingId,
                         );
                       },
-                    );
-                  }),
-                ),
+                    ),
+                );
+         }),
         ],
       ),
     );
