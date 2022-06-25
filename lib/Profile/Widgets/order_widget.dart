@@ -16,8 +16,8 @@ class OrderWidget extends StatelessWidget {
       required this.method,
       required this.createdDate})
       : super(key: key);
-  final OrderDetailsController orderDetailsController =
-      OrderDetailsController();
+  final PaymentDetailsController orderDetailsController =
+      PaymentDetailsController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +30,8 @@ class OrderWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () async {
-          await orderDetailsController.getOrderById(orderId.toString());
-          Get.to(() => OrderDetailScreen());
+          await orderDetailsController.getPaymentById(orderId.toString());
+          Get.to(() => OrderDetailsScreen());
         },
         child: Card(
           child: Column(
