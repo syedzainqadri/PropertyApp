@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/search_controller.dart';
+import 'package:realestapp/Search/Widgets/SearchRessultCard.dart';
 
 import '../AddListings/list_widget.dart';
 import '../Controllers/listings_controller.dart';
@@ -49,17 +50,19 @@ class _SearchPageState extends State<SearchPage> {
           const SizedBox(
             height: 15,
           ),
-          searchController.searchListings.value.data == null
-              ? const CircularProgressIndicator(
-                  color: Colors.greenAccent,
-                )
-              : Expanded(
-                  child: Obx(() {
-                    return ListView.builder(
+          Obx(() {
+            return searchController.searchListings.value.data == null
+                ? const CircularProgressIndicator(
+                    color: Colors.greenAccent,
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
                       itemCount:
                           searchController.searchListings.value.data!.length,
                       itemBuilder: (context, position) {
-                        return ListingCard(
+                        return SearchResultCard(
                           image: searchController
                               .searchListings.value.data![position].images,
                           title: searchController
@@ -74,9 +77,9 @@ class _SearchPageState extends State<SearchPage> {
                               .searchListings.value.data![position].listingId,
                         );
                       },
-                    );
-                  }),
-                ),
+                    ),
+                  );
+          }),
         ],
       ),
     );
