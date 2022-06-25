@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
 import 'package:realestapp/Controllers/membership_controller.dart';
 import 'package:realestapp/Controllers/payment_controller.dart';
 import 'package:realestapp/Models/payment_model.dart';
+import 'package:realestapp/Models/paymenyByIdModel.dart';
 import 'package:realestapp/Profile/PaymentResultScreen.dart';
 
 import '../Utils/color_scheme.dart';
@@ -27,6 +29,8 @@ class PaymentDetails extends StatefulWidget {
 class _PaymentDetailsState extends State<PaymentDetails> {
   MembershipController membershipController = Get.put(MembershipController());
   PaymentController paymentController = Get.put(PaymentController());
+  final PaymentDetailsController paymentDetailsController =
+      Get.put(PaymentDetailsController());
   var _radioValue = 0;
   String? gatewayId;
   void _handleRadioValueChange(value) {
@@ -126,6 +130,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       'Order Errod', "Order Not Places. Please Try Again",
                       snackPosition: SnackPosition.BOTTOM);
                 }
+                await paymentDetailsController
+                    .getPaymentById(membershipController.checkoutData.value.id);
                 Get.to(() => PaymentResultScreen());
               },
               child: const Text(

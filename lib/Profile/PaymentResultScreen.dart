@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
 import 'package:realestapp/Controllers/membership_controller.dart';
 import 'package:realestapp/Home/home_page.dart';
 import 'package:realestapp/Models/checkout_model.dart';
@@ -8,8 +9,8 @@ import 'package:realestapp/Utils/color_scheme.dart';
 
 class PaymentResultScreen extends StatelessWidget {
   PaymentResultScreen({Key? key}) : super(key: key);
-
-  final MembershipController membershipController = MembershipController();
+  final PaymentDetailsController paymentDetailsController =
+      Get.put(PaymentDetailsController());
   Checkout? checkout;
 
   @override
@@ -42,9 +43,8 @@ class PaymentResultScreen extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  membershipController.checkoutData.value == null
-                      ? Text(membershipController
-                          .checkoutData.value.gateway.instructions)
+                  paymentDetailsController.paymentDetail.value.id == null
+                      ? Text(paymentDetailsController.paymentDetail.value.id)
                       : CircularProgressIndicator(),
                 ],
               )

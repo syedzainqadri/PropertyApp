@@ -96,7 +96,7 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                 Expanded(
                   child: Container(
                     decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 194, 250, 225),
+                      color: Colors.white,
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(20),
                         bottomLeft: Radius.circular(20),

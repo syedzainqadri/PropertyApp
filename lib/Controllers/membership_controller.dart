@@ -5,11 +5,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:realestapp/Models/checkout_model.dart';
 import 'package:realestapp/Models/membership_model.dart';
+import 'package:realestapp/Models/payment_model.dart';
 
 class MembershipController extends GetxController {
   var box = GetStorage();
   var membershipPlans = List<Membership>.empty(growable: true).obs;
   var checkoutData = Checkout().obs;
+  var paymetId = ''.obs;
 
   getMembershipPlans() async {
     var response = await http.get(
@@ -39,11 +41,11 @@ class MembershipController extends GetxController {
           'promotion_type': promotionType,
           'gateway_id': gatewayId,
           'plan_id': planId.toString(),
-          // 'created_date': DateTime.now(),
         });
     print(planId);
     print(response.body);
     checkoutData.value = checkoutFromJson(response.body);
+    paymetId.value = checkoutData.value.id.toString();
     print(checkoutData.value.gateway.instructions);
   }
 }
