@@ -3,16 +3,15 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import '../Models/all_listing_model.dart';
 
-class SearchController extends GetxController{
-var isLoading = false.obs;
+class SearchController extends GetxController {
+  var isLoading = false.obs;
   var searchListings = AllListings().obs;
   final token = GetStorage().read('token');
 
-
   getSearchedListings(searchString) async {
-   
     isLoading.value = true;
-    String url = "https://lagosabuja.com/wp-json/rtcl/v1/my/listings?search=$searchString";
+    String url =
+        "https://lagosabuja.com/wp-json/rtcl/v1/listings?search=$searchString";
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -21,11 +20,11 @@ var isLoading = false.obs;
         'Authorization': 'Bearer $token',
       },
     );
-     print('Before Hit');
+    print('Before Hit');
 
     searchListings.value = allListingsFromJson(response.body);
     isLoading.value = false;
     print(searchString);
-    print("search response"+response.body);
+    print("search response" + response.body);
   }
 }
