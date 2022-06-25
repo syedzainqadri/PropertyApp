@@ -30,7 +30,7 @@ class _SignInState extends State<SignIn> {
   final SignInController _signInController = SignInController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final userController = Get.put(UserController());
+  // final userController = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
