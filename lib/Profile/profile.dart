@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestapp/Controllers/profile_controller.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
+import 'package:realestapp/Profile/orders.dart';
 import '../Auth/sign_in.dart';
 import '../Controllers/user_controller.dart';
 import 'account_details.dart';
@@ -139,7 +140,7 @@ class _ProfileState extends State<Profile> {
                 profileParameters(
                     "Settings", Icons.settings, mediumGrey, const Settings()),
                 profileParameters(
-                    "Contact Us", Icons.phone, lightGreen, const MyListings()),
+                    "Orders", Icons.shopping_cart, lightGreen, const Orders()),
                 profileParameters("Admin Dashboard", Icons.dashboard,
                     mediumBlue, const MyListings()),
                 const SizedBox(
