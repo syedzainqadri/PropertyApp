@@ -162,10 +162,15 @@ class _CategoryPageState extends State<CategoryPage> {
                     itemCount: listingController.allListings.value.data!.length,
                     itemBuilder: (context, position) {
                       if (listingController.allListings.value.data![position]
-                              .categories![0].termId ==
-                          widget.id) {
-                        return itemWidget(context,listingController
-                            .allListings.value.data![position]);
+                                  .categories![0].parent ==
+                              widget.id ||
+                          listingController.allListings.value.data![position]
+                                  .categories![0].termId ==
+                              widget.id) {
+                        return itemWidget(
+                            context,
+                            listingController
+                                .allListings.value.data![position]);
                       }
                       return const Offstage();
                     },

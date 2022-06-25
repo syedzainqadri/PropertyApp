@@ -334,6 +334,7 @@ class CustomField {
   var min;
   var max;
   var stepSize;
+  var icon;
 
   factory CustomField.fromJson(Map<String, dynamic> json) => CustomField(
         id: json["id"],

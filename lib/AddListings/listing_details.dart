@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flat_icons_flutter/flat_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
@@ -37,7 +38,7 @@ class _ListingDetailsState extends State<ListingDetails> {
   }
 
   final listingDetailsController = Get.put(ListingDetailsController());
-
+String icons='shower';
   @override
   Widget build(BuildContext context) {
     var listing = Get.find<ListingDetailsController>().listingDetail.value;
@@ -78,13 +79,11 @@ class _ListingDetailsState extends State<ListingDetails> {
         ],
       ),
       body: ListView.builder(
-                itemCount: listingDetailsController
-                    .listingDetail.value.customFields.length,
-                itemBuilder: (context, index) {
-                  return Text(
-                        '${listingDetailsController.listingDetail.value.customFields[index].label}:   ${listingDetailsController.listingDetail.value.customFields[index].value}');
-                },
-              ),
+        itemCount: listingDetailsController.listingDetail.value.customFields.length,
+        itemBuilder: (context, index) {
+          return Icon(FlatIcons.get(icons));
+        },
+      ),
       //  SingleChildScrollView(
       //   child: Column(
       //     mainAxisAlignment: MainAxisAlignment.start,
@@ -236,6 +235,11 @@ class _ListingDetailsState extends State<ListingDetails> {
       // ),
     );
   }
+  IconData getIconData(Map<String, dynamic> icon) {
+  return IconData(
+    icon['icon'],
+  );
+}
 
   extraInfo(title, value) {
     return Padding(
@@ -263,6 +267,9 @@ class _ListingDetailsState extends State<ListingDetails> {
       ),
     );
   }
+  
+
+}
 
   review(Data review) {
     return Padding(

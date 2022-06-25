@@ -55,6 +55,7 @@ dependencies:
   group_radio_button: ^1.2.0
   bubble_radio_button: ^0.0.3
   grouped_buttons: ^1.0.4
+  flat_icons_flutter: ^1.0.2
 
 dev_dependencies:
   flutter_test:
