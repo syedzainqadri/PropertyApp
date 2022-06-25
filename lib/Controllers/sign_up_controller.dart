@@ -19,11 +19,9 @@ class SignUpController extends GetxController {
         'last name ': lastName,
         'phone': phone,
       }),
-    );  
-    print(response.body);
+    );
     var result = jsonDecode(response.body);
     var data = result['user'];
-    print(data['first_name']);
     return response.body;
   }
 }

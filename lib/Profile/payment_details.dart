@@ -7,7 +7,9 @@ import 'package:realestapp/Models/payment_model.dart';
 import '../Utils/color_scheme.dart';
 
 class PaymentDetails extends StatefulWidget {
-  final String title, price, type;
+  final String title;
+  final String price;
+  final String type;
   final int id;
   const PaymentDetails(
       {Key? key,
@@ -24,11 +26,11 @@ class PaymentDetails extends StatefulWidget {
 class _PaymentDetailsState extends State<PaymentDetails> {
   MembershipController membershipController = Get.put(MembershipController());
   PaymentController paymentController = Get.put(PaymentController());
-  var _radioValue = 0;
-  String gatewayId = '';
+  var _radioValue = ''.obs;
+  String? gatewayId;
   void _handleRadioValueChange(value) {
     setState(() {
-      _radioValue = value;
+      _radioValue.value = value;
 
       switch (_radioValue) {
         case 0:
@@ -72,19 +74,23 @@ class _PaymentDetailsState extends State<PaymentDetails> {
         children: [
           membershipCard(widget.title, widget.price),
           const SizedBox(
-            height: 25,),
-          Row(
-            children:const [
-               SizedBox(
-            width: 28,),
-           Text('Select Payment Method',
-          style: TextStyle(color: lightGreen,fontSize: 22),
+            height: 25,
           ),
+          Row(
+            children: const [
+              SizedBox(
+                width: 28,
+              ),
+              Text(
+                'Select Payment Method',
+                style: TextStyle(color: lightGreen, fontSize: 22),
+              ),
             ],
           ),
           const SizedBox(
-            height: 10,),
-                    SizedBox(
+            height: 10,
+          ),
+          SizedBox(
             height: 250,
             child: ListView.builder(
                 itemCount: paymentController.paymentGateways.length,
@@ -105,6 +111,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               onPressed: () {
                 membershipController.membershipCheckout(
                     widget.type, widget.type, gatewayId, widget.id);
+                print(
+                    'objects sent to api are: ${widget.type}, ${gatewayId.toString()}, ${widget.id}');
               },
               child: const Text(
                 'Checkout',
@@ -244,13 +252,16 @@ class _PaymentDetailsState extends State<PaymentDetails> {
     return GestureDetector(
       onTap: () {
         setState(() {
+          print("i am prinitng ${payment.id}");
           gatewayId = payment.id;
+          print('gateway id is: $gatewayId');
         });
       },
       child: Row(
         children: [
           const SizedBox(
-            width: 25,),
+            width: 25,
+          ),
           Radio(
             value: 1,
             activeColor: lightGreen,

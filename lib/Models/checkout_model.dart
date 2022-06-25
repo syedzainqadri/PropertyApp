@@ -4,32 +4,32 @@ Checkout checkoutFromJson(String str) => Checkout.fromJson(json.decode(str));
 
 class Checkout {
   Checkout({
-    required this.id,
-    required this.price,
-    required this.method,
-    required this.status,
-    required this.transactionId,
-    required this.orderKey,
-    required this.paidDate,
-    required this.createdDate,
-    required this.gateway,
-    required this.plan,
-    required this.result,
-    required this.redirect,
+    this.id,
+    this.price,
+    this.method,
+    this.status,
+    this.transactionId,
+    this.orderKey,
+    this.paidDate,
+    // this.createdDate,
+    this.gateway,
+    this.plan,
+    this.result,
+    this.redirect,
   });
 
-  int id;
-  String price;
-  String method;
-  String status;
-  String transactionId;
-  String orderKey;
-  String paidDate;
-  DateTime createdDate;
-  Gateway gateway;
-  Plan plan;
-  String result;
-  String redirect;
+  var id;
+  var price;
+  var method;
+  var status;
+  var transactionId;
+  var orderKey;
+  var paidDate;
+  // var createdDate;
+  var gateway;
+  var plan;
+  var result;
+  var redirect;
 
   factory Checkout.fromJson(Map<String, dynamic> json) => Checkout(
         id: json["id"],
@@ -39,7 +39,7 @@ class Checkout {
         transactionId: json["transaction_id"],
         orderKey: json["order_key"],
         paidDate: json["paid_date"],
-        createdDate: DateTime.parse(json["created_date"]),
+        // createdDate: DateTime.parse(json["created_date"]),
         gateway: Gateway.fromJson(json["gateway"]),
         plan: Plan.fromJson(json["plan"]),
         result: json["result"],
@@ -49,18 +49,18 @@ class Checkout {
 
 class Gateway {
   Gateway({
-    required this.id,
-    required this.title,
-    required this.icon,
-    required this.instructions,
-    required this.description,
+    this.id,
+    this.title,
+    this.icon,
+    this.instructions,
+    this.description,
   });
 
-  String id;
-  String title;
-  dynamic icon;
-  String instructions;
-  String description;
+  var id;
+  var title;
+  var icon;
+  var instructions;
+  var description;
 
   factory Gateway.fromJson(Map<String, dynamic> json) => Gateway(
         id: json["id"],
@@ -73,22 +73,22 @@ class Gateway {
 
 class Plan {
   Plan({
-    required this.id,
-    required this.price,
-    required this.description,
-    required this.title,
-    required this.visible,
-    required this.type,
-    required this.regularAds,
+    this.id,
+    this.price,
+    this.description,
+    this.title,
+    this.visible,
+    this.type,
+    this.regularAds,
   });
 
-  int id;
-  String price;
-  String description;
-  String title;
-  int visible;
-  String type;
-  int regularAds;
+  var id;
+  var price;
+  var description;
+  var title;
+  var visible;
+  var type;
+  var regularAds;
 
   factory Plan.fromJson(Map<String, dynamic> json) => Plan(
         id: json["id"],
@@ -100,8 +100,3 @@ class Plan {
         regularAds: json["regular_ads"],
       );
 }
-
-
-
-
-
