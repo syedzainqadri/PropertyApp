@@ -18,7 +18,7 @@ class Orders extends StatelessWidget {
         elevation: 0.0,
         centerTitle: true,
         title: const Text(
-          'Orders',
+          'Order History',
           style: TextStyle(color: lightGreen),
         ),
         leading: GestureDetector(

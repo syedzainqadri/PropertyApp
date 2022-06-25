@@ -57,7 +57,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       backgroundColor: white,
       appBar: AppBar(
         title: const Text(
-          'Payment Details',
+          'Checkout',
           style: TextStyle(color: lightGreen),
         ),
         centerTitle: true,

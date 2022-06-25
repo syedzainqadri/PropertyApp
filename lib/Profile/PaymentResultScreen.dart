@@ -15,7 +15,7 @@ class PaymentResultScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Order Details',
+          'Payment Details',
           style: TextStyle(color: lightGreen),
         ),
         centerTitle: true,
@@ -160,16 +160,16 @@ class PaymentResultScreen extends StatelessWidget {
               color: lightGreen,
               thickness: 2,
             ),
-            // Padding(
-            //   padding:
-            //       const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-            //   child: Center(
-            //       child: Text(
-            //     orderDetails.paymentDetail.value.gateway.instructions,
-            //     style:
-            //         TextStyle(color: Colors.red, fontWeight: FontWeight.w500),
-            //   )),
-            // ),
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+              child: Center(
+                  child: Text(
+                orderDetails.paymentDetail.value.gateway.instructions,
+                style:
+                    TextStyle(color: Colors.red, fontWeight: FontWeight.w500),
+              )),
+            ),
             Divider(
               color: lightGreen,
               thickness: 2,

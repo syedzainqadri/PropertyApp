@@ -1,4 +1,4 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, invalid_use_of_protected_member, avoid_print
 
 import 'dart:convert';
 import 'dart:io';
@@ -346,7 +346,7 @@ class _AddListingState extends State<AddListing> {
                                                                 position];
                                                         if (value!) {
                                                           myAmenities.add(
-                                                             "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}");
+                                                              "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}");
                                                         }
                                                       });
                                                     },
