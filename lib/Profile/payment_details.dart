@@ -332,44 +332,4 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       ),
     );
   }
-
-  // paymentsCard(title, price) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(18.0),
-  //     child: SizedBox(
-  //       width: double.infinity,
-  //       height: 200,
-  //       child: Card(
-  //         shape:
-  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-  //         child: Column(
-  //           mainAxisAlignment: MainAxisAlignment.start,
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             Container(
-  //               height: 40,
-  //               width: double.infinity,
-  //               decoration: const BoxDecoration(
-  //                 color: lightGreen,
-  //                 borderRadius: BorderRadius.only(
-  //                   topLeft: Radius.circular(20),
-  //                   topRight: Radius.circular(20),
-  //                 ),
-  //               ),
-  //               child: const Center(
-  //                   child: Text(
-  //                 'Payment Detail',
-  //                 style: TextStyle(color: white, fontSize: 18),
-  //               )),
-  //             ),
-  //             Padding(
-  //               padding: const EdgeInsets.all(8.0),
-  //               child:
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
