@@ -5,6 +5,7 @@ import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/chat_controller.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
+import 'package:realestapp/Controllers/my_payment_controller.dart';
 import 'package:realestapp/Controllers/orders_controller.dart';
 import 'Auth/sign_in.dart';
 import 'Controllers/favorite_listing_controller.dart';
@@ -30,6 +31,7 @@ void main() async {
     Get.put(ListingTypeController());
     Get.put(SearchController());
     Get.put(OrdersController());
+    Get.put(MyPaymentsController());
   }
   runApp(const MyApp());
 }
