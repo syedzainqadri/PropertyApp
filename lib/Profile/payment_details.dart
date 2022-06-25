@@ -27,8 +27,9 @@ class PaymentDetails extends StatefulWidget {
 }
 
 class _PaymentDetailsState extends State<PaymentDetails> {
-  MembershipController membershipController = Get.put(MembershipController());
-  PaymentController paymentController = Get.put(PaymentController());
+  final MembershipController membershipController =
+      Get.put(MembershipController());
+  final PaymentController paymentController = Get.put(PaymentController());
   final PaymentDetailsController paymentDetailsController =
       Get.put(PaymentDetailsController());
   var _radioValue = 0;
@@ -36,8 +37,6 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   void _handleRadioValueChange(value) {
     setState(() {
       _radioValue = value;
-      print(value);
-      print(_radioValue);
 
       switch (_radioValue) {
         case 0:
@@ -103,8 +102,39 @@ class _PaymentDetailsState extends State<PaymentDetails> {
               child: ListView.builder(
                   itemCount: paymentController.paymentGateways.length,
                   itemBuilder: (context, index) {
-                    return paymentTypes(
-                        paymentController.paymentGateways.value[index]);
+                    return Row(
+                      children: [
+                        const SizedBox(
+                          width: 25,
+                        ),
+                        Radio(
+                          value: 1,
+                          activeColor: lightGreen,
+                          groupValue: _radioValue,
+                          onChanged: (value) {
+                            setState(() {
+                              print(
+                                  "i am prinitng ${paymentController.paymentGateways.value[index].id}");
+                              gatewayId = paymentController
+                                  .paymentGateways.value[index].id;
+                              print('gateway id is: $gatewayId');
+                            });
+                            _handleRadioValueChange(value);
+                          },
+                        ),
+                        const SizedBox(
+                          width: 8.0,
+                        ),
+                        Text(
+                          paymentController.paymentGateways.value[index].title,
+                          style: const TextStyle(
+                              color: Color.fromARGB(255, 40, 40, 40),
+                              fontSize: 19),
+                        ),
+                      ],
+                    );
+                    // paymentTypes(
+                    //     paymentController.paymentGateways.value[index]);
                   }),
             ),
           ],

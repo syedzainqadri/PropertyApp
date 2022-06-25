@@ -11,15 +11,14 @@ class PaymentResultScreen extends StatelessWidget {
   PaymentResultScreen({Key? key}) : super(key: key);
   final PaymentDetailsController paymentDetailsController =
       Get.put(PaymentDetailsController());
-  Checkout? checkout;
 
   @override
   Widget build(BuildContext context) {
-    var orderDetails = Get.find<MembershipController>();
+    var orderDetails = Get.find<PaymentDetailsController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Payment Details',
+          'Order Details',
           style: TextStyle(color: lightGreen),
         ),
         centerTitle: true,
@@ -41,12 +40,20 @@ class PaymentResultScreen extends StatelessWidget {
           Card(
               child: Column(
             children: [
-              Row(
-                children: [
-                  paymentDetailsController.paymentDetail.value.id == null
-                      ? Text(paymentDetailsController.paymentDetail.value.id)
-                      : CircularProgressIndicator(),
-                ],
+              Container(
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Order Id',
+                      style: TextStyle(color: lightGreen, fontSize: 14),
+                    ),
+                    orderDetails.paymentDetail.value.id != null
+                        ? Text(orderDetails.paymentDetail.value.id.toString())
+                        : CircularProgressIndicator(),
+                  ],
+                ),
               )
             ],
           )),
