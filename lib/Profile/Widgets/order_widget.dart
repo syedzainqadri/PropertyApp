@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/OrderDetailsController.dart';
 import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
 import 'package:realestapp/Profile/PaymentResultScreen.dart';
 import 'package:realestapp/Profile/order_detail_screen.dart';
 
-class OrderWidget extends StatelessWidget {
+class OrderWidget extends StatefulWidget {
   final orderId, title, price, status, method, createdDate;
   OrderWidget(
       {Key? key,
@@ -16,6 +15,12 @@ class OrderWidget extends StatelessWidget {
       required this.method,
       required this.createdDate})
       : super(key: key);
+
+  @override
+  State<OrderWidget> createState() => _OrderWidgetState();
+}
+
+class _OrderWidgetState extends State<OrderWidget> {
   final PaymentDetailsController orderDetailsController =
       PaymentDetailsController();
 
@@ -30,8 +35,19 @@ class OrderWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () async {
-          await orderDetailsController.getPaymentById(orderId.toString());
-          Get.to(() => OrderDetailsScreen());
+          await orderDetailsController
+              .getPaymentById(widget.orderId.toString());
+          Get.to(() => OrderDetailsScreen(
+                id: orderDetailsController.paymentDetail.value.id,
+                date: orderDetailsController.paymentDetail.value.createdDate,
+                ammount: orderDetailsController.paymentDetail.value.price,
+                status: orderDetailsController.paymentDetail.value.status,
+                paymentDue: orderDetailsController.paymentDetail.value.paidDate,
+                paymentMethod:
+                    orderDetailsController.paymentDetail.value.gateway.title,
+                instructions: orderDetailsController
+                    .paymentDetail.value.gateway.instructions,
+              ));
         },
         child: Card(
           child: Column(
@@ -49,7 +65,7 @@ class OrderWidget extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
-                    Text(orderId.toString()),
+                    Text(widget.orderId.toString()),
                   ],
                 ),
               ),
@@ -66,7 +82,7 @@ class OrderWidget extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
-                    Text(title.toString()),
+                    Text(widget.title.toString()),
                   ],
                 ),
               ),
@@ -83,7 +99,7 @@ class OrderWidget extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
-                    Text("\$ ${price.toString()}"),
+                    Text("\$ ${widget.price.toString()}"),
                   ],
                 ),
               ),
@@ -100,7 +116,7 @@ class OrderWidget extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
-                    Text(status.toString()),
+                    Text(widget.status.toString()),
                   ],
                 ),
               ),
@@ -117,7 +133,7 @@ class OrderWidget extends StatelessWidget {
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
-                    Text(createdDate.toString()),
+                    Text(widget.createdDate.toString()),
                   ],
                 ),
               ),

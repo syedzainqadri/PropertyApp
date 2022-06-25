@@ -5,13 +5,29 @@ import 'package:realestapp/Home/home.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
-  OrderDetailsScreen({Key? key}) : super(key: key);
-  final PaymentDetailsController paymentDetailsController =
-      Get.put(PaymentDetailsController());
+  var id;
+  var date;
+  var ammount;
+  var status;
+  var paymentDue;
+  var paymentMethod;
+  var instructions;
+  OrderDetailsScreen(
+      {this.id,
+      this.date,
+      this.ammount,
+      this.status,
+      this.paymentDue,
+      this.paymentMethod,
+      this.instructions,
+      Key? key})
+      : super(key: key);
+  // final PaymentDetailsController paymentDetailsController =
+  //     Get.put(PaymentDetailsController());
 
   @override
   Widget build(BuildContext context) {
-    var orderDetails = Get.find<PaymentDetailsController>();
+    // var orderDetails = Get.find<PaymentDetailsController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -49,9 +65,9 @@ class OrderDetailsScreen extends StatelessWidget {
                         'Order Id',
                         style: TextStyle(color: lightGreen, fontSize: 14),
                       ),
-                      orderDetails.paymentDetail.value.id != null
+                      id != null
                           ? Text(
-                              orderDetails.paymentDetail.value.id.toString(),
+                              id.toString(),
                               style: TextStyle(fontWeight: FontWeight.bold),
                             )
                           : const CircularProgressIndicator(),
@@ -68,10 +84,7 @@ class OrderDetailsScreen extends StatelessWidget {
                         'Order Date',
                         style: TextStyle(color: lightGreen, fontSize: 14),
                       ),
-                      orderDetails.paymentDetail.value.createdDate != null
-                          ? Text(orderDetails.paymentDetail.value.createdDate
-                              .toString())
-                          : const SizedBox(),
+                      date != null ? Text(date.toString()) : const SizedBox(),
                     ],
                   ),
                 ),
@@ -85,9 +98,8 @@ class OrderDetailsScreen extends StatelessWidget {
                         'Order Amount',
                         style: TextStyle(color: lightGreen, fontSize: 14),
                       ),
-                      orderDetails.paymentDetail.value.price != null
-                          ? Text(
-                              "\$ ${orderDetails.paymentDetail.value.price.toString()}")
+                      ammount != null
+                          ? Text("\$ ${ammount.toString()}")
                           : const CircularProgressIndicator(),
                     ],
                   ),
@@ -102,9 +114,8 @@ class OrderDetailsScreen extends StatelessWidget {
                         'Order Status',
                         style: TextStyle(color: lightGreen, fontSize: 14),
                       ),
-                      orderDetails.paymentDetail.value.status != null
-                          ? Text(orderDetails.paymentDetail.value.status
-                              .toString())
+                      status != null
+                          ? Text(status.toString())
                           : const CircularProgressIndicator(),
                     ],
                   ),
@@ -119,9 +130,8 @@ class OrderDetailsScreen extends StatelessWidget {
                         'Payment Date',
                         style: TextStyle(color: lightGreen, fontSize: 14),
                       ),
-                      orderDetails.paymentDetail.value.paidDate != ""
-                          ? Text(orderDetails.paymentDetail.value.paidDate
-                              .toString())
+                      paymentDue != ""
+                          ? Text(paymentDue.toString())
                           : const Text('Payment Pending'),
                     ],
                   ),
@@ -136,9 +146,8 @@ class OrderDetailsScreen extends StatelessWidget {
                         'Payment Method',
                         style: TextStyle(color: lightGreen, fontSize: 14),
                       ),
-                      orderDetails.paymentDetail.value.gateway != null
-                          ? Text(orderDetails.paymentDetail.value.gateway.title
-                              .toString())
+                      paymentMethod != null
+                          ? Text(paymentMethod.toString())
                           : const SizedBox(),
                     ],
                   ),
@@ -165,7 +174,7 @@ class OrderDetailsScreen extends StatelessWidget {
                   const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
               child: Center(
                   child: Text(
-                orderDetails.paymentDetail.value.gateway.instructions,
+                instructions,
                 style:
                     TextStyle(color: Colors.red, fontWeight: FontWeight.w500),
               )),
