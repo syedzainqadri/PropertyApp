@@ -17,6 +17,7 @@ import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/listing_config_controller.dart';
 import 'package:realestapp/Controllers/listing_type_controller.dart';
 import 'package:realestapp/Controllers/my_listings_controller.dart';
+import 'package:realestapp/Controllers/user_controller.dart';
 import 'package:realestapp/Models/listing_configuration_model.dart';
 import 'package:realestapp/Models/listing_types_model.dart';
 import 'package:realestapp/Models/locations_model.dart';
@@ -24,6 +25,7 @@ import 'package:realestapp/Profile/my_listings.dart';
 import '../Controllers/listings_controller.dart';
 import '../Models/Categories/category_model.dart' hide Icon;
 import '../Models/selected_fields_model.dart';
+import '../Models/user_model.dart';
 import '../Utils/color_scheme.dart';
 import '../Utils/constants.dart';
 import 'select_country.dart';
@@ -41,6 +43,7 @@ class _AddListingState extends State<AddListing> {
       Get.put(MyListingController());
   final categoriesController = Get.put(CategoriesController());
   final listingConfigController = Get.put(ListingConfigController());
+  final userController = Get.put(UserController());
   bool categorySelected = false;
   bool subCategorySelected = false;
   final listingsController = Get.put(ListingController());
@@ -341,28 +344,7 @@ class _AddListingState extends State<AddListing> {
                   },
                 ),
               ),
-               TitleWidget(
-                text: 'Select Promotion Type',
-                padding: 5.0,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
-                child: ChipsChoice<ListingTypes>.single(
-                  choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                  wrapped: true,
-                  value: listingType,
-                  choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
-                    source: listingTypeController.listingTypes.value,
-                    value: (i, v) => v,
-                    label: (i, v) => v.name,
-                  ),
-                  onChanged: (val) {
-                    setState(() => listingType = val);
-                    print(listingType.id.toString());
-                  },
-                ),
-              ),
+              
               TitleWidget(
                 padding: 5.0,
                 text: 'Select A Category',
@@ -806,6 +788,7 @@ class _AddListingState extends State<AddListing> {
                     imageFiles,
                     _latitude,
                     _longitude,
+                    videoController.text,
                     selectedFields,
                     jsonEncode(myAmenities),
                   );

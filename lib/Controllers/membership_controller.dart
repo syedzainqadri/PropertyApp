@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:realestapp/Models/checkout_model.dart';
 import 'package:realestapp/Models/membership_model.dart';
-import 'package:realestapp/Models/payment_model.dart';
 
 class MembershipController extends GetxController {
   var box = GetStorage();
@@ -13,6 +10,11 @@ class MembershipController extends GetxController {
   var checkoutData = Checkout().obs;
   var paymetId = ''.obs;
 
+  @override
+  onInit(){
+    getMembershipPlans();
+    super.onInit();
+  }
   getMembershipPlans() async {
     var response = await http.get(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/plans?type=membership"),

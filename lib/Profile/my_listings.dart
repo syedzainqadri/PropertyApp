@@ -4,6 +4,7 @@ import 'package:realestapp/Controllers/listings_controller.dart';
 import 'package:realestapp/Controllers/my_listings_controller.dart';
 
 import '../AddListings/list_widget.dart';
+import '../AddListings/my_listing_card.dart';
 import '../Utils/color_scheme.dart';
 
 class MyListings extends StatefulWidget {
@@ -48,7 +49,7 @@ class _MyListingsState extends State<MyListings> {
                 shrinkWrap: true,
                 itemCount: myListingController.myListings.value.data?.length,
                 itemBuilder: (context, index) {
-                  return ListingCard(
+                  return MyListingCard(
                       image: myListingController
                           .myListings.value.data![index].images,
                       title: myListingController
