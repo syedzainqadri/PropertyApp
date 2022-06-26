@@ -10,7 +10,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
-import 'package:realestapp/AddListings/Widgets/TextArea.dart';
 import 'package:realestapp/AddListings/Widgets/TextAreaForForm.dart';
 import 'package:realestapp/AddListings/Widgets/TextFieldForForm.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
@@ -322,6 +321,28 @@ class _AddListingState extends State<AddListing> {
               ),
               TitleWidget(
                 text: 'Select Listing Type',
+                padding: 5.0,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
+                child: ChipsChoice<ListingTypes>.single(
+                  choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                  wrapped: true,
+                  value: listingType,
+                  choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
+                    source: listingTypeController.listingTypes.value,
+                    value: (i, v) => v,
+                    label: (i, v) => v.name,
+                  ),
+                  onChanged: (val) {
+                    setState(() => listingType = val);
+                    print(listingType.id.toString());
+                  },
+                ),
+              ),
+               TitleWidget(
+                text: 'Select Promotion Type',
                 padding: 5.0,
               ),
               Padding(
@@ -738,6 +759,26 @@ class _AddListingState extends State<AddListing> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () async {
+      //              zipCode,
+      // address,
+      // phone,
+      // whatsApp,
+      // email,
+      // website,
+      // locationId,
+      // categoryId,
+      // listingType,
+      // title,
+      // status,
+      // price,
+      // priceType,
+      // priceUnit,
+      // badges,
+      // description,
+      // images,
+      // latitude,
+      // longitude,
+                  print(priceController.text);
                   var _latitude = await box.read('latitude');
                   var _longitude = await box.read('longitude');
                   var location = await box.read("city");
