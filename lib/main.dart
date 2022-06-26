@@ -31,12 +31,8 @@ void main() async {
     Get.put(LocationsController());
     Get.put(ListingTypeController());
     Get.put(SearchController());
-<<<<<<< HEAD
-     Get.put(OrderController());
-=======
     Get.put(OrdersController());
     Get.put(MyPaymentsController());
->>>>>>> a190e60bb1ac09e6945e17c6002b2ce5f1d44423
   }
   runApp(const MyApp());
 }

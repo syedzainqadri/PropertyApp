@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-import 'package:flutter/material.dart';
-
-class OrderWidget extends StatelessWidget{
-  final orderId, title, price, status, method, createdDate;
-  const OrderWidget({Key? key,required this.orderId,required this.title,required this.price,required this.status,required this.method,required this.createdDate}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(children: [
-        Text(orderId.toString()),
-        Text(title.toString()),
-        Text(price.toString()),
-        Text(status.toString()),
-        Text(method.toString()),
-        Text(createdDate.toString()),
-    ],),
-    );
-  }
-
-}
-=======
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
@@ -167,4 +144,3 @@ class _OrderWidgetState extends State<OrderWidget> {
     );
   }
 }
->>>>>>> a190e60bb1ac09e6945e17c6002b2ce5f1d44423

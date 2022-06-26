@@ -8,20 +8,12 @@ class SearchController extends GetxController {
   var searchListings = AllListings().obs;
   final token = GetStorage().read('token');
 
-<<<<<<< HEAD
-@override
-  onInit(){
-    getSearchedListings('');
-    super.onInit();
-}
-=======
   @override
   onInit() {
     getSearchedListings('');
     super.onInit();
   }
 
->>>>>>> a190e60bb1ac09e6945e17c6002b2ce5f1d44423
   getSearchedListings(searchString) async {
     isLoading.value = true;
     String url =
