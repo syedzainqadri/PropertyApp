@@ -44,6 +44,8 @@ class ListingController extends GetxController {
       badges,
       description,
       images,
+      latitude,
+      longitude,
       List<SelectedFieldsModel> customFields,
       amenities) async {
     print(locationId);
@@ -91,6 +93,8 @@ class ListingController extends GetxController {
       'badges': badges.toString(),
       'description': description.toString(),
       'custom_fields[4216]': amenities.toString(),
+      'latitude': latitude.toString(),
+      'longitude': longitude.toString(),
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
