@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/search_controller.dart';
+import 'package:realestapp/Search/Widgets/SearchRessultCard.dart';
 
 import '../AddListings/list_widget.dart';
 import '../Controllers/listings_controller.dart';
@@ -49,6 +50,7 @@ class _SearchPageState extends State<SearchPage> {
           const SizedBox(
             height: 15,
           ),
+<<<<<<< HEAD
          Obx(() {
          return  searchController.searchListings.value.data == null
               ? const CircularProgressIndicator(
@@ -58,10 +60,21 @@ class _SearchPageState extends State<SearchPage> {
                   child:  ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
+=======
+          Obx(() {
+            return searchController.searchListings.value.data == null
+                ? const CircularProgressIndicator(
+                    color: Colors.greenAccent,
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+>>>>>>> a190e60bb1ac09e6945e17c6002b2ce5f1d44423
                       itemCount:
                           searchController.searchListings.value.data!.length,
                       itemBuilder: (context, position) {
-                        return ListingCard(
+                        return SearchResultCard(
                           image: searchController
                               .searchListings.value.data![position].images,
                           title: searchController
@@ -77,8 +90,13 @@ class _SearchPageState extends State<SearchPage> {
                         );
                       },
                     ),
+<<<<<<< HEAD
                 );
          }),
+=======
+                  );
+          }),
+>>>>>>> a190e60bb1ac09e6945e17c6002b2ce5f1d44423
         ],
       ),
     );

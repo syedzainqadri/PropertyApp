@@ -28,7 +28,6 @@ class MembershipController extends GetxController {
 
   membershipCheckout(type, promotionType, gatewayId, planId) async {
     var token = box.read('token');
-    print(token);
     var response = await http.post(
         Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/checkout"),
         headers: <String, String>{
@@ -42,10 +41,7 @@ class MembershipController extends GetxController {
           'gateway_id': gatewayId,
           'plan_id': planId.toString(),
         });
-    print(planId);
-    print(response.body);
     checkoutData.value = checkoutFromJson(response.body);
     paymetId.value = checkoutData.value.id.toString();
-    print(checkoutData.value.gateway.instructions);
   }
 }

@@ -13,7 +13,6 @@ class PaymentController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    print(response.body);
     paymentGateways.value = paymentFromJson(response.body);
   }
 }

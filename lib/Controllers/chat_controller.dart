@@ -42,8 +42,6 @@ class ChatController extends GetxController {
     await sendChatConversation(
         listingId, text, jsonDecode(response.body)['con_id']);
     var data = jsonDecode(response.body);
-
-    print(response.body);
   }
 
   sendChatConversation(listingId, text, conId) async {
@@ -63,8 +61,6 @@ class ChatController extends GetxController {
     );
     await sendChatMessage(
         conId, jsonDecode(response.body)['message_id'], listingId);
-
-    print(response.body);
   }
 
   sendChatMessage(conId, messageId, listingId) async {
@@ -79,7 +75,6 @@ class ChatController extends GetxController {
       },
     );
     await getAllMessages(listingId);
-    print(response.body);
   }
 
   getAllMessages(listingId) async {
@@ -93,7 +88,6 @@ class ChatController extends GetxController {
       },
     );
     messages.value = messagesFromJson(response.body);
-    print('All Messages API Hit ' + response.body);
   }
 
   getAllChats() async {

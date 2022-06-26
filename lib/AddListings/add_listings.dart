@@ -1,4 +1,4 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, invalid_use_of_protected_member, avoid_print
 
 import 'dart:convert';
 import 'dart:io';
@@ -6,15 +6,22 @@ import 'dart:io';
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
+import 'package:realestapp/AddListings/Widgets/TextArea.dart';
+import 'package:realestapp/AddListings/Widgets/TextAreaForForm.dart';
+import 'package:realestapp/AddListings/Widgets/TextFieldForForm.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/listing_config_controller.dart';
 import 'package:realestapp/Controllers/listing_type_controller.dart';
+import 'package:realestapp/Controllers/my_listings_controller.dart';
 import 'package:realestapp/Models/listing_configuration_model.dart';
 import 'package:realestapp/Models/listing_types_model.dart';
 import 'package:realestapp/Models/locations_model.dart';
+import 'package:realestapp/Profile/my_listings.dart';
 import '../Controllers/listings_controller.dart';
 import '../Models/Categories/category_model.dart' hide Icon;
 import '../Models/selected_fields_model.dart';
@@ -31,6 +38,8 @@ class AddListing extends StatefulWidget {
 
 class _AddListingState extends State<AddListing> {
   final listingTypeController = Get.put(ListingTypeController());
+  final MyListingController myListingController =
+      Get.put(MyListingController());
   final categoriesController = Get.put(CategoriesController());
   final listingConfigController = Get.put(ListingConfigController());
   bool categorySelected = false;
@@ -41,6 +50,7 @@ class _AddListingState extends State<AddListing> {
   var listingType;
   var priceTypes;
   var pricingTypes;
+  var priceUnits;
   var customField;
   var myAmenities = List<String>.empty(growable: true);
   final priceController = TextEditingController();
@@ -48,12 +58,21 @@ class _AddListingState extends State<AddListing> {
   final priceEndController = TextEditingController();
   final descriptionController = TextEditingController();
   final titleController = TextEditingController();
+  final zipCodeController = TextEditingController();
+  final addressController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final emailController = TextEditingController();
+  final websiteController = TextEditingController();
+  final videoController = TextEditingController();
+  final whatsAppController = TextEditingController();
   final locationsController = Get.put(LocationsController());
   List<dynamic> amenities = [false];
   List<SelectedFieldsModel> selectedFields = List<SelectedFieldsModel>.filled(
       20, SelectedFieldsModel(0, Choice(id: '0', name: '0')),
       growable: true);
   List<XFile>? imageFiles = [];
+  final box = GetStorage();
+  var location = Location();
   @override
   void initState() {
     super.initState();
@@ -90,6 +109,58 @@ class _AddListingState extends State<AddListing> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              TitleWidget(
+                text: 'Select Images',
+                padding: 5.0,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 10.0, horizontal: 20),
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          await _getFromGallery();
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: lightGreen,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(18),
+                          ),
+                          child: const Icon(
+                            Icons.camera_alt,
+                            size: 40,
+                            color: white,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                        width: 200,
+                        height: 100,
+                        child: ListView.builder(
+                            physics: const ScrollPhysics(),
+                            shrinkWrap: true,
+                            primary: false,
+                            reverse: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: imageFiles?.length,
+                            itemBuilder: (context, index) {
+                              return imageContainer(
+                                  File(imageFiles![index].path));
+                            }),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -97,12 +168,14 @@ class _AddListingState extends State<AddListing> {
                 () => Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 14.0, bottom: 14.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 20),
                       child: SizedBox(
                         width: 200,
                         height: 46,
                         child: ElevatedButton.icon(
-                          onPressed: () {
+                          onPressed: () async {
+                            await locationService();
                             Get.to(const SelectCountry());
                           },
                           icon: const Icon(Icons.add),
@@ -141,287 +214,374 @@ class _AddListingState extends State<AddListing> {
                   ],
                 ),
               ),
-              const Text(
-                'Listing Type',
-                style: TextStyle(color: darkGrey, fontSize: 20),
+              TitleWidget(
+                text: 'Title',
+                padding: 5.0,
               ),
-              ChipsChoice<ListingTypes>.single(
-                choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                wrapped: true,
-                value: listingType,
-                choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
-                  source: listingTypeController.listingTypes.value,
-                  value: (i, v) => v,
-                  label: (i, v) => v.name,
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: TextFieldWidgetForForm(
+                  controller: titleController,
+                  leadingIcon: Icons.title,
+                  lable: 'Title',
+                  obsecure: false,
                 ),
-                onChanged: (val) {
-                  setState(() => listingType = val);
-                },
               ),
-              const SizedBox(
-                height: 10,
+              TitleWidget(
+                padding: 5.0,
+                text: 'Description',
               ),
-              const Text(
-                'Category',
-                style: TextStyle(color: darkGrey, fontSize: 20),
-              ),
-              ChipsChoice<CategoriesModel>.single(
-                choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                wrapped: true,
-                value: category,
-                choiceItems:
-                    C2Choice.listFrom<CategoriesModel, CategoriesModel>(
-                  source: categoriesController.categories.value,
-                  value: (i, v) => v,
-                  label: (i, v) => v.name,
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: TextAreaWidgetForForm(
+                  controller: descriptionController,
+                  leadingIcon: Icons.description,
+                  lable: 'Description',
+                  obsecure: false,
                 ),
-                onChanged: (val) async {
-                  await categoriesController.getSubCategories(val.termId);
-                  setState(() {
-                    categorySelected = true;
-                    category = val;
-                    pricingTypes = PricType();
-                    pricingTypes.id = '';
-                    pricingTypes.name = '';
-                  });
-                },
               ),
-              const SizedBox(
-                height: 10,
+              TitleWidget(
+                padding: 5.0,
+                text: 'Contact Information',
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: TextFieldWidgetForForm(
+                  controller: phoneNumberController,
+                  leadingIcon: Icons.phone,
+                  lable: 'Phone',
+                  obsecure: false,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: TextFieldWidgetForForm(
+                  controller: addressController,
+                  leadingIcon: Icons.house,
+                  lable: 'Address',
+                  obsecure: false,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: TextFieldWidgetForForm(
+                  controller: zipCodeController,
+                  leadingIcon: Icons.pin_drop_outlined,
+                  lable: 'Zip Code',
+                  obsecure: false,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: TextFieldWidgetForForm(
+                  controller: emailController,
+                  leadingIcon: Icons.email,
+                  lable: 'Email',
+                  obsecure: false,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: TextFieldWidgetForForm(
+                  controller: whatsAppController,
+                  leadingIcon: Icons.whatsapp,
+                  lable: 'WhatsApp Number',
+                  obsecure: false,
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: TextFieldWidgetForForm(
+                  controller: websiteController,
+                  leadingIcon: Icons.web_sharp,
+                  lable: 'WebSite',
+                  obsecure: false,
+                ),
+              ),
+              TitleWidget(
+                text: 'Video Url',
+                padding: 5.0,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: TextFieldWidgetForForm(
+                  controller: videoController,
+                  leadingIcon: Icons.play_arrow,
+                  lable: 'Video Url',
+                  obsecure: false,
+                ),
+              ),
+              TitleWidget(
+                text: 'Select Listing Type',
+                padding: 5.0,
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
+                child: ChipsChoice<ListingTypes>.single(
+                  choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                  wrapped: true,
+                  value: listingType,
+                  choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
+                    source: listingTypeController.listingTypes.value,
+                    value: (i, v) => v,
+                    label: (i, v) => v.name,
+                  ),
+                  onChanged: (val) {
+                    setState(() => listingType = val);
+                    print(listingType.id.toString());
+                  },
+                ),
+              ),
+              TitleWidget(
+                padding: 5.0,
+                text: 'Select A Category',
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: ChipsChoice<CategoriesModel>.single(
+                  choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                  wrapped: true,
+                  value: category,
+                  choiceItems:
+                      C2Choice.listFrom<CategoriesModel, CategoriesModel>(
+                    source: categoriesController.categories.value,
+                    value: (i, v) => v,
+                    label: (i, v) => v.name,
+                  ),
+                  onChanged: (val) async {
+                    await categoriesController.getSubCategories(val.termId);
+                    setState(() {
+                      categorySelected = true;
+                      category = val;
+                      pricingTypes = PricType();
+                      pricingTypes.id = '';
+                      pricingTypes.name = '';
+                      print(category.termId);
+                    });
+                  },
+                ),
               ),
               categorySelected
-                  ? ChipsChoice<LocationsModel>.single(
-                      choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                      wrapped: true,
-                      value: subCategory,
-                      choiceItems:
-                          C2Choice.listFrom<LocationsModel, LocationsModel>(
-                        source: categoriesController.subCategories.value,
-                        value: (i, v) => v,
-                        label: (i, v) => v.name,
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 20),
+                      child: ChipsChoice<LocationsModel>.single(
+                        choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                        wrapped: true,
+                        value: subCategory,
+                        choiceItems:
+                            //this should be coming from category model not location Model
+                            C2Choice.listFrom<LocationsModel, LocationsModel>(
+                          source: categoriesController.subCategories.value,
+                          value: (i, v) => v,
+                          label: (i, v) => v.name,
+                        ),
+                        onChanged: (val) async {
+                          await listingConfigController
+                              .getConfiguration(val.termId);
+                          setState(() {
+                            subCategorySelected = true;
+                            subCategory = val;
+                            print(subCategory);
+                          });
+                        },
                       ),
-                      onChanged: (val) async {
-                        await listingConfigController
-                            .getConfiguration(val.termId);
-                        setState(() {
-                          subCategorySelected = true;
-                          subCategory = val;
-                        });
-                      },
                     )
                   : const Offstage(),
-              const SizedBox(
-                height: 10,
-              ),
               subCategorySelected
                   ? Obx(() {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Pricing Type',
-                            style: TextStyle(color: darkGrey, fontSize: 20),
-                          ),
-                          ChipsChoice<PricType>.single(
-                            choiceStyle: const C2ChoiceStyle(color: lightGreen),
-                            wrapped: true,
-                            value: pricingTypes,
-                            choiceItems: C2Choice.listFrom<PricType, PricType>(
-                              source: listingConfigController
-                                  .listingConfig.value.config.pricingTypes,
-                              value: (i, v) => v,
-                              label: (i, v) => v.name,
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TitleWidget(
+                              padding: 5.0,
+                              text: 'Select Pricing Type',
                             ),
-                            onChanged: (val) {
-                              setState(() => pricingTypes = val);
-                            },
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          pricingTypes.id == ''
-                              ? const Offstage()
-                              : pricingTypes.id == 'price'
-                                  ? textField('Price', false, priceController)
-                                  : pricingTypes.id == 'range'
-                                      ? Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2.5,
-                                              child: textField('Start', false,
-                                                  priceStartController),
-                                            ),
-                                            const Text('To'),
-                                            SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  2.5,
-                                              child: textField('End', false,
-                                                  priceEndController),
-                                            ),
-                                          ],
-                                        )
-                                      : const Offstage(),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          const Text(
-                            'Price Type',
-                            style: TextStyle(color: darkGrey, fontSize: 20),
-                          ),
-                          RadioGroup<PricType>.builder(
-                            activeColor: lightGreen,
-                            direction: Axis.horizontal,
-                            groupValue: priceTypes,
-                            onChanged: (value) => setState(() {
-                              print(listingConfigController.listingConfig.value
-                                  .customFields[0].options.choices[0].name);
-                              priceTypes = value;
-                            }),
-                            items: listingConfigController
-                                .listingConfig.value.config.priceTypes,
-                            itemBuilder: (item) => RadioButtonBuilder(
-                              item.name,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              child: ChipsChoice<PricType>.single(
+                                choiceStyle:
+                                    const C2ChoiceStyle(color: lightGreen),
+                                wrapped: true,
+                                value: pricingTypes,
+                                choiceItems:
+                                    C2Choice.listFrom<PricType, PricType>(
+                                  source: listingConfigController
+                                      .listingConfig.value.config.pricingTypes,
+                                  value: (i, v) => v,
+                                  label: (i, v) => v.name,
+                                ),
+                                onChanged: (val) {
+                                  setState(() => pricingTypes = val);
+                                  print(priceTypes.id);
+                                },
+                              ),
                             ),
-                          ),
-                          ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: listingConfigController
-                                  .listingConfig.value.customFields.length,
-                              itemBuilder: ((context, index) {
-                                return listingConfigController.listingConfig
-                                            .value.customFields[index].type ==
-                                        'checkbox'
-                                    ? Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          const SizedBox(
-                                            height: 20,
-                                          ),
-                                          Text(
-                                            listingConfigController
-                                                .listingConfig
-                                                .value
-                                                .customFields[index]
-                                                .label,
-                                            style: const TextStyle(
-                                                color: darkGrey, fontSize: 20),
-                                          ),
-                                          ListView.builder(
-                                            shrinkWrap: true,
-                                            physics:
-                                                const NeverScrollableScrollPhysics(),
-                                            itemCount: listingConfigController
-                                                .listingConfig
-                                                .value
-                                                .customFields[index]
-                                                .options
-                                                .choices
-                                                .length,
-                                            itemBuilder: (context, position) {
-                                              amenities.add(false);
-                                              return Row(
-                                                children: [
-                                                  const SizedBox(width: 10),
-                                                  Checkbox(
-                                                    value: amenities[position],
-                                                    onChanged: (bool? value) {
-                                                      setState(() {
-                                                        amenities[position] =
-                                                            !amenities[
-                                                                position];
-                                                        if (value!) {
-                                                          myAmenities.add(
-                                                             "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}");
-                                                        }
-                                                      });
-                                                    },
-                                                    checkColor: white,
-                                                    activeColor: lightGreen,
-                                                  ),
-                                                  Text(
-                                                    "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
-                                                    style: const TextStyle(
-                                                        fontSize: 17.0),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      )
-                                    : listingConfigController
+                            pricingTypes.id == ''
+                                ? const Offstage()
+                                : pricingTypes.id == 'price'
+                                    ? textField('Price', false, priceController)
+                                    : pricingTypes.id == 'range'
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.5,
+                                                child: textField('Start', false,
+                                                    priceStartController),
+                                              ),
+                                              const Text('To'),
+                                              SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width /
+                                                    2.5,
+                                                child: textField('End', false,
+                                                    priceEndController),
+                                              ),
+                                            ],
+                                          )
+                                        : const Offstage(),
+                            TitleWidget(
+                              padding: 5.0,
+                              text: 'Select Pricing Terms',
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              child: ChipsChoice<PriceUnit>.single(
+                                choiceStyle:
+                                    const C2ChoiceStyle(color: lightGreen),
+                                wrapped: true,
+                                value: priceUnits,
+                                choiceItems:
+                                    C2Choice.listFrom<PriceUnit, PriceUnit>(
+                                  source: listingConfigController
+                                      .listingConfig.value.config.priceUnits,
+                                  value: (i, v) => v,
+                                  label: (i, v) => v.name,
+                                ),
+                                onChanged: (val) {
+                                  setState(() => priceUnits = val);
+                                  print(priceUnits.id);
+                                },
+                              ),
+                            ),
+                            // add here pricing unit
+                            TitleWidget(
+                              padding: 5.0,
+                              text: 'Select Negotiation Term',
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 5.0),
+                              child: RadioGroup<PricType>.builder(
+                                activeColor: lightGreen,
+                                direction: Axis.horizontal,
+                                groupValue: priceTypes,
+                                onChanged: (value) => setState(() {
+                                  priceTypes = value;
+                                }),
+                                items: listingConfigController
+                                    .listingConfig.value.config.priceTypes,
+                                itemBuilder: (item) => RadioButtonBuilder(
+                                  item.name,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5.0, horizontal: 20),
+                              child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: listingConfigController
+                                      .listingConfig.value.customFields.length,
+                                  itemBuilder: ((context, index) {
+                                    return listingConfigController
                                                 .listingConfig
                                                 .value
                                                 .customFields[index]
                                                 .type ==
-                                            'radio'
+                                            'checkbox'
                                         ? Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              const SizedBox(
-                                                height: 20,
-                                              ),
-                                              Text(
-                                                listingConfigController
+                                              TitleWidget(
+                                                padding: 5.0,
+                                                text: listingConfigController
                                                     .listingConfig
                                                     .value
                                                     .customFields[index]
                                                     .label,
-                                                style: const TextStyle(
-                                                    color: darkGrey,
-                                                    fontSize: 20),
                                               ),
-                                              ChipsChoice<Choice>.single(
-                                                choiceStyle:
-                                                    const C2ChoiceStyle(
-                                                        color: lightGreen),
-                                                wrapped: true,
-                                                value: selectedFields[index]
-                                                    .choice,
-                                                choiceItems: C2Choice.listFrom<
-                                                    Choice, Choice>(
-                                                  source:
-                                                      listingConfigController
-                                                          .listingConfig
-                                                          .value
-                                                          .customFields[index]
-                                                          .options
-                                                          .choices,
-                                                  value: (i, v) => v,
-                                                  label: (i, v) => v.name,
-                                                ),
-                                                onChanged: (val) {
-                                                  setState(() {
-                                                    customField = val;
-                                                    selectedFields.insert(
-                                                        index,
-                                                        SelectedFieldsModel(
-                                                            listingConfigController
-                                                                .listingConfig
-                                                                .value
-                                                                .customFields[
-                                                                    index]
-                                                                .id,
-                                                            val));
-                                                  });
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    const NeverScrollableScrollPhysics(),
+                                                itemCount:
+                                                    listingConfigController
+                                                        .listingConfig
+                                                        .value
+                                                        .customFields[index]
+                                                        .options
+                                                        .choices
+                                                        .length,
+                                                itemBuilder:
+                                                    (context, position) {
+                                                  amenities.add(false);
+                                                  return Row(
+                                                    children: [
+                                                      const SizedBox(width: 10),
+                                                      Checkbox(
+                                                        value:
+                                                            amenities[position],
+                                                        onChanged:
+                                                            (bool? value) {
+                                                          setState(() {
+                                                            amenities[
+                                                                    position] =
+                                                                !amenities[
+                                                                    position];
+                                                            if (value!) {
+                                                              myAmenities.add(
+                                                                  "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}");
+                                                            }
+                                                          });
+                                                        },
+                                                        checkColor: white,
+                                                        activeColor: lightGreen,
+                                                      ),
+                                                      Text(
+                                                        "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
+                                                        style: const TextStyle(
+                                                            fontSize: 17.0),
+                                                      ),
+                                                    ],
+                                                  );
                                                 },
                                               ),
                                             ],
@@ -431,7 +591,7 @@ class _AddListingState extends State<AddListing> {
                                                     .value
                                                     .customFields[index]
                                                     .type ==
-                                                'select'
+                                                'radio'
                                             ? Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,
@@ -490,111 +650,80 @@ class _AddListingState extends State<AddListing> {
                                                   ),
                                                 ],
                                               )
-                                            : const Offstage();
-                              })),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Title',
-                            style: TextStyle(color: darkGrey, fontSize: 20),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          textField('Title', false, titleController),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Description',
-                            style: TextStyle(color: darkGrey, fontSize: 20),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextField(
-                            controller: descriptionController,
-                            obscureText: false,
-                            cursorColor: lightGreen,
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: const BorderSide(
-                                    color: mediumGrey,
-                                    style: BorderStyle.solid,
-                                    width: 1),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: const BorderSide(
-                                    color: lightGreen,
-                                    style: BorderStyle.solid,
-                                    width: 1),
-                              ),
-                              fillColor: white,
-                              hintText: 'Description',
+                                            : listingConfigController
+                                                        .listingConfig
+                                                        .value
+                                                        .customFields[index]
+                                                        .type ==
+                                                    'select'
+                                                ? Column(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      const SizedBox(
+                                                        height: 20,
+                                                      ),
+                                                      Text(
+                                                        listingConfigController
+                                                            .listingConfig
+                                                            .value
+                                                            .customFields[index]
+                                                            .label,
+                                                        style: const TextStyle(
+                                                            color: darkGrey,
+                                                            fontSize: 20),
+                                                      ),
+                                                      ChipsChoice<
+                                                          Choice>.single(
+                                                        choiceStyle:
+                                                            const C2ChoiceStyle(
+                                                                color:
+                                                                    lightGreen),
+                                                        wrapped: true,
+                                                        value: selectedFields[
+                                                                index]
+                                                            .choice,
+                                                        choiceItems:
+                                                            C2Choice.listFrom<
+                                                                Choice, Choice>(
+                                                          source:
+                                                              listingConfigController
+                                                                  .listingConfig
+                                                                  .value
+                                                                  .customFields[
+                                                                      index]
+                                                                  .options
+                                                                  .choices,
+                                                          value: (i, v) => v,
+                                                          label: (i, v) =>
+                                                              v.name,
+                                                        ),
+                                                        onChanged: (val) {
+                                                          setState(() {
+                                                            customField = val;
+                                                            selectedFields.insert(
+                                                                index,
+                                                                SelectedFieldsModel(
+                                                                    listingConfigController
+                                                                        .listingConfig
+                                                                        .value
+                                                                        .customFields[
+                                                                            index]
+                                                                        .id,
+                                                                    val));
+                                                          });
+                                                        },
+                                                      ),
+                                                    ],
+                                                  )
+                                                : const Offstage();
+                                  })),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          const Text(
-                            'Add Photos',
-                            style: TextStyle(
-                              color: darkGrey,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () async {
-                                    await _getFromGallery();
-                                  },
-                                  child: Container(
-                                    width: 100,
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      color: lightGreen,
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(18),
-                                    ),
-                                    child: const Icon(
-                                      Icons.camera_alt,
-                                      size: 40,
-                                      color: white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                SizedBox(
-                                  width: 200,
-                                  height: 100,
-                                  child: ListView.builder(
-                                      physics: const ScrollPhysics(),
-                                      shrinkWrap: true,
-                                      primary: false,
-                                      reverse: true,
-                                      scrollDirection: Axis.horizontal,
-                                      itemCount: imageFiles?.length,
-                                      itemBuilder: (context, index) {
-                                        return imageContainer(
-                                            File(imageFiles![index].path));
-                                      }),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       );
                     })
                   : const Offstage(),
@@ -603,30 +732,47 @@ class _AddListingState extends State<AddListing> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(18.0),
+        padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
         child: SizedBox(
             height: 50,
             width: double.infinity,
             child: ElevatedButton(
-                onPressed: () {
-                  print(selectedFields.toString());
-                  listingsController.addListing(
-                      locationsController.userLocationId.value,
-                      208, //var category;
-                      listingType.id,
-                      titleController.text,
-                      'approved',
-                      pricingTypes == 'price'
-                          ? priceController.text
-                          : priceStartController.text +
-                              '-' +
-                              priceEndController.text,
-                      '',
-                      '',
-                      descriptionController.text,
-                      imageFiles,
-                      selectedFields,
-                      jsonEncode(myAmenities));
+                onPressed: () async {
+                  var _latitude = await box.read('latitude');
+                  var _longitude = await box.read('longitude');
+                  var location = await box.read("city");
+                  await listingsController.addListing(
+                    zipCodeController.text,
+                    addressController.text,
+                    phoneNumberController.text,
+                    whatsAppController.text,
+                    emailController.text,
+                    websiteController.text,
+                    location,
+                    category.termId,
+                    listingType.id,
+                    titleController.text,
+                    'approved',
+                    pricingTypes == 'price'
+                        ? priceController.text
+                        : priceStartController.text +
+                            '-' +
+                            priceEndController.text,
+                    priceTypes,
+                    priceUnits,
+                    '',
+                    descriptionController.text,
+                    imageFiles,
+                    _latitude,
+                    _longitude,
+                    selectedFields,
+                    jsonEncode(myAmenities),
+                  );
+                  await myListingController.getMyListing();
+                  Get.to(() => MyListings());
+                  Get.snackbar('Listing Posted',
+                      'Your is listing is pending for Approval from Admin',
+                      snackPosition: SnackPosition.BOTTOM);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: lightGreen,
@@ -667,44 +813,51 @@ class _AddListingState extends State<AddListing> {
       ),
     );
   }
+
+  locationService() async {
+    var serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+    var _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    var currentLocation = await location.getLocation();
+    var latitude = currentLocation.latitude.toString();
+    var longitude = currentLocation.longitude.toString();
+    box.write('longitude', longitude);
+    box.write('latitude', latitude);
+    print(latitude);
+    print(longitude);
+
+    print(currentLocation.toString());
+  }
 }
 
- // SingleChildScrollView(
-                                                //   scrollDirection:
-                                                //       Axis.horizontal,
-                                                //   child: RadioGroup<
-                                                //       Choice>.builder(
-                                                //     activeColor: lightGreen,
-                                                //     direction: Axis.horizontal,
-                                                //     groupValue:
-                                                //         selectedFields[index]
-                                                //             .choice,
-                                                //     onChanged: (value) {
-                                                //       setState(() {
-                                                //         selectedFields.insert(
-                                                //             index,
-                                                //             SelectedFieldsModel(
-                                                //                 listingConfigController
-                                                //                     .listingConfig
-                                                //                     .value
-                                                //                     .customFields[
-                                                //                         index]
-                                                //                     .id,
-                                                //                 value!));
-                                                //       });
-                                                //     },
-                                                //     items:
-                                                //         listingConfigController
-                                                //             .listingConfig
-                                                //             .value
-                                                //             .customFields[index]
-                                                //             .options
-                                                //             .choices,
-                                                //     itemBuilder: (item) =>
-                                                //         RadioButtonBuilder(
-                                                //       item.name,
-                                                //     ),
-                                                //   ),
-                                                // ),
-                                            //   ],
-                                            // )
+class TitleWidget extends StatelessWidget {
+  var text;
+  var padding;
+  TitleWidget({
+    required this.padding,
+    required this.text,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: padding, horizontal: 20),
+      child: Text(
+        text,
+        style: const TextStyle(color: darkGrey, fontSize: 20),
+      ),
+    );
+  }
+}

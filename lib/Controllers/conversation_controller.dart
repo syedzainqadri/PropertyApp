@@ -17,9 +17,7 @@ class ConversationController extends GetxController {
         'text': message,
       }),
     );
-    if (kDebugMode) {
-      print(response.body);
-    }
+    if (kDebugMode) {}
   }
 
   sendMessage(listingId, message, connectionId) async {
@@ -35,9 +33,7 @@ class ConversationController extends GetxController {
         'con_id': connectionId,
       }),
     );
-    if (kDebugMode) {
-      print(response.body);
-    }
+    if (kDebugMode) {}
   }
 
   getChatConversation(connectionId) async {
@@ -51,10 +47,9 @@ class ConversationController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    if (kDebugMode) {
-      print(response.body);
-    }
+    if (kDebugMode) {}
   }
+
   getListingsChat(listingId) async {
     String url =
         'https://lagosabuja.com/wp-json/rtcl/v1/my/chat/check?listing_id=';
@@ -66,13 +61,11 @@ class ConversationController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    if (kDebugMode) {
-      print(response.body);
-    }
+    if (kDebugMode) {}
   }
+
   getAllChat() async {
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/my/chat';
+    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/chat';
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -80,10 +73,6 @@ class ConversationController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    if (kDebugMode) {
-      print(response.body);
-    }
+    if (kDebugMode) {}
   }
-
-   
 }

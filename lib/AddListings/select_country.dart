@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart';
 import 'package:realestapp/AddListings/select_city.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
 
@@ -17,6 +19,7 @@ class SelectCountry extends StatefulWidget {
 
 class _SelectCountryState extends State<SelectCountry> {
   final locationsController = Get.put(LocationsController());
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +46,8 @@ class _SelectCountryState extends State<SelectCountry> {
       ),
       body: Obx(
         () => Padding(
-          padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
+          padding: const EdgeInsets.only(
+              top: 18.0, bottom: 18.0, right: 20, left: 20),
           child: ListView.builder(
               itemCount: locationsController.locations.length,
               itemBuilder: (context, index) {
@@ -51,11 +55,14 @@ class _SelectCountryState extends State<SelectCountry> {
                   onTap: () {
                     locationsController.getSubLocation(
                         locationsController.locations.value[index].termId);
+                    box.write('country',
+                        locationsController.locations.value[index].termId);
+                    print(box.read("country"));
                     Get.to(const SelectCity());
                   },
                   child: Container(
                     width: double.infinity,
-                    height: 80,
+                    height: 50,
                     decoration: BoxDecoration(
                         color: lightGreen,
                         border:

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:realestapp/AddListings/add_listings.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
 import '../Controllers/location_controller.dart';
@@ -17,6 +18,7 @@ class SelectCity extends StatefulWidget {
 
 class _SelectCityState extends State<SelectCity> {
   final locationsController = Get.put(LocationsController());
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +45,8 @@ class _SelectCityState extends State<SelectCity> {
       ),
       body: Obx(
         () => Padding(
-          padding: const EdgeInsets.only(top: 18.0, bottom: 18.0),
+          padding: const EdgeInsets.only(
+              top: 18.0, bottom: 18.0, right: 20, left: 20),
           child: ListView.builder(
               itemCount: locationsController.subLocations.length,
               itemBuilder: (context, index) {
@@ -54,11 +57,15 @@ class _SelectCityState extends State<SelectCity> {
                             .subLocations.value[index].termId,
                         await locationsController
                             .subLocations.value[index].name);
+                    box.write('city',
+                        locationsController.subLocations.value[index].termId);
+                    // box.write('latitude', locationsController.subLocations.value[index].);
+                    print(box.read("city"));
                     Get.offAll(const AddListing());
                   },
                   child: Container(
                     width: double.infinity,
-                    height: 80,
+                    height: 50,
                     decoration: BoxDecoration(
                         color: lightGreen,
                         border:

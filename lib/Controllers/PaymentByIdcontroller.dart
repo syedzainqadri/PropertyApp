@@ -20,7 +20,6 @@ class PaymentDetailsController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    print("this is what the response is: ${response.body}");
     paymentDetail.value = paymentByIdModelFromJson(response.body);
   }
 }

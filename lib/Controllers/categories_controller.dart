@@ -23,10 +23,7 @@ class CategoriesController extends GetxController {
     );
     if (response.statusCode == 200) {
       categories.value = categoriesFromJson(response.body);
-      print('my getCategories is called ${response.body}');
-    } else {
-      print('${response.statusCode} : ${response.body}');
-    }
+    } else {}
   }
 
   getSubCategories(categoryId) async {
@@ -41,9 +38,6 @@ class CategoriesController extends GetxController {
     );
     if (response.statusCode == 200) {
       subCategories.value = locationsModelFromJson(response.body);
-      print('my getCategories is called ${response.body}');
-    } else {
-      print('${response.statusCode} : ${response.body}');
-    }
+    } else {}
   }
 }

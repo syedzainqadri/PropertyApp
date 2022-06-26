@@ -57,7 +57,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       backgroundColor: white,
       appBar: AppBar(
         title: const Text(
-          'Payment Details',
+          'Checkout',
           style: TextStyle(color: lightGreen),
         ),
         centerTitle: true,
@@ -113,11 +113,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                           groupValue: _radioValue,
                           onChanged: (value) {
                             setState(() {
-                              print(
-                                  "i am prinitng ${paymentController.paymentGateways.value[index].id}");
                               gatewayId = paymentController
                                   .paymentGateways.value[index].id;
-                              print('gateway id is: $gatewayId');
                             });
                             _handleRadioValueChange(value);
                           },
@@ -297,79 +294,4 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       ),
     );
   }
-
-  paymentTypes(Payment payment) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          print("i am prinitng ${payment.id}");
-          gatewayId = payment.id;
-          print('gateway id is: $gatewayId');
-        });
-      },
-      child: Row(
-        children: [
-          const SizedBox(
-            width: 25,
-          ),
-          Radio(
-            value: 1,
-            activeColor: lightGreen,
-            groupValue: _radioValue,
-            onChanged: (value) {
-              _handleRadioValueChange(value);
-            },
-          ),
-          const SizedBox(
-            width: 8.0,
-          ),
-          Text(
-            payment.title,
-            style: const TextStyle(
-                color: Color.fromARGB(255, 40, 40, 40), fontSize: 19),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // paymentsCard(title, price) {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(18.0),
-  //     child: SizedBox(
-  //       width: double.infinity,
-  //       height: 200,
-  //       child: Card(
-  //         shape:
-  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-  //         child: Column(
-  //           mainAxisAlignment: MainAxisAlignment.start,
-  //           crossAxisAlignment: CrossAxisAlignment.start,
-  //           children: [
-  //             Container(
-  //               height: 40,
-  //               width: double.infinity,
-  //               decoration: const BoxDecoration(
-  //                 color: lightGreen,
-  //                 borderRadius: BorderRadius.only(
-  //                   topLeft: Radius.circular(20),
-  //                   topRight: Radius.circular(20),
-  //                 ),
-  //               ),
-  //               child: const Center(
-  //                   child: Text(
-  //                 'Payment Detail',
-  //                 style: TextStyle(color: white, fontSize: 18),
-  //               )),
-  //             ),
-  //             Padding(
-  //               padding: const EdgeInsets.all(8.0),
-  //               child:
-  //             ),
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
