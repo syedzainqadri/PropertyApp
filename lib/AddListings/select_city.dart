@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:realestapp/AddListings/add_listings.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
 import '../Controllers/location_controller.dart';
@@ -17,6 +18,7 @@ class SelectCity extends StatefulWidget {
 
 class _SelectCityState extends State<SelectCity> {
   final locationsController = Get.put(LocationsController());
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +57,9 @@ class _SelectCityState extends State<SelectCity> {
                             .subLocations.value[index].termId,
                         await locationsController
                             .subLocations.value[index].name);
+                    box.write('city',
+                        locationsController.subLocations.value[index].termId);
+                    print(box.read("city"));
                     Get.offAll(const AddListing());
                   },
                   child: Container(

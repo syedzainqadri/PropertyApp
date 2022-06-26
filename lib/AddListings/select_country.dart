@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart';
 import 'package:realestapp/AddListings/select_city.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
 
@@ -17,6 +19,7 @@ class SelectCountry extends StatefulWidget {
 
 class _SelectCountryState extends State<SelectCountry> {
   final locationsController = Get.put(LocationsController());
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,6 +55,9 @@ class _SelectCountryState extends State<SelectCountry> {
                   onTap: () {
                     locationsController.getSubLocation(
                         locationsController.locations.value[index].termId);
+                    box.write('country',
+                        locationsController.locations.value[index].termId);
+                    print(box.read("country"));
                     Get.to(const SelectCity());
                   },
                   child: Container(

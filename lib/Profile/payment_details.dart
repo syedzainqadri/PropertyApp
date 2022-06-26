@@ -175,4 +175,123 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       ],
     );
   }
+
+  membershipCard(title, price) {
+    return Padding(
+      padding: const EdgeInsets.all(18.0),
+      child: SizedBox(
+        width: double.infinity,
+        height: 200,
+        child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 40,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: lightGreen,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: const Center(
+                    child: Text(
+                  'Payment Detail',
+                  style: TextStyle(color: white, fontSize: 18),
+                )),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Selected Package',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 65, 65, 65),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      title,
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 32, 32, 32),
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
+                thickness: 0.4,
+                color: Color.fromARGB(255, 88, 101, 107),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Package Price',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 65, 65, 65),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      price,
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 32, 32, 32),
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Divider(
+                thickness: 0.4,
+                color: Color.fromARGB(255, 88, 101, 107),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Sub Total',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 65, 65, 65),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      price,
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                        color: lightGreen,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

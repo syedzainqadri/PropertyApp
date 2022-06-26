@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
@@ -55,6 +56,7 @@ class _AddListingState extends State<AddListing> {
       20, SelectedFieldsModel(0, Choice(id: '0', name: '0')),
       growable: true);
   List<XFile>? imageFiles = [];
+  final box = GetStorage();
   @override
   void initState() {
     super.initState();
@@ -608,8 +610,9 @@ class _AddListingState extends State<AddListing> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () async {
+                  var location = await box.read("city");
                   await listingsController.addListing(
-                      locationsController.userLocationId.value,
+                      location,
                       208, //var category;
                       listingType.id,
                       titleController.text,
