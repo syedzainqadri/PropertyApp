@@ -15,6 +15,7 @@ class MyListings extends StatefulWidget {
 
 class _MyListingsState extends State<MyListings> {
   final myListingController = Get.put(MyListingController());
+  final ListingController listingController = Get.put(ListingController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,29 +38,34 @@ class _MyListingsState extends State<MyListings> {
             )),
       ),
       body: Obx(() {
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2),
-          padding: const EdgeInsets.only(left: 18.0),
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: myListingController.myListings.value.data?.length,
-          itemBuilder: (context, index) {
-            return ListingCard(
-                image: myListingController.myListings.value.data![index].images,
-                title: myListingController.myListings.value.data![index].title
-                    .toString(),
-                city: myListingController
-                    .myListings.value.data![index].contact!.locations![0].name
-                    .toString(),
-                price: myListingController.myListings.value.data![index].price
-                    .toString(),
-                isFovorite: false,
-                description: '',
-                listingId: myListingController
-                    .myListings.value.data![index].listingId);
-          },
-        );
+        return listingController.isLoading == true
+            ? const CircularProgressIndicator()
+            : GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2),
+                padding: const EdgeInsets.only(left: 18.0),
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemCount: myListingController.myListings.value.data?.length,
+                itemBuilder: (context, index) {
+                  return ListingCard(
+                      image: myListingController
+                          .myListings.value.data![index].images,
+                      title: myListingController
+                          .myListings.value.data![index].title
+                          .toString(),
+                      city: myListingController.myListings.value.data![index]
+                          .contact!.locations![0].name
+                          .toString(),
+                      price: myListingController
+                          .myListings.value.data![index].price
+                          .toString(),
+                      isFovorite: false,
+                      description: '',
+                      listingId: myListingController
+                          .myListings.value.data![index].listingId);
+                },
+              );
       }),
     );
   }
