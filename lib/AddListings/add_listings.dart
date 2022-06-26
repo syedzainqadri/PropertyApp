@@ -393,7 +393,7 @@ class _AddListingState extends State<AddListing> {
                           setState(() {
                             subCategorySelected = true;
                             subCategory = val;
-                            print(subCategory);
+                            print(subCategory.termId);
                           });
                         },
                       ),
@@ -429,7 +429,7 @@ class _AddListingState extends State<AddListing> {
                                 ),
                                 onChanged: (val) {
                                   setState(() => pricingTypes = val);
-                                  print(priceTypes.id);
+                                  print(pricingTypes.id);
                                 },
                               ),
                             ),
@@ -738,6 +738,7 @@ class _AddListingState extends State<AddListing> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () async {
+                  print('my price input is ${priceController.text}');
                   var _latitude = await box.read('latitude');
                   var _longitude = await box.read('longitude');
                   var location = await box.read("city");
@@ -748,30 +749,31 @@ class _AddListingState extends State<AddListing> {
                     whatsAppController.text,
                     emailController.text,
                     websiteController.text,
-                    location,
-                    category.termId,
+                    locationsController.userLocationId.value,
+                    subCategory.termId,
                     listingType.id,
                     titleController.text,
-                    'approved',
-                    pricingTypes == 'price'
+                    '',
+                    pricingTypes.id == 'price'
                         ? priceController.text
                         : priceStartController.text +
                             '-' +
                             priceEndController.text,
-                    priceTypes,
-                    priceUnits,
+                    pricingTypes.id,
+                    priceUnits.id,
                     '',
                     descriptionController.text,
                     imageFiles,
                     _latitude,
                     _longitude,
+                    videoController.text,
                     selectedFields,
                     jsonEncode(myAmenities),
                   );
                   await myListingController.getMyListing();
-                  Get.to(() => MyListings());
+                  Get.to(() => const MyListings());
                   Get.snackbar('Listing Posted',
-                      'Your is listing is pending for Approval from Admin',
+                      'Your listing is pending for Approval from Admin',
                       snackPosition: SnackPosition.BOTTOM);
                 },
                 style: ElevatedButton.styleFrom(

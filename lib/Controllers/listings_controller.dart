@@ -53,6 +53,7 @@ class ListingController extends GetxController {
       images,
       latitude,
       longitude,
+      videoUrl,
       List<SelectedFieldsModel> customFields,
       amenities) async {
     print("zipcode is $zipCode");
@@ -71,6 +72,7 @@ class ListingController extends GetxController {
     print("pricing unit is $priceUnit");
     print("Badges is $badges");
     print("Images are $images");
+    print("Video is $videoUrl");
     isLoading.value = true;
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
 
@@ -116,6 +118,7 @@ class ListingController extends GetxController {
       'custom_fields[4216]': amenities.toString(),
       'latitude': latitude.toString(),
       'longitude': longitude.toString(),
+      'video_urls': videoUrl.toString(),
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
