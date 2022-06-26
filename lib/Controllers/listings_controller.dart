@@ -29,6 +29,7 @@ class ListingController extends GetxController {
       },
     );
     allListings.value = allListingsFromJson(response.body);
+    print(response.body);
     isLoading.value = false;
   }
 
@@ -93,7 +94,6 @@ class ListingController extends GetxController {
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    // print(response.body);
     isLoading.value = false;
   }
 }
