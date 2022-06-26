@@ -294,4 +294,39 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       ),
     );
   }
+
+  paymentTypes(Payment payment) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          print("i am prinitng ${payment.id}");
+          gatewayId = payment.id;
+          print('gateway id is: $gatewayId');
+        });
+      },
+      child: Row(
+        children: [
+          const SizedBox(
+            width: 25,
+          ),
+          Radio(
+            value: 1,
+            activeColor: lightGreen,
+            groupValue: _radioValue,
+            onChanged: (value) {
+              _handleRadioValueChange(value);
+            },
+          ),
+          const SizedBox(
+            width: 8.0,
+          ),
+          Text(
+            payment.title,
+            style: const TextStyle(
+                color: Color.fromARGB(255, 40, 40, 40), fontSize: 19),
+          ),
+        ],
+      ),
+    );
+  }
 }
