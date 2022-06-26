@@ -4,7 +4,6 @@ import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
 import 'package:realestapp/Controllers/membership_controller.dart';
 import 'package:realestapp/Controllers/payment_controller.dart';
 import 'package:realestapp/Models/payment_model.dart';
-import 'package:realestapp/Models/paymenyByIdModel.dart';
 import 'package:realestapp/Profile/PaymentResultScreen.dart';
 
 import '../Utils/color_scheme.dart';
