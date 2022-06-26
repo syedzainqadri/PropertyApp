@@ -338,6 +338,7 @@ class _AddListingState extends State<AddListing> {
                   ),
                   onChanged: (val) {
                     setState(() => listingType = val);
+                    print(listingType.id.toString());
                   },
                 ),
               ),
@@ -366,6 +367,7 @@ class _AddListingState extends State<AddListing> {
                       pricingTypes = PricType();
                       pricingTypes.id = '';
                       pricingTypes.name = '';
+                      print(category.termId);
                     });
                   },
                 ),
@@ -379,6 +381,7 @@ class _AddListingState extends State<AddListing> {
                         wrapped: true,
                         value: subCategory,
                         choiceItems:
+                            //this should be coming from category model not location Model
                             C2Choice.listFrom<LocationsModel, LocationsModel>(
                           source: categoriesController.subCategories.value,
                           value: (i, v) => v,
@@ -390,6 +393,7 @@ class _AddListingState extends State<AddListing> {
                           setState(() {
                             subCategorySelected = true;
                             subCategory = val;
+                            print(subCategory);
                           });
                         },
                       ),
@@ -425,6 +429,7 @@ class _AddListingState extends State<AddListing> {
                                 ),
                                 onChanged: (val) {
                                   setState(() => pricingTypes = val);
+                                  print(priceTypes.id);
                                 },
                               ),
                             ),
@@ -478,6 +483,7 @@ class _AddListingState extends State<AddListing> {
                                 ),
                                 onChanged: (val) {
                                   setState(() => priceUnits = val);
+                                  print(priceUnits.id);
                                 },
                               ),
                             ),
@@ -743,7 +749,7 @@ class _AddListingState extends State<AddListing> {
                     emailController.text,
                     websiteController.text,
                     location,
-                    category.id,
+                    category.termId,
                     listingType.id,
                     titleController.text,
                     'approved',
