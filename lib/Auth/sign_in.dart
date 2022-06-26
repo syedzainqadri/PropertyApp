@@ -12,6 +12,10 @@ import '../Controllers/favorite_listing_controller.dart';
 import '../Controllers/listing_type_controller.dart';
 import '../Controllers/listings_controller.dart';
 import '../Controllers/my_listings_controller.dart';
+import '../Controllers/my_payment_controller.dart';
+import '../Controllers/orders_controller.dart';
+import '../Controllers/search_controller.dart';
+import '../Controllers/store_controller.dart';
 import '../Home/home.dart';
 import '../Models/user_model.dart';
 import '../Utils/color_scheme.dart';
@@ -92,8 +96,10 @@ class _SignInState extends State<SignIn> {
                       Get.put(CategoriesController());
                       Get.put(LocationsController());
                       Get.put(ListingTypeController());
-
-                      Get.put(ListingTypeController());
+                      Get.put(SearchController());
+                      Get.put(OrdersController());
+                      Get.put(MyPaymentsController());
+                      Get.put(StoreController());
                       Get.offAll(const Home());
                     },
                   ),

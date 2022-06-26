@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:realestapp/Controllers/profile_controller.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
+import 'package:realestapp/Profile/my_store.dart';
 import 'package:realestapp/Profile/orders.dart';
 import 'package:realestapp/Profile/payments.dart';
 import '../Auth/sign_in.dart';
@@ -139,7 +140,7 @@ class _ProfileState extends State<Profile> {
                 profileParameters("Upgrade Account", Icons.upgrade,
                     Colors.amber, const AccountSubscription()),
                 profileParameters(
-                    "Settings", Icons.settings, mediumGrey, const Settings()),
+                    "My Store", Icons.sell,mediumGrey,  MyStoreScreen()),
                 profileParameters(
                     "Orders", Icons.shopping_cart, lightGreen, Orders()),
                 profileParameters(

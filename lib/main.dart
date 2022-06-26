@@ -11,8 +11,8 @@ import 'Auth/sign_in.dart';
 import 'Controllers/favorite_listing_controller.dart';
 import 'Controllers/listing_type_controller.dart';
 import 'Controllers/my_listings_controller.dart';
-import 'Controllers/order_controller.dart';
 import 'Controllers/search_controller.dart';
+import 'Controllers/store_controller.dart';
 import 'Home/home.dart';
 import 'Utils/color_scheme.dart';
 import 'Utils/constants.dart';
@@ -33,6 +33,7 @@ void main() async {
     Get.put(SearchController());
     Get.put(OrdersController());
     Get.put(MyPaymentsController());
+    Get.put(StoreController());
   }
   runApp(const MyApp());
 }

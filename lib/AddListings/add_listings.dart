@@ -393,7 +393,7 @@ class _AddListingState extends State<AddListing> {
                           setState(() {
                             subCategorySelected = true;
                             subCategory = val;
-                            print(subCategory);
+                            print(subCategory.termId);
                           });
                         },
                       ),
@@ -429,7 +429,7 @@ class _AddListingState extends State<AddListing> {
                                 ),
                                 onChanged: (val) {
                                   setState(() => pricingTypes = val);
-                                  print(priceTypes.id);
+                                 // print(priceTypes.id);
                                 },
                               ),
                             ),
@@ -748,8 +748,8 @@ class _AddListingState extends State<AddListing> {
                     whatsAppController.text,
                     emailController.text,
                     websiteController.text,
-                    location,
-                    category.termId,
+                    locationsController.userLocationId.value,
+                    subCategory.termId,
                     listingType.id,
                     titleController.text,
                     'approved',
@@ -769,9 +769,9 @@ class _AddListingState extends State<AddListing> {
                     jsonEncode(myAmenities),
                   );
                   await myListingController.getMyListing();
-                  Get.to(() => MyListings());
+                  Get.to(() => const MyListings());
                   Get.snackbar('Listing Posted',
-                      'Your is listing is pending for Approval from Admin',
+                      'Your listing is pending for Approval from Admin',
                       snackPosition: SnackPosition.BOTTOM);
                 },
                 style: ElevatedButton.styleFrom(

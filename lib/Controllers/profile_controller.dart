@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:realestapp/Controllers/sign_in_controller.dart';
 
 class ProfileController extends GetxController {
-  SignInController signInController = Get.put(SignInController());
   final token = GetStorage().read('token');
   changeProfile(image) async {
     var request = http.MultipartRequest('POST',
