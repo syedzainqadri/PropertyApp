@@ -617,24 +617,25 @@ class _AddListingState extends State<AddListing> {
                   var _longitude = await box.read('longitude');
                   var location = await box.read("city");
                   await listingsController.addListing(
-                      _longitude,
-                      _latitude,
-                      location,
-                      208, //var category;
-                      listingType.id,
-                      titleController.text,
-                      'approved',
-                      pricingTypes == 'price'
-                          ? priceController.text
-                          : priceStartController.text +
-                              '-' +
-                              priceEndController.text,
-                      '',
-                      '',
-                      descriptionController.text,
-                      imageFiles,
-                      selectedFields,
-                      jsonEncode(myAmenities));
+                    location,
+                    208, //var category;
+                    listingType.id,
+                    titleController.text,
+                    'approved',
+                    pricingTypes == 'price'
+                        ? priceController.text
+                        : priceStartController.text +
+                            '-' +
+                            priceEndController.text,
+                    '',
+                    '',
+                    descriptionController.text,
+                    imageFiles,
+                    _latitude,
+                    _longitude,
+                    selectedFields,
+                    jsonEncode(myAmenities),
+                  );
                   Get.to(() => MyListings());
                   Get.snackbar('Listing Posted',
                       'Your is listing is pending for Approval from Admin',
