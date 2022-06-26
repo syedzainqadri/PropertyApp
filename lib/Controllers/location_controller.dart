@@ -42,6 +42,7 @@ class LocationsController extends GetxController {
     );
 
     subLocations.value = locationsModelFromJson(response.body);
+    print(response.body);
   }
 
   updateLocationName(id, name) {

@@ -45,6 +45,15 @@ class ListingController extends GetxController {
       images,
       List<SelectedFieldsModel> customFields,
       amenities) async {
+    print(locationId);
+    print(categoryId);
+    print(locationId);
+    print(title);
+    print(status);
+    print(price);
+    print(priceUnit);
+    print(badges);
+    print(images);
     isLoading.value = true;
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
 
@@ -84,7 +93,7 @@ class ListingController extends GetxController {
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    print(response.body);
+    // print(response.body);
     isLoading.value = false;
   }
 }

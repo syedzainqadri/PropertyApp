@@ -59,6 +59,7 @@ class _SelectCityState extends State<SelectCity> {
                             .subLocations.value[index].name);
                     box.write('city',
                         locationsController.subLocations.value[index].termId);
+                    // box.write('latitude', locationsController.subLocations.value[index].);
                     print(box.read("city"));
                     Get.offAll(const AddListing());
                   },
