@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/listing_config_controller.dart';
@@ -57,6 +58,7 @@ class _AddListingState extends State<AddListing> {
       growable: true);
   List<XFile>? imageFiles = [];
   final box = GetStorage();
+  var location = Location();
   @override
   void initState() {
     super.initState();
@@ -105,7 +107,8 @@ class _AddListingState extends State<AddListing> {
                         width: 200,
                         height: 46,
                         child: ElevatedButton.icon(
-                          onPressed: () {
+                          onPressed: () async {
+                            await locationService();
                             Get.to(const SelectCountry());
                           },
                           icon: const Icon(Icons.add),
@@ -610,8 +613,12 @@ class _AddListingState extends State<AddListing> {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () async {
+                  var _latitude = await box.read('latitude');
+                  var _longitude = await box.read('longitude');
                   var location = await box.read("city");
                   await listingsController.addListing(
+                      _longitude,
+                      _latitude,
                       location,
                       208, //var category;
                       listingType.id,
@@ -671,6 +678,32 @@ class _AddListingState extends State<AddListing> {
         ),
       ),
     );
+  }
+
+  locationService() async {
+    var serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+    var _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    var currentLocation = await location.getLocation();
+    var latitude = currentLocation.latitude.toString();
+    var longitude = currentLocation.longitude.toString();
+    box.write('longitude', longitude);
+    box.write('latitude', latitude);
+    print(latitude);
+    print(longitude);
+
+    print(currentLocation.toString());
   }
 }
 
