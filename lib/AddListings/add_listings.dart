@@ -171,7 +171,7 @@ class _AddListingState extends State<AddListing> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 5.0, horizontal: 20),
                       child: SizedBox(
-                        width: 200,
+                        width: 180,
                         height: 46,
                         child: ElevatedButton.icon(
                           onPressed: () async {

@@ -376,12 +376,15 @@ class _ListingDetailsState extends State<ListingDetails> {
                               SizedBox(
                                 width: 5,
                               ),
-                              Text(
-                                listingDetailsController
-                                    .listingDetail.value.amenities.value[index],
-                                overflow: TextOverflow.fade,
-                                style: const TextStyle(
-                                    fontSize: 10, fontWeight: FontWeight.w500),
+                              Expanded(
+                                child: Text(
+                                  listingDetailsController.listingDetail.value
+                                      .amenities.value[index],
+                                  overflow: TextOverflow.fade,
+                                  style: const TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ],
                           );

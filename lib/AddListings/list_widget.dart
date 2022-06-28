@@ -61,7 +61,7 @@ class ListingCard extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 100,
+                    height: 83,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10),
@@ -96,11 +96,12 @@ class ListingCard extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 4.0, top: 4.0),
+                padding: const EdgeInsets.only(left: 4.0, top: 2.0),
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
                     title,
+                    maxLines: 2,
                     style: const TextStyle(
                       color: darkGrey,
                       fontSize: 14,
@@ -109,10 +110,10 @@ class ListingCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 4,
+                height: 2,
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 4.0, bottom: 4.0),
+                padding: const EdgeInsets.only(right: 4.0, bottom: 2.0),
                 child: Container(
                   alignment: Alignment.bottomRight,
                   child: Text(
