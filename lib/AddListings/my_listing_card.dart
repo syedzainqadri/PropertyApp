@@ -72,11 +72,11 @@ class MyListingCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  isFovorite
-                      ? Row(
+                  
+                       Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            IconButton(
+                           isFovorite? IconButton(
                               onPressed: () {
                                 favoriteListingController
                                     .addToFavorites(listingId);
@@ -89,10 +89,23 @@ class MyListingCard extends StatelessWidget {
                                 size: 25,
                                 color: lightGreen,
                               ),
-                            ),
+                            ):const Offstage(),
+                             IconButton(
+                              onPressed: () {
+                                favoriteListingController
+                                    .addToFavorites(listingId);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Added to Favorites')));
+                              },
+                              icon: const Icon(
+                                Icons.favorite,
+                                size: 25,
+                                color: lightGreen,
+                              ),
+                            )
                           ],
-                        )
-                      : const Offstage(),
+                        ),
                 ],
               ),
               Padding(
