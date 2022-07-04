@@ -10,7 +10,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
-import 'package:realestapp/AddListings/Widgets/TextArea.dart';
 import 'package:realestapp/AddListings/Widgets/TextAreaForForm.dart';
 import 'package:realestapp/AddListings/Widgets/TextFieldForForm.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
@@ -109,6 +108,56 @@ class _AddListingState extends State<AddListing> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Obx(
+                () => Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 20),
+                      child: SizedBox(
+                        width: 200,
+                        height: 46,
+                        child: ElevatedButton.icon(
+                          onPressed: () async {
+                            await locationService();
+                            Get.to(const SelectCountry());
+                          },
+                          icon: const Icon(Icons.add),
+                          label: const Text(
+                            'Add Location',
+                            style: TextStyle(
+                              color: white,
+                              fontSize: 18,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: lightGreen,
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    locationsController.userLocationId.value != 0
+                        ? Chip(
+                            deleteIcon: const Icon(
+                              Icons.close,
+                            ),
+                            onDeleted: () {
+                              locationsController.updateLocationName(0, '');
+                            },
+                            label: Text(locationsController
+                                .userLocationName.value
+                                .toString()),
+                          )
+                        : const Offstage(),
+                  ],
+                ),
+              ),
               TitleWidget(
                 text: 'Select Images',
                 padding: 5.0,
@@ -163,56 +212,6 @@ class _AddListingState extends State<AddListing> {
               ),
               const SizedBox(
                 height: 10,
-              ),
-              Obx(
-                () => Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5.0, horizontal: 20),
-                      child: SizedBox(
-                        width: 200,
-                        height: 46,
-                        child: ElevatedButton.icon(
-                          onPressed: () async {
-                            await locationService();
-                            Get.to(const SelectCountry());
-                          },
-                          icon: const Icon(Icons.add),
-                          label: const Text(
-                            'Add Location',
-                            style: TextStyle(
-                              color: white,
-                              fontSize: 18,
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            primary: lightGreen,
-                            elevation: 0.0,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    locationsController.userLocationId.value != 0
-                        ? Chip(
-                            deleteIcon: const Icon(
-                              Icons.close,
-                            ),
-                            onDeleted: () {
-                              locationsController.updateLocationName(0, '');
-                            },
-                            label: Text(locationsController
-                                .userLocationName.value
-                                .toString()),
-                          )
-                        : const Offstage(),
-                  ],
-                ),
               ),
               TitleWidget(
                 text: 'Title',

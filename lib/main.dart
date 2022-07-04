@@ -7,6 +7,7 @@ import 'package:realestapp/Controllers/chat_controller.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
 import 'package:realestapp/Controllers/my_payment_controller.dart';
 import 'package:realestapp/Controllers/orders_controller.dart';
+import 'package:realestapp/Controllers/plansController.dart';
 import 'Auth/sign_in.dart';
 import 'Controllers/favorite_listing_controller.dart';
 import 'Controllers/listing_type_controller.dart';
@@ -24,7 +25,7 @@ void main() async {
   if (GetStorage().read('isLoggedIn')) {
     Get.put(ListingController());
     Get.put(FavoriteListingController());
-    Get.put(MyListingController());
+    // Get.put(MyListingController());
     Get.put(ChatController());
     Get.put(CategoriesController());
     Get.put(LocationsController());
@@ -32,6 +33,7 @@ void main() async {
     Get.put(SearchController());
     Get.put(OrdersController());
     Get.put(MyPaymentsController());
+    Get.put(PlansController());
   }
   runApp(const MyApp());
 }

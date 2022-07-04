@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:realestapp/AddListings/listing_details.dart';
+import 'package:realestapp/BuyPromotions/buyPromotions.dart';
 import 'package:realestapp/Controllers/deleteListingController.dart';
 import 'package:realestapp/Controllers/favorite_listing_controller.dart';
 import 'package:realestapp/Controllers/listing_detail_controller.dart';
+import 'package:realestapp/Controllers/markAsSoldController.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
+import 'package:realestapp/Profile/my_listings.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
 
 class MyListingCard extends StatelessWidget {
@@ -34,8 +38,8 @@ class MyListingCard extends StatelessWidget {
   double width = Get.width;
 
   final favoriteListingController = Get.put(FavoriteListingController());
-  final DeleteListingController deleteListingController =
-      Get.put(DeleteListingController());
+  final MarkAsSoldController markAsSoldController =
+      Get.put(MarkAsSoldController());
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +62,7 @@ class MyListingCard extends StatelessWidget {
         },
         child: Card(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
@@ -124,7 +128,7 @@ class MyListingCard extends StatelessWidget {
                 width: 30,
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 40.0, top: 15),
+                padding: const EdgeInsets.only(top: 20.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,16 +165,20 @@ class MyListingCard extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(
+                width: width * 0.14,
+              ),
               Container(
                 alignment: Alignment.topRight,
                 child: PopupMenuButton(
                     onSelected: (value) {
-                      if (value == 'Delete') {
-                        deleteListingController
-                            .deleteListing(listingId.toString());
+                      if (value == 'Mark As Sold') {
+                        markAsSoldController.markAsSold(listingId.toString());
+                        favoriteListingController.refresh();
                         ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Removed from Favorites')));
+                            const SnackBar(content: Text('Marked As Sold')));
+                      } else if (value == 'promote') {
+                        Get.to(() => PromotionPlans());
                       }
                     },
                     icon: Icon(Icons.more_horiz),
@@ -217,27 +225,6 @@ class MyListingCard extends StatelessWidget {
                             ],
                           ),
                           value: 'promote',
-                        ),
-                        PopupMenuItem(
-                          child: Row(
-                            children: const [
-                              Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Delete',
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                          value: 'Delete',
                         ),
                         PopupMenuItem(
                           child: Row(
