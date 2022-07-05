@@ -1,10 +1,4 @@
-// To parse this JSON data, do
-//
-//     final listingsByIdModel = listingsByIdModelFromJson(jsonString);
-
 import 'dart:convert';
-
-import 'package:get_storage/get_storage.dart';
 
 ListingsByIdModel listingsByIdModelFromJson(String str) =>
     ListingsByIdModel.fromJson(json.decode(str));

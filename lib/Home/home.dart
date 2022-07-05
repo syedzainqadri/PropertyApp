@@ -3,8 +3,10 @@ import 'package:get/get.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:realestapp/Controllers/user_controller.dart';
 import '../AddListings/add_listings.dart';
+import '../AddListings/edit_listing.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';
+import '../Controllers/listing_detail_controller.dart';
 import '../Controllers/membership_controller.dart';
 import '../Profile/profile.dart';
 import '../Search/search_page.dart';
@@ -27,6 +29,7 @@ class _HomeState extends State<Home> {
   late PageController _pageController;
   bool notIntialized = true;
   MembershipController membershipController = Get.put(MembershipController());
+  final listingDetailsController = Get.put(ListingDetailsController());
   @override
   void initState() {
     setState(() {
@@ -86,7 +89,8 @@ class _HomeState extends State<Home> {
                   ? [
                       GestureDetector(
                         onTap: () {
-                          Get.to(const AddListing());
+                          listingDetailsController.getListingById("17626");
+                          Get.to(const EditListing());
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
