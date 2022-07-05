@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:realestapp/AddListings/editlisting.dart';
 import 'package:realestapp/AddListings/listing_details.dart';
 import 'package:realestapp/BuyPromotions/buyPromotions.dart';
 import 'package:realestapp/Controllers/deleteListingController.dart';
@@ -179,6 +180,9 @@ class MyListingCard extends StatelessWidget {
                             const SnackBar(content: Text('Marked As Sold')));
                       } else if (value == 'promote') {
                         Get.to(() => PromotionPlans());
+                      } else if (value == 'Edit') {
+                        Get.to(
+                            () => EditListing(listingId: listingId.toString()));
                       }
                     },
                     icon: Icon(Icons.more_horiz),
