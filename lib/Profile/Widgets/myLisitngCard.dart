@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
+import 'package:realestapp/AddListings/edit_listing.dart';
 import 'package:realestapp/AddListings/editlisting.dart';
 import 'package:realestapp/AddListings/listing_details.dart';
 import 'package:realestapp/BuyPromotions/buyPromotions.dart';
@@ -63,7 +64,7 @@ class MyListingCard extends StatelessWidget {
         },
         child: Card(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Stack(
@@ -126,7 +127,7 @@ class MyListingCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                width: 30,
+                width: 10,
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20.0),
@@ -139,7 +140,7 @@ class MyListingCard extends StatelessWidget {
                       height: 10,
                     ),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Icon(
                           Icons.place,
@@ -153,7 +154,7 @@ class MyListingCard extends StatelessWidget {
                       height: 10,
                     ),
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Icon(
                           Icons.monetization_on,
@@ -166,90 +167,97 @@ class MyListingCard extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                width: width * 0.14,
-              ),
-              Container(
-                alignment: Alignment.topRight,
-                child: PopupMenuButton(
-                    onSelected: (value) {
-                      if (value == 'Mark As Sold') {
-                        markAsSoldController.markAsSold(listingId.toString());
-                        favoriteListingController.refresh();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Marked As Sold')));
-                      } else if (value == 'promote') {
-                        Get.to(() => PromotionPlans());
-                      } else if (value == 'Edit') {
-                        Get.to(
-                            () => EditListing(listingId: listingId.toString()));
-                      }
-                    },
-                    icon: Icon(Icons.more_horiz),
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem(
-                          child: Row(
-                            children: const [
-                              Icon(
-                                Icons.edit,
-                                color: Colors.blueAccent,
+              // SizedBox(
+              //   width: width * 0.14,
+              // ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    alignment: Alignment.topRight,
+                    child: PopupMenuButton(
+                        onSelected: (value) {
+                          if (value == 'Mark As Sold') {
+                            markAsSoldController
+                                .markAsSold(listingId.toString());
+                            favoriteListingController.refresh();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Marked As Sold')));
+                          } else if (value == 'promote') {
+                            Get.to(() => PromotionPlans());
+                          } else if (value == 'Edit') {
+                            Get.to(
+                                () => EditListingScreen(listingId: listingId));
+                          }
+                        },
+                        icon: Icon(Icons.more_horiz),
+                        itemBuilder: (context) {
+                          return [
+                            PopupMenuItem(
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.edit,
+                                    color: Colors.blueAccent,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Edit',
+                                    style: TextStyle(
+                                      color: Colors.blueAccent,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                width: 10,
+                              value: 'Edit',
+                            ),
+                            PopupMenuItem(
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.announcement,
+                                    color: Colors.green,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Promote',
+                                    style: TextStyle(
+                                      color: Colors.green,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                'Edit',
-                                style: TextStyle(
-                                  color: Colors.blueAccent,
-                                  fontSize: 20,
-                                ),
+                              value: 'promote',
+                            ),
+                            PopupMenuItem(
+                              child: Row(
+                                children: const [
+                                  Icon(Icons.replay, color: Colors.greenAccent),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    'Mark As Sold',
+                                    style: TextStyle(
+                                      color: Colors.greenAccent,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          value: 'Edit',
-                        ),
-                        PopupMenuItem(
-                          child: Row(
-                            children: const [
-                              Icon(
-                                Icons.announcement,
-                                color: Colors.green,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Promote',
-                                style: TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                          value: 'promote',
-                        ),
-                        PopupMenuItem(
-                          child: Row(
-                            children: const [
-                              Icon(Icons.replay, color: Colors.greenAccent),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                'Mark As Sold',
-                                style: TextStyle(
-                                  color: Colors.greenAccent,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                          value: 'Mark As Sold',
-                        ),
-                      ];
-                    }),
+                              value: 'Mark As Sold',
+                            ),
+                          ];
+                        }),
+                  ),
+                ],
               ),
             ],
           ),

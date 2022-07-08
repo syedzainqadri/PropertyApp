@@ -26,7 +26,9 @@ class _HomeState extends State<Home> {
   String title = 'Home';
   late PageController _pageController;
   bool notIntialized = true;
-  MembershipController membershipController = Get.put(MembershipController());
+  final MembershipController membershipController =
+      Get.put(MembershipController());
+  final userController = Get.find<UserController>();
   @override
   void initState() {
     setState(() {
@@ -59,27 +61,20 @@ class _HomeState extends State<Home> {
                     await membershipController.getMembershipPlans();
                     Get.to(const Profile());
                   },
-                  child: GetX<UserController>(
-                    init: UserController(),
-                    builder: (_) {
-                      return Container(
-                        width: 30,
-                        height: 30,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: mediumGrey,
-                          ),
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                              _.user.value.ppThumbUrl.toString(),
-                            ),
-                          ),
+                  child: Obx(() => Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: mediumGrey,
                         ),
-                      );
-                    },
-                  ),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              userController.user.value.ppThumbUrl.toString()),
+                        ),
+                      ))),
                 ),
               ),
               actions: hasAction

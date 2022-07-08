@@ -9,6 +9,7 @@ import 'package:realestapp/Controllers/my_listings_controller.dart';
 import 'package:realestapp/Controllers/my_payment_controller.dart';
 import 'package:realestapp/Controllers/orders_controller.dart';
 import 'package:realestapp/Controllers/plansController.dart';
+import 'package:realestapp/Controllers/user_controller.dart';
 import 'Auth/sign_in.dart';
 import 'Controllers/favorite_listing_controller.dart';
 import 'Controllers/listing_type_controller.dart';
@@ -35,6 +36,7 @@ void main() async {
     Get.put(OrdersController());
     Get.put(MyPaymentsController());
     Get.put(PlansController());
+    Get.put(UserController());
   }
   runApp(const MyApp());
 }
