@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:realestapp/AddListings/Widgets/TextAreaForForm.dart';
 import 'package:realestapp/AddListings/Widgets/TextFieldForForm.dart';
 import 'package:realestapp/AddListings/add_listings.dart';
@@ -32,6 +33,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
   @override
   void initState() {
     super.initState();
+    print(widget.listingId);
     getListingbyId();
     print(whatsAppController.text);
   }
@@ -58,21 +60,20 @@ class _EditListingScreenState extends State<EditListingScreen> {
         text: editListingController.editListing.value.listing!.title!);
     addressController.value = TextEditingValue(
         text:
-            editListingController.editListing.value.listing!.author!.address!);
+            editListingController.editListing.value.listing!.contact!.address!);
     phoneNumberController.value = TextEditingValue(
         text: editListingController.editListing.value.listing!.author!.phone!);
     emailController.value = TextEditingValue(
         text: editListingController.editListing.value.listing!.author!.email!);
     websiteController.value = TextEditingValue(
         text:
-            editListingController.editListing.value.listing!.author!.website!);
+            editListingController.editListing.value.listing!.contact!.website!);
     videoController.value = TextEditingValue(
         text:
             editListingController.editListing.value.listing!.videoUrls!.first!);
     whatsAppController.value = TextEditingValue(
         text: editListingController
-            .editListing.value.listing!.author!.whatsappNumber!
-            .toString());
+            .editListing.value.listing!.contact!.whatsappNumber!);
   }
 
   @override
@@ -149,6 +150,24 @@ class _EditListingScreenState extends State<EditListingScreen> {
                           ),
                         );
                       },
+                    ),
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _getFromGallery();
+                      },
+                      child: Text('Add Images'),
+                      style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all(
+                            TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),
+                          ),
+                          backgroundColor:
+                              MaterialStateProperty.all(lightGreen),
+                          overlayColor: MaterialStateProperty.all(white)),
                     ),
                   ),
                   TitleWidget(
@@ -251,5 +270,14 @@ class _EditListingScreenState extends State<EditListingScreen> {
               ),
             )),
           );
+  }
+
+  _getFromGallery() async {
+    List<XFile>? _images = await ImagePicker().pickMultiImage();
+    for (int i = 0; i < _images!.length; i++) {
+      setState(() {
+        imagesList.value.addAll(_images);
+      });
+    }
   }
 }

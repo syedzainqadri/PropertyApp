@@ -26,7 +26,8 @@ class EditListingController extends GetxController {
     isLoading.value = false;
   }
 
-  addListing(
+  updateListing(
+      listingId,
       zipCode,
       address,
       phone,
@@ -49,21 +50,14 @@ class EditListingController extends GetxController {
       videoUrl,
       List<SelectedFieldsModel> customFields,
       amenities) async {
-    print("zipcode is $zipCode");
+    print("Listing id is $listingId");
     print("address is $address");
     print("phone is $phone");
     print("whatsApp is $whatsApp");
     print("email is $email");
     print("website is $website");
-    print("location is is $locationId");
-    print("category id is $categoryId");
-    print("location id is $locationId");
     print("title of the listing is $title");
-    print("Status of the listing is $status");
     print("Price is $price");
-    print("Price type is $priceType");
-    print("pricing unit is $priceUnit");
-    print("Badges is $badges");
     print("Images are $images");
     print("Video is $videoUrl");
     isLoading.value = true;
@@ -92,25 +86,14 @@ class EditListingController extends GetxController {
       'Authorization': 'Bearer $token'
     });
     request.fields.addAll({
-      'zipcode': zipCode.toString(),
       'address': address.toString(),
       'phone': phone.toString(),
       'whatsapp_number': whatsApp.toString(),
       'email': email.toString(),
       'website': website.toString(),
-      'locations': locationId.toString(),
-      'category_id': categoryId.toString(),
-      'listing_type': listingType.toString(),
       'title': title.toString(),
-      'status': status.toString(),
       'price': price.toString(),
-      'price_type': priceType.toString(),
-      'price_unit': priceUnit.toString(),
-      'badges': badges.toString(),
       'description': description.toString(),
-      'custom_fields[4216]': amenities.toString(),
-      'latitude': latitude.toString(),
-      'longitude': longitude.toString(),
       'video_urls': videoUrl.toString(),
     });
     var res = await request.send();
