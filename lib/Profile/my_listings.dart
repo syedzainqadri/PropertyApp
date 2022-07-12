@@ -17,9 +17,10 @@ class _MyListingsState extends State<MyListings> {
   final ListingController listingController = Get.put(ListingController());
   final DeleteListingController deleteListingController =
       Get.put(DeleteListingController());
+  final MyListingController myListingController =
+      Get.put(MyListingController());
   @override
   Widget build(BuildContext context) {
-    var myListingController = Get.find<MyListingController>();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: transparent,

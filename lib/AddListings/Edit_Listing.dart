@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -5,6 +7,8 @@ import 'package:realestapp/AddListings/Widgets/TextAreaForForm.dart';
 import 'package:realestapp/AddListings/Widgets/TextFieldForForm.dart';
 import 'package:realestapp/AddListings/add_listings.dart';
 import 'package:realestapp/Controllers/editlisting_controller.dart';
+import 'package:realestapp/Controllers/my_listings_controller.dart';
+import 'package:realestapp/Profile/my_listings.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
 
 class EditListingScreen extends StatefulWidget {
@@ -17,6 +21,7 @@ class EditListingScreen extends StatefulWidget {
 
 class _EditListingScreenState extends State<EditListingScreen> {
   final EditListingController editListingController = EditListingController();
+  final MyListingController myListingController = MyListingController();
   final priceController = TextEditingController();
   final priceStartController = TextEditingController();
   final priceEndController = TextEditingController();
@@ -29,6 +34,8 @@ class _EditListingScreenState extends State<EditListingScreen> {
   final videoController = TextEditingController();
   final whatsAppController = TextEditingController();
   var imagesList = [].obs;
+  List<XFile>? images = [];
+  String? categoryId;
 
   @override
   void initState() {
@@ -36,6 +43,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
     print(widget.listingId);
     getListingbyId();
     print(whatsAppController.text);
+    print(categoryId);
   }
 
   getListingbyId() async {
@@ -44,6 +52,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
       setState(() {});
     });
     setInitialValues();
+    setCategoryId();
   }
 
   setInitialValues() {
@@ -74,6 +83,16 @@ class _EditListingScreenState extends State<EditListingScreen> {
     whatsAppController.value = TextEditingValue(
         text: editListingController
             .editListing.value.listing!.contact!.whatsappNumber!);
+  }
+
+  setCategoryId() {
+    for (int i = 0;
+        i < editListingController.editListing.value.listing!.categories!.length;
+        i++) {
+      categoryId = editListingController
+          .editListing.value.listing!.categories![i].termId
+          .toString();
+    }
   }
 
   @override
@@ -140,6 +159,10 @@ class _EditListingScreenState extends State<EditListingScreen> {
                                       setState(() {
                                         items.removeAt(index);
                                       });
+                                      editListingController.deleteImage(
+                                          widget.listingId,
+                                          imagesList[index].id,
+                                          208);
                                     },
                                     icon: Icon(
                                       Icons.delete,
@@ -152,6 +175,47 @@ class _EditListingScreenState extends State<EditListingScreen> {
                       },
                     ),
                   ),
+                  images != null
+                      ? SizedBox(
+                          height: 150,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: images!.length,
+                            itemBuilder: (context, index) {
+                              var items = images;
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.only(top: 20.0, right: 10),
+                                child: Stack(
+                                  key: Key(UniqueKey().toString()),
+                                  children: [
+                                    ClipRRect(
+                                      child: SizedBox(
+                                          height: 100,
+                                          child: imageContainer(
+                                              File(images![index].path))),
+                                    ),
+                                    Positioned(
+                                      top: -14,
+                                      right: -14,
+                                      child: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              items!.removeAt(index);
+                                            });
+                                          },
+                                          icon: Icon(
+                                            Icons.delete,
+                                            color: Colors.red,
+                                          )),
+                                    )
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        )
+                      : SizedBox(),
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
@@ -269,6 +333,43 @@ class _EditListingScreenState extends State<EditListingScreen> {
                 ],
               ),
             )),
+            bottomNavigationBar: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
+              child: SizedBox(
+                  height: 50,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        await editListingController.updateListing(
+                          widget.listingId,
+                          addressController.text,
+                          phoneNumberController.text,
+                          whatsAppController.text,
+                          emailController.text,
+                          websiteController.text,
+                          titleController.text,
+                          priceController.text,
+                          descriptionController.text,
+                          images,
+                          videoController.text,
+                          208,
+                        );
+                        await myListingController.getMyListing();
+                        Get.to(() => const MyListings());
+                        Get.snackbar('Listing Posted',
+                            'Your listing is pending for Approval from Admin',
+                            snackPosition: SnackPosition.BOTTOM);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: lightGreen,
+                        onSurface: white,
+                      ),
+                      child: const Text(
+                        'Update Listing',
+                        style: TextStyle(fontSize: 18),
+                      ))),
+            ),
           );
   }
 
@@ -276,8 +377,27 @@ class _EditListingScreenState extends State<EditListingScreen> {
     List<XFile>? _images = await ImagePicker().pickMultiImage();
     for (int i = 0; i < _images!.length; i++) {
       setState(() {
-        imagesList.value.addAll(_images);
+        images!.addAll(_images);
       });
     }
+  }
+
+  imageContainer(file) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 10.0),
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: FileImage(
+                file,
+              ),
+              fit: BoxFit.cover),
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(18),
+        ),
+      ),
+    );
   }
 }

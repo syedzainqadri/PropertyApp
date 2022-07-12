@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:realestapp/Models/all_listing_model.dart';
+
 EditListingModel editListingModelFromJson(String str) =>
     EditListingModel.fromJson(json.decode(str));
 
@@ -341,7 +343,7 @@ class Listing {
     this.videoUrls,
     this.author,
     this.customFields,
-    this.amenities,
+    // this.amenities,
     this.related,
     this.review,
   });
@@ -372,7 +374,7 @@ class Listing {
   List<dynamic>? videoUrls;
   Author? author;
   List<CustomField>? customFields;
-  Amenities? amenities;
+  // Amenities? amenities;
   List<dynamic>? related;
   Review? review;
 
@@ -406,7 +408,7 @@ class Listing {
         author: Author.fromJson(json["author"]),
         customFields: List<CustomField>.from(
             json["custom_fields"].map((x) => CustomField.fromJson(x))),
-        amenities: Amenities.fromJson(json["amenities"]),
+        // amenities: Amenities.fromJson(json["amenities"]),
         related: List<dynamic>.from(json["related"].map((x) => x)),
         review: Review.fromJson(json["review"]),
       );
@@ -439,97 +441,97 @@ class Listing {
         "author": author!.toJson(),
         "custom_fields":
             List<dynamic>.from(customFields!.map((x) => x.toJson())),
-        "amenities": amenities!.toJson(),
+        // "amenities": amenities!.toJson(),
         "related": List<dynamic>.from(related!.map((x) => x)),
         "review": review!.toJson(),
       };
 }
 
-class Amenities {
-  Amenities({
-    this.id,
-    this.metaKey,
-    this.label,
-    this.slug,
-    this.description,
-    this.searchable,
-    this.listable,
-    this.type,
-    this.required,
-    this.placeholder,
-    this.value,
-    this.icon,
-    this.options,
-  });
+// class Amenities {
+//   Amenities({
+//     this.id,
+//     this.metaKey,
+//     this.label,
+//     this.slug,
+//     this.description,
+//     this.searchable,
+//     this.listable,
+//     this.type,
+//     this.required,
+//     this.placeholder,
+//     this.value,
+//     this.icon,
+//     this.options,
+//   });
 
-  int? id;
-  String? metaKey;
-  String? label;
-  String? slug;
-  String? description;
-  String? searchable;
-  String? listable;
-  String? type;
-  bool? required;
-  String? placeholder;
-  List<String>? value;
-  String? icon;
-  AmenitiesOptions? options;
+//   int? id;
+//   String? metaKey;
+//   String? label;
+//   String? slug;
+//   String? description;
+//   String? searchable;
+//   String? listable;
+//   String? type;
+//   bool? required;
+//   String? placeholder;
+//   List<String>? value;
+//   String? icon;
+//   AmenitiesOptions? options;
 
-  factory Amenities.fromJson(Map<String, dynamic> json) => Amenities(
-        id: json["id"],
-        metaKey: json["meta_key"],
-        label: json["label"],
-        slug: json["slug"],
-        description: json["description"],
-        searchable: json["searchable"],
-        listable: json["listable"],
-        type: json["type"],
-        required: json["required"],
-        placeholder: json["placeholder"],
-        value: List<String>.from(json["value"].map((x) => x)),
-        icon: json["icon"],
-        options: AmenitiesOptions.fromJson(json["options"]),
-      );
+//   factory Amenities.fromJson(Map<String, dynamic> json) => Amenities(
+//         id: json["id"],
+//         metaKey: json["meta_key"],
+//         label: json["label"],
+//         slug: json["slug"],
+//         description: json["description"],
+//         searchable: json["searchable"],
+//         listable: json["listable"],
+//         type: json["type"],
+//         required: json["required"],
+//         placeholder: json["placeholder"],
+//         value: List<String>.from(json["value"].map((x) => x)),
+//         icon: json["icon"],
+//         options: AmenitiesOptions.fromJson(json["options"]),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "meta_key": metaKey,
-        "label": label,
-        "slug": slug,
-        "description": description,
-        "searchable": searchable,
-        "listable": listable,
-        "type": type,
-        "required": required,
-        "placeholder": placeholder,
-        "value": List<dynamic>.from(value!.map((x) => x)),
-        "icon": icon,
-        "options": options!.toJson(),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "meta_key": metaKey,
+//         "label": label,
+//         "slug": slug,
+//         "description": description,
+//         "searchable": searchable,
+//         "listable": listable,
+//         "type": type,
+//         "required": required,
+//         "placeholder": placeholder,
+//         "value": List<dynamic>.from(value!.map((x) => x)),
+//         "icon": icon,
+//         "options": options!.toJson(),
+//       };
+// }
 
-class AmenitiesOptions {
-  AmenitiesOptions({
-    this.optionsDefault,
-    this.choices,
-  });
+// class AmenitiesOptions {
+//   AmenitiesOptions({
+//     this.optionsDefault,
+//     this.choices,
+//   });
 
-  dynamic optionsDefault;
-  List<PriceType>? choices;
+//   dynamic optionsDefault;
+//   List<PriceType>? choices;
 
-  factory AmenitiesOptions.fromJson(Map<String, dynamic> json) =>
-      AmenitiesOptions(
-        optionsDefault: json["default"],
-        choices: List<PriceType>.from(
-            json["choices"].map((x) => PriceType.fromJson(x))),
-      );
+//   factory AmenitiesOptions.fromJson(Map<String, dynamic> json) =>
+//       AmenitiesOptions(
+//         optionsDefault: json["default"],
+//         choices: List<PriceType>.from(
+//             json["choices"].map((x) => PriceType.fromJson(x))),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "default": optionsDefault,
-        "choices": List<dynamic>.from(choices!.map((x) => x.toJson())),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "default": optionsDefault,
+//         "choices": List<dynamic>.from(choices!.map((x) => x.toJson())),
+//       };
+// }
 
 class Author {
   Author({
@@ -543,7 +545,7 @@ class Author {
     this.phone,
     this.whatsappNumber,
     this.website,
-    this.locations,
+    // this.locations,
     this.zipcode,
     this.address,
     this.latitude,
@@ -563,7 +565,7 @@ class Author {
   String? phone;
   String? whatsappNumber;
   String? website;
-  List<dynamic>? locations;
+  // List<dynamic>? locations;
   String? zipcode;
   String? address;
   String? latitude;
@@ -583,7 +585,7 @@ class Author {
         phone: json["phone"],
         whatsappNumber: json["whatsapp_number"],
         website: json["website"],
-        locations: List<dynamic>.from(json["locations"].map((x) => x)),
+        // locations: List<dynamic>.from(json["locations"].map((x) => x)),
         zipcode: json["zipcode"],
         address: json["address"],
         latitude: json["latitude"],
@@ -604,7 +606,7 @@ class Author {
         "phone": phone,
         "whatsapp_number": whatsappNumber,
         "website": website,
-        "locations": List<dynamic>.from(locations!.map((x) => x)),
+        // "locations": List<dynamic>.from(locations!.map((x) => x)),
         "zipcode": zipcode,
         "address": address,
         "latitude": latitude,
@@ -745,7 +747,7 @@ class Category {
 
 class Contact {
   Contact({
-    this.locations,
+    // this.locations,
     this.latitude,
     this.longitude,
     this.hideMap,
@@ -758,7 +760,7 @@ class Contact {
     this.geoAddress,
   });
 
-  List<Category>? locations;
+  // List<Locations>? locations;
   String? latitude;
   String? longitude;
   bool? hideMap;
@@ -771,8 +773,8 @@ class Contact {
   String? geoAddress;
 
   factory Contact.fromJson(Map<String, dynamic> json) => Contact(
-        locations: List<Category>.from(
-            json["locations"].map((x) => Category.fromJson(x))),
+        // locations: List<Locations>.from(
+        // json["locations"].map((x) => Category.fromJson(x))),
         latitude: json["latitude"],
         longitude: json["longitude"],
         hideMap: json["hide_map"],
@@ -786,7 +788,7 @@ class Contact {
       );
 
   Map<String, dynamic> toJson() => {
-        "locations": List<dynamic>.from(locations!.map((x) => x.toJson())),
+        // "locations": List<dynamic>.from(locations!.map((x) => x)),
         "latitude": latitude,
         "longitude": longitude,
         "hide_map": hideMap,

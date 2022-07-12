@@ -27,29 +27,19 @@ class EditListingController extends GetxController {
   }
 
   updateListing(
-      listingId,
-      zipCode,
-      address,
-      phone,
-      whatsApp,
-      email,
-      website,
-      locationId,
-      categoryId,
-      listingType,
-      title,
-      status,
-      price,
-      priceType,
-      priceUnit,
-      badges,
-      description,
-      images,
-      latitude,
-      longitude,
-      videoUrl,
-      List<SelectedFieldsModel> customFields,
-      amenities) async {
+    listingId,
+    address,
+    phone,
+    whatsApp,
+    email,
+    website,
+    title,
+    price,
+    description,
+    images,
+    videoUrl,
+    categoryId,
+  ) async {
     print("Listing id is $listingId");
     print("address is $address");
     print("phone is $phone");
@@ -60,8 +50,10 @@ class EditListingController extends GetxController {
     print("Price is $price");
     print("Images are $images");
     print("Video is $videoUrl");
+    print("Category is $categoryId");
     isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
+    String url =
+        'https://lagosabuja.com/wp-json/rtcl/v1/listing/form?listing_id=$listingId';
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
     for (int i = 0; i < images.length; i++) {
@@ -72,14 +64,6 @@ class EditListingController extends GetxController {
           http.MultipartFile('gallery[]', stream, length, filename: fileName);
       request.files.add(multipartFileSign);
     }
-    customFields.forEach((element) {
-      if (element.id != 0) {
-        request.fields.addAll({
-          'custom_fields[${element.id}]': element.choice.id.toString(),
-        });
-      }
-    });
-
     request.headers.addAll({
       'Content-Type': 'application/json; charset=UTF-8',
       'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
@@ -95,10 +79,40 @@ class EditListingController extends GetxController {
       'price': price.toString(),
       'description': description.toString(),
       'video_urls': videoUrl.toString(),
+      'category_id': categoryId.toString(),
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
     print(response.body);
     isLoading.value = false;
   }
+
+  deleteImage(
+    listingId,
+    imagestodelete,
+    categoryId,
+  ) async {
+    print("Listing id is $listingId");
+    print("images to delete are $imagestodelete");
+    print("Category is $categoryId");
+    String url =
+        'https://lagosabuja.com/wp-json/rtcl/v1/listing/form?listing_id=$listingId';
+
+    var request = http.MultipartRequest('POST', Uri.parse(url));
+    request.headers.addAll({
+      'Content-Type': 'application/json; charset=UTF-8',
+      'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+      'Authorization': 'Bearer $token'
+    });
+    request.fields.addAll({
+      'gallery_delete[]': imagestodelete.toString(),
+      'category_id': categoryId.toString(),
+    });
+    var res = await request.send();
+    var response = await http.Response.fromStream(res);
+    print(response.body);
+  }
 }
+
+// 'gallery_delete[]': 
+
