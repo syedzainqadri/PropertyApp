@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Controllers/chat_controller.dart';
 import 'package:realestapp/Controllers/user_controller.dart';
-
-import '../Controllers/sign_in_controller.dart';
 import '../Utils/color_scheme.dart';
 
 class ChatUi extends StatefulWidget {
@@ -24,8 +22,6 @@ class _ChatUiState extends State<ChatUi> {
   TextEditingController con = TextEditingController();
   ChatController chatController = Get.put(ChatController());
   UserController userController = Get.put(UserController());
-
-  SignInController signInController = Get.put(SignInController());
 
   @override
   Widget build(BuildContext context) {

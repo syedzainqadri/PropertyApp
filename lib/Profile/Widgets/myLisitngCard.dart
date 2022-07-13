@@ -135,7 +135,12 @@ class MyListingCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title),
+                    SizedBox(
+                        width: 100,
+                        child: Text(
+                          title,
+                          maxLines: 2,
+                        )),
                     const SizedBox(
                       height: 10,
                     ),

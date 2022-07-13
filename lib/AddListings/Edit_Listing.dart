@@ -51,8 +51,8 @@ class _EditListingScreenState extends State<EditListingScreen> {
     Future.delayed(Duration(seconds: 1), () {
       setState(() {});
     });
+    await setCategoryId();
     setInitialValues();
-    setCategoryId();
   }
 
   setInitialValues() {
@@ -61,6 +61,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
         text: editListingController.editListing.value.listing!.price!);
     priceStartController.value = TextEditingValue(
         text: editListingController.editListing.value.listing!.price!);
+
     priceEndController.value = TextEditingValue(
         text: editListingController.editListing.value.listing!.maxPrice!);
     descriptionController.value = TextEditingValue(
@@ -92,6 +93,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
       categoryId = editListingController
           .editListing.value.listing!.categories![i].termId
           .toString();
+      print('categoryId is $categoryId');
     }
   }
 
@@ -155,16 +157,31 @@ class _EditListingScreenState extends State<EditListingScreen> {
                                 top: -14,
                                 right: -14,
                                 child: IconButton(
-                                    onPressed: () {
+                                    onPressed: () async {
+                                      var priceWithSymbols =
+                                          priceController.text;
+                                      var price = priceWithSymbols.replaceAll(
+                                          RegExp('[^A-Za-z0-9]'), '');
+                                      await editListingController.deleteImage(
+                                        widget.listingId,
+                                        imagesList[index].id,
+                                        categoryId,
+                                        addressController.text,
+                                        phoneNumberController.text,
+                                        whatsAppController.text,
+                                        emailController.text,
+                                        websiteController.text,
+                                        titleController.text,
+                                        price,
+                                        descriptionController.text,
+                                        images,
+                                        videoController.text,
+                                      );
                                       setState(() {
                                         items.removeAt(index);
                                       });
-                                      editListingController.deleteImage(
-                                          widget.listingId,
-                                          imagesList[index].id,
-                                          208);
                                     },
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.delete,
                                       color: Colors.red,
                                     )),
@@ -232,6 +249,20 @@ class _EditListingScreenState extends State<EditListingScreen> {
                           backgroundColor:
                               MaterialStateProperty.all(lightGreen),
                           overlayColor: MaterialStateProperty.all(white)),
+                    ),
+                  ),
+                  TitleWidget(
+                    text: 'Price',
+                    padding: 5.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 5.0, horizontal: 20),
+                    child: TextFieldWidgetForForm(
+                      controller: priceController,
+                      leadingIcon: Icons.title,
+                      lable: 'Price',
+                      obsecure: false,
                     ),
                   ),
                   TitleWidget(
@@ -341,6 +372,9 @@ class _EditListingScreenState extends State<EditListingScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () async {
+                        var priceWithSymbols = priceController.text;
+                        var price = priceWithSymbols.replaceAll(
+                            RegExp('[^A-Za-z0-9]'), '');
                         await editListingController.updateListing(
                           widget.listingId,
                           addressController.text,
@@ -349,11 +383,11 @@ class _EditListingScreenState extends State<EditListingScreen> {
                           emailController.text,
                           websiteController.text,
                           titleController.text,
-                          priceController.text,
+                          price,
                           descriptionController.text,
                           images,
                           videoController.text,
-                          208,
+                          categoryId,
                         );
                         await myListingController.getMyListing();
                         Get.to(() => const MyListings());

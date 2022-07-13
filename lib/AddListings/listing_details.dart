@@ -80,7 +80,7 @@ class _ListingDetailsState extends State<ListingDetails> {
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
               onPressed: () {
-                Get.to(ChatUi(listingId: widget.id, title: widget.title));
+                Get.to(() => ChatUi(listingId: widget.id, title: widget.title));
               },
               icon: const Icon(
                 Icons.chat_sharp,

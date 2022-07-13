@@ -91,6 +91,16 @@ class EditListingController extends GetxController {
     listingId,
     imagestodelete,
     categoryId,
+    address,
+    phone,
+    whatsApp,
+    email,
+    website,
+    title,
+    price,
+    description,
+    images,
+    videoUrl,
   ) async {
     print("Listing id is $listingId");
     print("images to delete are $imagestodelete");
@@ -106,6 +116,16 @@ class EditListingController extends GetxController {
     });
     request.fields.addAll({
       'gallery_delete[]': imagestodelete.toString(),
+      'category_id': categoryId.toString(),
+      'address': address.toString(),
+      'phone': phone.toString(),
+      'whatsapp_number': whatsApp.toString(),
+      'email': email.toString(),
+      'website': website.toString(),
+      'title': title.toString(),
+      'price': price.toString(),
+      'description': description.toString(),
+      'video_urls': videoUrl.toString(),
       'category_id': categoryId.toString(),
     });
     var res = await request.send();
