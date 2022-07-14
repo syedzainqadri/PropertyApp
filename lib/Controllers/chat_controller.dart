@@ -2,24 +2,12 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:realestapp/Models/startConversationModel.dart';
 import '../Models/all_chat_model.dart';
-import '../Models/listing_messages_model.dart';
 
 class ChatController extends GetxController {
   final token = GetStorage().read('token');
-  var messages = Messages(
-          conId: 0,
-          listingId: 0,
-          senderId: 0,
-          recipientId: 0,
-          senderDelete: 0,
-          recipientDelete: 0,
-          lastMessageId: 0,
-          senderReview: 0,
-          recipientReview: 0,
-          invertReview: 0,
-          messages: List<Message>.empty(growable: true))
-      .obs;
+  var messages = StartConversation().obs;
   var allChats = List<AllChats>.empty(growable: true).obs;
 
   @override
@@ -39,6 +27,7 @@ class ChatController extends GetxController {
       },
       body: jsonEncode(permas),
     );
+    print('conversation id is : ${jsonDecode(response.body)["con_id"]}');
     await sendChatConversation(
         listingId, text, jsonDecode(response.body)['con_id']);
     var data = jsonDecode(response.body);
@@ -87,7 +76,7 @@ class ChatController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    messages.value = messagesFromJson(response.body);
+    messages.value = startConversationFromJson(response.body);
   }
 
   getAllChats() async {

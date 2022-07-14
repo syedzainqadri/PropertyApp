@@ -20,8 +20,8 @@ class ChatUi extends StatefulWidget {
 class _ChatUiState extends State<ChatUi> {
   List<Widget> list = [];
   TextEditingController con = TextEditingController();
-  ChatController chatController = Get.put(ChatController());
-  UserController userController = Get.put(UserController());
+  final ChatController chatController = Get.put(ChatController());
+  final UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -43,32 +43,25 @@ class _ChatUiState extends State<ChatUi> {
           Expanded(
             child: Obx(() {
               return ListView.builder(
-                  itemCount: chatController.messages.value.messages.length,
+                  itemCount: chatController.messages.value.message.length,
                   itemBuilder: (_, pos) {
-                    return int.parse(Get.find<ChatController>()
-                                    .messages
-                                    .value
-                                    .messages[pos]
-                                    .sourceId
-                                // chatController
-                                //           .messages.value.messages[pos].sourceId
-                                ) ==
-                            userController.user.value.id
+                    var sourceId = Get.find<ChatController>()
+                        .messages
+                        .value
+                        .message[pos]
+                        .sourceId;
+                    var userId = userController.user.value.id;
+                    return int.parse(sourceId) == userId
                         ? sentMessage(Get.find<ChatController>()
-                                .messages
-                                .value
-                                .messages[pos]
-                                .message
-                            // chatController.messages.value.messages[pos].message
-                            )
+                            .messages
+                            .value
+                            .message[pos]
+                            .message)
                         : recieveMessage(Get.find<ChatController>()
-                                .messages
-                                .value
-                                .messages[pos]
-                                .message
-                            // chatController
-                            //   .messages.value.messages[pos].message
-                            );
+                            .messages
+                            .value
+                            .message[pos]
+                            .message);
                   });
             }),
           ),
