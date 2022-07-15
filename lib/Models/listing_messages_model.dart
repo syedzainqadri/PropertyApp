@@ -29,7 +29,7 @@ class Messages {
   int invertReview;
   List<MessageStart> messages;
 
-  factory Messages.fromJson(Map<String, dynamic> json) => Messages(
+  factory Messages.fromJson(Map<dynamic, dynamic> json) => Messages(
         conId: json["con_id"],
         listingId: json["listing_id"],
         senderId: json["sender_id"],
@@ -59,10 +59,10 @@ class MessageStart {
   String conId;
   String sourceId;
   String message;
-  bool isRead;
+  var isRead;
   DateTime createdAt;
 
-  factory MessageStart.fromJson(Map<String, dynamic> json) => MessageStart(
+  factory MessageStart.fromJson(Map<dynamic, dynamic> json) => MessageStart(
         messageId: json["message_id"],
         conId: json["con_id"],
         sourceId: json["source_id"],

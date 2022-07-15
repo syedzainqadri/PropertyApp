@@ -26,6 +26,7 @@ class _ChatUiState extends State<ChatUi> {
   @override
   Widget build(BuildContext context) {
     var con_id = chatController.messages.value.conId;
+    print(con_id);
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -43,24 +44,24 @@ class _ChatUiState extends State<ChatUi> {
           Expanded(
             child: Obx(() {
               return ListView.builder(
-                  itemCount: chatController.messages.value.message.length,
+                  itemCount: chatController.messages.value.messages.length,
                   itemBuilder: (_, pos) {
                     var sourceId = Get.find<ChatController>()
                         .messages
                         .value
-                        .message[pos]
+                        .messages[pos]
                         .sourceId;
                     var userId = userController.user.value.id;
                     return int.parse(sourceId) == userId
                         ? sentMessage(Get.find<ChatController>()
                             .messages
                             .value
-                            .message[pos]
+                            .messages[pos]
                             .message)
                         : recieveMessage(Get.find<ChatController>()
                             .messages
                             .value
-                            .message[pos]
+                            .messages[pos]
                             .message);
                   });
             }),
