@@ -70,9 +70,12 @@ class _ChatUiState extends State<ChatUi> {
             controller: con,
             onReceiveText: (str) {
               con_id != null
-                  ? chatController.sendChatConversation(widget.listingId, str,
-                      chatController.messages.value.conId)
-                  : chatController.startChatConversation(widget.listingId, str);
+                  ? Get.find<ChatController>().sendChatConversation(
+                      widget.listingId,
+                      str,
+                      Get.find<ChatController>().messages.value.conId)
+                  : Get.find<ChatController>()
+                      .startChatConversation(widget.listingId, str);
 
               setState(() {
                 list.add(sentMessage(str.toString()));

@@ -51,7 +51,7 @@ class MessageStart {
     required this.conId,
     required this.sourceId,
     required this.message,
-    required this.isRead,
+    // required this.isRead,
     required this.createdAt,
   });
 
@@ -59,7 +59,7 @@ class MessageStart {
   String conId;
   String sourceId;
   String message;
-  var isRead;
+  // var isRead;
   DateTime createdAt;
 
   factory MessageStart.fromJson(Map<dynamic, dynamic> json) => MessageStart(
@@ -67,7 +67,7 @@ class MessageStart {
         conId: json["con_id"],
         sourceId: json["source_id"],
         message: json["message"],
-        isRead: json["is_read"],
+        // isRead: json["is_read"],
         createdAt: DateTime.parse(json["created_at"]),
       );
 }
