@@ -28,7 +28,6 @@ void main() async {
     Get.put(ListingController());
     Get.put(FavoriteListingController());
     Get.put(MyListingController());
-    Get.put(ChatController());
     Get.put(CategoriesController());
     Get.put(LocationsController());
     Get.put(ListingTypeController());

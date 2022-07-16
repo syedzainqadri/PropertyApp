@@ -40,7 +40,6 @@ class _ConversationPageState extends State<ConversationPage> {
             title: name,
             listingId: int.parse(listingId),
           ));
-          chatController.getAllMessages(listingId);
         },
         child: SizedBox(
           height: 60,

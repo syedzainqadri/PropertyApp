@@ -7,6 +7,9 @@ import 'package:realestapp/Models/startConversationModel.dart';
 import '../Models/all_chat_model.dart';
 
 class ChatController extends GetxController {
+  var count = 0.obs;
+  var box = GetStorage();
+  var isLoading = false.obs;
   final token = GetStorage().read('token');
   var converstaions = StartConversation().obs;
   var allChats = List<AllChats>.empty(growable: true).obs;
@@ -27,6 +30,8 @@ class ChatController extends GetxController {
   @override
   onInit() {
     getAllChats();
+    getAllMessages();
+    // showMessages();
     super.onInit();
   }
 
@@ -78,10 +83,14 @@ class ChatController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    await getAllMessages(listingId);
+    await getAllMessages();
+    showMessages();
   }
 
-  getAllMessages(listingId) async {
+  getAllMessages() async {
+    isLoading.value = true;
+    var listingId = box.read('listingId');
+    print(listingId);
     var response = await http.get(
       Uri.parse(
           "https://lagosabuja.com/wp-json/rtcl/v1/my/chat/check?listing_id=$listingId"),
@@ -92,9 +101,18 @@ class ChatController extends GetxController {
       },
     );
     messages.value = messagesFromJson(response.body);
+    isLoading.value = false;
+    count.value++;
+    print(count);
   }
 
+  Stream showMessages() => Stream.periodic(
+        Duration(seconds: 1),
+        getAllMessages(),
+      );
+
   getAllChats() async {
+    isLoading.value = true;
     var response = await http.get(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my/chat"),
       headers: <String, String>{
@@ -104,5 +122,6 @@ class ChatController extends GetxController {
       },
     );
     allChats.value = allChatsFromJson(response.body);
+    isLoading.value = false;
   }
 }
