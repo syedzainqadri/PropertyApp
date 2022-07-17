@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:realestapp/Auth/sign_up.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
+import 'package:realestapp/Controllers/socialAuthController/firebaseAuthController.dart';
 import '../Controllers/location_controller.dart';
 import '../Controllers/categories_controller.dart';
 import '../Controllers/chat_controller.dart';
@@ -24,6 +25,8 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final SignInController _signInController = SignInController();
+  final FirebaseAuthController _firebaseAuthController =
+      FirebaseAuthController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   // final userController = Get.put(UserController());
@@ -92,7 +95,9 @@ class _SignInState extends State<SignIn> {
                     height: 15,
                   ),
                   socialButton('Google Login',
-                      const FaIcon(FontAwesomeIcons.google), brightRed, () {}),
+                      const FaIcon(FontAwesomeIcons.google), brightRed, () {
+                    _firebaseAuthController.googleLogin();
+                  }),
                   const SizedBox(
                     height: 15,
                   ),

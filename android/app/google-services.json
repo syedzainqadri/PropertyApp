@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "731281729322",
+    "project_id": "lagosabuja-8c93b",
+    "storage_bucket": "lagosabuja-8c93b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:731281729322:android:7fe1a5be74a2575f8c6053",
+        "android_client_info": {
+          "package_name": "com.lagosabuja.com"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "731281729322-lclrlu4hciptch7vaa2csquqbqc1sk6i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAant5Apn7RYQdqrbrbsmdTrPFg1gmNn60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "731281729322-lclrlu4hciptch7vaa2csquqbqc1sk6i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
