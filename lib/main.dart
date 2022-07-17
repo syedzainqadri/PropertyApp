@@ -31,6 +31,7 @@ void main() async {
     Get.put(CategoriesController());
     Get.put(LocationsController());
     Get.put(ListingTypeController());
+    Get.put(ChatController());
     Get.put(SearchController());
     Get.put(OrdersController());
     Get.put(MyPaymentsController());

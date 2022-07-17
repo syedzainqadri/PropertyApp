@@ -48,13 +48,13 @@ defaultButton(title, onPressed) {
   );
 }
 
-socialButton(title, icon, color) {
+socialButton(title, icon, color, onTap) {
   return SizedBox(
     width: double.infinity,
     height: 60,
     child: ElevatedButton.icon(
       icon: icon,
-      onPressed: () {},
+      onPressed: onTap,
       label: Text(
         title,
         style: const TextStyle(

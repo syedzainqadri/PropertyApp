@@ -4,30 +4,30 @@ Messages messagesFromJson(String str) => Messages.fromJson(json.decode(str));
 
 class Messages {
   Messages({
-    required this.conId,
-    required this.listingId,
-    required this.senderId,
-    required this.recipientId,
-    required this.senderDelete,
-    required this.recipientDelete,
-    required this.lastMessageId,
-    required this.senderReview,
-    required this.recipientReview,
-    required this.invertReview,
-    required this.messages,
+    this.conId,
+    this.listingId,
+    this.senderId,
+    this.recipientId,
+    this.senderDelete,
+    this.recipientDelete,
+    this.lastMessageId,
+    this.senderReview,
+    this.recipientReview,
+    this.invertReview,
+    this.messages,
   });
 
-  int conId;
-  int listingId;
-  int senderId;
-  int recipientId;
-  int senderDelete;
-  int recipientDelete;
-  int lastMessageId;
-  int senderReview;
-  int recipientReview;
-  int invertReview;
-  List<MessageStart> messages;
+  int? conId;
+  int? listingId;
+  int? senderId;
+  int? recipientId;
+  int? senderDelete;
+  int? recipientDelete;
+  int? lastMessageId;
+  int? senderReview;
+  int? recipientReview;
+  int? invertReview;
+  List<MessageStart>? messages;
 
   factory Messages.fromJson(Map<dynamic, dynamic> json) => Messages(
         conId: json["con_id"],
@@ -47,20 +47,20 @@ class Messages {
 
 class MessageStart {
   MessageStart({
-    required this.messageId,
-    required this.conId,
-    required this.sourceId,
-    required this.message,
-    // required this.isRead,
-    required this.createdAt,
+    this.messageId,
+    this.conId,
+    this.sourceId,
+    this.message,
+    // this.isRead,
+    this.createdAt,
   });
 
-  String messageId;
-  String conId;
-  String sourceId;
-  String message;
-  // var isRead;
-  DateTime createdAt;
+  String? messageId;
+  String? conId;
+  String? sourceId;
+  String? message;
+  // bool? isRead;
+  DateTime? createdAt;
 
   factory MessageStart.fromJson(Map<dynamic, dynamic> json) => MessageStart(
         messageId: json["message_id"],

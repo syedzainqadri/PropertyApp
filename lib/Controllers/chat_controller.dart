@@ -13,25 +13,14 @@ class ChatController extends GetxController {
   final token = GetStorage().read('token');
   var converstaions = StartConversation().obs;
   var allChats = List<AllChats>.empty(growable: true).obs;
-  var messages = Messages(
-    conId: 0,
-    listingId: 0,
-    senderId: 0,
-    recipientId: 0,
-    senderDelete: 0,
-    recipientDelete: 0,
-    lastMessageId: 0,
-    senderReview: 0,
-    recipientReview: 0,
-    invertReview: 0,
-    messages: List<MessageStart>.empty(growable: true),
-  ).obs;
+
+  Rx<Messages> messagesList = Rx<Messages>(Messages());
+  Messages get messageGetter => messagesList.value;
 
   @override
   onInit() {
+    messagesList.bindStream(showMesssages());
     getAllChats();
-    getAllMessages();
-    // showMessages();
     super.onInit();
   }
 
@@ -84,11 +73,9 @@ class ChatController extends GetxController {
       },
     );
     await getAllMessages();
-    showMessages();
   }
 
-  getAllMessages() async {
-    isLoading.value = true;
+  Future<Messages> getAllMessages() async {
     var listingId = box.read('listingId');
     print(listingId);
     var response = await http.get(
@@ -100,16 +87,13 @@ class ChatController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    messages.value = messagesFromJson(response.body);
-    isLoading.value = false;
-    count.value++;
-    print(count);
+    messagesList.value = messagesFromJson(response.body);
+    return messagesList.value;
   }
 
-  Stream showMessages() => Stream.periodic(
-        Duration(seconds: 1),
-        getAllMessages(),
-      );
+  Stream<Messages> showMesssages() {
+    return getAllMessages().asStream();
+  }
 
   getAllChats() async {
     isLoading.value = true;

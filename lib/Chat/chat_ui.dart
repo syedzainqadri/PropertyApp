@@ -20,7 +20,8 @@ class ChatUi extends StatefulWidget {
 
 class _ChatUiState extends State<ChatUi> {
   var box = GetStorage();
-  List<Widget> list = [];
+  var list = [].obs;
+  // Rx<List<Widget>> list = Rx<List<Widget>>[].obs;
   TextEditingController con = TextEditingController();
   final ChatController chatController = Get.put(ChatController());
   final UserController userController = Get.put(UserController());
@@ -34,11 +35,9 @@ class _ChatUiState extends State<ChatUi> {
 
   @override
   Widget build(BuildContext context) {
-    return chatController.isLoading == true
+    var _chatController = Get.find<ChatController>();
+    return _chatController.isLoading == false
         ? Scaffold(
-            body: Center(child: CircularProgressIndicator()),
-          )
-        : Scaffold(
             appBar: AppBar(
               elevation: 0.0,
               centerTitle: true,
@@ -54,74 +53,36 @@ class _ChatUiState extends State<ChatUi> {
             body: Column(
               children: [
                 Expanded(
-                  child:
-                      // GetX(
-                      //     init: Get.put<ChatController>(ChatController()),
-                      //     builder: (ChatController chatController) {
-                      //       return ListView.builder(
-                      //           itemCount:
-                      //               chatController.messages.value.messages.length,
-                      //           itemBuilder: (_, pos) {
-                      //             var sourceId = Get.find<ChatController>()
-                      //                 .messages
-                      //                 .value
-                      //                 .messages[pos]
-                      //                 .sourceId;
-                      //             var userId = userController.user.value.id;
-                      //             return int.parse(sourceId) == userId
-                      //                 ? sentMessage(Get.find<ChatController>()
-                      //                     .messages
-                      //                     .value
-                      //                     .messages[pos]
-                      //                     .message)
-                      //                 : recieveMessage(Get.find<ChatController>()
-                      //                     .messages
-                      //                     .value
-                      //                     .messages[pos]
-                      //                     .message);
-                      //           });
-                      //     }),
-                      Obx(() {
+                  child: Obx(() {
                     return ListView.builder(
                         itemCount:
-                            chatController.messages.value.messages.length,
+                            _chatController.messageGetter.messages!.length,
                         itemBuilder: (_, pos) {
-                          var sourceId = Get.find<ChatController>()
-                              .messages
-                              .value
-                              .messages[pos]
-                              .sourceId;
+                          var sourceId = _chatController
+                              .messageGetter.messages![pos].sourceId;
                           var userId = userController.user.value.id;
-                          return int.parse(sourceId) == userId
-                              ? sentMessage(Get.find<ChatController>()
-                                  .messages
-                                  .value
-                                  .messages[pos]
-                                  .message)
-                              : recieveMessage(Get.find<ChatController>()
-                                  .messages
-                                  .value
-                                  .messages[pos]
-                                  .message);
+                          return int.parse(sourceId!) == userId
+                              ? sentMessage(_chatController
+                                  .messageGetter.messages![pos].message)
+                              : recieveMessage(_chatController
+                                  .messageGetter.messages![pos].message);
                         });
                   }),
                 ),
                 ChatComposer(
                   controller: con,
                   onReceiveText: (str) {
-                    Get.find<ChatController>().messages.value.conId != null
+                    Get.find<ChatController>().messageGetter.conId != null
                         ? Get.find<ChatController>().sendChatConversation(
                             widget.listingId,
                             str,
-                            Get.find<ChatController>().messages.value.conId)
+                            Get.find<ChatController>().messageGetter.conId)
                         : Get.find<ChatController>()
                             .startChatConversation(widget.listingId, str);
-
-                    setState(() {
-                      list.add(sentMessage(str.toString()));
-                      list.add(recieveMessage(str.toString()));
-                      con.text = '';
-                    });
+                    list.value.add(sentMessage(str.toString()));
+                    list.value.add(recieveMessage(str.toString()));
+                    list.refresh();
+                    con.text = '';
                   },
                   onRecordEnd: (path) {
                     setState(() {
@@ -160,6 +121,11 @@ class _ChatUiState extends State<ChatUi> {
                   ],
                 ),
               ],
+            ),
+          )
+        : Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
             ),
           );
   }
