@@ -5,7 +5,6 @@ import 'package:realestapp/Auth/sign_in.dart';
 import 'package:realestapp/Controllers/sign_up_controller.dart';
 import '../Home/home.dart';
 import '../Models/sign_in_model.dart';
-import '../Models/user_model.dart';
 import '../Utils/constants.dart';
 import '../Utils/color_scheme.dart';
 
@@ -29,19 +28,6 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: transparent,
-      //   elevation: 0.0,
-      //   leading: GestureDetector(
-      //       onTap: () {
-      //         Get.back();
-      //       },
-      //       child: const Icon(
-      //         Icons.navigate_before,
-      //         size: 35,
-      //         color: lightGreen,
-      //       )),
-      // ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(

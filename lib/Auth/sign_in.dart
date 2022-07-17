@@ -3,8 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:realestapp/Auth/sign_up.dart';
 import 'package:realestapp/Controllers/sign_in_controller.dart';
-import 'package:realestapp/Controllers/user_controller.dart';
-import 'package:realestapp/Models/sign_in_model.dart';
 import '../Controllers/location_controller.dart';
 import '../Controllers/categories_controller.dart';
 import '../Controllers/chat_controller.dart';
@@ -13,11 +11,9 @@ import '../Controllers/listing_type_controller.dart';
 import '../Controllers/listings_controller.dart';
 import '../Controllers/my_listings_controller.dart';
 import '../Home/home.dart';
-import '../Models/user_model.dart';
 import '../Utils/color_scheme.dart';
 import 'package:get/get.dart';
 import '../Utils/constants.dart';
-import 'sign_in_phone.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -34,19 +30,6 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: transparent,
-      //   elevation: 0.0,
-      //   leading: GestureDetector(
-      //       onTap: () {
-      //         Get.back();
-      //       },
-      //       child: const Icon(
-      //         Icons.navigate_before,
-      //         size: 35,
-      //         color: lightGreen,
-      //       )),
-      // ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -92,7 +75,6 @@ class _SignInState extends State<SignIn> {
                       Get.put(CategoriesController());
                       Get.put(LocationsController());
                       Get.put(ListingTypeController());
-
                       Get.put(ListingTypeController());
                       Get.offAll(const Home());
                     },
@@ -105,19 +87,14 @@ class _SignInState extends State<SignIn> {
                     height: 15,
                   ),
                   socialButton('Facebook Login',
-                      const FaIcon(FontAwesomeIcons.facebook), darkBlue),
+                      const FaIcon(FontAwesomeIcons.facebook), darkBlue, () {}),
                   const SizedBox(
                     height: 15,
                   ),
                   socialButton('Google Login',
-                      const FaIcon(FontAwesomeIcons.google), brightRed),
+                      const FaIcon(FontAwesomeIcons.google), brightRed, () {}),
                   const SizedBox(
                     height: 15,
-                  ),
-                  socialButton('LinkedIn Login',
-                      const FaIcon(FontAwesomeIcons.linkedin), mediumBlue),
-                  const SizedBox(
-                    height: 25,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
