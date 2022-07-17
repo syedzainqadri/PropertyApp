@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
 
 class FirebaseAuthController extends GetxController {
   var isDataSubmitting = false.obs;
@@ -46,7 +49,29 @@ class FirebaseAuthController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
       print(googleAuth.idToken);
-      print(authResult.credential!.token);
+      print(googleAuth.accessToken);
+      http
+          .post(
+              Uri.parse('https://lagosabuja.com/wp-json/rtcl/v1/social-login'),
+              headers: <String, String>{
+                'Content-Type': 'application/json; charset=UTF-8',
+                'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+              },
+              body: jsonEncode(<String, dynamic>{
+                'access_token': googleAuth.idToken,
+                'type': "google_firebase",
+              }))
+          .then((response) {
+        print(response.body);
+      });
+      // http
+      //     .get(
+      //   Uri.parse(
+      //       'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${googleAuth.idToken}'),
+      // )
+      //     .then((response) {
+      //   print(response.body);
+      // });
     } catch (error) {
       print(error);
       Get.snackbar(
