@@ -46,6 +46,7 @@ class _ChatUiState extends State<ChatUi> {
               leading: GestureDetector(
                   onTap: () {
                     Get.back();
+                    box.remove('listingId');
                   },
                   child: const Icon(Icons.navigate_before,
                       size: 35, color: white)),
