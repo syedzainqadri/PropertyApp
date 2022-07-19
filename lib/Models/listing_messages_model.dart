@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:get/utils.dart';
+
 Messages messagesFromJson(String str) => Messages.fromJson(json.decode(str));
 
 class Messages {
@@ -51,7 +53,7 @@ class MessageStart {
     this.conId,
     this.sourceId,
     this.message,
-    // this.isRead,
+    this.isRead,
     this.createdAt,
   });
 
@@ -59,7 +61,7 @@ class MessageStart {
   String? conId;
   String? sourceId;
   String? message;
-  // bool? isRead;
+  String? isRead;
   DateTime? createdAt;
 
   factory MessageStart.fromJson(Map<dynamic, dynamic> json) => MessageStart(
@@ -67,7 +69,7 @@ class MessageStart {
         conId: json["con_id"],
         sourceId: json["source_id"],
         message: json["message"],
-        // isRead: json["is_read"],
+        isRead: json["is_read"],
         createdAt: DateTime.parse(json["created_at"]),
       );
 }

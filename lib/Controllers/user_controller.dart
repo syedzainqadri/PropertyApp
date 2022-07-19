@@ -9,10 +9,11 @@ class UserController extends GetxController {
   final token = GetStorage().read('token');
   var user = User().obs;
   @override
-  onInit(){
+  onInit() {
     getUser();
     super.onInit();
   }
+
   getUser() async {
     var response = await http.get(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my"),

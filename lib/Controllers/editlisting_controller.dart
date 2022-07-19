@@ -134,5 +134,4 @@ class EditListingController extends GetxController {
   }
 }
 
-// 'gallery_delete[]': 
-
+// 'gallery_delete[]':

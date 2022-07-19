@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 List<LocationsModel> locationsModelFromJson(String str) =>
-    List<LocationsModel>.from(json.decode(str).map((x) => LocationsModel.fromJson(x)));
+    List<LocationsModel>.from(
+        json.decode(str).map((x) => LocationsModel.fromJson(x)));
 
 class LocationsModel {
   LocationsModel({

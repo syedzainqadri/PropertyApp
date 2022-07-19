@@ -36,7 +36,7 @@ class _ChatUiState extends State<ChatUi> {
   @override
   Widget build(BuildContext context) {
     var _chatController = Get.find<ChatController>();
-    return _chatController.isLoading == false
+    return Obx(() => chatController.isLoading.value != true
         ? Scaffold(
             appBar: AppBar(
               elevation: 0.0,
@@ -56,27 +56,27 @@ class _ChatUiState extends State<ChatUi> {
                   child: Obx(() {
                     return ListView.builder(
                         itemCount:
-                            _chatController.messageGetter.messages!.length,
+                            _chatController.messagesList.value.messages!.length,
                         itemBuilder: (_, pos) {
                           var sourceId = _chatController
-                              .messageGetter.messages![pos].sourceId;
+                              .messagesList.value.messages![pos].sourceId;
                           var userId = userController.user.value.id;
                           return int.parse(sourceId!) == userId
                               ? sentMessage(_chatController
-                                  .messageGetter.messages![pos].message)
+                                  .messagesList.value.messages![pos].message)
                               : recieveMessage(_chatController
-                                  .messageGetter.messages![pos].message);
+                                  .messagesList.value.messages![pos].message);
                         });
                   }),
                 ),
                 ChatComposer(
                   controller: con,
                   onReceiveText: (str) {
-                    Get.find<ChatController>().messageGetter.conId != null
+                    Get.find<ChatController>().messagesList.value.conId != null
                         ? Get.find<ChatController>().sendChatConversation(
                             widget.listingId,
                             str,
-                            Get.find<ChatController>().messageGetter.conId)
+                            Get.find<ChatController>().messagesList.value.conId)
                         : Get.find<ChatController>()
                             .startChatConversation(widget.listingId, str);
                     list.value.add(sentMessage(str.toString()));
@@ -127,7 +127,7 @@ class _ChatUiState extends State<ChatUi> {
             body: Center(
               child: CircularProgressIndicator(),
             ),
-          );
+          ));
   }
 
   sentMessage(message) {

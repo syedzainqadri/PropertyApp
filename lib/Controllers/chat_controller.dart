@@ -7,20 +7,16 @@ import 'package:realestapp/Models/startConversationModel.dart';
 import '../Models/all_chat_model.dart';
 
 class ChatController extends GetxController {
-  var count = 0.obs;
   var box = GetStorage();
   var isLoading = false.obs;
   final token = GetStorage().read('token');
-  var converstaions = StartConversation().obs;
   var allChats = List<AllChats>.empty(growable: true).obs;
-
-  Rx<Messages> messagesList = Rx<Messages>(Messages());
-  Messages get messageGetter => messagesList.value;
+  var messagesList = Messages().obs;
 
   @override
   onInit() {
-    messagesList.bindStream(showMesssages());
     getAllChats();
+    getAllMessages();
     super.onInit();
   }
 
@@ -75,7 +71,8 @@ class ChatController extends GetxController {
     await getAllMessages();
   }
 
-  Future<Messages> getAllMessages() async {
+  getAllMessages() async {
+    isLoading.value = true;
     var listingId = box.read('listingId');
     print(listingId);
     var response = await http.get(
@@ -87,16 +84,12 @@ class ChatController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
+    print(response.body);
     messagesList.value = messagesFromJson(response.body);
-    return messagesList.value;
-  }
-
-  Stream<Messages> showMesssages() {
-    return getAllMessages().asStream();
+    isLoading.value = false;
   }
 
   getAllChats() async {
-    isLoading.value = true;
     var response = await http.get(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my/chat"),
       headers: <String, String>{
@@ -106,6 +99,5 @@ class ChatController extends GetxController {
       },
     );
     allChats.value = allChatsFromJson(response.body);
-    isLoading.value = false;
   }
 }

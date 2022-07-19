@@ -70,7 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '731281729322',
     projectId: 'lagosabuja-8c93b',
     storageBucket: 'lagosabuja-8c93b.appspot.com',
-    iosClientId: '731281729322-7o7e4ld0suscferi5tbt0dse5rdq4o5k.apps.googleusercontent.com',
+    iosClientId:
+        '731281729322-7o7e4ld0suscferi5tbt0dse5rdq4o5k.apps.googleusercontent.com',
     iosBundleId: 'com.classima.realestapp',
   );
 }

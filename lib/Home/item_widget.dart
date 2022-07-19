@@ -119,20 +119,6 @@ itemWidget(context, Datum listing) {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // itemWidget(AllListings listing) {
 //     return GestureDetector(
 //       onTap: (){
@@ -219,4 +205,3 @@ itemWidget(context, Datum listing) {
 //       ),
 //     );
 //   }
-

@@ -46,16 +46,21 @@ class _MyFavoritesState extends State<MyFavorites> {
               favoriteListingController.favoriteListings.value.data?.length,
           itemBuilder: (context, index) {
             return ListingCard(
-                image: favoriteListingController.favoriteListings.value.data[index].images,
-                title: favoriteListingController.favoriteListings.value.data[index].title
+                image: favoriteListingController
+                    .favoriteListings.value.data[index].images,
+                title: favoriteListingController
+                    .favoriteListings.value.data[index].title
                     .toString(),
-                city: '${favoriteListingController.favoriteListings.value.data[index].contact.locations[1].name}, ${favoriteListingController.favoriteListings.value.data[0].contact.locations[0].name}'
-                    .toString(),
-                price:favoriteListingController.favoriteListings.value.data[index].price
+                city:
+                    '${favoriteListingController.favoriteListings.value.data[index].contact.locations[1].name}, ${favoriteListingController.favoriteListings.value.data[0].contact.locations[0].name}'
+                        .toString(),
+                price: favoriteListingController
+                    .favoriteListings.value.data[index].price
                     .toString(),
                 isFovorite: true,
                 description: '',
-                listingId: favoriteListingController.favoriteListings.value.data[index].listingId);
+                listingId: favoriteListingController
+                    .favoriteListings.value.data[index].listingId);
           },
         );
       }),

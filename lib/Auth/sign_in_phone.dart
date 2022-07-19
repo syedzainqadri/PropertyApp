@@ -20,7 +20,7 @@
 //   final _phoneFocus = FocusNode();
 //   @override
 //   Widget build(BuildContext context) {
-    
+
 //  // FocusScopeNode currentFocus = FocusScope.of(context);
 //     return MaterialApp(
 //       supportedLocales: const [

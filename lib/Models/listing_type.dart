@@ -9,4 +9,3 @@ class ListingType {
     name = data['name'];
   }
 }
-

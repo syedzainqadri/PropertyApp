@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 import '../Utils/color_scheme.dart';
 
-
 class AccountDetails extends StatefulWidget {
   const AccountDetails({Key? key}) : super(key: key);
 
@@ -53,7 +52,6 @@ class _AccountDetailsState extends State<AccountDetails> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
           const SizedBox(
             height: 20,
           ),
@@ -144,8 +142,10 @@ class _AccountDetailsState extends State<AccountDetails> {
               ),
             ),
           ),
-          const SizedBox(height: 15,),
-           const Padding(
+          const SizedBox(
+            height: 15,
+          ),
+          const Padding(
             padding: EdgeInsets.only(left: 18.0),
             child: Text(
               'PRIVATE DETAILS',
