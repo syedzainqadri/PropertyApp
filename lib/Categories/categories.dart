@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/AddListings/list_widget.dart';
 import 'package:realestapp/Categories/Widgets/CategoryListingCard.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
 import '../AddListings/add_listings.dart';
-import '../Home/item_widget.dart';
-import '../Models/all_listing_model.dart';
 import '../Utils/color_scheme.dart';
 import 'filters.dart';
 

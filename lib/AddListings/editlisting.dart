@@ -24,7 +24,7 @@ import 'package:realestapp/Models/listing_types_model.dart';
 import 'package:realestapp/Models/locations_model.dart';
 import 'package:realestapp/Profile/my_listings.dart';
 import '../Controllers/listings_controller.dart';
-import '../Models/Categories/category_model.dart' hide Icon;
+import '../Models/Categories/category_model.dart' hide CatIcon;
 import '../Models/selected_fields_model.dart';
 import '../Utils/color_scheme.dart';
 import '../Utils/constants.dart';

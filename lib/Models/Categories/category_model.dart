@@ -29,7 +29,7 @@ class CategoriesModel {
   int? parent;
   int? count;
   String? filter;
-  Icon? icon;
+  CatIcon? icon;
 
   factory CategoriesModel.fromJson(Map<String, dynamic> json) =>
       CategoriesModel(
@@ -43,12 +43,12 @@ class CategoriesModel {
         parent: json["parent"],
         count: json["count"],
         filter: json["filter"],
-        icon: Icon.fromJson(json["icon"]),
+        icon: CatIcon.fromJson(json["icon"]),
       );
 }
 
-class Icon {
-  Icon({
+class CatIcon {
+  CatIcon({
     this.url,
     this.iconClass,
   });
@@ -56,7 +56,7 @@ class Icon {
   String? url;
   String? iconClass;
 
-  factory Icon.fromJson(Map<String, dynamic> json) => Icon(
+  factory CatIcon.fromJson(Map<String, dynamic> json) => CatIcon(
         url: json["url"],
         iconClass: json["class"],
       );

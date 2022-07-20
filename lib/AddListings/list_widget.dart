@@ -61,7 +61,7 @@ class ListingCard extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    height: 100,
+                    height: 90,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10),
