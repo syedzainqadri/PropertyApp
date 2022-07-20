@@ -31,6 +31,7 @@ class _ChatUiState extends State<ChatUi> {
     // TODO: implement initState
     super.initState();
     box.write('listingId', widget.listingId);
+    chatController.getAllMessages();
   }
 
   @override
@@ -53,23 +54,28 @@ class _ChatUiState extends State<ChatUi> {
             ),
             body: Column(
               children: [
-                Expanded(
-                  child: Obx(() {
-                    return ListView.builder(
-                        itemCount:
-                            _chatController.messagesList.value.messages!.length,
-                        itemBuilder: (_, pos) {
-                          var sourceId = _chatController
-                              .messagesList.value.messages![pos].sourceId;
-                          var userId = userController.user.value.id;
-                          return int.parse(sourceId!) == userId
-                              ? sentMessage(_chatController
-                                  .messagesList.value.messages![pos].message)
-                              : recieveMessage(_chatController
-                                  .messagesList.value.messages![pos].message);
-                        });
-                  }),
-                ),
+                chatController.messagesList.value.messages != null
+                    ? Expanded(
+                        child: Obx(() {
+                          return ListView.builder(
+                              itemCount: _chatController
+                                  .messagesList.value.messages!.length,
+                              itemBuilder: (_, pos) {
+                                var sourceId = _chatController
+                                    .messagesList.value.messages![pos].sourceId;
+                                var userId = userController.user.value.id;
+                                return int.parse(sourceId!) == userId
+                                    ? sentMessage(_chatController.messagesList
+                                        .value.messages![pos].message)
+                                    : recieveMessage(_chatController
+                                        .messagesList
+                                        .value
+                                        .messages![pos]
+                                        .message);
+                              });
+                        }),
+                      )
+                    : Expanded(child: Center(child: Text('No Messages'))),
                 ChatComposer(
                   controller: con,
                   onReceiveText: (str) {

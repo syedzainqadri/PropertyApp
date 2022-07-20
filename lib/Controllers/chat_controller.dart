@@ -16,7 +16,7 @@ class ChatController extends GetxController {
   @override
   onInit() {
     getAllChats();
-    getAllMessages();
+    // getAllMessages();
     super.onInit();
   }
 
@@ -85,7 +85,9 @@ class ChatController extends GetxController {
       },
     );
     print(response.body);
-    messagesList.value = messagesFromJson(response.body);
+    response.body.contains('false')
+        ? isLoading.value = false
+        : messagesList.value = messagesFromJson(response.body);
     isLoading.value = false;
   }
 
