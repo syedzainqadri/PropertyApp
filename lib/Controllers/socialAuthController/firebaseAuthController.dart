@@ -7,11 +7,12 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:realestapp/Controllers/socialAuthController/socialAuthController.dart';
 
 class FirebaseAuthController extends GetxController {
   var isDataSubmitting = false.obs;
-  // final SocialLoginController socialLoginController =
-  //     Get.put(SocialLoginController());
+  final SocialSignInController socialSignInController =
+      SocialSignInController();
   var isDataReadingCompleted = false.obs;
   final box = GetStorage();
   var isLoading = false.obs;
@@ -50,28 +51,7 @@ class FirebaseAuthController extends GetxController {
       );
       print(googleAuth.idToken);
       print(googleAuth.accessToken);
-      http
-          .post(
-              Uri.parse('https://lagosabuja.com/wp-json/rtcl/v1/social-login'),
-              headers: <String, String>{
-                'Content-Type': 'application/json; charset=UTF-8',
-                'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-              },
-              body: jsonEncode(<String, dynamic>{
-                'access_token': googleAuth.idToken,
-                'type': "google_firebase",
-              }))
-          .then((response) {
-        print(response.body);
-      });
-      // http
-      //     .get(
-      //   Uri.parse(
-      //       'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${googleAuth.idToken}'),
-      // )
-      //     .then((response) {
-      //   print(response.body);
-      // });
+      socialSignInController.signInWithGoogle(googleAuth.idToken);
     } catch (error) {
       print(error);
       Get.snackbar(

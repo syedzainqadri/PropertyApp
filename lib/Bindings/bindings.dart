@@ -10,7 +10,7 @@ class MyBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => ListingController());
-    Get.lazyPut(() => FavoriteListingController());
+    Get.lazyPut(() => FavoriteListingController(), fenix: true);
     Get.lazyPut(() => MyListingController());
     Get.lazyPut(() => CategoriesController());
     Get.lazyPut<ChatController>(() => ChatController());
