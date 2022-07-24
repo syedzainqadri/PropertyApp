@@ -24,25 +24,6 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final SearchController searchController = Get.put(SearchController());
-  final listingTypeController = Get.put(ListingTypeController());
-  final categoriesController = Get.put(CategoriesController());
-  final listingConfigController = Get.put(ListingConfigController());
-  List<SelectedFieldsModel> selectedFields = List<SelectedFieldsModel>.filled(
-      20, SelectedFieldsModel(0, Choice(id: '0', name: '0')),
-      growable: true);
-  var myAmenities = List<String>.empty(growable: true);
-  bool categorySelected = false;
-  bool subCategorySelected = false;
-  List<dynamic> amenities = [false];
-  double _lowerValue = 50;
-  double _upperValue = 180;
-  var listingType;
-  var category;
-  var subCategory;
-  var priceTypes;
-  var pricingTypes;
-  var priceUnits;
-  var customField;
 
   @override
   Widget build(BuildContext context) {
@@ -118,14 +99,43 @@ class _SearchPageState extends State<SearchPage> {
           showModalBottomSheet(
               context: context,
               builder: (context) {
-                return filterBottomSheet();
+                return FillterBottomSheet();
               });
         },
       ),
     );
   }
+}
 
-  Widget filterBottomSheet() {
+class FillterBottomSheet extends StatefulWidget {
+  const FillterBottomSheet({Key? key}) : super(key: key);
+
+  @override
+  State<FillterBottomSheet> createState() => _FillterBottomSheetState();
+}
+
+class _FillterBottomSheetState extends State<FillterBottomSheet> {
+  final listingTypeController = Get.put(ListingTypeController());
+  final categoriesController = Get.put(CategoriesController());
+  final listingConfigController = Get.put(ListingConfigController());
+  List<SelectedFieldsModel> selectedFields = List<SelectedFieldsModel>.filled(
+      20, SelectedFieldsModel(0, Choice(id: '0', name: '0')),
+      growable: true);
+  var myAmenities = List<String>.empty(growable: true);
+  bool categorySelected = false;
+  bool subCategorySelected = false;
+  List<dynamic> amenities = [false];
+  double _lowerValue = 50;
+  double _upperValue = 1800;
+  Rx<ListingTypes> listingType = ListingTypes().obs;
+  var category;
+  var subCategory;
+  var priceTypes;
+  var pricingTypes;
+  var priceUnits;
+  var customField;
+  @override
+  Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,35 +148,37 @@ class _SearchPageState extends State<SearchPage> {
               style: TextStyle(color: darkGrey, fontSize: 16),
             ),
           ),
-          RangeSliderFlutter(
-            values: [_lowerValue, _upperValue],
-            rangeSlider: true,
-            tooltip: RangeSliderFlutterTooltip(
-              alwaysShowTooltip: true,
-            ),
-            max: 20000,
-            textPositionTop: -100,
-            handlerHeight: 30,
-            trackBar: RangeSliderFlutterTrackBar(
-              activeTrackBarHeight: 10,
-              inactiveTrackBarHeight: 10,
-              activeTrackBar: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.red,
+          Padding(
+            padding: const EdgeInsets.only(top: 40.0, right: 10, left: 10),
+            child: RangeSliderFlutter(
+              min: 0,
+              max: 1000000,
+              values: [_lowerValue, _upperValue],
+              rangeSlider: true,
+              tooltip: RangeSliderFlutterTooltip(
+                alwaysShowTooltip: true,
               ),
-              inactiveTrackBar: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.grey,
+              textPositionTop: -70,
+              handlerHeight: 20,
+              trackBar: RangeSliderFlutterTrackBar(
+                activeTrackBarHeight: 10,
+                inactiveTrackBarHeight: 10,
+                activeTrackBar: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.green,
+                ),
+                inactiveTrackBar: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey,
+                ),
               ),
+              fontSize: 15,
+              textBackgroundColor: Colors.green,
+              onDragging: (handlerIndex, lowerValue, upperValue) {
+                _lowerValue = lowerValue;
+                _upperValue = upperValue;
+              },
             ),
-            min: 0,
-            fontSize: 15,
-            textBackgroundColor: Colors.red,
-            onDragging: (handlerIndex, lowerValue, upperValue) {
-              _lowerValue = lowerValue;
-              _upperValue = upperValue;
-              setState(() {});
-            },
           ),
           const SizedBox(height: 10),
           const Padding(
@@ -178,19 +190,21 @@ class _SearchPageState extends State<SearchPage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
-            child: ChipsChoice<ListingTypes>.single(
-              choiceStyle: const C2ChoiceStyle(color: lightGreen),
-              wrapped: true,
-              value: listingType,
-              choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
-                source: listingTypeController.listingTypes.value,
-                value: (i, v) => v,
-                label: (i, v) => v.name,
+            child: Obx(
+              () => ChipsChoice<ListingTypes>.single(
+                choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                wrapped: true,
+                onChanged: (val) {
+                  listingType.value = val;
+                  print(listingType.value.id.toString());
+                },
+                value: listingType.value,
+                choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
+                  source: listingTypeController.listingTypes.value,
+                  value: (i, v) => v,
+                  label: (i, v) => v.name,
+                ),
               ),
-              onChanged: (val) {
-                setState(() => listingType = val);
-                print(listingType.id.toString());
-              },
             ),
           ),
           const SizedBox(height: 10),

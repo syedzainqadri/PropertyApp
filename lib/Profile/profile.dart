@@ -152,6 +152,7 @@ class _ProfileState extends State<Profile> {
                   onTap: () {
                     signOut.remove('token');
                     signOut.write('isLoggedIn', false);
+                    Get.find<UserController>().onDelete();
                     Get.offAll(const SignIn());
                   },
                   child: const Text(
