@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
 import 'package:realestapp/AddListings/select_country.dart';
+import 'package:realestapp/Categories/filters.dart';
 import 'package:realestapp/Controllers/listing_type_controller.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/search_controller.dart';
@@ -95,14 +96,10 @@ class _SearchPageState extends State<SearchPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.filter),
+        child: const Icon(Icons.filter_list),
         backgroundColor: Colors.greenAccent,
         onPressed: () {
-          showModalBottomSheet(
-              context: context,
-              builder: (context) {
-                return FillterBottomSheet();
-              });
+          Get.to(const MyFilters());
         },
       ),
     );

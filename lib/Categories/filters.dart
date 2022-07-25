@@ -2,7 +2,12 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:location/location.dart';
+import 'package:realestapp/AddListings/select_city.dart';
+import 'package:realestapp/Categories/Widgets/select_country.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import '../Controllers/location_controller.dart';
 import '../Utils/color_scheme.dart';
 
 class MyFilters extends StatefulWidget {
@@ -14,6 +19,14 @@ class MyFilters extends StatefulWidget {
 
 class _MyFiltersState extends State<MyFilters> {
   RangeValues _currentRangeValues = const RangeValues(0, 30);
+  var listingType = "".obs;
+  final locationsController = Get.put(LocationsController());
+  final box = GetStorage();
+  var locationId = ''.obs;
+  var locationName = ''.obs;
+  var location = Location();
+  var latitude = ''.obs;
+  var longitude = ''.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,55 +108,211 @@ class _MyFiltersState extends State<MyFilters> {
                       [lightGreen],
                       [lightGreen]
                     ],
-                    onToggle: (index) {},
+                    onToggle: (index) {
+                      listingType.value = index == 0 ? "rent" : "buy";
+                      print(listingType.value);
+                    },
                   ),
                 ],
               ),
             ),
-            //City
-
             divide(),
             Padding(
               padding: const EdgeInsets.only(
                   left: 12.0, right: 12, top: 5, bottom: 5),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const Icon(
-                        Icons.location_pin,
-                        color: mediumGrey,
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          Text(
-                            'City',
-                            style: TextStyle(color: darkGrey),
+              child: InkWell(
+                onTap: (() {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                            'Select State',
+                            textAlign: TextAlign.center,
                           ),
-                          SizedBox(
-                            width: 4,
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20.0)),
+                          content: SizedBox(
+                            height: 500,
+                            width: 300,
+                            child: ListView.builder(
+                                itemCount: locationsController.locations.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      locationsController.getSubLocation(
+                                          locationsController
+                                              .locations.value[index].termId);
+                                      box.write(
+                                          'country',
+                                          locationsController
+                                              .locations.value[index].termId);
+                                      print(box.read("country"));
+                                      Navigator.pop(context, true);
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                'Select City',
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20.0),
+                                              ),
+                                              content: SizedBox(
+                                                height: 500,
+                                                width: 300,
+                                                child: Obx(
+                                                  () => ListView.builder(
+                                                      itemCount:
+                                                          locationsController
+                                                              .subLocations
+                                                              .length,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return GestureDetector(
+                                                          onTap: () async {
+                                                            locationsController.updateLocationName(
+                                                                await locationsController
+                                                                    .subLocations
+                                                                    .value[
+                                                                        index]
+                                                                    .termId,
+                                                                await locationsController
+                                                                    .subLocations
+                                                                    .value[
+                                                                        index]
+                                                                    .name);
+                                                            Navigator.pop(
+                                                                context, true);
+                                                            locationId.value =
+                                                                locationsController
+                                                                    .subLocations
+                                                                    .value[
+                                                                        index]
+                                                                    .termId
+                                                                    .toString();
+                                                            print(locationId
+                                                                .value);
+                                                            locationName.value =
+                                                                locationsController
+                                                                    .subLocations
+                                                                    .value[
+                                                                        index]
+                                                                    .name;
+                                                          },
+                                                          child: Container(
+                                                            width:
+                                                                double.infinity,
+                                                            height: 50,
+                                                            decoration: BoxDecoration(
+                                                                color:
+                                                                    lightGreen,
+                                                                border: Border.all(
+                                                                    color:
+                                                                        white,
+                                                                    style: BorderStyle
+                                                                        .solid)),
+                                                            child: Center(
+                                                              child: Text(
+                                                                locationsController
+                                                                    .subLocations
+                                                                    .value[
+                                                                        index]
+                                                                    .name,
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
+                                                                style:
+                                                                    const TextStyle(
+                                                                  color: white,
+                                                                  fontSize: 20,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
+                                                ),
+                                              ),
+                                            );
+                                          });
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          color: lightGreen,
+                                          border: Border.all(
+                                              color: white,
+                                              style: BorderStyle.solid)),
+                                      child: Center(
+                                        child: Text(
+                                          locationsController
+                                              .locations.value[index].name,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            color: white,
+                                            fontSize: 20,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }),
                           ),
-                          Text(
-                            'Johannesburg',
-                            style: TextStyle(color: lightGreen),
+                        );
+                      });
+                }),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const Icon(
+                          Icons.location_pin,
+                          color: mediumGrey,
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        Obx(
+                          () => Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'City',
+                                style: TextStyle(color: darkGrey),
+                              ),
+                              const SizedBox(
+                                width: 4,
+                              ),
+                              locationName.value == ''
+                                  ? Text(
+                                      'Select City',
+                                      style: TextStyle(color: lightGreen),
+                                    )
+                                  : Text(
+                                      locationName.toString(),
+                                      style: const TextStyle(color: lightGreen),
+                                    ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const Icon(
-                    Icons.navigate_next,
-                    color: mediumGrey,
-                    size: 35,
-                  ),
-                ],
+                        ),
+                      ],
+                    ),
+                    const Icon(
+                      Icons.navigate_next,
+                      color: mediumGrey,
+                      size: 35,
+                    ),
+                  ],
+                ),
               ),
             ),
             //Search Locations
@@ -215,8 +384,12 @@ class _MyFiltersState extends State<MyFilters> {
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.map, color: lightGreen),
+                            children: [
+                              IconButton(
+                                  onPressed: () {
+                                    locationService();
+                                  },
+                                  icon: Icon(Icons.map, color: lightGreen)),
                               SizedBox(
                                 width: 8,
                               ),
@@ -231,71 +404,10 @@ class _MyFiltersState extends State<MyFilters> {
               ),
             ),
 
-//Property Types
-            divide(),
             Padding(
               padding: const EdgeInsets.only(top: 5, bottom: 5),
               child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12.0, right: 12),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(
-                          Icons.location_city,
-                          color: mediumGrey,
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Text(
-                          'Property Types',
-                          style: TextStyle(color: darkGrey),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 150,
-                    child: DefaultTabController(
-                      length: 3,
-                      child: Column(
-                        children: [
-                          const TabBar(
-                            labelColor: lightGreen,
-                            indicatorColor: lightGreen,
-                            indicatorWeight: 4.0,
-                            indicatorSize: TabBarIndicatorSize.label,
-                            tabs: [
-                              Tab(
-                                text: 'Homes',
-                              ),
-                              Tab(
-                                text: 'Plots',
-                              ),
-                              Tab(
-                                text: 'Commercial',
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: TabBarView(
-                              children: [
-                                tabContent(),
-                                tabContent(),
-                                tabContent(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                   //Price Range
                   divide(),
                   Padding(
@@ -413,222 +525,93 @@ class _MyFiltersState extends State<MyFilters> {
                       ],
                     ),
                   ),
-                  //Area Range
-                  divide(),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 12.0, right: 12, top: 5, bottom: 5),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                FaIcon(
-                                  FontAwesomeIcons.rulerVertical,
-                                  color: mediumGrey,
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  'Area Range',
-                                  style: TextStyle(color: darkGrey),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  'Marla',
-                                  style: TextStyle(color: darkGrey),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Icon(
-                                  Icons.arrow_drop_down,
-                                  color: darkGrey,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 9,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: TextField(
-                                cursorColor: lightGreen,
-                                decoration: InputDecoration(
-                                  hintText: '3',
-                                  suffixIconColor: lightGreen,
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                      borderSide:
-                                          const BorderSide(color: mediumGrey)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                      borderSide:
-                                          const BorderSide(color: lightGreen)),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            const Text(
-                              'TO',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: TextField(
-                                cursorColor: lightGreen,
-                                decoration: InputDecoration(
-                                  hintText: '3',
-                                  suffixIconColor: lightGreen,
-                                  enabledBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                      borderSide:
-                                          const BorderSide(color: mediumGrey)),
-                                  focusedBorder: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(25),
-                                      borderSide:
-                                          const BorderSide(color: lightGreen)),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 9,
-                        ),
-                        RangeSlider(
-                          inactiveColor: lightGrey,
-                          activeColor: lightGreen,
-                          values: _currentRangeValues,
-                          max: 100,
-                          divisions: 100,
-                          labels: RangeLabels(
-                            _currentRangeValues.start.round().toString(),
-                            _currentRangeValues.end.round().toString(),
-                          ),
-                          onChanged: (RangeValues values) {
-                            setState(() {
-                              _currentRangeValues = values;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          height: 9,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            labelButtons('3 Marla'),
-                            labelButtons('5 Marla'),
-                            labelButtons('7 Marla'),
-                            labelButtons('8 Marla'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
                   //Bedrooms
-                  divide(),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8, bottom: 8, left: 12.0, right: 12),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            Icon(
-                              Icons.bed,
-                              color: mediumGrey,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'Bedrooms',
-                              style: TextStyle(color: darkGrey),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Wrap(
-                          children: [
-                            roundButton('1'),
-                            roundButton('2'),
-                            roundButton('3'),
-                            roundButton('4'),
-                            roundButton('5'),
-                            roundButton('6'),
-                            roundButton('7'),
-                            roundButton('8'),
-                            roundButton('9'),
-                            roundButton('10+'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  // divide(),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       top: 8, bottom: 8, left: 12.0, right: 12),
+                  //   child: Column(
+                  //     children: [
+                  //       Row(
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         children: const [
+                  //           Icon(
+                  //             Icons.bed,
+                  //             color: mediumGrey,
+                  //           ),
+                  //           SizedBox(
+                  //             width: 8,
+                  //           ),
+                  //           Text(
+                  //             'Bedrooms',
+                  //             style: TextStyle(color: darkGrey),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       const SizedBox(
+                  //         height: 8,
+                  //       ),
+                  //       Wrap(
+                  //         children: [
+                  //           roundButton('1'),
+                  //           roundButton('2'),
+                  //           roundButton('3'),
+                  //           roundButton('4'),
+                  //           roundButton('5'),
+                  //           roundButton('6'),
+                  //           roundButton('7'),
+                  //           roundButton('8'),
+                  //           roundButton('9'),
+                  //           roundButton('10+'),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
 
-                  //Bsthroom
-                  divide(),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8, bottom: 8, left: 12.0, right: 12),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            FaIcon(
-                              FontAwesomeIcons.bath,
-                              color: mediumGrey,
-                            ),
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Text(
-                              'Bathrooms',
-                              style: TextStyle(color: darkGrey),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Wrap(
-                          children: [
-                            roundButton('1'),
-                            roundButton('2'),
-                            roundButton('3'),
-                            roundButton('4'),
-                            roundButton('5'),
-                            roundButton('6'),
-                            roundButton('7'),
-                            roundButton('8'),
-                            roundButton('9'),
-                            roundButton('10+'),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  // //Bsthroom
+                  // divide(),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       top: 8, bottom: 8, left: 12.0, right: 12),
+                  //   child: Column(
+                  //     children: [
+                  //       Row(
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         children: const [
+                  //           FaIcon(
+                  //             FontAwesomeIcons.bath,
+                  //             color: mediumGrey,
+                  //           ),
+                  //           SizedBox(
+                  //             width: 8,
+                  //           ),
+                  //           Text(
+                  //             'Bathrooms',
+                  //             style: TextStyle(color: darkGrey),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       const SizedBox(
+                  //         height: 8,
+                  //       ),
+                  //       Wrap(
+                  //         children: [
+                  //           roundButton('1'),
+                  //           roundButton('2'),
+                  //           roundButton('3'),
+                  //           roundButton('4'),
+                  //           roundButton('5'),
+                  //           roundButton('6'),
+                  //           roundButton('7'),
+                  //           roundButton('8'),
+                  //           roundButton('9'),
+                  //           roundButton('10+'),
+                  //         ],
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   divide(),
                 ],
               ),
@@ -773,5 +756,33 @@ class _MyFiltersState extends State<MyFilters> {
         ],
       ),
     );
+  }
+
+  locationService() async {
+    var serviceEnabled = await location.serviceEnabled();
+    if (!serviceEnabled) {
+      serviceEnabled = await location.requestService();
+      if (!serviceEnabled) {
+        return;
+      }
+    }
+    var _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    var currentLocation = await location.getLocation();
+    var _latitude = currentLocation.latitude.toString();
+    var _longitude = currentLocation.longitude.toString();
+    box.write('longitude', _longitude);
+    box.write('latitude', _latitude);
+    longitude.value = _longitude;
+    latitude.value = _latitude;
+    print(_latitude);
+    print(_longitude);
+
+    print(currentLocation.toString());
   }
 }
