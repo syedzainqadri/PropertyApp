@@ -2,7 +2,9 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group_radio_button/group_radio_button.dart';
+import 'package:realestapp/AddListings/select_country.dart';
 import 'package:realestapp/Controllers/listing_type_controller.dart';
+import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/search_controller.dart';
 import 'package:realestapp/Models/Categories/category_model.dart';
 import 'package:realestapp/Models/locations_model.dart';
@@ -128,6 +130,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
   double _lowerValue = 50;
   double _upperValue = 1800;
   Rx<ListingTypes> listingType = ListingTypes().obs;
+  final locationsController = Get.put(LocationsController());
   var category;
   var subCategory;
   var priceTypes;
@@ -141,6 +144,54 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 20),
+          Obx(
+            () => Row(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child: SizedBox(
+                    width: 200,
+                    height: 46,
+                    child: ElevatedButton.icon(
+                      onPressed: () async {
+                        Get.to(const SelectCountry());
+                      },
+                      icon: const Icon(Icons.add),
+                      label: const Text(
+                        'Add Location',
+                        style: TextStyle(
+                          color: white,
+                          fontSize: 18,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: lightGreen,
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30)),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                locationsController.userLocationId.value != 0
+                    ? Chip(
+                        deleteIcon: const Icon(
+                          Icons.close,
+                        ),
+                        onDeleted: () {
+                          locationsController.updateLocationName(0, '');
+                        },
+                        label: Text(locationsController.userLocationName.value
+                            .toString()),
+                      )
+                    : const Offstage(),
+              ],
+            ),
+          ),
           const Padding(
             padding: EdgeInsets.only(left: 20),
             child: Text(
@@ -521,6 +572,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                                                                     .id,
                                                                 val));
                                                       });
+                                                      print(customField);
                                                     },
                                                   ),
                                                 ],
