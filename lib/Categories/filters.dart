@@ -6,6 +6,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:location/location.dart';
 import 'package:realestapp/AddListings/select_city.dart';
 import 'package:realestapp/Categories/Widgets/select_country.dart';
+import 'package:realestapp/Controllers/search_controller.dart';
+import 'package:realestapp/Search/search_page.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../Controllers/location_controller.dart';
 import '../Utils/color_scheme.dart';
@@ -18,7 +20,11 @@ class MyFilters extends StatefulWidget {
 }
 
 class _MyFiltersState extends State<MyFilters> {
+  final SearchController _searchController = Get.put(SearchController());
+  final TextEditingController startRangeController = TextEditingController();
+  final TextEditingController endRangeController = TextEditingController();
   RangeValues _currentRangeValues = const RangeValues(0, 30);
+  var _distanceRangeValues = 0.0;
   var listingType = "".obs;
   final locationsController = Get.put(LocationsController());
   final box = GetStorage();
@@ -27,6 +33,12 @@ class _MyFiltersState extends State<MyFilters> {
   var location = Location();
   var latitude = ''.obs;
   var longitude = ''.obs;
+  double _lowerValue = 50;
+  double _upperValue = 18000;
+  var startRange = ''.obs;
+  var endRange = ''.obs;
+  var distance = ''.obs;
+  var sortBy = ''.obs;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -346,22 +358,22 @@ class _MyFiltersState extends State<MyFilters> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
-                        child: TextField(
-                          cursorColor: lightGreen,
-                          decoration: InputDecoration(
-                            iconColor: lightGreen,
-                            suffixIcon: const Icon(Icons.search),
-                            hintText: 'Search Locations',
-                            suffixIconColor: lightGreen,
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide:
-                                    const BorderSide(color: mediumGrey)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(25),
-                                borderSide:
-                                    const BorderSide(color: lightGreen)),
-                          ),
+                        child: Slider(
+                          inactiveColor: lightGrey,
+                          activeColor: lightGreen,
+                          value: _distanceRangeValues,
+                          max: 300,
+                          min: 0,
+                          divisions: 10,
+                          label: _distanceRangeValues.round().toString(),
+                          onChanged: (values) {
+                            setState(() {
+                              _distanceRangeValues = values;
+                              distance.value =
+                                  _distanceRangeValues.round().toString();
+                            });
+                            print(distance.value);
+                          },
                         ),
                       ),
                       const SizedBox(
@@ -384,12 +396,8 @@ class _MyFiltersState extends State<MyFilters> {
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              IconButton(
-                                  onPressed: () {
-                                    locationService();
-                                  },
-                                  icon: Icon(Icons.map, color: lightGreen)),
+                            children: const [
+                              Icon(Icons.map, color: lightGreen),
                               SizedBox(
                                 width: 8,
                               ),
@@ -434,22 +442,6 @@ class _MyFiltersState extends State<MyFilters> {
                                 ),
                               ],
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  'Price',
-                                  style: TextStyle(color: darkGrey),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Icon(
-                                  Icons.arrow_drop_down,
-                                  color: darkGrey,
-                                ),
-                              ],
-                            ),
                           ],
                         ),
                         const SizedBox(
@@ -459,6 +451,7 @@ class _MyFiltersState extends State<MyFilters> {
                           children: [
                             Expanded(
                               child: TextField(
+                                controller: startRangeController,
                                 cursorColor: lightGreen,
                                 decoration: InputDecoration(
                                   hintText: '0',
@@ -486,6 +479,7 @@ class _MyFiltersState extends State<MyFilters> {
                             ),
                             Expanded(
                               child: TextField(
+                                controller: endRangeController,
                                 cursorColor: lightGreen,
                                 decoration: InputDecoration(
                                   hintText: 'Any',
@@ -510,7 +504,7 @@ class _MyFiltersState extends State<MyFilters> {
                           inactiveColor: lightGrey,
                           activeColor: lightGreen,
                           values: _currentRangeValues,
-                          max: 100,
+                          max: 10000000,
                           divisions: 100,
                           labels: RangeLabels(
                             _currentRangeValues.start.round().toString(),
@@ -519,99 +513,118 @@ class _MyFiltersState extends State<MyFilters> {
                           onChanged: (RangeValues values) {
                             setState(() {
                               _currentRangeValues = values;
+                              startRange.value =
+                                  _currentRangeValues.start.round().toString();
+                              endRange.value =
+                                  _currentRangeValues.end.round().toString();
+                              startRangeController.text = startRange.value;
+                              endRangeController.text = endRange.value;
                             });
+                            print(startRange.value);
+                            print(endRange.value);
                           },
                         ),
                       ],
                     ),
                   ),
                   //Bedrooms
-                  // divide(),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       top: 8, bottom: 8, left: 12.0, right: 12),
-                  //   child: Column(
-                  //     children: [
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: const [
-                  //           Icon(
-                  //             Icons.bed,
-                  //             color: mediumGrey,
-                  //           ),
-                  //           SizedBox(
-                  //             width: 8,
-                  //           ),
-                  //           Text(
-                  //             'Bedrooms',
-                  //             style: TextStyle(color: darkGrey),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //       const SizedBox(
-                  //         height: 8,
-                  //       ),
-                  //       Wrap(
-                  //         children: [
-                  //           roundButton('1'),
-                  //           roundButton('2'),
-                  //           roundButton('3'),
-                  //           roundButton('4'),
-                  //           roundButton('5'),
-                  //           roundButton('6'),
-                  //           roundButton('7'),
-                  //           roundButton('8'),
-                  //           roundButton('9'),
-                  //           roundButton('10+'),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-
-                  // //Bsthroom
-                  // divide(),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       top: 8, bottom: 8, left: 12.0, right: 12),
-                  //   child: Column(
-                  //     children: [
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: const [
-                  //           FaIcon(
-                  //             FontAwesomeIcons.bath,
-                  //             color: mediumGrey,
-                  //           ),
-                  //           SizedBox(
-                  //             width: 8,
-                  //           ),
-                  //           Text(
-                  //             'Bathrooms',
-                  //             style: TextStyle(color: darkGrey),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //       const SizedBox(
-                  //         height: 8,
-                  //       ),
-                  //       Wrap(
-                  //         children: [
-                  //           roundButton('1'),
-                  //           roundButton('2'),
-                  //           roundButton('3'),
-                  //           roundButton('4'),
-                  //           roundButton('5'),
-                  //           roundButton('6'),
-                  //           roundButton('7'),
-                  //           roundButton('8'),
-                  //           roundButton('9'),
-                  //           roundButton('10+'),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+                  divide(),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        left: 12.0, right: 12, top: 5, bottom: 5),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: const [
+                                FaIcon(
+                                  FontAwesomeIcons.sort,
+                                  color: mediumGrey,
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  'Sort By',
+                                  style: TextStyle(color: darkGrey),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2.5,
+                              height: 60,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  sortBy.value = 'price-desc';
+                                },
+                                child: const Text('Low to High'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: lightGreen, elevation: 0.0),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2.5,
+                              height: 60,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  sortBy.value = 'price-asc';
+                                },
+                                child: const Text('High to Low'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: lightGreen, elevation: 0.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2.5,
+                              height: 60,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  sortBy.value = 'date-desc';
+                                },
+                                child: const Text('New to Old'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: lightGreen, elevation: 0.0),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width / 2.5,
+                              height: 60,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  sortBy.value = 'date-asc';
+                                },
+                                child: const Text('Old to New'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: lightGreen, elevation: 0.0),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                   divide(),
                 ],
               ),
@@ -627,9 +640,27 @@ class _MyFiltersState extends State<MyFilters> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              const Text(
-                'Reset',
-                style: TextStyle(color: mediumGrey, fontSize: 16),
+              InkWell(
+                onTap: () {
+                  startRange.value = 0.toString();
+                  endRange.value = 0.toString();
+                  setState(() {
+                    _currentRangeValues = const RangeValues(0, 30);
+                  });
+                  startRangeController.text = startRange.value;
+                  endRangeController.text = endRange.value;
+                  locationId.value = '';
+                  locationName.value = '';
+                  distance.value = '';
+                  longitude.value = '';
+                  latitude.value = '';
+                  _distanceRangeValues = 0.0;
+                  sortBy.value = '';
+                },
+                child: const Text(
+                  'Reset',
+                  style: TextStyle(color: mediumGrey, fontSize: 16),
+                ),
               ),
               const SizedBox(
                 width: 15,
@@ -638,8 +669,29 @@ class _MyFiltersState extends State<MyFilters> {
                 width: MediaQuery.of(context).size.width / 2.5,
                 height: 60,
                 child: ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Show 1000+ Ads'),
+                  onPressed: () async {
+                    if (locationId.value != '') {
+                      await _searchController.getFilteredData(
+                          listingType,
+                          locationId,
+                          latitude,
+                          longitude,
+                          distance,
+                          startRange,
+                          endRange,
+                          sortBy);
+                      Get.back();
+                    } else {
+                      Get.snackbar(
+                        'Error',
+                        'Please select a location',
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.red,
+                        colorText: white,
+                      );
+                    }
+                  },
+                  child: const Text('Apply Filters'),
                   style: ElevatedButton.styleFrom(
                       primary: lightGreen, elevation: 0.0),
                 ),
