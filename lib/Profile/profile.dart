@@ -114,12 +114,14 @@ class _ProfileState extends State<Profile> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Text(
-                    "${userController.userModel.value.firstName} ${userController.userModel.value.lastName}",
-                    style: const TextStyle(
-                      color: darkGrey,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500,
+                  Obx(
+                    () => Text(
+                      "${userController.userModel.value.firstName} ${userController.userModel.value.lastName}",
+                      style: const TextStyle(
+                        color: darkGrey,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -176,7 +178,7 @@ class _ProfileState extends State<Profile> {
     setState(() {
       isLoading = true;
     });
-    XFile? picture = await ImagePicker().pickImage(source: ImageSource.gallery);
+    XFile? picture = await ImagePicker().pickImage(source: ImageSource.camera);
     await _profileController.changeProfile(File(picture!.path));
     Get.find<UserController>().getUser();
     setState(() {

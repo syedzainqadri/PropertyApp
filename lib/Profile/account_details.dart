@@ -275,11 +275,13 @@ class _AccountDetailsState extends State<AccountDetails> {
           ),
           Center(
               child: ElevatedButton(
-                  onPressed: () {
-                    profileController.changeProfileDetail(
+                  onPressed: () async {
+                    await userController.changeProfileDetail(
                         firstNameController.text,
                         lastNameController.text,
                         phoneNoController.text);
+                    userController.update();
+                    Get.back();
                   },
                   style: ElevatedButton.styleFrom(
                     primary: lightGreen,

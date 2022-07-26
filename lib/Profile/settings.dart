@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/user_controller.dart';
 
 import '../Utils/color_scheme.dart';
 import 'account_details.dart';
@@ -12,6 +13,7 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
+  final UserController userController = Get.put(UserController());
   bool isNotificationSwitched = true;
   bool isAppNotificationSwitched = false;
   @override
@@ -107,23 +109,29 @@ class _SettingsState extends State<Settings> {
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    'Change Password',
-                    style: TextStyle(
-                      color: mediumGrey,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
+              GestureDetector(
+                onTap: () {
+                  var email = userController.userModel.value.email;
+                  userController.changePassword(email);
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      'Change Password',
+                      style: TextStyle(
+                        color: mediumGrey,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  Icon(
-                    Icons.navigate_next,
-                    size: 35,
-                    color: mediumGrey,
-                  ),
-                ],
+                    Icon(
+                      Icons.navigate_next,
+                      size: 35,
+                      color: mediumGrey,
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 25,

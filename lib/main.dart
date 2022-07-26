@@ -22,7 +22,6 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  MyBindings().dependencies();
   await GetStorage.init();
   GetStorage().writeIfNull('isLoggedIn', false);
   if (GetStorage().read('isLoggedIn')) {
