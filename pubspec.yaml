@@ -64,6 +64,9 @@ dependencies:
   google_sign_in: ^5.4.0
   flutter_facebook_auth: ^4.4.0+1
   range_slider_flutter: ^0.0.2
+  firebase_messaging: ^11.4.4
+  flutter_local_notifications: ^9.6.1
+  overlay_support: ^2.0.1
 
 dev_dependencies:
   flutter_test:

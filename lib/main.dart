@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:realestapp/Bindings/bindings.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
@@ -10,6 +12,7 @@ import 'package:realestapp/Controllers/my_payment_controller.dart';
 import 'package:realestapp/Controllers/orders_controller.dart';
 import 'package:realestapp/Controllers/plansController.dart';
 import 'package:realestapp/Controllers/user_controller.dart';
+import 'package:realestapp/Models/pushNotification_model.dart';
 import 'Auth/sign_in.dart';
 import 'Controllers/favorite_listing_controller.dart';
 import 'Controllers/listing_type_controller.dart';
@@ -22,6 +25,86 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging.instance.getToken().then((token) {
+    print(token);
+  });
+  //firebase messaging instanse initiated
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  await messaging.subscribeToTopic('courses');
+  //Firebase Meassage Settings
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
+  if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+    print('User granted permission: ${settings.authorizationStatus}');
+    //if the app is opened.
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      PushNotification notification = PushNotification(
+        title: message.notification!.title,
+        body: message.notification!.body,
+        dataTitle: message.data['title'],
+        dataBody: message.data['body'],
+      );
+      AndroidNotification android = message.notification!.android!;
+      if (notification != null && android != null) {
+        showSimpleNotification(
+          Text(notification.title!),
+          leading: Icon(Icons.notification_add),
+          subtitle: Text(
+            notification.body!,
+          ),
+          background: Colors.blue,
+          duration: const Duration(seconds: 2),
+        );
+      }
+    });
+  } else {
+    print('permission denied');
+  }
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    PushNotification notification = PushNotification(
+      title: message.notification!.title,
+      body: message.notification!.body,
+      dataTitle: message.data['title'],
+      dataBody: message.data['body'],
+    );
+    // RemoteNotification notification = message.notification!;
+    AndroidNotification android = message.notification!.android!;
+    if (notification != null && android != null) {
+      showSimpleNotification(
+        Text(notification.title!),
+        leading: Image.asset(
+          'assets/images/logo.png',
+          height: 50,
+        ),
+        subtitle: Text(
+          notification.body!,
+        ),
+        background: Colors.blue,
+        duration: const Duration(seconds: 2),
+      );
+    }
+  });
+
+  checkForInitialMessage() async {
+    RemoteMessage? message = await messaging.getInitialMessage();
+    if (message != null) {
+      PushNotification notification = PushNotification(
+        title: message.notification!.title,
+        body: message.notification!.body,
+        dataTitle: message.data['title'],
+        dataBody: message.data['body'],
+      );
+    }
+  }
+
   await GetStorage.init();
   GetStorage().writeIfNull('isLoggedIn', false);
   if (GetStorage().read('isLoggedIn')) {
@@ -45,10 +128,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialBinding: MyBindings(),
-      debugShowCheckedModeBanner: false,
-      home: GetStorage().read('isLoggedIn') ? const Home() : const MyHomePage(),
+    return OverlaySupport(
+      child: GetMaterialApp(
+        initialBinding: MyBindings(),
+        debugShowCheckedModeBanner: false,
+        home:
+            GetStorage().read('isLoggedIn') ? const Home() : const MyHomePage(),
+      ),
     );
   }
 }
