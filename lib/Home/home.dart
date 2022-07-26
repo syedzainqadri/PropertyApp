@@ -56,26 +56,47 @@ class _HomeState extends State<Home> {
               ),
               leading: Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
-                child: GestureDetector(
-                  onTap: () async {
-                    await membershipController.getMembershipPlans();
-                    Get.to(const Profile());
-                  },
-                  child: Obx(() => Container(
-                      width: 30,
-                      height: 30,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: mediumGrey,
-                        ),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                              userController.user.value.ppThumbUrl.toString()),
-                        ),
-                      ))),
-                ),
+                child: userController.userModel.value.ppThumbUrl != null
+                    ? GestureDetector(
+                        onTap: () async {
+                          await membershipController.getMembershipPlans();
+                          Get.to(const Profile());
+                        },
+                        child: Obx(() => Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: mediumGrey,
+                              ),
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(userController
+                                    .userModel.value.ppThumbUrl
+                                    .toString()),
+                              ),
+                            ))),
+                      )
+                    : GestureDetector(
+                        onTap: () async {
+                          await membershipController.getMembershipPlans();
+                          Get.to(const Profile());
+                        },
+                        child: Container(
+                            width: 30,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: mediumGrey,
+                              ),
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: AssetImage('assets/images/1.png'),
+                              ),
+                            )),
+                      ),
               ),
               actions: hasAction
                   ? [

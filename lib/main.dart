@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:realestapp/Bindings/bindings.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
-import 'package:realestapp/Controllers/chat_controller.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
 import 'package:realestapp/Controllers/my_listings_controller.dart';
 import 'package:realestapp/Controllers/my_payment_controller.dart';

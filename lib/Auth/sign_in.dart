@@ -64,22 +64,22 @@ class _SignInState extends State<SignIn> {
                   defaultButton(
                     'Log In',
                     () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              child: Container(
+                                color: Colors.white,
+                                height: 200,
+                                width: 200,
+                                child: Center(
+                                  child: CircularProgressIndicator(),
+                                ),
+                              ),
+                            );
+                          });
                       await _signInController.signIn(
                           emailController.text, passwordController.text);
-
-                      GetStorage().write('isLoggedIn', true);
-                      GetStorage().write(
-                          'token', _signInController.signInModel.value.token);
-
-                      Get.put(ListingController());
-                      Get.put(FavoriteListingController());
-                      Get.put(MyListingController());
-                      Get.put(ChatController());
-                      Get.put(CategoriesController());
-                      Get.put(LocationsController());
-                      Get.put(ListingTypeController());
-                      Get.put(ListingTypeController());
-                      Get.offAll(const Home());
                     },
                   ),
                   const SizedBox(

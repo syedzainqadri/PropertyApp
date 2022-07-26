@@ -103,7 +103,7 @@ class _ProfileState extends State<Profile> {
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(userController
-                                        .user.value.ppThumbUrl
+                                        .userModel.value.ppThumbUrl
                                         .toString()),
                                   ),
                                 ),
@@ -115,7 +115,7 @@ class _ProfileState extends State<Profile> {
                     height: 15,
                   ),
                   Text(
-                    "${Get.find<UserController>().user.value.firstName} ${Get.find<UserController>().user.value.lastName}",
+                    "${userController.userModel.value.firstName} ${userController.userModel.value.lastName}",
                     style: const TextStyle(
                       color: darkGrey,
                       fontSize: 22,

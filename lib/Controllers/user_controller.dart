@@ -2,12 +2,11 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-
-import '../Models/user_model.dart';
+import 'package:realestapp/Models/user_model.dart';
 
 class UserController extends GetxController {
   final token = GetStorage().read('token');
-  var user = User().obs;
+  var userModel = UserModel().obs;
   @override
   onInit() {
     getUser();
@@ -23,6 +22,7 @@ class UserController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    user.value = userFromJson(response.body);
+    print(response.body);
+    userModel.value = userModelFromJson(response.body);
   }
 }

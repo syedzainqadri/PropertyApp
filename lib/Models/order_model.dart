@@ -13,7 +13,7 @@ class Order {
 
   factory Order.fromJson(Map<String, dynamic> json) => Order(
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-        pagination: Pagination.fromJson(json["pagination"]),
+        // pagination: Pagination.fromJson(json["pagination"]),
       );
 }
 
@@ -95,29 +95,29 @@ enum Status { PENDING, COMPLETED }
 final statusValues =
     EnumValues({"Completed": Status.COMPLETED, "Pending": Status.PENDING});
 
-class Pagination {
-  Pagination({
-    this.total,
-    this.count,
-    this.perPage,
-    this.currentPage,
-    this.totalPages,
-  });
+// class Pagination {
+//   Pagination({
+//     this.total,
+//     this.count,
+//     this.perPage,
+//     this.currentPage,
+//     this.totalPages,
+//   });
 
-  var total;
-  var count;
-  var perPage;
-  var currentPage;
-  var totalPages;
+//   var total;
+//   var count;
+//   var perPage;
+//   var currentPage;
+//   var totalPages;
 
-  factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
-        total: json["total"],
-        count: json["count"],
-        perPage: json["per_page"],
-        currentPage: json["current_page"],
-        totalPages: json["total_pages"],
-      );
-}
+//   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
+//         total: json["total"],
+//         count: json["count"],
+//         perPage: json["per_page"],
+//         currentPage: json["current_page"],
+//         totalPages: json["total_pages"],
+//       );
+// }
 
 class EnumValues<T> {
   var map;

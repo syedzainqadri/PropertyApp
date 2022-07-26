@@ -63,7 +63,7 @@ class _ChatUiState extends State<ChatUi> {
                               itemBuilder: (_, pos) {
                                 var sourceId = _chatController
                                     .messagesList.value.messages![pos].sourceId;
-                                var userId = userController.user.value.id;
+                                var userId = userController.userModel.value.id;
                                 return int.parse(sourceId!) == userId
                                     ? sentMessage(_chatController.messagesList
                                         .value.messages![pos].message)

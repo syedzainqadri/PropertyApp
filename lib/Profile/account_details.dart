@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/Controllers/profile_controller.dart';
+import 'package:realestapp/Controllers/user_controller.dart';
 
 import '../Utils/color_scheme.dart';
 
@@ -11,17 +13,21 @@ class AccountDetails extends StatefulWidget {
 }
 
 class _AccountDetailsState extends State<AccountDetails> {
+  final ProfileController profileController = Get.put(ProfileController());
+  final UserController userController = Get.put(UserController());
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNoController = TextEditingController();
+  double height = Get.height;
+  double width = Get.width;
   @override
   void initState() {
     super.initState();
-    firstNameController.text = 'Mark';
-    lastNameController.text = 'Sacca';
-    emailController.text = 'marksacca21@gmail.com';
-    phoneNoController.text = '+27 1312323 523';
+    firstNameController.text = userController.userModel.value.firstName;
+    lastNameController.text = userController.userModel.value.lastName;
+    emailController.text = userController.userModel.value.email;
+    phoneNoController.text = userController.userModel.value.phone;
   }
 
   @override
@@ -89,8 +95,16 @@ class _AccountDetailsState extends State<AccountDetails> {
                       fontSize: 17,
                     ),
                   ),
-                  SizedBox(
-                    width: 100,
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: mediumGrey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white),
+                    height: height * 0.06,
+                    width: width * 0.5,
                     child: TextField(
                       textAlign: TextAlign.end,
                       cursorColor: lightGreen,
@@ -126,8 +140,16 @@ class _AccountDetailsState extends State<AccountDetails> {
                       fontSize: 17,
                     ),
                   ),
-                  SizedBox(
-                    width: 100,
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: mediumGrey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white),
+                    height: height * 0.06,
+                    width: width * 0.5,
                     child: TextField(
                       textAlign: TextAlign.end,
                       cursorColor: lightGreen,
@@ -179,8 +201,16 @@ class _AccountDetailsState extends State<AccountDetails> {
                       fontSize: 17,
                     ),
                   ),
-                  SizedBox(
-                    width: 200,
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: mediumGrey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white),
+                    height: height * 0.06,
+                    width: width * 0.5,
                     child: TextField(
                       textAlign: TextAlign.end,
                       cursorColor: lightGreen,
@@ -216,8 +246,16 @@ class _AccountDetailsState extends State<AccountDetails> {
                       fontSize: 17,
                     ),
                   ),
-                  SizedBox(
-                    width: 200,
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: mediumGrey,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white),
+                    height: height * 0.06,
+                    width: width * 0.5,
                     child: TextField(
                       textAlign: TextAlign.end,
                       cursorColor: lightGreen,
@@ -232,6 +270,28 @@ class _AccountDetailsState extends State<AccountDetails> {
               ),
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
+          Center(
+              child: ElevatedButton(
+                  onPressed: () {
+                    profileController.changeProfileDetail(
+                        firstNameController.text,
+                        lastNameController.text,
+                        phoneNoController.text);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: lightGreen,
+                    onSurface: white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'Update Profile',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ))),
         ],
       ),
     );

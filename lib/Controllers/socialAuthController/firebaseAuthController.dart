@@ -51,7 +51,7 @@ class FirebaseAuthController extends GetxController {
       );
       print(googleAuth.idToken);
       print(googleAuth.accessToken);
-      socialSignInController.signInWithGoogle(googleAuth.idToken);
+      await socialSignInController.signInWithGoogle(googleAuth.idToken);
     } catch (error) {
       print(error);
       Get.snackbar(

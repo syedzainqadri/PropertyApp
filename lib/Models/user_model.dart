@@ -1,9 +1,15 @@
+// To parse this JSON data, do
+//
+//     final userModel = userModelFromJson(jsonString);
+
 import 'dart:convert';
 
-User userFromJson(String str) => User.fromJson(json.decode(str));
+UserModel userModelFromJson(String str) => UserModel.fromJson(json.decode(str));
 
-class User {
-  User({
+String userModelToJson(UserModel data) => json.encode(data.toJson());
+
+class UserModel {
+  UserModel({
     this.firstName,
     this.lastName,
     this.description,
@@ -20,30 +26,28 @@ class User {
     this.latitude,
     this.longitude,
     this.ppThumbUrl,
-    this.membership,
     this.store,
   });
 
-  String? firstName;
-  String? lastName;
-  String? description;
-  int? id;
-  bool? isAdmin;
-  String? email;
-  String? username;
-  String? phone;
-  String? whatsappNumber;
-  String? website;
-  List<dynamic>? locations = [];
-  String? zipcode;
-  String? address;
-  String? latitude;
-  String? longitude;
-  String? ppThumbUrl;
-  Membership? membership;
-  bool? store;
+  var firstName;
+  var lastName;
+  var description;
+  var id;
+  var isAdmin;
+  var email;
+  var username;
+  var phone;
+  var whatsappNumber;
+  var website;
+  var locations;
+  var zipcode;
+  var address;
+  var latitude;
+  var longitude;
+  var ppThumbUrl;
+  var store;
 
-  factory User.fromJson(Map<String, dynamic> json) => User(
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         firstName: json["first_name"],
         lastName: json["last_name"],
         description: json["description"],
@@ -60,64 +64,26 @@ class User {
         latitude: json["latitude"],
         longitude: json["longitude"],
         ppThumbUrl: json["pp_thumb_url"],
-        membership: Membership.fromJson(json["membership"]),
         store: json["store"],
       );
-}
 
-class Membership {
-  Membership({
-    this.isExpired,
-    this.expiredAt,
-    this.remainingAds,
-    this.postedAds,
-    this.promotions,
-  });
-
-  bool? isExpired;
-  DateTime? expiredAt;
-  String? remainingAds;
-  String? postedAds;
-  Promotions? promotions;
-
-  factory Membership.fromJson(Map<String, dynamic> json) => Membership(
-        isExpired: json["is_expired"],
-        expiredAt: DateTime.parse(json["expired_at"]),
-        remainingAds: json["remaining_ads"],
-        postedAds: json["posted_ads"],
-        promotions: Promotions.fromJson(json["promotions"]),
-      );
-}
-
-class Promotions {
-  Promotions({
-    this.featured,
-    this.top,
-    this.bumpUp,
-  });
-
-  BumpUp? featured;
-  BumpUp? top;
-  BumpUp? bumpUp;
-
-  factory Promotions.fromJson(Map<String, dynamic> json) => Promotions(
-        featured: BumpUp.fromJson(json["featured"]),
-        top: BumpUp.fromJson(json["_top"]),
-        bumpUp: BumpUp.fromJson(json["_bump_up"]),
-      );
-}
-
-class BumpUp {
-  BumpUp({
-    this.ads,
-    this.validate,
-  });
-
-  int? ads;
-  int? validate;
-
-  factory BumpUp.fromJson(Map<String, dynamic> json) => BumpUp(
-        ads: json["ads"],
-        validate: json["validate"],
-      );
+  Map<String, dynamic> toJson() => {
+        "first_name": firstName,
+        "last_name": lastName,
+        "description": description,
+        "id": id,
+        "isAdmin": isAdmin,
+        "email": email,
+        "username": username,
+        "phone": phone,
+        "whatsapp_number": whatsappNumber,
+        "website": website,
+        "locations": List<dynamic>.from(locations.map((x) => x)),
+        "zipcode": zipcode,
+        "address": address,
+        "latitude": latitude,
+        "longitude": longitude,
+        "pp_thumb_url": ppThumbUrl,
+        "store": store,
+      };
 }
