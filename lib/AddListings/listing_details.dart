@@ -10,6 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:realestapp/Chat/chat_ui.dart';
 import 'package:realestapp/Controllers/EmailController.dart';
 import 'package:realestapp/Controllers/listing_detail_controller.dart';
+import 'package:realestapp/Utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Models/review_model.dart';
 import '../Utils/color_scheme.dart';
@@ -51,6 +52,8 @@ class _ListingDetailsState extends State<ListingDetails> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController messageController = TextEditingController();
 
+  var formKey = GlobalKey<FormState>();
+
   double height = Get.height;
   double width = Get.width;
 
@@ -61,23 +64,24 @@ class _ListingDetailsState extends State<ListingDetails> {
       appBar: AppBar(
         backgroundColor: transparent,
         elevation: 0.0,
-        centerTitle: true,
+        centerTitle: false,
         title: Text(
           widget.title,
           style: const TextStyle(color: lightGreen),
         ),
+        leadingWidth: 35,
         leading: GestureDetector(
             onTap: () {
               Get.back();
             },
             child: const Icon(
               Icons.navigate_before,
-              size: 35,
+              size: 30,
               color: lightGreen,
             )),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(0.0),
             child: IconButton(
               onPressed: () {
                 Get.to(() => ChatUi(listingId: widget.id, title: widget.title));
@@ -88,8 +92,19 @@ class _ListingDetailsState extends State<ListingDetails> {
               ),
             ),
           ),
+          Icon(
+            Icons.favorite_border_rounded,
+            color: lightGreen,
+          ),
           const SizedBox(
-            width: 10,
+            width: 5,
+          ),
+          Icon(
+            Icons.share,
+            color: lightGreen,
+          ),
+          const SizedBox(
+            width: 5,
           ),
         ],
       ),
@@ -135,7 +150,7 @@ class _ListingDetailsState extends State<ListingDetails> {
               child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "\$\ ${listingDetailsController.listingDetail.value.price}",
+                    "N ${listingDetailsController.listingDetail.value.price}",
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -150,9 +165,10 @@ class _ListingDetailsState extends State<ListingDetails> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Icon(Icons.pin_drop_outlined),
+                      const Icon(Icons.pin_drop_outlined),
                       Text(
                         listingDetailsController
+                            .listingDetail.value.contact.address.toString().isEmpty? "N/A" : listingDetailsController
                             .listingDetail.value.contact.address,
                         style: const TextStyle(
                           fontSize: 12,
@@ -279,7 +295,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                 width: double.infinity,
                 height: 300,
                 child: GoogleMap(
-                  mapType: MapType.hybrid,
+                  mapToolbarEnabled: true,
+                  mapType: MapType.normal,
                   initialCameraPosition: CameraPosition(
                     target: LatLng(
                         double.parse(listingDetailsController
@@ -390,54 +407,58 @@ class _ListingDetailsState extends State<ListingDetails> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Expanded(
-                    child: Divider(
-                      color: Colors.greenAccent,
-                      thickness: 3,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                    child: Text(
-                      'Rating'.toUpperCase(),
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  const Expanded(
-                    child: Divider(
-                      color: Colors.greenAccent,
-                      thickness: 3,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 8, right: 8, left: 8, bottom: 30),
-              child: SizedBox(
-                height: 100,
-                child: RatingBarIndicator(
-                  rating: double.parse(listingDetailsController
-                      .listingDetail.value.review.rating.average),
-                  direction: Axis.horizontal,
-                  itemBuilder: (context, index) => Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                  ),
-                  itemCount: 5,
-                  itemSize: 50.0,
-                ),
-              ),
-            ),
+
+            /// Ratings
+            // Padding(
+            //   padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+            //       const Expanded(
+            //         child: Divider(
+            //           color: Colors.greenAccent,
+            //           thickness: 3,
+            //         ),
+            //       ),
+            //       Padding(
+            //         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+            //         child: Text(
+            //           'Rating'.toUpperCase(),
+            //           style: const TextStyle(fontSize: 20),
+            //         ),
+            //       ),
+            //       const Expanded(
+            //         child: Divider(
+            //           color: Colors.greenAccent,
+            //           thickness: 3,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // Padding(
+            //   padding:
+            //   const EdgeInsets.only(top: 8, right: 8, left: 8, bottom: 30),
+            //   child: SizedBox(
+            //     height: 100,
+            //     child: RatingBarIndicator(
+            //       rating: double.parse(listingDetailsController
+            //           .listingDetail.value.review.rating.average),
+            //       direction: Axis.horizontal,
+            //       itemBuilder: (context, index) => Icon(
+            //         Icons.star,
+            //         color: Colors.amber,
+            //       ),
+            //       itemCount: 5,
+            //       itemSize: 50.0,
+            //     ),
+            //   ),
+            // ),
+            //
+
             SizedBox(
-              height: 20,
+              height: 100,
             ),
           ],
         ),
@@ -465,75 +486,103 @@ class _ListingDetailsState extends State<ListingDetails> {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
+                      return StatefulBuilder(
+                        builder: (context, setState){
+                          return Dialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
                                 BorderRadius.circular(20.0)), //this right here
-                        child: SizedBox(
-                          height: 400,
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 5.0, bottom: 5.0, right: 10.0, left: 10.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Center(
-                                  child: Text(
-                                    'Contact US',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 25,
-                                        // fontFamily: 'Noto Nastaliq Urdu',
-                                        fontWeight: FontWeight.normal),
+                            child: SizedBox(
+                              height: 400,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 5.0, bottom: 5.0, right: 10.0, left: 10.0),
+                                child: Form(
+                                  key: formKey,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        const Center(
+                                          child: Text(
+                                            'Contact US',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: Colors.green,
+                                                fontSize: 25,
+                                                // fontFamily: 'Noto Nastaliq Urdu',
+                                                fontWeight: FontWeight.normal),
+                                          ),
+                                        ),
+                                        SizedBox(height: 15,),
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 8.0),
+                                          child: textField(
+                                              'YourName',
+                                              false,
+                                              nameController,
+                                              onValidate: (v)=> v!.isEmpty? "Required" : null
+                                          ),
+                                        ),
+
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 8.0),
+                                          child: textField(
+                                              'Email',
+                                              false,
+                                              emailController,
+                                              onValidate: (v)=> v!.isEmpty? "Required" : null
+                                          ),
+                                        ),
+                                        textField(
+                                            'Message',
+                                             false,
+                                            messageController,
+                                            onValidate: (v)=> v!.isEmpty? "Required" : null,
+                                            maxLine: 4
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.03,
+                                        ),
+                                        defaultButton(
+                                          'Send',
+                                              () async {
+                                            if(formKey.currentState!.validate()){
+                                              sendemailController.sendEmail(
+                                                  widget.id,
+                                                  messageController.text,
+                                                  nameController.text,
+                                                  emailController.text);
+                                            }
+                                          },
+                                        ),
+                                        // Center(
+                                        //   child: BottomSheetButton(
+                                        //     onTap: () {
+                                        //       sendemailController.sendEmail(
+                                        //           widget.id,
+                                        //           messageController.text,
+                                        //           nameController.text,
+                                        //           emailController.text);
+                                        //     },
+                                        //     width: width * 0.25,
+                                        //     height: height * 0.06,
+                                        //     iconColor: Colors.green,
+                                        //     buttonColor: Colors.greenAccent,
+                                        //     buttonText: 'Send',
+                                        //     icon: Icons.email,
+                                        //   ),
+                                        // ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: TextFieldWidget(
-                                      lable: 'YourName',
-                                      controller: nameController,
-                                      leadingIcon: Icons.person,
-                                      obsecure: false),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 8.0),
-                                  child: TextFieldWidget(
-                                      lable: 'Email',
-                                      controller: emailController,
-                                      leadingIcon: Icons.email,
-                                      obsecure: false),
-                                ),
-                                TextAreaWidget(
-                                    lable: 'Message',
-                                    controller: messageController,
-                                    leadingIcon: Icons.message,
-                                    obsecure: false),
-                                SizedBox(
-                                  height: height * 0.01,
-                                ),
-                                Center(
-                                  child: BottomSheetButton(
-                                    onTap: () {
-                                      sendemailController.sendEmail(
-                                          widget.id,
-                                          messageController.text,
-                                          nameController.text,
-                                          emailController.text);
-                                    },
-                                    width: width * 0.25,
-                                    height: height * 0.06,
-                                    iconColor: Colors.green,
-                                    buttonColor: Colors.greenAccent,
-                                    buttonText: 'Send',
-                                    icon: Icons.email,
-                                  ),
-                                ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                        },
                       );
                     });
               },

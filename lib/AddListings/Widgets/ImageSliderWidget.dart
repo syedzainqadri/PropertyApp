@@ -20,10 +20,10 @@ class ImageSliderWidget extends StatelessWidget {
           height: height,
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
+              topLeft: Radius.circular(2),
+              topRight: Radius.circular(2),
+              bottomLeft: Radius.circular(2),
+              bottomRight: Radius.circular(2),
             ),
             image: DecorationImage(
               fit: BoxFit.cover,

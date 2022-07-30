@@ -10,8 +10,11 @@ class LocationsController extends GetxController {
   var userLocationName = ''.obs;
   final token = GetStorage().read('token');
 
+  List locationDist = [];
+
   @override
   onInit() {
+    locationDist = ["5km", "10km", "15km", "20km", "30km", "40km", "50km"];
     getLocation();
     super.onInit();
   }

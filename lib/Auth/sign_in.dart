@@ -29,6 +29,7 @@ class _SignInState extends State<SignIn> {
       FirebaseAuthController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
   // final userController = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
@@ -38,91 +39,106 @@ class _SignInState extends State<SignIn> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 28.0, right: 28.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Sign In',
-                    style: TextStyle(
-                      color: lightGreen,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Sign In',
+                      style: TextStyle(
+                        color: lightGreen,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  textField('E-mail address', false, emailController),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  textField('Password', false, passwordController),
-                  const SizedBox(
-                    height: 35,
-                  ),
-                  defaultButton(
-                    'Log In',
-                    () async {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return Dialog(
-                              child: Container(
-                                color: Colors.white,
-                                height: 200,
-                                width: 200,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    textField(
+                        'E-mail address',
+                        false,
+                        emailController,
+                      onValidate: (v)=> v!.isEmpty? "Required" : null
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField(
+                        'Password',
+                        true,
+                        passwordController,
+                        onValidate: (v)=> v!.isEmpty? "Required" : null
+                    ),
+                    const SizedBox(
+                      height: 35,
+                    ),
+                    defaultButton(
+                      'Log In',
+                      () async {
+                        if(formKey.currentState!.validate()){
+                          // showDialog(
+                          //     context: context,
+                          //     builder: (context) {
+                          //       return Dialog(
+                          //         child: Container(
+                          //           color: Colors.white,
+                          //           height: 200,
+                          //           width: 200,
+                          //           child: Center(
+                          //             child: CircularProgressIndicator(),
+                          //           ),
+                          //         ),
+                          //       );
+                          //     });
+                          await _signInController.signIn(
+                              emailController.text, passwordController.text);
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const Center(child: Text('OR')),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    socialButton('Facebook Login',
+                        const FaIcon(FontAwesomeIcons.facebook), darkBlue, () {}),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    socialButton('Google Login',
+                        const FaIcon(FontAwesomeIcons.google), brightRed, () {
+                      _firebaseAuthController.googleLogin();
+                    }),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Don't have an Account? "),
+                        InkWell(
+                          onTap: () {
+                            Get.to(const SignUp());
+                          },
+                          child: const Center(
+                            child: Text(
+                              "SignUp",
+                              style: TextStyle(
+                                color: brightRed,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
                               ),
-                            );
-                          });
-                      await _signInController.signIn(
-                          emailController.text, passwordController.text);
-                    },
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  const Center(child: Text('OR')),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  socialButton('Facebook Login',
-                      const FaIcon(FontAwesomeIcons.facebook), darkBlue, () {}),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  socialButton('Google Login',
-                      const FaIcon(FontAwesomeIcons.google), brightRed, () {
-                    _firebaseAuthController.googleLogin();
-                  }),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Don't have an Account? "),
-                      InkWell(
-                        onTap: () {
-                          Get.to(const SignUp());
-                        },
-                        child: const Center(
-                          child: Text(
-                            "SignUp",
-                            style: TextStyle(
-                              color: brightRed,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

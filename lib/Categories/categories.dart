@@ -89,10 +89,10 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
           body: Column(
             children: [
-              const Divider(
-                color: mediumGrey,
-                thickness: 0.5,
-              ),
+              // const Divider(
+              //   color: mediumGrey,
+              //   thickness: 0.5,
+              // ),
               Padding(
                 padding: const EdgeInsets.only(left: 20.0),
                 child: Row(

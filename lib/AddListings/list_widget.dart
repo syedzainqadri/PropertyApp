@@ -72,27 +72,27 @@ class ListingCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  isFovorite
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                favoriteListingController
-                                    .addToFavorites(listingId);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Added to Favorites')));
-                              },
-                              icon: const Icon(
-                                Icons.favorite,
-                                size: 25,
-                                color: lightGreen,
-                              ),
-                            ),
-                          ],
-                        )
-                      : const Offstage(),
+                  // isFovorite
+                  //     ? Row(
+                  //         mainAxisAlignment: MainAxisAlignment.end,
+                  //         children: [
+                  //           IconButton(
+                  //             onPressed: () {
+                  //               favoriteListingController
+                  //                   .addToFavorites(listingId);
+                  //               ScaffoldMessenger.of(context).showSnackBar(
+                  //                   const SnackBar(
+                  //                       content: Text('Added to Favorites')));
+                  //             },
+                  //             icon: const Icon(
+                  //               Icons.favorite,
+                  //               size: 25,
+                  //               color: lightGreen,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       )
+                  //     : const Offstage(),
                 ],
               ),
               Padding(

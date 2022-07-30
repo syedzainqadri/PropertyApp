@@ -4,24 +4,43 @@ import 'package:get/get.dart';
 import '../Auth/sign_up.dart';
 import 'color_scheme.dart';
 
-textField(hintText, obscureText, controller) {
-  return TextField(
-    controller: controller,
-    obscureText: obscureText,
-    cursorColor: lightGreen,
-    decoration: InputDecoration(
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(
-            color: mediumGrey, style: BorderStyle.solid, width: 1),
+textField(hintText, obscureText, controller, {String? Function (String?)? onValidate, int? maxLine }) {
+  return Container(
+    decoration: BoxDecoration(
+      color: Colors.grey.shade200,
+      borderRadius: BorderRadius.circular(8)
+    ),
+    child: TextFormField(
+      maxLines: maxLine,
+      validator: onValidate,
+      controller: controller,
+      obscureText: obscureText,
+      cursorColor: lightGreen,
+      textInputAction: TextInputAction.next,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.only(left: 15, bottom: 20, top: 10),
+        // enabledBorder: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(10),
+        //   borderSide: const BorderSide(
+        //       color: mediumGrey, style: BorderStyle.solid, width: 1),
+        // ),
+        // focusedBorder: OutlineInputBorder(
+        //   borderRadius: BorderRadius.circular(30),
+        //   borderSide: const BorderSide(
+        //       color: lightGreen, style: BorderStyle.solid, width: 1),
+        // ),
+        border: InputBorder.none,
+        disabledBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        fillColor: white,
+        labelText: hintText,
+        alignLabelWithHint: true,
+        labelStyle: TextStyle(
+          color: Colors.grey,
+          fontSize: 16
+        )
       ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(30),
-        borderSide: const BorderSide(
-            color: lightGreen, style: BorderStyle.solid, width: 1),
-      ),
-      fillColor: white,
-      hintText: hintText,
     ),
   );
 }
@@ -29,7 +48,7 @@ textField(hintText, obscureText, controller) {
 defaultButton(title, onPressed) {
   return SizedBox(
     width: double.infinity,
-    height: 60,
+    height: 49,
     child: ElevatedButton(
       onPressed: onPressed,
       child: Text(
@@ -42,7 +61,7 @@ defaultButton(title, onPressed) {
       style: ElevatedButton.styleFrom(
         primary: lightGreen,
         elevation: 0.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
     ),
   );
@@ -51,7 +70,7 @@ defaultButton(title, onPressed) {
 socialButton(title, icon, color, onTap) {
   return SizedBox(
     width: double.infinity,
-    height: 60,
+    height: 49,
     child: ElevatedButton.icon(
       icon: icon,
       onPressed: onTap,
@@ -65,7 +84,7 @@ socialButton(title, icon, color, onTap) {
       style: ElevatedButton.styleFrom(
         primary: color,
         elevation: 0.0,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
     ),
   );

@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Auth/sign_in.dart';
 import 'package:realestapp/Controllers/sign_up_controller.dart';
+import 'package:realestapp/Models/user_model.dart';
 import '../Home/home.dart';
 import '../Models/sign_in_model.dart';
 import '../Utils/constants.dart';
@@ -24,6 +27,7 @@ class _SignUpState extends State<SignUp> {
   final phoneController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   final userNameController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
   final SignUpController _signUpController = SignUpController();
   @override
   Widget build(BuildContext context) {
@@ -33,114 +37,181 @@ class _SignUpState extends State<SignUp> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(left: 28.0, right: 28.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Create New Account',
-                    style: TextStyle(
-                      color: lightGreen,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Create New Account',
+                      style: TextStyle(
+                        color: lightGreen,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  // Center(
-                  //   child: Badge(
-                  //     badgeColor: lightGreen,
-                  //     badgeContent: const Icon(
-                  //       Icons.camera_alt,
-                  //       color: white,
-                  //     ),
-                  //     position: const BadgePosition(bottom: 1, end: 1),
-                  //     child: Container(
-                  //       width: 100,
-                  //       height: 100,
-                  //       decoration: BoxDecoration(
-                  //         shape: BoxShape.circle,
-                  //         border: Border.all(color: mediumGrey),
-                  //         image: const DecorationImage(
-                  //           fit: BoxFit.cover,
-                  //           image: AssetImage('assets/images/1.png'),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  textField('First Name', false, firstNameController),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  textField('Last Name', false, lastNameController),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  textField('Phone No', false, phoneController),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  textField('E-mail address', false, emailController),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  textField('User Name', false, userNameController),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  textField('Password', true, passwordController),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  textField(
-                      'Confirm Password', true, confirmPasswordController),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  defaultButton('Sign Up', () async {
-                    user = await _signUpController.signUp(
-                        userNameController.text,
-                        emailController.text,
-                        passwordController.text,
-                        firstNameController.text,
-                        lastNameController.text,
-                        phoneController.text);
-                    Get.to(const Home());
-                  }),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  // const Center(child: Text('OR')),
-                  // const SizedBox(
-                  //   height: 15,
-                  // ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Have an Account? "),
-                      InkWell(
-                        onTap: () {
-                          Get.to(const SignIn());
-                        },
-                        child: const Center(
-                          child: Text(
-                            "Log In",
-                            style: TextStyle(
-                              color: lightGreen,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    // Center(
+                    //   child: Badge(
+                    //     badgeColor: lightGreen,
+                    //     badgeContent: const Icon(
+                    //       Icons.camera_alt,
+                    //       color: white,
+                    //     ),
+                    //     position: const BadgePosition(bottom: 1, end: 1),
+                    //     child: Container(
+                    //       width: 100,
+                    //       height: 100,
+                    //       decoration: BoxDecoration(
+                    //         shape: BoxShape.circle,
+                    //         border: Border.all(color: mediumGrey),
+                    //         image: const DecorationImage(
+                    //           fit: BoxFit.cover,
+                    //           image: AssetImage('assets/images/1.png'),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField(
+                        'First Name',
+                        false,
+                        firstNameController,
+                        onValidate: (v) => v!.isEmpty? "Required" : null
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField(
+                        'Last Name',
+                        false,
+                        lastNameController,
+                        onValidate: (v) => v!.isEmpty? "Required" : null
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField(
+                        'Phone No',
+                        false,
+                        phoneController,
+                        onValidate: (v) => v!.isEmpty? "Required" : null
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField(
+                        'E-mail address',
+                        false,
+                        emailController,
+                        onValidate: (v) => v!.isEmpty? "Required" : null
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField(
+                        'User Name',
+                        false,
+                        userNameController,
+                        onValidate: (v) => v!.isEmpty? "Required" : null
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField(
+                        'Password',
+                        true,
+                        passwordController,
+                        onValidate: (v) => v!.isEmpty? "Required" : null
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField(
+                        'Confirm Password',
+                        true,
+                        confirmPasswordController,
+                        onValidate: (v) => v!.isEmpty? "Required" : null
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    defaultButton('Sign Up', () async {
+                      if(formKey.currentState!.validate()){
+                        Get.defaultDialog(
+                            title: "",
+                            content: Container(
+                              color: Colors.white,
+                              child: Column(
+                                children: const [
+                                  Center(
+                                    child: CircularProgressIndicator(color: lightGreen,),
+                                  ),
+                                  SizedBox(height: 10,),
+                                  Text(
+                                    "SigningIn! please wait",
+                                    style:  TextStyle(color: Colors.black38),
+                                  )
+                                ],
+                              ),
+                            )
+                        );
+                        var response = await _signUpController.signUp(
+                            userNameController.text,
+                            emailController.text,
+                            passwordController.text,
+                            firstNameController.text,
+                            lastNameController.text,
+                            phoneController.text);
+                        if(response != null){
+                          user = SignInModel.fromJson(response);
+                          Get.back();
+                          Get.to(const Home());
+                        }else{
+                          Get.back();
+                          // Get.snackbar('Error', 'something went wrong',
+                          //     snackPosition: SnackPosition.BOTTOM,
+                          //     backgroundColor: Colors.red,
+                          //     icon: const Icon(Icons.error, color: Colors.white));
+                        }
+                      }
+                    }),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    // const Center(child: Text('OR')),
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Have an Account? "),
+                        InkWell(
+                          onTap: () {
+                            Get.to(const SignIn());
+                          },
+                          child: const Center(
+                            child: Text(
+                              "Log In",
+                              style: TextStyle(
+                                color: lightGreen,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

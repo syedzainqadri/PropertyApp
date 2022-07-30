@@ -11,12 +11,31 @@ import 'package:realestapp/Controllers/listings_controller.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/my_listings_controller.dart';
 import 'package:realestapp/Home/home.dart';
+import 'package:realestapp/Utils/color_scheme.dart';
 import '../Models/sign_in_model.dart';
 
 class SignInController extends GetxController {
   Rx<SignInModel> signInModel = SignInModel().obs;
 
   signIn(username, password) async {
+    Get.defaultDialog(
+      title: "",
+      content: Container(
+        color: Colors.white,
+        child: Column(
+          children: const [
+             Center(
+              child: CircularProgressIndicator(color: lightGreen,),
+            ),
+             SizedBox(height: 10,),
+             Text(
+              "SigningIn! please wait",
+              style:  TextStyle(color: Colors.black38),
+            )
+          ],
+        ),
+      )
+    );
     var response = await http.post(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/login"),
       headers: <String, String>{
@@ -40,12 +59,14 @@ class SignInController extends GetxController {
       Get.put(LocationsController());
       Get.put(ListingTypeController());
       Get.put(ListingTypeController());
+      Get.back();
       Get.offAll(const Home());
     } else {
+      Get.back();
       Get.snackbar('Error', 'Invalid username or password',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,
-          icon: Icon(Icons.error, color: Colors.white));
+          icon: const Icon(Icons.error, color: Colors.white));
     }
   }
 }

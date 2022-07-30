@@ -21,11 +21,14 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ListingController());
+    Get.put(CategoriesController());
     final listingController = Get.find<ListingController>();
     final categoriesController = Get.find<CategoriesController>();
     return SingleChildScrollView(
@@ -46,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20.0),

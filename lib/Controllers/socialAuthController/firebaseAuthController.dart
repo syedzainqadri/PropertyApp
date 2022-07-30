@@ -56,7 +56,8 @@ class FirebaseAuthController extends GetxController {
       print(error);
       Get.snackbar(
         'Failed',
-        error.toString(),
+        "Google sign in cancelled",
+        colorText: Colors.white,
         backgroundColor: Colors.red,
       );
     }

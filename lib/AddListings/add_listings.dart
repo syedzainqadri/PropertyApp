@@ -203,7 +203,7 @@ class _AddListingState extends State<AddListing> {
                             itemCount: imageFiles?.length,
                             itemBuilder: (context, index) {
                               return imageContainer(
-                                  File(imageFiles![index].path));
+                                  File(imageFiles![index].path), index);
                             }),
                       ),
                     ],
@@ -213,111 +213,101 @@ class _AddListingState extends State<AddListing> {
               const SizedBox(
                 height: 10,
               ),
-              TitleWidget(
-                text: 'Title',
-                padding: 5.0,
-              ),
+              // TitleWidget(
+              //   text: 'Title',
+              //   padding: 5.0,
+              // ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: TextFieldWidgetForForm(
-                  controller: titleController,
-                  leadingIcon: Icons.title,
-                  lable: 'Title',
-                  obsecure: false,
-                ),
+                child: textField("Title", false, titleController),
               ),
+
+
               TitleWidget(
                 padding: 5.0,
                 text: 'Description',
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: TextAreaWidgetForForm(
-                  controller: descriptionController,
-                  leadingIcon: Icons.description,
-                  lable: 'Description',
-                  obsecure: false,
-                ),
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Description", false, descriptionController, maxLine: 4),
               ),
-              TitleWidget(
-                padding: 5.0,
-                text: 'Contact Information',
-              ),
+
+
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Phone Number',
+              // ),
+
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: TextFieldWidgetForForm(
-                  controller: phoneNumberController,
-                  leadingIcon: Icons.phone,
-                  lable: 'Phone',
-                  obsecure: false,
-                ),
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Phone", false, phoneNumberController),
               ),
+
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Zip Code',
+              // ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: TextFieldWidgetForForm(
-                  controller: addressController,
-                  leadingIcon: Icons.house,
-                  lable: 'Address',
-                  obsecure: false,
-                ),
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Zip Code", false, zipCodeController),
               ),
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Address',
+              // ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: TextFieldWidgetForForm(
-                  controller: zipCodeController,
-                  leadingIcon: Icons.pin_drop_outlined,
-                  lable: 'Zip Code',
-                  obsecure: false,
-                ),
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Address", false, addressController),
               ),
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Email',
+              // ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: TextFieldWidgetForForm(
-                  controller: emailController,
-                  leadingIcon: Icons.email,
-                  lable: 'Email',
-                  obsecure: false,
-                ),
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Email", false, emailController),
               ),
+
+
+
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'WhatsApp Number',
+              // ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: TextFieldWidgetForForm(
-                  controller: whatsAppController,
-                  leadingIcon: Icons.whatsapp,
-                  lable: 'WhatsApp Number',
-                  obsecure: false,
-                ),
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("WhatsApp Number", false, whatsAppController),
               ),
+
+
+
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Website',
+              // ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: TextFieldWidgetForForm(
-                  controller: websiteController,
-                  leadingIcon: Icons.web_sharp,
-                  lable: 'WebSite',
-                  obsecure: false,
-                ),
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Website", false, websiteController),
               ),
-              TitleWidget(
-                text: 'Video Url',
-                padding: 5.0,
-              ),
+
+
+
+              // TitleWidget(
+              //   text: 'Video Url',
+              //   padding: 5.0,
+              // ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: TextFieldWidgetForForm(
-                  controller: videoController,
-                  leadingIcon: Icons.play_arrow,
-                  lable: 'Video Url',
-                  obsecure: false,
-                ),
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Video url", false, videoController),
               ),
               TitleWidget(
                 text: 'Select Listing Type',
@@ -795,7 +785,7 @@ class _AddListingState extends State<AddListing> {
     }
   }
 
-  imageContainer(file) {
+  imageContainer(file, index) {
     return Padding(
       padding: const EdgeInsets.only(right: 10.0),
       child: Container(
@@ -809,6 +799,24 @@ class _AddListingState extends State<AddListing> {
               fit: BoxFit.cover),
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(18),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(30.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle
+            ),
+            child: IconButton(
+              icon: Icon(Icons.close, color: Colors.white,),
+              onPressed: (){
+
+                setState(() {
+                  imageFiles!.removeAt(index);
+                });
+              },
+            ),
+          ),
         ),
       ),
     );
@@ -856,7 +864,7 @@ class TitleWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: padding, horizontal: 20),
       child: Text(
         text,
-        style: const TextStyle(color: darkGrey, fontSize: 20),
+        style: const TextStyle(color: darkGrey, fontSize: 16),
       ),
     );
   }

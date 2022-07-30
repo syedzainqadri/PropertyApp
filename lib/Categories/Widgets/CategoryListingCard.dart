@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:realestapp/AddListings/listing_details.dart';
 import 'package:realestapp/Controllers/favorite_listing_controller.dart';
 import 'package:realestapp/Controllers/listing_detail_controller.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
+import 'package:realestapp/Utils/full_screen_dialog.dart';
 
 class CategoryListingCard extends StatelessWidget {
   var image;
@@ -40,10 +42,12 @@ class CategoryListingCard extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () async {
+          CustomFullScreenDialog.showDialog();
           try {
             await listingDetailsController.getListingById(listingId);
             // await reviewController.fetchReviews(listingId);
           } finally {
+            CustomFullScreenDialog.cancelDialog();
             Get.to(() => ListingDetails(
                   id: listingId,
                   title: title,
@@ -135,6 +139,7 @@ class CategoryListingCard extends StatelessWidget {
                         size: 17,
                         color: Colors.greenAccent,
                       ),
+                      SizedBox(width: 10,),
                       Text(city),
                     ],
                   ),
@@ -149,6 +154,7 @@ class CategoryListingCard extends StatelessWidget {
                         size: 17,
                         color: Colors.greenAccent,
                       ),
+                      SizedBox(width: 10,),
                       Text(price),
                     ],
                   ),
