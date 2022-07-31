@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:realestapp/Models/listing_messages_model.dart';
 import 'package:realestapp/Models/startConversationModel.dart';
+import 'package:realestapp/Utils/full_screen_dialog.dart';
 import '../Models/all_chat_model.dart';
 
 class ChatController extends GetxController {
@@ -73,6 +74,7 @@ class ChatController extends GetxController {
 
   getAllMessages() async {
     isLoading.value = true;
+
     var listingId = box.read('listingId');
     print(listingId);
     var response = await http.get(
@@ -85,8 +87,7 @@ class ChatController extends GetxController {
       },
     );
     print(response.body);
-    response.body.contains('false')
-        ? isLoading.value = false
+    response.body.contains('false') ? isLoading.value = false
         : messagesList.value = messagesFromJson(response.body);
     isLoading.value = false;
   }

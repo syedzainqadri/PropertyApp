@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:realestapp/Controllers/membership_controller.dart';
 import 'package:realestapp/Models/membership_model.dart';
 import 'package:realestapp/Profile/payment_details.dart';
+import 'package:realestapp/Utils/full_screen_dialog.dart';
 import '../Controllers/payment_controller.dart';
 import '../Utils/color_scheme.dart';
 
@@ -18,6 +19,7 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
   final MembershipController membershipController =
       Get.put(MembershipController());
   final PaymentController paymentController = Get.put(PaymentController());
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +50,22 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
           () => ListView.builder(
               itemCount: membershipController.membershipPlans.length,
               itemBuilder: ((context, index) =>
-                  membershipCard(_membership.membershipPlans.value[index]))),
+                  membershipCard(_membership.membershipPlans.value[index], index))),
         ),
       ),
     );
   }
 
-  membershipCard(Membership membership) {
+  membershipCard(Membership membership, int index) {
     return GestureDetector(
       onTap: () async {
+        selectedIndex = index;
+        setState(() {
+
+        });
+        CustomFullScreenDialog.showDialog();
         await paymentController.getPaymentGateways();
+        CustomFullScreenDialog.cancelDialog();
         Get.to(PaymentDetails(
           price: membership.price,
           title: membership.title,
@@ -70,109 +78,84 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
         child: SizedBox(
           width: double.infinity,
           height: 200,
-          child: Card(
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 40,
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    color: lightGreen,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20),
-                    ),
-                  ),
-                  child: Center(
-                      child: Text(
-                    membership.title,
-                    style: const TextStyle(color: white, fontSize: 18),
-                  )),
-                ),
-                Expanded(
-                  child: Container(
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: selectedIndex == index ? Colors.green : Colors.transparent),
+              borderRadius: BorderRadius.circular(20)
+            ),
+            child: Card(
+              shape:
+                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 40,
+                    width: double.infinity,
                     decoration: const BoxDecoration(
-                      color: Colors.white,
+                      color: lightGreen,
+
                       borderRadius: BorderRadius.only(
-                        bottomRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20),
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
                       ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 10,
+                    child: Center(
+                        child: Text(
+                      membership.title,
+                      style: const TextStyle(color: white, fontSize: 18),
+                    )),
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          bottomRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 18.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: const [
-                                    Text(
-                                      'Ads',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Text(
-                                      'Days',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                const Divider(
-                                  thickness: 0.4,
-                                  color: darkGrey,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text('Featured'),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 18.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Text(membership
-                                              .promotion.membership.featured.ads
-                                              .toString()),
-                                          const SizedBox(
-                                            width: 15,
-                                          ),
-                                          Text(membership.promotion.membership
-                                              .featured.validate
-                                              .toString()),
-                                        ],
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 18.0),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: const [
+                                      Text(
+                                        'Ads',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Container(
-                                  color: Colors.black12,
-                                  child: Row(
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        'Days',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  const Divider(
+                                    thickness: 0.4,
+                                    color: darkGrey,
+                                  ),
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Text('Bump Up'),
+                                      const Text('Featured'),
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(right: 18.0),
@@ -181,80 +164,112 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Text(membership
-                                                .promotion.membership.bumpUp.ads
+                                                .promotion.membership.featured.ads
                                                 .toString()),
                                             const SizedBox(
                                               width: 15,
                                             ),
                                             Text(membership.promotion.membership
-                                                .bumpUp.validate
+                                                .featured.validate
                                                 .toString()),
                                           ],
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 8,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text('Top'),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(right: 18.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Text(membership
-                                              .promotion.membership.top.ads
-                                              .toString()),
-                                          const SizedBox(
-                                            width: 15,
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Container(
+                                    color: Colors.black12,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text('Bump Up'),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 18.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(membership
+                                                  .promotion.membership.bumpUp.ads
+                                                  .toString()),
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              Text(membership.promotion.membership
+                                                  .bumpUp.validate
+                                                  .toString()),
+                                            ],
                                           ),
-                                          Text(membership
-                                              .promotion.membership.top.validate
-                                              .toString()),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ],
+                                  ),
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text('Top'),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 18.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Text(membership
+                                                .promotion.membership.top.ads
+                                                .toString()),
+                                            const SizedBox(
+                                              width: 15,
+                                            ),
+                                            Text(membership
+                                                .promotion.membership.top.validate
+                                                .toString()),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            await paymentController.getPaymentGateways();
-                            Get.to(PaymentDetails(
-                              price: membership.price,
-                              title: membership.title,
-                              type: membership.type,
-                              id: membership.id,
-                            ));
-                          },
-                          child: Text('\$${membership.price}'),
-                          style: ElevatedButton.styleFrom(
-                            primary: lightGreen,
-                            onSurface: white,
+                          const SizedBox(
+                            width: 10,
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                      ],
+                          ElevatedButton(
+                            onPressed: () async {
+                              await paymentController.getPaymentGateways();
+                              Get.to(PaymentDetails(
+                                price: membership.price,
+                                title: membership.title,
+                                type: membership.type,
+                                id: membership.id,
+                              ));
+                            },
+                            child: Text('\$${membership.price}'),
+                            style: ElevatedButton.styleFrom(
+                              primary: lightGreen,
+                              onSurface: white,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

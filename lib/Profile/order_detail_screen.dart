@@ -99,7 +99,7 @@ class OrderDetailsScreen extends StatelessWidget {
                         style: TextStyle(color: lightGreen, fontSize: 14),
                       ),
                       ammount != null
-                          ? Text("\$ ${ammount.toString()}")
+                          ? Text("N ${ammount.toString()}")
                           : const CircularProgressIndicator(),
                     ],
                   ),

@@ -83,32 +83,32 @@ class _SettingsState extends State<Settings> {
               const SizedBox(
                 height: 5,
               ),
-              GestureDetector(
-                onTap: () {
-                  Get.to(const AccountDetails());
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      'Edit Profile',
-                      style: TextStyle(
-                        color: mediumGrey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                      ),
-                    ),
-                    Icon(
-                      Icons.navigate_next,
-                      size: 35,
-                      color: mediumGrey,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     Get.to(const AccountDetails());
+              //   },
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: const [
+              //       Text(
+              //         'Edit Profile',
+              //         style: TextStyle(
+              //           color: mediumGrey,
+              //           fontWeight: FontWeight.w500,
+              //           fontSize: 18,
+              //         ),
+              //       ),
+              //       Icon(
+              //         Icons.navigate_next,
+              //         size: 35,
+              //         color: mediumGrey,
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
               GestureDetector(
                 onTap: () {
                   var email = userController.userModel.value.email;
@@ -255,7 +255,7 @@ class _SettingsState extends State<Settings> {
               ),
               GestureDetector(
                 onTap: () {
-                  Get.to(const AccountDetails());
+                  //Get.to(const AccountDetails());
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

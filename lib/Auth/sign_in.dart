@@ -65,11 +65,42 @@ class _SignInState extends State<SignIn> {
                     const SizedBox(
                       height: 15,
                     ),
-                    textField(
-                        'Password',
-                        true,
-                        passwordController,
-                        onValidate: (v)=> v!.isEmpty? "Required" : null
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(8)
+                      ),
+                      child: TextFormField(
+                        validator: (v) => v!.isEmpty? "Required" : null,
+                        controller: passwordController,
+                        obscureText: true,
+                        cursorColor: lightGreen,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 15, bottom: 20, top: 10),
+                            // enabledBorder: OutlineInputBorder(
+                            //   borderRadius: BorderRadius.circular(10),
+                            //   borderSide: const BorderSide(
+                            //       color: mediumGrey, style: BorderStyle.solid, width: 1),
+                            // ),
+                            // focusedBorder: OutlineInputBorder(
+                            //   borderRadius: BorderRadius.circular(30),
+                            //   borderSide: const BorderSide(
+                            //       color: lightGreen, style: BorderStyle.solid, width: 1),
+                            // ),
+                            border: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            fillColor: white,
+                            labelText: "Enter Password",
+                            alignLabelWithHint: true,
+                            labelStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16
+                            )
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 35,

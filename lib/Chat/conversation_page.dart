@@ -17,7 +17,7 @@ class _ConversationPageState extends State<ConversationPage> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return ListView.builder(
+      return chatController.allChats.isEmpty? Center(child: CircularProgressIndicator()): ListView.builder(
         itemCount: chatController.allChats.length,
         itemBuilder: (context, index) {
           return chat(

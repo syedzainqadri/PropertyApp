@@ -45,7 +45,7 @@ class _MyFiltersState extends State<MyFilters> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          'MyFilterss',
+          'MyFilters',
           style: TextStyle(
             color: darkGrey,
           ),
@@ -70,7 +70,7 @@ class _MyFiltersState extends State<MyFilters> {
                 Get.back();
               },
               child: const Text(
-                'Done',
+                'Close',
                 style: TextStyle(
                   color: mediumGrey,
                 ),
@@ -450,9 +450,10 @@ class _MyFiltersState extends State<MyFilters> {
                         Row(
                           children: [
                             Expanded(
-                              child: TextField(
+                              child: TextFormField(
                                 controller: startRangeController,
                                 cursorColor: lightGreen,
+                                keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   hintText: '0',
                                   suffixIconColor: lightGreen,
@@ -478,7 +479,8 @@ class _MyFiltersState extends State<MyFilters> {
                               width: 10,
                             ),
                             Expanded(
-                              child: TextField(
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
                                 controller: endRangeController,
                                 cursorColor: lightGreen,
                                 decoration: InputDecoration(

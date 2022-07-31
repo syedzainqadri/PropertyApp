@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:group_radio_button/group_radio_button.dart';
@@ -158,6 +159,102 @@ class _AddListingState extends State<AddListing> {
                   ],
                 ),
               ),
+
+              const SizedBox(
+                height: 10,
+              ),
+              // TitleWidget(
+              //   text: 'Title',
+              //   padding: 5.0,
+              // ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Title", false, titleController),
+              ),
+
+
+              TitleWidget(
+                padding: 5.0,
+                text: 'Description',
+              ),
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Description", false, descriptionController, maxLine: 4),
+              ),
+
+
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Phone Number',
+              // ),
+
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Phone*", false, phoneNumberController),
+              ),
+
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Zip Code',
+              // ),
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Zip Code*", false, zipCodeController),
+              ),
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Address',
+              // ),
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Address*", false, addressController),
+              ),
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Email',
+              // ),
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Email*", false, emailController),
+              ),
+
+
+
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'WhatsApp Number',
+              // ),
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("WhatsApp Number*", false, whatsAppController),
+              ),
+
+
+
+              // TitleWidget(
+              //   padding: 5.0,
+              //   text: 'Website',
+              // ),
+              Padding(
+                padding:
+                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Website", false, websiteController),
+              ),
+
+
+
+              // TitleWidget(
+              //   text: 'Video Url',
+              //   padding: 5.0,
+              // ),
+
               TitleWidget(
                 text: 'Select Images',
                 padding: 5.0,
@@ -210,100 +307,7 @@ class _AddListingState extends State<AddListing> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              // TitleWidget(
-              //   text: 'Title',
-              //   padding: 5.0,
-              // ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Title", false, titleController),
-              ),
 
-
-              TitleWidget(
-                padding: 5.0,
-                text: 'Description',
-              ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Description", false, descriptionController, maxLine: 4),
-              ),
-
-
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Phone Number',
-              // ),
-
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Phone", false, phoneNumberController),
-              ),
-
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Zip Code',
-              // ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Zip Code", false, zipCodeController),
-              ),
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Address',
-              // ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Address", false, addressController),
-              ),
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Email',
-              // ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Email", false, emailController),
-              ),
-
-
-
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'WhatsApp Number',
-              // ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("WhatsApp Number", false, whatsAppController),
-              ),
-
-
-
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Website',
-              // ),
-              Padding(
-                padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Website", false, websiteController),
-              ),
-
-
-
-              // TitleWidget(
-              //   text: 'Video Url',
-              //   padding: 5.0,
-              // ),
               Padding(
                 padding:
                 const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
@@ -348,7 +352,26 @@ class _AddListingState extends State<AddListing> {
                     label: (i, v) => v.name,
                   ),
                   onChanged: (val) async {
+                    Get.defaultDialog(
+                        title: "",
+                        content: Container(
+                          color: Colors.white,
+                          child: Column(
+                            children: const [
+                              Center(
+                                child: CircularProgressIndicator(color: lightGreen,),
+                              ),
+                              SizedBox(height: 10,),
+                              Text(
+                                "Loading",
+                                style:  TextStyle(color: Colors.black38),
+                              )
+                            ],
+                          ),
+                        )
+                    );
                     await categoriesController.getSubCategories(val.termId);
+                    Get.back();
                     setState(() {
                       categorySelected = true;
                       category = val;
@@ -359,6 +382,10 @@ class _AddListingState extends State<AddListing> {
                     });
                   },
                 ),
+              ),
+              TitleWidget(
+                padding: 5.0,
+                text: 'Select Subcategory',
               ),
               categorySelected
                   ? Padding(
@@ -424,7 +451,7 @@ class _AddListingState extends State<AddListing> {
                             pricingTypes.id == ''
                                 ? const Offstage()
                                 : pricingTypes.id == 'price'
-                                    ? textField('Price', false, priceController)
+                                    ? textField('Price', false, priceController, textInputType: TextInputType.number)
                                     : pricingTypes.id == 'range'
                                         ? Row(
                                             mainAxisAlignment:
@@ -476,27 +503,27 @@ class _AddListingState extends State<AddListing> {
                               ),
                             ),
                             // add here pricing unit
-                            TitleWidget(
-                              padding: 5.0,
-                              text: 'Select Negotiation Term',
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 5.0),
-                              child: RadioGroup<PricType>.builder(
-                                activeColor: lightGreen,
-                                direction: Axis.horizontal,
-                                groupValue: priceTypes,
-                                onChanged: (value) => setState(() {
-                                  priceTypes = value;
-                                }),
-                                items: listingConfigController
-                                    .listingConfig.value.config.priceTypes,
-                                itemBuilder: (item) => RadioButtonBuilder(
-                                  item.name,
-                                ),
-                              ),
-                            ),
+                            // TitleWidget(
+                            //   padding: 5.0,
+                            //   text: 'Select Negotiation Term',
+                            // ),
+                            // Padding(
+                            //   padding:
+                            //       const EdgeInsets.symmetric(vertical: 5.0),
+                            //   child: RadioGroup<PricType>.builder(
+                            //     activeColor: lightGreen,
+                            //     direction: Axis.horizontal,
+                            //     groupValue: priceTypes,
+                            //     onChanged: (value) => setState(() {
+                            //       priceTypes = value;
+                            //     }),
+                            //     items: listingConfigController
+                            //         .listingConfig.value.config.priceTypes,
+                            //     itemBuilder: (item) => RadioButtonBuilder(
+                            //       item.name,
+                            //     ),
+                            //   ),
+                            // ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5.0, horizontal: 20),
@@ -518,6 +545,7 @@ class _AddListingState extends State<AddListing> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
+
                                               TitleWidget(
                                                 padding: 5.0,
                                                 text: listingConfigController
@@ -586,6 +614,7 @@ class _AddListingState extends State<AddListing> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
+                                                  /// purpuse
                                                   const SizedBox(
                                                     height: 20,
                                                   ),

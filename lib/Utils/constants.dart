@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../Auth/sign_up.dart';
 import 'color_scheme.dart';
 
-textField(hintText, obscureText, controller, {String? Function (String?)? onValidate, int? maxLine }) {
+textField(hintText, obscureText, controller, {String? Function (String?)? onValidate, int? maxLine, TextInputType? textInputType }) {
   return Container(
     decoration: BoxDecoration(
       color: Colors.grey.shade200,
@@ -12,6 +12,7 @@ textField(hintText, obscureText, controller, {String? Function (String?)? onVali
     ),
     child: TextFormField(
       maxLines: maxLine,
+      keyboardType: textInputType,
       validator: onValidate,
       controller: controller,
       obscureText: obscureText,
