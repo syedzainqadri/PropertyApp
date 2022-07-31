@@ -40,7 +40,7 @@ class ListingDetails extends StatefulWidget {
 }
 
 class _ListingDetailsState extends State<ListingDetails> {
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
   @override
   void initState() {
     super.initState();
@@ -92,14 +92,14 @@ class _ListingDetailsState extends State<ListingDetails> {
               ),
             ),
           ),
-          Icon(
+          const Icon(
             Icons.favorite_border_rounded,
             color: lightGreen,
           ),
           const SizedBox(
             width: 5,
           ),
-          Icon(
+          const Icon(
             Icons.share,
             color: lightGreen,
           ),
@@ -111,6 +111,7 @@ class _ListingDetailsState extends State<ListingDetails> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            //TODO: show indicator on slider
             CarouselSlider.builder(
                 itemCount:
                     listingDetailsController.listingDetail.value.images.length,
@@ -150,7 +151,7 @@ class _ListingDetailsState extends State<ListingDetails> {
               child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "N ${listingDetailsController.listingDetail.value.price}",
+                    "NGN ${listingDetailsController.listingDetail.value.price}",
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
@@ -168,8 +169,12 @@ class _ListingDetailsState extends State<ListingDetails> {
                       const Icon(Icons.pin_drop_outlined),
                       Text(
                         listingDetailsController
-                            .listingDetail.value.contact.address.toString().isEmpty? "N/A" : listingDetailsController
-                            .listingDetail.value.contact.address,
+                                .listingDetail.value.contact.address
+                                .toString()
+                                .isEmpty
+                            ? "N/A"
+                            : listingDetailsController
+                                .listingDetail.value.contact.address,
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w500,
@@ -190,6 +195,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                       thickness: 3,
                     ),
                   ),
+                  //TODO: redesign this section as mentioned in documents
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0, left: 8.0),
                     child: Text(
@@ -213,7 +219,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                 child: Card(
                   elevation: 1,
                   child: GridView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 4,
@@ -266,7 +272,9 @@ class _ListingDetailsState extends State<ListingDetails> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Text(
-                                      '${listingDetailsController.listingDetail.value.customFields[index].value.toString()}'
+                                      listingDetailsController.listingDetail
+                                          .value.customFields[index].value
+                                          .toString()
                                           .toUpperCase(),
                                       maxLines: 1,
                                       style: const TextStyle(fontSize: 12),
@@ -294,7 +302,9 @@ class _ListingDetailsState extends State<ListingDetails> {
               child: SizedBox(
                 width: double.infinity,
                 height: 300,
+                //TODO: check zoom functions in google maps
                 child: GoogleMap(
+                  zoomControlsEnabled: true,
                   mapToolbarEnabled: true,
                   mapType: MapType.normal,
                   initialCameraPosition: CameraPosition(
@@ -351,7 +361,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                   child: SizedBox(
                     height: 200,
                     child: GridView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
@@ -390,7 +400,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
@@ -457,7 +467,7 @@ class _ListingDetailsState extends State<ListingDetails> {
             // ),
             //
 
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
           ],
@@ -487,23 +497,29 @@ class _ListingDetailsState extends State<ListingDetails> {
                     context: context,
                     builder: (BuildContext context) {
                       return StatefulBuilder(
-                        builder: (context, setState){
+                        builder: (context, setState) {
                           return Dialog(
                             shape: RoundedRectangleBorder(
-                                borderRadius:
-                                BorderRadius.circular(20.0)), //this right here
+                                borderRadius: BorderRadius.circular(
+                                    20.0)), //this right here
                             child: SizedBox(
                               height: 400,
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    top: 5.0, bottom: 5.0, right: 10.0, left: 10.0),
+                                    top: 5.0,
+                                    bottom: 5.0,
+                                    right: 10.0,
+                                    left: 10.0),
                                 child: Form(
                                   key: formKey,
                                   child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15),
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         const Center(
                                           child: Text(
@@ -516,40 +532,41 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                 fontWeight: FontWeight.normal),
                                           ),
                                         ),
-                                        SizedBox(height: 15,),
+                                        const SizedBox(
+                                          height: 15,
+                                        ),
                                         Padding(
-                                          padding: const EdgeInsets.only(bottom: 8.0),
+                                          padding: const EdgeInsets.only(
+                                              bottom: 8.0),
                                           child: textField(
-                                              'YourName',
-                                              false,
-                                              nameController,
-                                              onValidate: (v)=> v!.isEmpty? "Required" : null
-                                          ),
+                                              'YourName', false, nameController,
+                                              onValidate: (v) => v!.isEmpty
+                                                  ? "Required"
+                                                  : null),
                                         ),
 
                                         Padding(
-                                          padding: const EdgeInsets.only(bottom: 8.0),
+                                          padding: const EdgeInsets.only(
+                                              bottom: 8.0),
                                           child: textField(
-                                              'Email',
-                                              false,
-                                              emailController,
-                                              onValidate: (v)=> v!.isEmpty? "Required" : null
-                                          ),
+                                              'Email', false, emailController,
+                                              onValidate: (v) => v!.isEmpty
+                                                  ? "Required"
+                                                  : null),
                                         ),
                                         textField(
-                                            'Message',
-                                             false,
-                                            messageController,
-                                            onValidate: (v)=> v!.isEmpty? "Required" : null,
-                                            maxLine: 4
-                                        ),
+                                            'Message', false, messageController,
+                                            onValidate: (v) =>
+                                                v!.isEmpty ? "Required" : null,
+                                            maxLine: 4),
                                         SizedBox(
                                           height: height * 0.03,
                                         ),
                                         defaultButton(
                                           'Send',
-                                              () async {
-                                            if(formKey.currentState!.validate()){
+                                          () async {
+                                            if (formKey.currentState!
+                                                .validate()) {
                                               sendemailController.sendEmail(
                                                   widget.id,
                                                   messageController.text,

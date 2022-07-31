@@ -35,6 +35,7 @@ class _SearchPageState extends State<SearchPage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
+            // TODO: include sortby along search field.
             TextField(
               decoration: InputDecoration(
                 hintText: 'Search for Listings',

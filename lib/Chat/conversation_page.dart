@@ -15,19 +15,23 @@ class ConversationPage extends StatefulWidget {
 class _ConversationPageState extends State<ConversationPage> {
   final chatController = Get.put(ChatController());
   @override
+  //TODO: if there is no chat them there should be a message 'No Chat Available'
   Widget build(BuildContext context) {
     return Obx(() {
-      return chatController.allChats.isEmpty? Center(child: CircularProgressIndicator()): ListView.builder(
-        itemCount: chatController.allChats.length,
-        itemBuilder: (context, index) {
-          return chat(
-              chatController.allChats.value[index].listing!.images![0].src
-                  .toString(),
-              chatController.allChats.value[index].listing!.title.toString(),
-              chatController.allChats.value[index].lastMessage.toString(),
-              chatController.allChats.value[index].listingId.toString());
-        },
-      );
+      return chatController.allChats.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: chatController.allChats.length,
+              itemBuilder: (context, index) {
+                return chat(
+                    chatController.allChats.value[index].listing!.images![0].src
+                        .toString(),
+                    chatController.allChats.value[index].listing!.title
+                        .toString(),
+                    chatController.allChats.value[index].lastMessage.toString(),
+                    chatController.allChats.value[index].listingId.toString());
+              },
+            );
     });
   }
 

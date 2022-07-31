@@ -80,6 +80,11 @@ class _AddListingState extends State<AddListing> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO: Add a loading indicator
+    //TODO: Location selected is not shown
+    //TODO: show snackbar on click of location "Your Current Location is selected",
+    //TODO: Categories are not shown
+    //TODO: Custom Fields & Pricing Types are not shown
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -173,17 +178,16 @@ class _AddListingState extends State<AddListing> {
                 child: textField("Title", false, titleController),
               ),
 
-
               TitleWidget(
                 padding: 5.0,
                 text: 'Description',
               ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Description", false, descriptionController, maxLine: 4),
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                child: textField("Description", false, descriptionController,
+                    maxLine: 4),
               ),
-
 
               // TitleWidget(
               //   padding: 5.0,
@@ -192,7 +196,7 @@ class _AddListingState extends State<AddListing> {
 
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Phone*", false, phoneNumberController),
               ),
 
@@ -202,7 +206,7 @@ class _AddListingState extends State<AddListing> {
               // ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Zip Code*", false, zipCodeController),
               ),
               // TitleWidget(
@@ -211,7 +215,7 @@ class _AddListingState extends State<AddListing> {
               // ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Address*", false, addressController),
               ),
               // TitleWidget(
@@ -220,11 +224,9 @@ class _AddListingState extends State<AddListing> {
               // ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Email*", false, emailController),
               ),
-
-
 
               // TitleWidget(
               //   padding: 5.0,
@@ -232,11 +234,9 @@ class _AddListingState extends State<AddListing> {
               // ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("WhatsApp Number*", false, whatsAppController),
               ),
-
-
 
               // TitleWidget(
               //   padding: 5.0,
@@ -244,11 +244,9 @@ class _AddListingState extends State<AddListing> {
               // ),
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Website", false, websiteController),
               ),
-
-
 
               // TitleWidget(
               //   text: 'Video Url',
@@ -310,7 +308,7 @@ class _AddListingState extends State<AddListing> {
 
               Padding(
                 padding:
-                const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Video url", false, videoController),
               ),
               TitleWidget(
@@ -340,7 +338,8 @@ class _AddListingState extends State<AddListing> {
                 text: 'Select A Category',
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: ChipsChoice<CategoriesModel>.single(
                   choiceStyle: const C2ChoiceStyle(color: lightGreen),
                   wrapped: true,
@@ -359,17 +358,20 @@ class _AddListingState extends State<AddListing> {
                           child: Column(
                             children: const [
                               Center(
-                                child: CircularProgressIndicator(color: lightGreen,),
+                                child: CircularProgressIndicator(
+                                  color: lightGreen,
+                                ),
                               ),
-                              SizedBox(height: 10,),
+                              SizedBox(
+                                height: 10,
+                              ),
                               Text(
                                 "Loading",
-                                style:  TextStyle(color: Colors.black38),
+                                style: TextStyle(color: Colors.black38),
                               )
                             ],
                           ),
-                        )
-                    );
+                        ));
                     await categoriesController.getSubCategories(val.termId);
                     Get.back();
                     setState(() {
@@ -451,7 +453,8 @@ class _AddListingState extends State<AddListing> {
                             pricingTypes.id == ''
                                 ? const Offstage()
                                 : pricingTypes.id == 'price'
-                                    ? textField('Price', false, priceController, textInputType: TextInputType.number)
+                                    ? textField('Price', false, priceController,
+                                        textInputType: TextInputType.number)
                                     : pricingTypes.id == 'range'
                                         ? Row(
                                             mainAxisAlignment:
@@ -545,7 +548,6 @@ class _AddListingState extends State<AddListing> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-
                                               TitleWidget(
                                                 padding: 5.0,
                                                 text: listingConfigController
@@ -832,14 +834,14 @@ class _AddListingState extends State<AddListing> {
         child: Padding(
           padding: const EdgeInsets.all(30.0),
           child: Container(
-            decoration: BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle
-            ),
+            decoration:
+                const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
             child: IconButton(
-              icon: Icon(Icons.close, color: Colors.white,),
-              onPressed: (){
-
+              icon: const Icon(
+                Icons.close,
+                color: Colors.white,
+              ),
+              onPressed: () {
                 setState(() {
                   imageFiles!.removeAt(index);
                 });

@@ -1,12 +1,7 @@
-import 'dart:convert';
-
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:realestapp/Auth/sign_in.dart';
 import 'package:realestapp/Controllers/sign_up_controller.dart';
-import 'package:realestapp/Models/user_model.dart';
-import '../Home/home.dart';
 import '../Models/sign_in_model.dart';
 import '../Utils/constants.dart';
 import '../Utils/color_scheme.dart';
@@ -54,96 +49,49 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(
                       height: 25,
                     ),
-                    // Center(
-                    //   child: Badge(
-                    //     badgeColor: lightGreen,
-                    //     badgeContent: const Icon(
-                    //       Icons.camera_alt,
-                    //       color: white,
-                    //     ),
-                    //     position: const BadgePosition(bottom: 1, end: 1),
-                    //     child: Container(
-                    //       width: 100,
-                    //       height: 100,
-                    //       decoration: BoxDecoration(
-                    //         shape: BoxShape.circle,
-                    //         border: Border.all(color: mediumGrey),
-                    //         image: const DecorationImage(
-                    //           fit: BoxFit.cover,
-                    //           image: AssetImage('assets/images/1.png'),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField('First Name', false, firstNameController,
+                        onValidate: (v) => v!.isEmpty ? "Required" : null),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField('Last Name', false, lastNameController,
+                        onValidate: (v) => v!.isEmpty ? "Required" : null),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField('Phone No', false, phoneController,
+                        onValidate: (v) => v!.isEmpty ? "Required" : null),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField('E-mail address', false, emailController,
+                        onValidate: (v) => v!.isEmpty ? "Required" : null),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    textField('User Name', false, userNameController,
+                        onValidate: (v) => v!.isEmpty ? "Required" : null),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    //TODO:obsecure cannot be multiline replace these widgets.
+                    textField('Password', false, passwordController,
+                        onValidate: (v) => v!.isEmpty ? "Required" : null),
                     const SizedBox(
                       height: 15,
                     ),
                     textField(
-                        'First Name',
-                        false,
-                        firstNameController,
-                        onValidate: (v) => v!.isEmpty? "Required" : null
-                    ),
+                        'Confirm Password', false, confirmPasswordController,
+                        onValidate: (v) => v!.isEmpty ? "Required" : null),
                     const SizedBox(
                       height: 15,
                     ),
-                    textField(
-                        'Last Name',
-                        false,
-                        lastNameController,
-                        onValidate: (v) => v!.isEmpty? "Required" : null
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    textField(
-                        'Phone No',
-                        false,
-                        phoneController,
-                        onValidate: (v) => v!.isEmpty? "Required" : null
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    textField(
-                        'E-mail address',
-                        false,
-                        emailController,
-                        onValidate: (v) => v!.isEmpty? "Required" : null
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    textField(
-                        'User Name',
-                        false,
-                        userNameController,
-                        onValidate: (v) => v!.isEmpty? "Required" : null
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    textField(
-                        'Password',
-                        true,
-                        passwordController,
-                        onValidate: (v) => v!.isEmpty? "Required" : null
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    textField(
-                        'Confirm Password',
-                        true,
-                        confirmPasswordController,
-                        onValidate: (v) => v!.isEmpty? "Required" : null
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    //TODO: obsecure cannot be multiline replace these widgets.
                     defaultButton('Sign Up', () async {
-                      if(formKey.currentState!.validate()){
+                      if (formKey.currentState!.validate()) {
                         Get.defaultDialog(
                             title: "",
                             content: Container(
@@ -151,17 +99,20 @@ class _SignUpState extends State<SignUp> {
                               child: Column(
                                 children: const [
                                   Center(
-                                    child: CircularProgressIndicator(color: lightGreen,),
+                                    child: CircularProgressIndicator(
+                                      color: lightGreen,
+                                    ),
                                   ),
-                                  SizedBox(height: 10,),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
                                   Text(
                                     "SigningIn! please wait",
-                                    style:  TextStyle(color: Colors.black38),
+                                    style: TextStyle(color: Colors.black38),
                                   )
                                 ],
                               ),
-                            )
-                        );
+                            ));
                         var response = await _signUpController.signUp(
                             userNameController.text,
                             emailController.text,
@@ -169,11 +120,11 @@ class _SignUpState extends State<SignUp> {
                             firstNameController.text,
                             lastNameController.text,
                             phoneController.text);
-                        if(response != null){
+                        if (response != null) {
                           user = SignInModel.fromJson(response);
                           Get.back();
-                          Get.to(const Home());
-                        }else{
+                          // Get.to(const Home());
+                        } else {
                           Get.back();
                           // Get.snackbar('Error', 'something went wrong',
                           //     snackPosition: SnackPosition.BOTTOM,

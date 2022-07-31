@@ -149,11 +149,11 @@ class _PromotionPlansState extends State<PromotionPlans> {
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
-                                        children: [
+                                        children: const [
                                           // Text(promotionPlans
                                           //     .promotion.regular.featured.ads
                                           //     .toString()),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 15,
                                           ),
                                           // Text(promotionPlans.promotion.regular
@@ -180,11 +180,11 @@ class _PromotionPlansState extends State<PromotionPlans> {
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
-                                          children: [
+                                          children: const [
                                             // Text(promotionPlans
                                             //     .promotion.regular.bumpUp.ads
                                             //     .toString()),
-                                            const SizedBox(
+                                            SizedBox(
                                               width: 15,
                                             ),
                                             // Text(promotionPlans.promotion
@@ -210,11 +210,11 @@ class _PromotionPlansState extends State<PromotionPlans> {
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
-                                        children: [
+                                        children: const [
                                           // Text(promotionPlans
                                           //     .promotion.regular.top.ads
                                           //     .toString()),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 15,
                                           ),
                                           // Text(promotionPlans
@@ -242,6 +242,7 @@ class _PromotionPlansState extends State<PromotionPlans> {
                               id: promotionPlans.id,
                             ));
                           },
+                          //TODO: curency symbol is NGN
                           child: Text('\$${promotionPlans.price}'),
                           style: ElevatedButton.styleFrom(
                             primary: lightGreen,

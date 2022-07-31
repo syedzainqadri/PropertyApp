@@ -36,6 +36,7 @@ class _ChatUiState extends State<ChatUi> {
 
   @override
   Widget build(BuildContext context) {
+    //TODO: no need reload the state
     var _chatController = Get.find<ChatController>();
     return Obx(() => chatController.isLoading.value != true
         ? Scaffold(
@@ -75,7 +76,7 @@ class _ChatUiState extends State<ChatUi> {
                               });
                         }),
                       )
-                    : Expanded(child: Center(child: Text('No Messages'))),
+                    : const Expanded(child: Center(child: Text('No Messages'))),
                 ChatComposer(
                   controller: con,
                   onReceiveText: (str) {
@@ -130,7 +131,7 @@ class _ChatUiState extends State<ChatUi> {
               ],
             ),
           )
-        : Scaffold(
+        : const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),
