@@ -79,45 +79,70 @@ class CategoryListingCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  isFovorite
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                favoriteListingController
-                                    .addToFavorites(listingId);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Added to Favorites')));
-                              },
-                              icon: const Icon(
-                                Icons.favorite,
-                                size: 25,
-                                color: lightGreen,
-                              ),
-                            ),
-                          ],
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                favoriteListingController
-                                    .addToFavorites(listingId);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Added to Favorites')));
-                              },
-                              icon: const Icon(
-                                Icons.favorite_border,
-                                size: 25,
-                                color: lightGreen,
-                              ),
-                            ),
-                          ],
+                  Positioned(
+                    top: 10,
+                    right: 0,
+                    child: Container(
+                      height: 20,
+                      width: 80,
+                      decoration: const BoxDecoration(
+                        color: lightGreen,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10)),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'NGN:  ' + price.toString(),
+                          style: const TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              letterSpacing: .5,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              fontSize: 12),
                         ),
+                      ),
+                    ),
+                  ),
+                  // isFovorite
+                  //     ? Row(
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         children: [
+                  //           IconButton(
+                  //             onPressed: () {
+                  //               favoriteListingController
+                  //                   .addToFavorites(listingId);
+                  //               ScaffoldMessenger.of(context).showSnackBar(
+                  //                   const SnackBar(
+                  //                       content: Text('Added to Favorites')));
+                  //             },
+                  //             icon: const Icon(
+                  //               Icons.favorite,
+                  //               size: 25,
+                  //               color: lightGreen,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       )
+                  //     : Row(
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         children: [
+                  //           IconButton(
+                  //             onPressed: () {
+                  //               favoriteListingController
+                  //                   .addToFavorites(listingId);
+                  //               ScaffoldMessenger.of(context).showSnackBar(
+                  //                   const SnackBar(
+                  //                       content: Text('Added to Favorites')));
+                  //             },
+                  //             icon: const Icon(
+                  //               Icons.favorite_border,
+                  //               size: 25,
+                  //               color: lightGreen,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
                 ],
               ),
               const SizedBox(
@@ -139,7 +164,9 @@ class CategoryListingCard extends StatelessWidget {
                         size: 17,
                         color: Colors.greenAccent,
                       ),
-                      SizedBox(width: 10,),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       Text(city),
                     ],
                   ),
@@ -154,7 +181,9 @@ class CategoryListingCard extends StatelessWidget {
                         size: 17,
                         color: Colors.greenAccent,
                       ),
-                      SizedBox(width: 10,),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       Text(price),
                     ],
                   ),

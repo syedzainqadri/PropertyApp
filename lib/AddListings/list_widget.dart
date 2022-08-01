@@ -72,27 +72,31 @@ class ListingCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // isFovorite
-                  //     ? Row(
-                  //         mainAxisAlignment: MainAxisAlignment.end,
-                  //         children: [
-                  //           IconButton(
-                  //             onPressed: () {
-                  //               favoriteListingController
-                  //                   .addToFavorites(listingId);
-                  //               ScaffoldMessenger.of(context).showSnackBar(
-                  //                   const SnackBar(
-                  //                       content: Text('Added to Favorites')));
-                  //             },
-                  //             icon: const Icon(
-                  //               Icons.favorite,
-                  //               size: 25,
-                  //               color: lightGreen,
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       )
-                  //     : const Offstage(),
+                  Positioned(
+                    top: 10,
+                    right: 0,
+                    child: Container(
+                      height: 20,
+                      width: 80,
+                      decoration: const BoxDecoration(
+                        color: lightGreen,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10)),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'NGN:  ' + price.toString(),
+                          style: const TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              letterSpacing: .5,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               Padding(
@@ -115,20 +119,24 @@ class ListingCard extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 4.0, bottom: 4.0),
                 child: Container(
                   alignment: Alignment.bottomRight,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Icon(Icons.pin_drop, color: lightGreen, size: 15,),
-                      SizedBox(width: 5,),
-                      Text(
-                        city,
-                        style: const TextStyle(
-                          color: mediumDarkGrey,
-                          fontSize: 12,
-                        ),
-                      )
-                    ]
-                  ),
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    const Icon(
+                      Icons.pin_drop,
+                      color: lightGreen,
+                      size: 15,
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      city,
+                      style: const TextStyle(
+                        color: mediumDarkGrey,
+                        fontSize: 12,
+                      ),
+                    )
+                  ]),
                 ),
               ),
               // Column(

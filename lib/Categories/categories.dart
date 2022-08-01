@@ -4,7 +4,6 @@ import 'package:realestapp/Categories/Widgets/CategoryListingCard.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
 import '../AddListings/add_listings.dart';
 import '../Utils/color_scheme.dart';
-import 'filters.dart';
 
 class CategoryPage extends StatefulWidget {
   final String title;
@@ -80,67 +79,6 @@ class _CategoryPageState extends State<CategoryPage> {
           ),
           body: Column(
             children: [
-              // const Divider(
-              //   color: mediumGrey,
-              //   thickness: 0.5,
-              // ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    // ElevatedButton.icon(
-                    //   icon: const Icon(
-                    //     Icons.filter_list,
-                    //     color: lightGreen,
-                    //   ),
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: transparent,
-                    //     shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(8),
-                    //         side: const BorderSide(
-                    //           color: lightGreen,
-                    //         )),
-                    //     shadowColor: transparent,
-                    //   ),
-                    //   onPressed: () {
-                    //     Get.to(const MyFilters());
-                    //   },
-                    //   label: const Text(
-                    //     'Filters',
-                    //     style: TextStyle(color: lightGreen, fontSize: 14),
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   width: 15,
-                    // ),
-                    // ElevatedButton.icon(
-                    //   icon: const Icon(
-                    //     Icons.sort,
-                    //     color: lightGreen,
-                    //   ),
-                    //   style: ElevatedButton.styleFrom(
-                    //     primary: transparent,
-                    //     shape: RoundedRectangleBorder(
-                    //         borderRadius: BorderRadius.circular(8),
-                    //         side: const BorderSide(
-                    //           color: lightGreen,
-                    //         )),
-                    //     shadowColor: transparent,
-                    //   ),
-                    //   onPressed: () {
-                    //     setState(() {
-                    //       showSort = true;
-                    //     });
-                    //   },
-                    //   label: const Text(
-                    //     'Sort',
-                    //     style: TextStyle(color: lightGreen, fontSize: 14),
-                    //   ),
-                    // ),
-                  ],
-                ),
-              ),
               const Divider(
                 color: mediumGrey,
                 thickness: 0.5,
