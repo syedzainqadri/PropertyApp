@@ -11,7 +11,6 @@ import 'package:realestapp/Models/Categories/category_model.dart';
 import 'package:realestapp/Models/locations_model.dart';
 import 'package:realestapp/Models/selected_fields_model.dart';
 import 'package:realestapp/Search/Widgets/SearchRessultCard.dart';
-import 'package:realestapp/Utils/full_screen_dialog.dart';
 import '../Controllers/categories_controller.dart';
 import '../Controllers/listing_config_controller.dart';
 import '../Models/listing_configuration_model.dart';
@@ -40,61 +39,34 @@ class _SearchPageState extends State<SearchPage> {
             Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Search for Listings',
-                      prefixIcon: const Icon(Icons.search),
-                      suffixIcon: const Icon(Icons.close),
-                      suffixIconColor: lightGreen,
-                      prefixIconColor: lightGreen,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(
-                          color: darkGrey,
+                  child: SizedBox(
+                    height: 50,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search for Listings',
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: const Icon(Icons.close),
+                        suffixIconColor: lightGreen,
+                        prefixIconColor: lightGreen,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                            color: darkGrey,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                            color: lightGreen,
+                          ),
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(30),
-                        borderSide: const BorderSide(
-                          color: lightGreen,
-                        ),
-                      ),
+                      onSubmitted: (value) {
+                        searchController.getSearchedListings(value);
+                      },
                     ),
-                    onSubmitted: (value) {
-                      searchController.getSearchedListings(value);
-                    },
                   ),
                 ),
-                PopupMenuButton<String>(
-                  child: const Padding(
-                    padding:  EdgeInsets.all(10.0),
-                    child: Text("Sort"),
-                  ),
-                    itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
-                      const PopupMenuItem<String>(
-                          value: "price-desc", child: Text('Low to High')),
-                      const PopupMenuItem<String>(
-                          value: "price-asc", child: Text('High to Low')),
-                      const PopupMenuItem<String>(
-                          value: "date-desc", child: Text('New to Old')),
-                      const PopupMenuItem<String>(
-                          value: "Old to New", child: Text('Old to New'))
-                    ],
-                    onSelected: (String value) async{
-                      sortBy.value = value;
-                      CustomFullScreenDialog.showDialog();
-                      await searchController.sortListing(sortBy.value);
-                      CustomFullScreenDialog.cancelDialog();
-                      // await searchController.getFilteredData(
-                      //     '',
-                      //     '214', /// location id
-                      //     '',
-                      //     '',
-                      //     '',
-                      //     '',
-                      //     '',
-                      //     sortBy);
-                    })
               ],
             ),
             const SizedBox(

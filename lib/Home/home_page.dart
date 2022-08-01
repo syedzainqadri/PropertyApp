@@ -1,12 +1,11 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:realestapp/AddListings/featuredListingCard.dart';
+import 'package:realestapp/Controllers/featuredListings.dart';
 import 'package:realestapp/Home/widgets/CategoryCard.dart';
 import '../AddListings/list_widget.dart';
-import '../Categories/categories.dart';
 import '../Controllers/categories_controller.dart';
 import '../Controllers/listings_controller.dart';
-import '../Models/Categories/category_model.dart';
 import '../Utils/color_scheme.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +20,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -30,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     Get.put(ListingController());
     Get.put(CategoriesController());
     final listingController = Get.find<ListingController>();
+    final featuredListingController = Get.find<FeaturedListingController>();
     final categoriesController = Get.find<CategoriesController>();
     return SingleChildScrollView(
       child: Padding(
@@ -82,6 +81,72 @@ class _HomePageState extends State<HomePage> {
                 //   height: 5,
                 // ),
                 const Text(
+                  'Featured Listings',
+                  style: TextStyle(
+                    color: darkGrey,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 20.0),
+                  child: Obx(
+                    () =>
+                        featuredListingController.featuredListing.value.data ==
+                                null
+                            ? const CircularProgressIndicator(
+                                color: Colors.greenAccent,
+                              )
+                            : SizedBox(
+                                height: 140,
+                                width: double.infinity,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: featuredListingController
+                                      .featuredListing.value.data!.length,
+                                  itemBuilder: (context, index) {
+                                    return FeaturedListingCard(
+                                      image: featuredListingController
+                                          .featuredListing
+                                          .value
+                                          .data?[index]
+                                          .images,
+                                      title: featuredListingController
+                                          .featuredListing
+                                          .value
+                                          .data?[index]
+                                          .title
+                                          .toString(),
+                                      city: featuredListingController
+                                          .featuredListing
+                                          .value
+                                          .data?[index]
+                                          .contact!
+                                          .locations![0]
+                                          .name
+                                          .toString(),
+                                      price: featuredListingController
+                                          .featuredListing
+                                          .value
+                                          .data?[index]
+                                          .price
+                                          .toString(),
+                                      isFovorite: true,
+                                      listingId: featuredListingController
+                                          .featuredListing
+                                          .value
+                                          .data?[index]
+                                          .listingId,
+                                    );
+                                  }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+                                ),
+                              ),
+                  ),
+                ),
+                const Text(
                   'All Listings',
                   style: TextStyle(
                     color: darkGrey,
@@ -122,7 +187,6 @@ class _HomePageState extends State<HomePage> {
                               .allListings.value.data?[index].price
                               .toString(),
                           isFovorite: true,
-                          description: 'This is description',
                           listingId: listingController
                               .allListings.value.data?[index].listingId,
                         );

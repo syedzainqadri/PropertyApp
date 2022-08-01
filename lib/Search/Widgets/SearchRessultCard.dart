@@ -4,7 +4,6 @@ import 'package:realestapp/AddListings/listing_details.dart';
 import 'package:realestapp/Controllers/favorite_listing_controller.dart';
 import 'package:realestapp/Controllers/listing_detail_controller.dart';
 import 'package:realestapp/Controllers/review_controller.dart';
-import 'package:realestapp/Utils/color_scheme.dart';
 
 class SearchResultCard extends StatelessWidget {
   var image;
@@ -49,7 +48,6 @@ class SearchResultCard extends StatelessWidget {
                   title: title,
                   images: image,
                   price: price,
-                  description: description,
                 ));
           }
         },

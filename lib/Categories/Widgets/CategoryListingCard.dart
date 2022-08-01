@@ -53,7 +53,6 @@ class CategoryListingCard extends StatelessWidget {
                   title: title,
                   images: image,
                   price: price,
-                  description: description,
                 ));
           }
         },

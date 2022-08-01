@@ -4,10 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:location/location.dart';
-import 'package:realestapp/AddListings/select_city.dart';
-import 'package:realestapp/Categories/Widgets/select_country.dart';
 import 'package:realestapp/Controllers/search_controller.dart';
-import 'package:realestapp/Search/search_page.dart';
+import 'package:realestapp/Utils/full_screen_dialog.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../Controllers/location_controller.dart';
 import '../Utils/color_scheme.dart';
@@ -23,6 +21,7 @@ class _MyFiltersState extends State<MyFilters> {
   final SearchController _searchController = Get.put(SearchController());
   final TextEditingController startRangeController = TextEditingController();
   final TextEditingController endRangeController = TextEditingController();
+  final TextEditingController sortByController = TextEditingController();
   RangeValues _currentRangeValues = const RangeValues(0, 30);
   var _distanceRangeValues = 0.0;
   var listingType = "".obs;
@@ -33,13 +32,12 @@ class _MyFiltersState extends State<MyFilters> {
   var location = Location();
   var latitude = ''.obs;
   var longitude = ''.obs;
-  double _lowerValue = 50;
-  double _upperValue = 18000;
+  final double _lowerValue = 50;
+  final double _upperValue = 18000;
   var startRange = '0'.obs;
   var endRange = '250000'.obs;
   var distance = ''.obs;
   var sortBy = 'date-desc'.obs;
-
 
   @override
   void initState() {
@@ -47,8 +45,9 @@ class _MyFiltersState extends State<MyFilters> {
     super.initState();
     startRangeController.text = "5000";
     endRangeController.text = "15000";
+    sortByController.text = "New to Old";
 
-    _currentRangeValues = RangeValues(5000, 15000);
+    _currentRangeValues = const RangeValues(5000, 15000);
   }
 
   @override
@@ -95,8 +94,61 @@ class _MyFiltersState extends State<MyFilters> {
         child: Column(
           children: [
             //Toggle
-
-            divide(),
+            PopupMenuButton<String>(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Container(
+                      height: 30,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: Colors.black,
+                        ),
+                      ),
+                      child: Center(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          SizedBox(
+                            width: 100,
+                            child: TextField(
+                              controller: sortByController,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                              ),
+                            ),
+                          ),
+                          const Text("Sort"),
+                          const Icon(Icons.arrow_drop_down),
+                        ],
+                      ))),
+                ),
+                itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
+                      const PopupMenuItem<String>(
+                          value: "price-desc", child: Text('High to Low')),
+                      const PopupMenuItem<String>(
+                          value: "price-asc", child: Text('Low to High')),
+                      const PopupMenuItem<String>(
+                          value: "date-desc", child: Text('New to Old')),
+                      const PopupMenuItem<String>(
+                          value: "date-asc", child: Text('Old to New'))
+                    ],
+                onSelected: (String value) async {
+                  sortBy.value = value;
+                  CustomFullScreenDialog.showDialog();
+                  CustomFullScreenDialog.cancelDialog();
+                  if (value == 'price-desc') {
+                    sortByController.text = 'High to Low';
+                  } else if (value == 'price-asc') {
+                    sortByController.text = 'Low to High';
+                  } else if (value == 'date-desc') {
+                    sortByController.text = 'New to Old';
+                  } else if (value == 'date-asc') {
+                    sortByController.text = 'Old to New';
+                  }
+                }),
             Padding(
               padding: const EdgeInsets.only(
                   left: 12.0, right: 12, top: 5, bottom: 5),
@@ -150,7 +202,7 @@ class _MyFiltersState extends State<MyFilters> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text(
+                          title: const Text(
                             'Select State',
                             textAlign: TextAlign.center,
                           ),
@@ -178,7 +230,7 @@ class _MyFiltersState extends State<MyFilters> {
                                           context: context,
                                           builder: (BuildContext context) {
                                             return AlertDialog(
-                                              title: Text(
+                                              title: const Text(
                                                 'Select City',
                                                 textAlign: TextAlign.center,
                                               ),
@@ -317,7 +369,7 @@ class _MyFiltersState extends State<MyFilters> {
                                 width: 4,
                               ),
                               locationName.value == ''
-                                  ? Text(
+                                  ? const Text(
                                       'Select City',
                                       style: TextStyle(color: lightGreen),
                                     )
@@ -693,7 +745,7 @@ class _MyFiltersState extends State<MyFilters> {
                           distance,
                           startRange,
                           endRange,
-                          '');
+                          sortBy);
                       Get.back();
                     } else {
                       Get.snackbar(

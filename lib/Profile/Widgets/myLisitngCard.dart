@@ -58,7 +58,6 @@ class MyListingCard extends StatelessWidget {
                   title: title,
                   images: image,
                   price: price,
-                  description: description,
                 ));
           }
         },
@@ -190,13 +189,13 @@ class MyListingCard extends StatelessWidget {
                                 const SnackBar(
                                     content: Text('Marked As Sold')));
                           } else if (value == 'promote') {
-                            Get.to(() => PromotionPlans());
+                            Get.to(() => const PromotionPlans());
                           } else if (value == 'Edit') {
                             Get.to(
                                 () => EditListingScreen(listingId: listingId));
                           }
                         },
-                        icon: Icon(Icons.more_horiz),
+                        icon: const Icon(Icons.more_horiz),
                         itemBuilder: (context) {
                           return [
                             PopupMenuItem(

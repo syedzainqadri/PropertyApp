@@ -8,7 +8,7 @@ import 'package:realestapp/Controllers/review_controller.dart';
 import '../Utils/color_scheme.dart';
 import 'listing_details.dart';
 
-class ListingCard extends StatelessWidget {
+class FeaturedListingCard extends StatelessWidget {
   var image;
   var title;
   var city;
@@ -16,7 +16,7 @@ class ListingCard extends StatelessWidget {
   var isFovorite;
   var listingId;
 
-  ListingCard(
+  FeaturedListingCard(
       {this.image,
       this.title,
       this.city,
@@ -57,8 +57,8 @@ class ListingCard extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    width: double.infinity,
-                    height: 90,
+                    width: 160,
+                    height: 89,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10),

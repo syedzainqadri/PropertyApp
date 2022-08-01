@@ -58,7 +58,6 @@ class _MyFavoritesState extends State<MyFavorites> {
                     .favoriteListings.value.data[index].price
                     .toString(),
                 isFovorite: true,
-                description: '',
                 listingId: favoriteListingController
                     .favoriteListings.value.data[index].listingId);
           },

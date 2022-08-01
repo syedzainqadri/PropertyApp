@@ -23,12 +23,12 @@ class _SettingsState extends State<Settings> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(box.read("notification") != null){
+    if (box.read("notification") != null) {
       isNotificationSwitched = box.read("notification");
     }
-
-
-
+    if (box.read("AppNotification") != null) {
+      isAppNotificationSwitched = box.read("AppNotification");
+    }
   }
 
   @override
@@ -229,6 +229,7 @@ class _SettingsState extends State<Settings> {
                     onChanged: (value) {
                       setState(() {
                         isAppNotificationSwitched = value;
+                        box.write("AppNotification", value);
                       });
                     },
                     activeTrackColor: Colors.lightGreenAccent,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:realestapp/Bindings/bindings.dart';
+import 'package:realestapp/Controllers/featuredListings.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
@@ -52,10 +53,10 @@ void main() async {
         dataBody: message.data['body'],
       );
       AndroidNotification android = message.notification!.android!;
-      if (notification != null && android != null) {
+      if (android != null) {
         showSimpleNotification(
           Text(notification.title!),
-          leading: Icon(Icons.notification_add),
+          leading: const Icon(Icons.notification_add),
           subtitle: Text(
             notification.body!,
           ),
@@ -77,7 +78,7 @@ void main() async {
     );
     // RemoteNotification notification = message.notification!;
     AndroidNotification android = message.notification!.android!;
-    if (notification != null && android != null) {
+    if (android != null) {
       showSimpleNotification(
         Text(notification.title!),
         leading: Image.asset(
@@ -110,6 +111,7 @@ void main() async {
   if (GetStorage().read('isLoggedIn')) {
     Get.put(ListingController());
     Get.put(FavoriteListingController());
+    Get.put(FeaturedListingController());
     Get.put(MyListingController());
     Get.put(CategoriesController());
     Get.put(LocationsController());

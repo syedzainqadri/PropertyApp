@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/chat_controller.dart';
 import 'package:realestapp/Controllers/favorite_listing_controller.dart';
+import 'package:realestapp/Controllers/featuredListings.dart';
 import 'package:realestapp/Controllers/listings_controller.dart';
 import 'package:realestapp/Controllers/my_listings_controller.dart';
 import 'package:realestapp/Controllers/socialAuthController/firebaseAuthController.dart';
@@ -12,6 +13,8 @@ class MyBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<ListingController>(() => ListingController(), fenix: true);
+    Get.lazyPut<FeaturedListingController>(() => FeaturedListingController(),
+        fenix: true);
     Get.lazyPut(() => FavoriteListingController(), fenix: true);
     Get.lazyPut(() => MyListingController());
     Get.lazyPut(() => CategoriesController());
