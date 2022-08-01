@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart';
 import 'package:realestapp/AddListings/select_city.dart';
 import 'package:realestapp/Utils/color_scheme.dart';
+import 'package:realestapp/Utils/full_screen_dialog.dart';
 
 import '../Controllers/location_controller.dart';
 
@@ -18,10 +19,12 @@ class SelectCountry extends StatefulWidget {
 }
 
 class _SelectCountryState extends State<SelectCountry> {
+
   final locationsController = Get.put(LocationsController());
   final box = GetStorage();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -45,19 +48,21 @@ class _SelectCountryState extends State<SelectCountry> {
         ),
       ),
       body: Obx(
-        () => Padding(
+        () => locationsController.isLoading.value? Center(child: CircularProgressIndicator()) : Padding(
           padding: const EdgeInsets.only(
               top: 18.0, bottom: 18.0, right: 20, left: 20),
           child: ListView.builder(
               itemCount: locationsController.locations.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  onTap: () {
-                    locationsController.getSubLocation(
+                  onTap: () async{
+                    CustomFullScreenDialog.showDialog();
+                    await locationsController.getSubLocation(
                         locationsController.locations.value[index].termId);
                     box.write('country',
                         locationsController.locations.value[index].termId);
                     print(box.read("country"));
+                    CustomFullScreenDialog.cancelDialog();
                     Get.to(const SelectCity());
                   },
                   child: Container(

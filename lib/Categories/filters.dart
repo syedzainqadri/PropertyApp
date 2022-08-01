@@ -35,17 +35,29 @@ class _MyFiltersState extends State<MyFilters> {
   var longitude = ''.obs;
   double _lowerValue = 50;
   double _upperValue = 18000;
-  var startRange = ''.obs;
-  var endRange = ''.obs;
+  var startRange = '0'.obs;
+  var endRange = '250000'.obs;
   var distance = ''.obs;
-  var sortBy = ''.obs;
+  var sortBy = 'date-desc'.obs;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    startRangeController.text = "5000";
+    endRangeController.text = "15000";
+
+    _currentRangeValues = RangeValues(5000, 15000);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          'MyFilters',
+          'Filters',
           style: TextStyle(
             color: darkGrey,
           ),
@@ -506,7 +518,7 @@ class _MyFiltersState extends State<MyFilters> {
                           inactiveColor: lightGrey,
                           activeColor: lightGreen,
                           values: _currentRangeValues,
-                          max: 10000000,
+                          max: 30000,
                           divisions: 100,
                           labels: RangeLabels(
                             _currentRangeValues.start.round().toString(),
@@ -530,104 +542,104 @@ class _MyFiltersState extends State<MyFilters> {
                     ),
                   ),
                   //Bedrooms
-                  divide(),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 12.0, right: 12, top: 5, bottom: 5),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                FaIcon(
-                                  FontAwesomeIcons.sort,
-                                  color: mediumGrey,
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  'Sort By',
-                                  style: TextStyle(color: darkGrey),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              height: 60,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  sortBy.value = 'price-desc';
-                                },
-                                child: const Text('Low to High'),
-                                style: ElevatedButton.styleFrom(
-                                    primary: lightGreen, elevation: 0.0),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              height: 60,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  sortBy.value = 'price-asc';
-                                },
-                                child: const Text('High to Low'),
-                                style: ElevatedButton.styleFrom(
-                                    primary: lightGreen, elevation: 0.0),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              height: 60,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  sortBy.value = 'date-desc';
-                                },
-                                child: const Text('New to Old'),
-                                style: ElevatedButton.styleFrom(
-                                    primary: lightGreen, elevation: 0.0),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 2.5,
-                              height: 60,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  sortBy.value = 'date-asc';
-                                },
-                                child: const Text('Old to New'),
-                                style: ElevatedButton.styleFrom(
-                                    primary: lightGreen, elevation: 0.0),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  divide(),
+                  /// sortings
+                  //divide(),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       left: 12.0, right: 12, top: 5, bottom: 5),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //         children: [
+                  //           Row(
+                  //             mainAxisAlignment: MainAxisAlignment.start,
+                  //             children: const [
+                  //               FaIcon(
+                  //                 FontAwesomeIcons.sort,
+                  //                 color: mediumGrey,
+                  //               ),
+                  //               SizedBox(
+                  //                 width: 8,
+                  //               ),
+                  //               Text(
+                  //                 'Sort By',
+                  //                 style: TextStyle(color: darkGrey),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ],
+                  //       ),
+                  //       Obx(() => Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Row(
+                  //             mainAxisSize: MainAxisSize.min,
+                  //             children: [
+                  //               Radio(value: "price-desc", groupValue: sortBy.value, onChanged: (v){sortBy.value=v.toString();}),
+                  //               Text('Low to High')
+                  //             ],
+                  //           ),
+                  //           Row(
+                  //             mainAxisSize: MainAxisSize.min,
+                  //             children: [
+                  //               Radio(value: "price-asc", groupValue: sortBy.value, onChanged: (v){sortBy.value=v.toString();}),
+                  //               Text('High to Low')
+                  //             ],
+                  //           ),
+                  //
+                  //           Row(
+                  //             mainAxisSize: MainAxisSize.min,
+                  //             children: [
+                  //               Radio(value: "date-desc", groupValue: sortBy.value, onChanged: (v){sortBy.value=v.toString();}),
+                  //               Text('New to Old')
+                  //             ],
+                  //           ),
+                  //
+                  //           Row(
+                  //             mainAxisSize: MainAxisSize.min,
+                  //             children: [
+                  //               Radio(value: "date-asc", groupValue: sortBy.value, onChanged: (v){sortBy.value=v.toString();}),
+                  //               Text('Old to New')
+                  //             ],
+                  //           ),
+                  //           // SizedBox(
+                  //           //   width: MediaQuery.of(context).size.width / 2.5,
+                  //           //   height: 60,
+                  //           //   child: ElevatedButton(
+                  //           //     onPressed: () {
+                  //           //       sortBy.value = 'price-desc';
+                  //           //     },
+                  //           //     child: const Text('Low to High'),
+                  //           //     style: ElevatedButton.styleFrom(
+                  //           //         primary: lightGreen, elevation: 0.0),
+                  //           //   ),
+                  //           // ),
+                  //           // SizedBox(
+                  //           //   width: 20,
+                  //           // ),
+                  //           // SizedBox(
+                  //           //   width: MediaQuery.of(context).size.width / 2.5,
+                  //           //   height: 60,
+                  //           //   child: ElevatedButton(
+                  //           //     onPressed: () {
+                  //           //       sortBy.value = 'price-asc';
+                  //           //     },
+                  //           //     child: const Text('High to Low'),
+                  //           //     style: ElevatedButton.styleFrom(
+                  //           //         primary: lightGreen, elevation: 0.0),
+                  //           //   ),
+                  //           // ),
+                  //         ],
+                  //       ),),
+                  //       SizedBox(
+                  //         height: 20,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // divide(),
                 ],
               ),
             ),
@@ -681,7 +693,7 @@ class _MyFiltersState extends State<MyFilters> {
                           distance,
                           startRange,
                           endRange,
-                          sortBy);
+                          '');
                       Get.back();
                     } else {
                       Get.snackbar(

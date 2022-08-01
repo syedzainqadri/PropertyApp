@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:realestapp/Controllers/user_controller.dart';
 
 import '../Utils/color_scheme.dart';
@@ -16,6 +17,20 @@ class _SettingsState extends State<Settings> {
   final UserController userController = Get.put(UserController());
   bool isNotificationSwitched = true;
   bool isAppNotificationSwitched = false;
+  final box = GetStorage();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(box.read("notification") != null){
+      isNotificationSwitched = box.read("notification");
+    }
+
+
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,6 +201,7 @@ class _SettingsState extends State<Settings> {
                       onChanged: (value) {
                         setState(() {
                           isNotificationSwitched = value;
+                          box.write("notification", value);
                         });
                       },
                       activeTrackColor: Colors.lightGreenAccent,
@@ -222,80 +238,6 @@ class _SettingsState extends State<Settings> {
               ),
               const SizedBox(
                 height: 25,
-              ),
-              Row(
-                children: const [
-                  Icon(
-                    Icons.more,
-                    size: 30,
-                    color: darkGrey,
-                  ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                  Text(
-                    'More',
-                    style: TextStyle(
-                      color: darkGrey,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 22,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const Divider(
-                color: darkGrey,
-                thickness: 0.3,
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              GestureDetector(
-                onTap: () {
-                  //Get.to(const AccountDetails());
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
-                      'Country',
-                      style: TextStyle(
-                        color: mediumGrey,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                      ),
-                    ),
-                    Icon(
-                      Icons.navigate_next,
-                      size: 35,
-                      color: mediumGrey,
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
-                    'Language',
-                    style: TextStyle(
-                      color: mediumGrey,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Icon(
-                    Icons.navigate_next,
-                    size: 35,
-                    color: mediumGrey,
-                  ),
-                ],
               ),
             ],
           ),

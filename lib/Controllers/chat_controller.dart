@@ -93,6 +93,7 @@ class ChatController extends GetxController {
   }
 
   getAllChats() async {
+    isLoading.value = true;
     var response = await http.get(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my/chat"),
       headers: <String, String>{
@@ -101,6 +102,8 @@ class ChatController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
+    isLoading.value = false;
+
     allChats.value = allChatsFromJson(response.body);
   }
 }

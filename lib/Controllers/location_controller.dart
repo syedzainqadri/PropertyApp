@@ -9,7 +9,7 @@ class LocationsController extends GetxController {
   var userLocationId = 0.obs;
   var userLocationName = ''.obs;
   final token = GetStorage().read('token');
-
+RxBool isLoading = true.obs;
   List locationDist = [];
 
   @override
@@ -20,6 +20,7 @@ class LocationsController extends GetxController {
   }
 
   getLocation() async {
+    isLoading.value = false;
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/locations';
     var response = await http.get(
       Uri.parse(url),
@@ -29,10 +30,13 @@ class LocationsController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
+    print("............................DONE..............................");
+    isLoading.value = false;
     locations.value = locationsModelFromJson(response.body);
   }
 
   getSubLocation(locationId) async {
+    isLoading.value = true;
     String url =
         'https://lagosabuja.com/wp-json/rtcl/v1/locations?parent_id=$locationId';
     var response = await http.get(
@@ -43,7 +47,7 @@ class LocationsController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-
+    isLoading.value = false;
     subLocations.value = locationsModelFromJson(response.body);
     print(response.body);
   }

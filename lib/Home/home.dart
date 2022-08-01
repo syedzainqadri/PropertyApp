@@ -23,7 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   bool hasAction = true;
-  String title = 'Home';
+  String title = 'Lagusabuja';
   late PageController _pageController;
   bool notIntialized = true;
   final MembershipController membershipController =
@@ -56,47 +56,47 @@ class _HomeState extends State<Home> {
               ),
               leading: Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
-                child: userController.userModel.value.ppThumbUrl != null
+                child: Obx(() => userController.userModel.value.ppThumbUrl != null
                     ? GestureDetector(
-                        onTap: () async {
-                          await membershipController.getMembershipPlans();
-                          Get.to(const Profile());
-                        },
-                        child: Obx(() => Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: mediumGrey,
-                              ),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(userController
-                                    .userModel.value.ppThumbUrl
-                                    .toString()),
-                              ),
-                            ))),
-                      )
+                  onTap: () async {
+                    await membershipController.getMembershipPlans();
+                    Get.to(const Profile());
+                  },
+                  child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: mediumGrey,
+                        ),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(userController
+                              .userModel.value.ppThumbUrl
+                              .toString()),
+                        ),
+                      )),
+                )
                     : GestureDetector(
-                        onTap: () async {
-                          await membershipController.getMembershipPlans();
-                          Get.to(const Profile());
-                        },
-                        child: Container(
-                            width: 30,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: mediumGrey,
-                              ),
-                              image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage('assets/images/1.png'),
-                              ),
-                            )),
-                      ),
+                  onTap: () async {
+                    await membershipController.getMembershipPlans();
+                    Get.to(const Profile());
+                  },
+                  child: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: mediumGrey,
+                        ),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/1.png'),
+                        ),
+                      )),
+                )),
               ),
               actions: hasAction
                   ? [
@@ -126,7 +126,7 @@ class _HomeState extends State<Home> {
                   setState(() => _currentIndex = index);
                   index == 0
                       ? setState(() {
-                          title = 'Home';
+                          title = 'Lagusabuja';
                           hasAction = true;
                         })
                       : index == 1

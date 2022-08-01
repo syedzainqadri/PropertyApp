@@ -75,45 +75,45 @@ class SearchResultCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  isFovorite
-                      ? Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                favoriteListingController
-                                    .addToFavorites(listingId);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Added to Favorites')));
-                              },
-                              icon: const Icon(
-                                Icons.favorite,
-                                size: 25,
-                                color: lightGreen,
-                              ),
-                            ),
-                          ],
-                        )
-                      : Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                favoriteListingController
-                                    .addToFavorites(listingId);
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('Added to Favorites')));
-                              },
-                              icon: const Icon(
-                                Icons.favorite_border,
-                                size: 25,
-                                color: lightGreen,
-                              ),
-                            ),
-                          ],
-                        ),
+                  // isFovorite
+                  //     ? Row(
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         children: [
+                  //           IconButton(
+                  //             onPressed: () {
+                  //               favoriteListingController
+                  //                   .addToFavorites(listingId);
+                  //               ScaffoldMessenger.of(context).showSnackBar(
+                  //                   const SnackBar(
+                  //                       content: Text('Added to Favorites')));
+                  //             },
+                  //             icon: const Icon(
+                  //               Icons.favorite,
+                  //               size: 25,
+                  //               color: lightGreen,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       )
+                  //     : Row(
+                  //         mainAxisAlignment: MainAxisAlignment.start,
+                  //         children: [
+                  //           IconButton(
+                  //             onPressed: () {
+                  //               favoriteListingController
+                  //                   .addToFavorites(listingId);
+                  //               ScaffoldMessenger.of(context).showSnackBar(
+                  //                   const SnackBar(
+                  //                       content: Text('Added to Favorites')));
+                  //             },
+                  //             icon: const Icon(
+                  //               Icons.favorite_border,
+                  //               size: 25,
+                  //               color: lightGreen,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
                 ],
               ),
               const SizedBox(

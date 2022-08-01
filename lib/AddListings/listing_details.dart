@@ -45,7 +45,8 @@ class _ListingDetailsState extends State<ListingDetails> {
   void initState() {
     super.initState();
   }
-
+  int _current = 0;
+  final CarouselController sliderController = CarouselController();
   final listingDetailsController = Get.put(ListingDetailsController());
   final sendemailController = Get.put(EmailController());
   final TextEditingController nameController = TextEditingController();
@@ -133,7 +134,29 @@ class _ListingDetailsState extends State<ListingDetails> {
                   pauseAutoPlayOnManualNavigate: true,
                   aspectRatio: 2.0,
                   viewportFraction: 1,
+                    onPageChanged: (index, reason) {
+                      setState(() {
+                        _current = index;
+                      });
+                    }
                 )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(listingDetailsController.listingDetail.value.images.length, (index) => GestureDetector(
+                onTap: () => sliderController.animateToPage(_current),
+                child: Container(
+                  width: 10.0,
+                  height: 10.0,
+                  margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: (Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black)
+                          .withOpacity(_current == index ? 0.9 : 0.4)),
+                ),
+              )),
+            ),
             Padding(
               padding: const EdgeInsets.only(left: 8.0, top: 8.0),
               child: Container(
@@ -183,114 +206,245 @@ class _ListingDetailsState extends State<ListingDetails> {
                     ],
                   )),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Expanded(
-                    child: Divider(
-                      color: Colors.greenAccent,
-                      thickness: 3,
-                    ),
-                  ),
-                  //TODO: redesign this section as mentioned in documents
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-                    child: Text(
-                      'Features'.toUpperCase(),
-                      style: const TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  const Expanded(
-                    child: Divider(
-                      color: Colors.greenAccent,
-                      thickness: 3,
-                    ),
-                  ),
-                ],
-              ),
+            /// old design
+            // Padding(
+            //   padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.center,
+            //     crossAxisAlignment: CrossAxisAlignment.center,
+            //     children: [
+            //       const Expanded(
+            //         child: Divider(
+            //           color: Colors.greenAccent,
+            //           thickness: 3,
+            //         ),
+            //       ),
+            //       //TODO: redesign this section as mentioned in documents
+            //       Padding(
+            //         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
+            //         child: Text(
+            //           'Features'.toUpperCase(),
+            //           style: const TextStyle(fontSize: 20),
+            //         ),
+            //       ),
+            //       const Expanded(
+            //         child: Divider(
+            //           color: Colors.greenAccent,
+            //           thickness: 3,
+            //         ),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
+            //   child: SizedBox(
+            //     height: height * 0.3,
+            //     child: Card(
+            //       elevation: 1,
+            //       child: GridView.builder(
+            //           physics: const NeverScrollableScrollPhysics(),
+            //           gridDelegate:
+            //               const SliverGridDelegateWithFixedCrossAxisCount(
+            //             crossAxisCount: 4,
+            //           ),
+            //           itemCount: listingDetailsController
+            //                   .listingDetail.value.customFields.length -
+            //               1,
+            //           itemBuilder: (context, index) {
+            //             return Padding(
+            //               padding: const EdgeInsets.only(top: 10.0),
+            //               child: Column(
+            //                 children: [
+            //                   Container(
+            //                     decoration: BoxDecoration(
+            //                       color: Colors.white,
+            //                       borderRadius: BorderRadius.circular(5),
+            //                       boxShadow: [
+            //                         BoxShadow(
+            //                           color: Colors.grey.shade300,
+            //                           offset: const Offset(
+            //                             3.0,
+            //                             3.0,
+            //                           ),
+            //                           blurRadius: 2.0,
+            //                           spreadRadius: 1.0,
+            //                         ), //BoxShadow//BoxShadow
+            //                       ],
+            //                     ),
+            //                     child: const Padding(
+            //                       padding: EdgeInsets.all(8.0),
+            //                       child: Icon(
+            //                         Icons.garage,
+            //                         color: Colors.greenAccent,
+            //                       ),
+            //                     ),
+            //                   ),
+            //                   Padding(
+            //                     padding: const EdgeInsets.only(top: 8.0),
+            //                     child: Text(
+            //                       listingDetailsController.listingDetail.value
+            //                           .customFields[index].label,
+            //                       overflow: TextOverflow.fade,
+            //                       style: const TextStyle(
+            //                           fontSize: 14,
+            //                           fontWeight: FontWeight.w500),
+            //                     ),
+            //                   ),
+            //                   Flexible(
+            //                     child: Container(
+            //                       child: Padding(
+            //                         padding: const EdgeInsets.only(top: 8.0),
+            //                         child: Text(
+            //                           listingDetailsController.listingDetail
+            //                               .value.customFields[index].value
+            //                               .toString()
+            //                               .toUpperCase(),
+            //                           maxLines: 1,
+            //                           style: const TextStyle(fontSize: 12),
+            //                           overflow: TextOverflow.clip,
+            //                           softWrap: false,
+            //                         ),
+            //                       ),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             );
+            //           }),
+            //     ),
+            //   ),
+            // ),
+            /// new design like zameen.com
+            SizedBox(height: 10,),
+            Stack(
+             children: [
+
+               Container(
+                 //color: Colors.green,
+                 width: double.infinity,
+                 height: 260,
+               ),
+
+               Padding(
+                 padding: const EdgeInsets.all(20.0),
+                 child: Container(
+                   decoration: BoxDecoration(
+                     //color: Colors.pink,
+                     borderRadius: BorderRadius.circular(10),
+                     border: Border.all(color: Colors.black.withOpacity(0.3))
+                   ),
+                   child: Padding(
+                     padding: const EdgeInsets.only(left: 10, right: 10, top: 20),
+                     child: SizedBox(
+                       height: 200,
+                       child: GridView.builder(
+                           physics: const NeverScrollableScrollPhysics(),
+                           gridDelegate:
+                           const SliverGridDelegateWithFixedCrossAxisCount(
+                             crossAxisCount: 4,
+                           ),
+                           itemCount: listingDetailsController
+                               .listingDetail.value.customFields.length -
+                               1,
+                           itemBuilder: (context, index) {
+                             return Padding(
+                               padding: const EdgeInsets.only(top: 10.0),
+                               child: Column(
+                                 children: [
+                                   // Container(
+                                   //   decoration: BoxDecoration(
+                                   //     color: Colors.white,
+                                   //     borderRadius: BorderRadius.circular(5),
+                                   //     boxShadow: [
+                                   //       BoxShadow(
+                                   //         color: Colors.grey.shade300,
+                                   //         offset: const Offset(
+                                   //           3.0,
+                                   //           3.0,
+                                   //         ),
+                                   //         blurRadius: 2.0,
+                                   //         spreadRadius: 1.0,
+                                   //       ), //BoxShadow//BoxShadow
+                                   //     ],
+                                   //   ),
+                                   //   child: const Padding(
+                                   //     padding: EdgeInsets.all(8.0),
+                                   //     child: Icon(
+                                   //       Icons.garage,
+                                   //       color: Colors.greenAccent,
+                                   //     ),
+                                   //   ),
+                                   // ),
+                                   Icon(
+                                     listingDetailsController.listingDetail.value
+                                         .customFields[index].label == "Type"? Icons.home_work_outlined : listingDetailsController.listingDetail.value
+                                         .customFields[index].label == "Parking"? Icons.car_rental : listingDetailsController.listingDetail.value
+                                         .customFields[index].label == "Bedroom"? Icons.home_outlined: listingDetailsController.listingDetail.value
+                                         .customFields[index].label == "Bath"?  Icons.bathtub_outlined : listingDetailsController.listingDetail.value
+                                         .customFields[index].label == "Sqft"? Icons.terrain_outlined : listingDetailsController.listingDetail.value
+                                         .customFields[index].label == "Purpose"? Icons.admin_panel_settings_outlined : listingDetailsController.listingDetail.value
+                                         .customFields[index].label == "Location"? Icons.pin_drop_outlined : listingDetailsController.listingDetail.value
+                                         .customFields[index].label == "Build Year"? Icons.calendar_today_outlined : Icons.error_outline_sharp,
+
+                                   ),
+                                   Padding(
+                                     padding: const EdgeInsets.only(top: 8.0),
+                                     child: Text(
+                                       listingDetailsController.listingDetail.value
+                                           .customFields[index].label,
+                                       overflow: TextOverflow.fade,
+                                       style: const TextStyle(
+                                           fontSize: 14,
+                                           fontWeight: FontWeight.w500),
+                                     ),
+                                   ),
+                                   Flexible(
+                                     child: Container(
+                                       child: Padding(
+                                         padding: const EdgeInsets.only(top: 8.0),
+                                         child: Text(
+                                           listingDetailsController.listingDetail
+                                               .value.customFields[index].value
+                                               .toString()
+                                               .toUpperCase(),
+                                           maxLines: 1,
+                                           style: const TextStyle(fontSize: 11),
+                                           overflow: TextOverflow.clip,
+                                           softWrap: false,
+                                         ),
+                                       ),
+                                     ),
+                                   ),
+                                 ],
+                               ),
+                             );
+                           }),
+                     ),
+                   ),
+                 ),
+               ),
+
+               Positioned(
+                 top: 7,
+                 left: (width/2)-60,
+                 child: Container(
+                   decoration: BoxDecoration(
+                     color: Colors.white,
+                     border: Border.all(color: Colors.black.withOpacity(0.3))
+                   ),
+                   child: Padding(
+                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                     child: Text(
+                       'Main Features',
+                       style: const TextStyle(fontSize: 15),
+                     ),
+                   ),
+                 ),
+               ),
+             ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
-              child: SizedBox(
-                height: height * 0.3,
-                child: Card(
-                  elevation: 1,
-                  child: GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 4,
-                      ),
-                      itemCount: listingDetailsController
-                              .listingDetail.value.customFields.length -
-                          1,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(5),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.shade300,
-                                      offset: const Offset(
-                                        3.0,
-                                        3.0,
-                                      ),
-                                      blurRadius: 2.0,
-                                      spreadRadius: 1.0,
-                                    ), //BoxShadow//BoxShadow
-                                  ],
-                                ),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Icon(
-                                    Icons.garage,
-                                    color: Colors.greenAccent,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
-                                child: Text(
-                                  listingDetailsController.listingDetail.value
-                                      .customFields[index].label,
-                                  overflow: TextOverflow.fade,
-                                  style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                              Flexible(
-                                child: Container(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Text(
-                                      listingDetailsController.listingDetail
-                                          .value.customFields[index].value
-                                          .toString()
-                                          .toUpperCase(),
-                                      maxLines: 1,
-                                      style: const TextStyle(fontSize: 12),
-                                      overflow: TextOverflow.clip,
-                                      softWrap: false,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }),
-                ),
-              ),
-            ),
+
             Padding(
               padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
               child: DescriptionTextWidget(

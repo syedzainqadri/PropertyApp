@@ -18,9 +18,9 @@ class _ConversationPageState extends State<ConversationPage> {
   //TODO: if there is no chat them there should be a message 'No Chat Available'
   Widget build(BuildContext context) {
     return Obx(() {
-      return chatController.allChats.isEmpty
+      return chatController.isLoading.value
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
+          : chatController.allChats.isEmpty? Center(child: Text("No Chats")) : ListView.builder(
               itemCount: chatController.allChats.length,
               itemBuilder: (context, index) {
                 return chat(

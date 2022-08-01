@@ -78,14 +78,70 @@ class _SignUpState extends State<SignUp> {
                       height: 15,
                     ),
                     //TODO:obsecure cannot be multiline replace these widgets.
-                    textField('Password', false, passwordController,
-                        onValidate: (v) => v!.isEmpty ? "Required" : null),
+
+
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(8)
+                      ),
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        validator: (v) => v!.isEmpty ? "Required" : null,
+                        controller: passwordController,
+                        obscureText: true,
+                        cursorColor: lightGreen,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 15, bottom: 20, top: 10),
+                            border: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            fillColor: white,
+                            labelText: "Password",
+                            alignLabelWithHint: true,
+                            labelStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16
+                            )
+                        ),
+                      ),
+                    ),
+
                     const SizedBox(
                       height: 15,
                     ),
-                    textField(
-                        'Confirm Password', false, confirmPasswordController,
-                        onValidate: (v) => v!.isEmpty ? "Required" : null),
+
+
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey.shade200,
+                          borderRadius: BorderRadius.circular(8)
+                      ),
+                      child: TextFormField(
+                        keyboardType: TextInputType.text,
+                        validator: (v) => v!.isEmpty ? "Required" : null,
+                        controller: confirmPasswordController,
+                        obscureText: true,
+                        cursorColor: lightGreen,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 15, bottom: 20, top: 10),
+                            border: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            fillColor: white,
+                            labelText: "Confirm Password",
+                            alignLabelWithHint: true,
+                            labelStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 16
+                            )
+                        ),
+                      ),
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -122,6 +178,7 @@ class _SignUpState extends State<SignUp> {
                             phoneController.text);
                         if (response != null) {
                           user = SignInModel.fromJson(response);
+                          Get.back();
                           Get.back();
                           // Get.to(const Home());
                         } else {

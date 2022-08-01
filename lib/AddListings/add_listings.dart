@@ -875,6 +875,9 @@ class _AddListingState extends State<AddListing> {
     box.write('latitude', latitude);
     print(latitude);
     print(longitude);
+    Get.snackbar(
+        'Success', "Your Current Location is selected",
+        snackPosition: SnackPosition.BOTTOM);
 
     print(currentLocation.toString());
   }

@@ -38,104 +38,99 @@ class _ChatUiState extends State<ChatUi> {
   Widget build(BuildContext context) {
     //TODO: no need reload the state
     var _chatController = Get.find<ChatController>();
-    return Obx(() => chatController.isLoading.value != true
-        ? Scaffold(
-            appBar: AppBar(
-              elevation: 0.0,
-              centerTitle: true,
-              backgroundColor: lightGreen,
-              title: Text(widget.title),
-              leading: GestureDetector(
-                  onTap: () {
-                    Get.back();
-                    box.remove('listingId');
-                  },
-                  child: const Icon(Icons.navigate_before,
-                      size: 35, color: white)),
-            ),
-            body: Column(
-              children: [
-                chatController.messagesList.value.messages != null
-                    ? Expanded(
-                        child: Obx(() {
-                          return ListView.builder(
-                              itemCount: _chatController
-                                  .messagesList.value.messages!.length,
-                              itemBuilder: (_, pos) {
-                                var sourceId = _chatController
-                                    .messagesList.value.messages![pos].sourceId;
-                                var userId = userController.userModel.value.id;
-                                return int.parse(sourceId!) == userId
-                                    ? sentMessage(_chatController.messagesList
-                                        .value.messages![pos].message)
-                                    : recieveMessage(_chatController
-                                        .messagesList
-                                        .value
-                                        .messages![pos]
-                                        .message);
-                              });
-                        }),
-                      )
-                    : const Expanded(child: Center(child: Text('No Messages'))),
-                ChatComposer(
-                  controller: con,
-                  onReceiveText: (str) {
-                    Get.find<ChatController>().messagesList.value.conId != null
-                        ? Get.find<ChatController>().sendChatConversation(
-                            widget.listingId,
-                            str,
-                            Get.find<ChatController>().messagesList.value.conId)
-                        : Get.find<ChatController>()
-                            .startChatConversation(widget.listingId, str);
-                    list.value.add(sentMessage(str.toString()));
-                    list.value.add(recieveMessage(str.toString()));
-                    list.refresh();
-                    con.text = '';
-                  },
-                  onRecordEnd: (path) {
-                    setState(() {
-                      //  list.add('AUDIO PATH : ' + path!);
-                    });
-                  },
-                  textPadding: EdgeInsets.zero,
-                  leading: CupertinoButton(
-                    padding: EdgeInsets.zero,
-                    child: const Icon(
-                      Icons.insert_emoticon_outlined,
-                      size: 25,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {},
-                  ),
-                  actions: [
-                    CupertinoButton(
-                      padding: EdgeInsets.zero,
-                      child: const Icon(
-                        Icons.attach_file_rounded,
-                        size: 25,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {},
-                    ),
-                    CupertinoButton(
-                      padding: EdgeInsets.zero,
-                      child: const Icon(
-                        Icons.camera_alt_rounded,
-                        size: 25,
-                        color: Colors.grey,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ],
-            ),
+    return Obx(() => Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        centerTitle: true,
+        backgroundColor: lightGreen,
+        title: Text(widget.title),
+        leading: GestureDetector(
+            onTap: () {
+              Get.back();
+              box.remove('listingId');
+            },
+            child: const Icon(Icons.navigate_before,
+                size: 35, color: white)),
+      ),
+      body: Column(
+        children: [
+          chatController.messagesList.value.messages != null
+              ? Expanded(
+            child: Obx(() {
+              return ListView.builder(
+                  itemCount: _chatController
+                      .messagesList.value.messages!.length,
+                  itemBuilder: (_, pos) {
+                    var sourceId = _chatController
+                        .messagesList.value.messages![pos].sourceId;
+                    var userId = userController.userModel.value.id;
+                    return int.parse(sourceId!) == userId
+                        ? sentMessage(_chatController.messagesList
+                        .value.messages![pos].message)
+                        : recieveMessage(_chatController
+                        .messagesList
+                        .value
+                        .messages![pos]
+                        .message);
+                  });
+            }),
           )
-        : const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          ));
+              : const Expanded(child: Center(child: Text('No Messages'))),
+          ChatComposer(
+            recordIcon: Icons.send,
+            controller: con,
+            onReceiveText: (str) {
+              Get.find<ChatController>().messagesList.value.conId != null
+                  ? Get.find<ChatController>().sendChatConversation(
+                  widget.listingId,
+                  str,
+                  Get.find<ChatController>().messagesList.value.conId)
+                  : Get.find<ChatController>()
+                  .startChatConversation(widget.listingId, str);
+              list.value.add(sentMessage(str.toString()));
+              list.value.add(recieveMessage(str.toString()));
+              list.refresh();
+              con.text = '';
+            },
+            onRecordEnd: (path) {
+              setState(() {
+                //  list.add('AUDIO PATH : ' + path!);
+              });
+            },
+            textPadding: EdgeInsets.only(left: 15, right: 15),
+            // leading: CupertinoButton(
+            //   padding: EdgeInsets.zero,
+            //   child: const Icon(
+            //     Icons.insert_emoticon_outlined,
+            //     size: 25,
+            //     color: Colors.grey,
+            //   ),
+            //   onPressed: () {},
+            // ),
+            // actions: [
+            //   CupertinoButton(
+            //     padding: EdgeInsets.zero,
+            //     child: const Icon(
+            //       Icons.attach_file_rounded,
+            //       size: 25,
+            //       color: Colors.grey,
+            //     ),
+            //     onPressed: () {},
+            //   ),
+            //   CupertinoButton(
+            //     padding: EdgeInsets.zero,
+            //     child: const Icon(
+            //       Icons.camera_alt_rounded,
+            //       size: 25,
+            //       color: Colors.grey,
+            //     ),
+            //     onPressed: () {},
+            //   ),
+            // ],
+          ),
+        ],
+      ),
+    ));
   }
 
   sentMessage(message) {

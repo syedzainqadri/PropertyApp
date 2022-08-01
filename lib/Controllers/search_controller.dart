@@ -62,4 +62,23 @@ class SearchController extends GetxController {
     searchListings.value = allListingsFromJson(response.body);
     isLoading.value = false;
   }
+
+  sortListing(String sortedBy) async{
+    isLoading.value = true;
+    String url =
+        "https://lagosabuja.com/wp-json/rtcl/v1/listings?sortBy=$sortedBy";
+    var response = await http.get(
+      Uri.parse(url),
+      headers: <String, String>{
+        'Accept': 'application/json',
+        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    searchListings.value = allListingsFromJson(response.body);
+    print(searchListings.value);
+    isLoading.value = false;
+
+
+  }
 }

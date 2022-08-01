@@ -21,6 +21,7 @@ class _SelectCityState extends State<SelectCity> {
   final box = GetStorage();
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -61,7 +62,10 @@ class _SelectCityState extends State<SelectCity> {
                         locationsController.subLocations.value[index].termId);
                     // box.write('latitude', locationsController.subLocations.value[index].);
                     print(box.read("city"));
-                    Get.offAll(const AddListing());
+                    // Get.offAll(const AddListing());
+                    Get.back();
+                    Get.back();
+
                   },
                   child: Container(
                     width: double.infinity,

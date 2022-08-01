@@ -243,7 +243,7 @@ class _PromotionPlansState extends State<PromotionPlans> {
                             ));
                           },
                           //TODO: curency symbol is NGN
-                          child: Text('\$${promotionPlans.price}'),
+                          child: Text('NGN${promotionPlans.price}'),
                           style: ElevatedButton.styleFrom(
                             primary: lightGreen,
                             onSurface: white,

@@ -115,12 +115,19 @@ class ListingCard extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 4.0, bottom: 4.0),
                 child: Container(
                   alignment: Alignment.bottomRight,
-                  child: Text(
-                    city,
-                    style: const TextStyle(
-                      color: mediumDarkGrey,
-                      fontSize: 12,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(Icons.pin_drop, color: lightGreen, size: 15,),
+                      SizedBox(width: 5,),
+                      Text(
+                        city,
+                        style: const TextStyle(
+                          color: mediumDarkGrey,
+                          fontSize: 12,
+                        ),
+                      )
+                    ]
                   ),
                 ),
               ),

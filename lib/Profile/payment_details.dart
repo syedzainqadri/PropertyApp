@@ -145,21 +145,36 @@ class _PaymentDetailsState extends State<PaymentDetails> {
             height: 50,
             child: ElevatedButton(
               onPressed: () async {
-                await membershipController.membershipCheckout(
-                    widget.type, widget.type, gatewayId, widget.id);
-                if (membershipController.checkoutData.value.result ==
-                    "success") {
-                  Get.snackbar('Order Places',
-                      "Please Make The Payment According to Instructions",
-                      snackPosition: SnackPosition.BOTTOM);
-                } else {
-                  Get.snackbar(
-                      'Order Errod', "Order Not Places. Please Try Again",
-                      snackPosition: SnackPosition.BOTTOM);
+                if(gatewayId == null){
+                  Get.defaultDialog(
+                    title: "Oops",
+                    content: Text(
+                      "Please select payment method to proceed",
+                    ),
+                    actions: [
+                      MaterialButton(
+                        onPressed: () => Get.back(),
+                        child: Text("OK"),
+                      )
+                    ]
+                  );
+                }else{
+                  await membershipController.membershipCheckout(
+                      widget.type, widget.type, gatewayId, widget.id);
+                  if (membershipController.checkoutData.value.result ==
+                      "success") {
+                    Get.snackbar('Order Places',
+                        "Please Make The Payment According to Instructions",
+                        snackPosition: SnackPosition.BOTTOM);
+                  } else {
+                    Get.snackbar(
+                        'Order Errod', "Order Not Places. Please Try Again",
+                        snackPosition: SnackPosition.BOTTOM);
+                  }
+                  await paymentDetailsController
+                      .getPaymentById(membershipController.checkoutData.value.id);
+                  Get.to(() => PaymentResultScreen());
                 }
-                await paymentDetailsController
-                    .getPaymentById(membershipController.checkoutData.value.id);
-                Get.to(() => PaymentResultScreen());
               },
               child: const Text(
                 'Checkout',

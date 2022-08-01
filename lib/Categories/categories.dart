@@ -77,15 +77,6 @@ class _CategoryPageState extends State<CategoryPage> {
                 Get.back();
               },
             ),
-            actions: const [
-              Padding(
-                padding: EdgeInsets.all(12.0),
-                child: Icon(
-                  Icons.map,
-                  color: lightGreen,
-                ),
-              )
-            ],
           ),
           body: Column(
             children: [
