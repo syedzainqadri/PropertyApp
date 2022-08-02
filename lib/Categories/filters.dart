@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:location/location.dart';
 import 'package:realestapp/Controllers/search_controller.dart';
 import 'package:realestapp/Utils/full_screen_dialog.dart';
+import 'package:realestapp/Utils/global_Variable.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../Controllers/location_controller.dart';
 import '../Utils/color_scheme.dart';
@@ -21,14 +22,13 @@ class _MyFiltersState extends State<MyFilters> {
   final SearchController _searchController = Get.put(SearchController());
   final TextEditingController startRangeController = TextEditingController();
   final TextEditingController endRangeController = TextEditingController();
-  final TextEditingController sortByController = TextEditingController();
   RangeValues _currentRangeValues = const RangeValues(0, 30);
-  var _distanceRangeValues = 0.0;
+  final _distanceRangeValues = 30.0.obs;
   var listingType = "".obs;
   final locationsController = Get.put(LocationsController());
   final box = GetStorage();
   var locationId = ''.obs;
-  var locationName = ''.obs;
+  var locationName = 'Select City'.obs;
   var location = Location();
   var latitude = ''.obs;
   var longitude = ''.obs;
@@ -38,16 +38,29 @@ class _MyFiltersState extends State<MyFilters> {
   var endRange = '250000'.obs;
   var distance = ''.obs;
   var sortBy = 'date-desc'.obs;
+  var sortByName = ''.obs;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    startRangeController.text = "5000";
-    endRangeController.text = "15000";
-    sortByController.text = "New to Old";
-
+    sortBy.value = sortByGlobalValue.value != null
+        ? sortByGlobalValue.toString()
+        : 'date-desc';
+    startRangeController.text = startRangeControllerGlobal.value ?? "5000";
+    endRangeController.text = endRangeControllerGlobal.value ?? "250000";
+    sortByName.value =
+        sortByGlobal.value != null ? sortByGlobal.toString() : 'High to Low';
+    listingType.value = iWantTo.toString();
+    locationName.value = locationNameGlobal.value != null
+        ? locationNameGlobal.toString()
+        : "Select City";
+    _distanceRangeValues.value = distanceRangeValueGlobal.value ?? 30.0;
     _currentRangeValues = const RangeValues(5000, 15000);
+    latitude.value = box.read('latitude') ?? '';
+    longitude.value = box.read('longitude') ?? '';
+    print(latitude.value);
+    print(longitude.value);
   }
 
   @override
@@ -113,10 +126,9 @@ class _MyFiltersState extends State<MyFilters> {
                         children: [
                           SizedBox(
                             width: 100,
-                            child: TextField(
-                              controller: sortByController,
-                              decoration: const InputDecoration(
-                                border: InputBorder.none,
+                            child: Obx(
+                              () => Text(
+                                sortByName.toString(),
                               ),
                             ),
                           ),
@@ -126,6 +138,10 @@ class _MyFiltersState extends State<MyFilters> {
                       ))),
                 ),
                 itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
+                      const PopupMenuItem<String>(
+                          value: "title-asc", child: Text('A to Z')),
+                      const PopupMenuItem<String>(
+                          value: "title-desc", child: Text('Z to A')),
                       const PopupMenuItem<String>(
                           value: "price-desc", child: Text('High to Low')),
                       const PopupMenuItem<String>(
@@ -137,16 +153,28 @@ class _MyFiltersState extends State<MyFilters> {
                     ],
                 onSelected: (String value) async {
                   sortBy.value = value;
+                  print(sortBy.value);
+                  sortByGlobalValue.value = value;
                   CustomFullScreenDialog.showDialog();
                   CustomFullScreenDialog.cancelDialog();
                   if (value == 'price-desc') {
-                    sortByController.text = 'High to Low';
+                    sortByName.value = 'High to Low';
+                    sortByGlobal.value = sortByName.value;
                   } else if (value == 'price-asc') {
-                    sortByController.text = 'Low to High';
+                    sortByName.value = 'Low to High';
+                    sortByGlobal.value = sortByName.value;
                   } else if (value == 'date-desc') {
-                    sortByController.text = 'New to Old';
+                    sortByName.value = 'New to Old';
+                    sortByGlobal.value = sortByName.value;
                   } else if (value == 'date-asc') {
-                    sortByController.text = 'Old to New';
+                    sortByName.value = 'Old to New';
+                    sortByGlobal.value = sortByName.value;
+                  } else if (value == 'title-asc') {
+                    sortByName.value = 'A to Z';
+                    sortByGlobal.value = sortByName.value;
+                  } else if (value == 'title-decs') {
+                    sortByName.value = 'Z to A';
+                    sortByGlobal.value = sortByName.value;
                   }
                 }),
             Padding(
@@ -173,7 +201,7 @@ class _MyFiltersState extends State<MyFilters> {
                   ),
                   ToggleSwitch(
                     minWidth: 65.0,
-                    initialLabelIndex: 1,
+                    initialLabelIndex: listingType.value == 'buy' ? 1 : 0,
                     cornerRadius: 20.0,
                     activeFgColor: white,
                     inactiveBgColor: lightGrey,
@@ -186,6 +214,7 @@ class _MyFiltersState extends State<MyFilters> {
                     ],
                     onToggle: (index) {
                       listingType.value = index == 0 ? "rent" : "buy";
+                      iWantTo.value = listingType.value;
                       print(listingType.value);
                     },
                   ),
@@ -279,6 +308,10 @@ class _MyFiltersState extends State<MyFilters> {
                                                                     .value[
                                                                         index]
                                                                     .name;
+                                                            locationNameGlobal
+                                                                    .value =
+                                                                locationName
+                                                                    .value;
                                                           },
                                                           child: Container(
                                                             width:
@@ -368,7 +401,7 @@ class _MyFiltersState extends State<MyFilters> {
                               const SizedBox(
                                 width: 4,
                               ),
-                              locationName.value == ''
+                              locationName.value == null
                                   ? const Text(
                                       'Select City',
                                       style: TextStyle(color: lightGreen),
@@ -425,16 +458,18 @@ class _MyFiltersState extends State<MyFilters> {
                         child: Slider(
                           inactiveColor: lightGrey,
                           activeColor: lightGreen,
-                          value: _distanceRangeValues,
+                          value: _distanceRangeValues.value.toDouble(),
                           max: 300,
                           min: 0,
                           divisions: 10,
                           label: _distanceRangeValues.round().toString(),
                           onChanged: (values) {
                             setState(() {
-                              _distanceRangeValues = values;
+                              _distanceRangeValues.value = values;
                               distance.value =
                                   _distanceRangeValues.round().toString();
+                              distanceRangeValueGlobal.value =
+                                  _distanceRangeValues.value;
                             });
                             print(distance.value);
                           },
@@ -443,30 +478,35 @@ class _MyFiltersState extends State<MyFilters> {
                       const SizedBox(
                         width: 8,
                       ),
-                      Badge(
-                        badgeContent: const Icon(
-                          Icons.location_pin,
-                          color: brightRed,
-                        ),
-                        badgeColor: transparent,
-                        elevation: 0.0,
-                        position: const BadgePosition(top: -16.0, end: -8.0),
-                        child: Container(
-                          width: 80,
-                          height: 60,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: lightGreen),
-                            borderRadius: BorderRadius.circular(25),
+                      InkWell(
+                        onTap: () {
+                          locationService();
+                        },
+                        child: Badge(
+                          badgeContent: const Icon(
+                            Icons.location_pin,
+                            color: brightRed,
                           ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Icon(Icons.map, color: lightGreen),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text('Map'),
-                            ],
+                          badgeColor: transparent,
+                          elevation: 0.0,
+                          position: const BadgePosition(top: -16.0, end: -8.0),
+                          child: Container(
+                            width: 80,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: lightGreen),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.map, color: lightGreen),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text('Map'),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -570,8 +610,8 @@ class _MyFiltersState extends State<MyFilters> {
                           inactiveColor: lightGrey,
                           activeColor: lightGreen,
                           values: _currentRangeValues,
-                          max: 30000,
-                          divisions: 100,
+                          max: 300000,
+                          divisions: 1000,
                           labels: RangeLabels(
                             _currentRangeValues.start.round().toString(),
                             _currentRangeValues.end.round().toString(),
@@ -585,6 +625,9 @@ class _MyFiltersState extends State<MyFilters> {
                                   _currentRangeValues.end.round().toString();
                               startRangeController.text = startRange.value;
                               endRangeController.text = endRange.value;
+                              startRangeControllerGlobal.value =
+                                  startRange.value;
+                              endRangeControllerGlobal.value = endRange.value;
                             });
                             print(startRange.value);
                             print(endRange.value);
@@ -593,105 +636,6 @@ class _MyFiltersState extends State<MyFilters> {
                       ],
                     ),
                   ),
-                  //Bedrooms
-                  /// sortings
-                  //divide(),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       left: 12.0, right: 12, top: 5, bottom: 5),
-                  //   child: Column(
-                  //     crossAxisAlignment: CrossAxisAlignment.start,
-                  //     children: [
-                  //       Row(
-                  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //         children: [
-                  //           Row(
-                  //             mainAxisAlignment: MainAxisAlignment.start,
-                  //             children: const [
-                  //               FaIcon(
-                  //                 FontAwesomeIcons.sort,
-                  //                 color: mediumGrey,
-                  //               ),
-                  //               SizedBox(
-                  //                 width: 8,
-                  //               ),
-                  //               Text(
-                  //                 'Sort By',
-                  //                 style: TextStyle(color: darkGrey),
-                  //               ),
-                  //             ],
-                  //           ),
-                  //         ],
-                  //       ),
-                  //       Obx(() => Column(
-                  //         crossAxisAlignment: CrossAxisAlignment.start,
-                  //         children: [
-                  //           Row(
-                  //             mainAxisSize: MainAxisSize.min,
-                  //             children: [
-                  //               Radio(value: "price-desc", groupValue: sortBy.value, onChanged: (v){sortBy.value=v.toString();}),
-                  //               Text('Low to High')
-                  //             ],
-                  //           ),
-                  //           Row(
-                  //             mainAxisSize: MainAxisSize.min,
-                  //             children: [
-                  //               Radio(value: "price-asc", groupValue: sortBy.value, onChanged: (v){sortBy.value=v.toString();}),
-                  //               Text('High to Low')
-                  //             ],
-                  //           ),
-                  //
-                  //           Row(
-                  //             mainAxisSize: MainAxisSize.min,
-                  //             children: [
-                  //               Radio(value: "date-desc", groupValue: sortBy.value, onChanged: (v){sortBy.value=v.toString();}),
-                  //               Text('New to Old')
-                  //             ],
-                  //           ),
-                  //
-                  //           Row(
-                  //             mainAxisSize: MainAxisSize.min,
-                  //             children: [
-                  //               Radio(value: "date-asc", groupValue: sortBy.value, onChanged: (v){sortBy.value=v.toString();}),
-                  //               Text('Old to New')
-                  //             ],
-                  //           ),
-                  //           // SizedBox(
-                  //           //   width: MediaQuery.of(context).size.width / 2.5,
-                  //           //   height: 60,
-                  //           //   child: ElevatedButton(
-                  //           //     onPressed: () {
-                  //           //       sortBy.value = 'price-desc';
-                  //           //     },
-                  //           //     child: const Text('Low to High'),
-                  //           //     style: ElevatedButton.styleFrom(
-                  //           //         primary: lightGreen, elevation: 0.0),
-                  //           //   ),
-                  //           // ),
-                  //           // SizedBox(
-                  //           //   width: 20,
-                  //           // ),
-                  //           // SizedBox(
-                  //           //   width: MediaQuery.of(context).size.width / 2.5,
-                  //           //   height: 60,
-                  //           //   child: ElevatedButton(
-                  //           //     onPressed: () {
-                  //           //       sortBy.value = 'price-asc';
-                  //           //     },
-                  //           //     child: const Text('High to Low'),
-                  //           //     style: ElevatedButton.styleFrom(
-                  //           //         primary: lightGreen, elevation: 0.0),
-                  //           //   ),
-                  //           // ),
-                  //         ],
-                  //       ),),
-                  //       SizedBox(
-                  //         height: 20,
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                  // divide(),
                 ],
               ),
             ),
@@ -720,7 +664,7 @@ class _MyFiltersState extends State<MyFilters> {
                   distance.value = '';
                   longitude.value = '';
                   latitude.value = '';
-                  _distanceRangeValues = 0.0;
+                  _distanceRangeValues.value = 0.0;
                   sortBy.value = '';
                 },
                 child: const Text(

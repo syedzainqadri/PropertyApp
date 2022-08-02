@@ -50,7 +50,7 @@ class SearchController extends GetxController {
     print(_priceEnd);
     print(sortBy);
     String url =
-        "https://lagosabuja.com/wp-json/rtcl/v1/listings?price_range=$_priceStart,$_priceEnd&order_by=$_sortBy&listing_type=$_type&locations[]=$_location&latitude=$_lat&longitude=$_log&radius_search=$_range";
+        "https://lagosabuja.com/wp-json/rtcl/v1/listings?price_range=$_priceStart,$_priceEnd&order_by=$_sortBy&listing_type=$_type&locations[]=$_location&latitude=$_lat&longitude=$_log&radius_search=$_range&custom_fields={'_field_4216':[], '_field_4316':[],'_field_4321':[]}";
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

@@ -5,14 +5,10 @@ import 'dart:io';
 
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:group_radio_button/group_radio_button.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
-import 'package:realestapp/AddListings/Widgets/TextAreaForForm.dart';
-import 'package:realestapp/AddListings/Widgets/TextFieldForForm.dart';
 import 'package:realestapp/Controllers/location_controller.dart';
 import 'package:realestapp/Controllers/categories_controller.dart';
 import 'package:realestapp/Controllers/listing_config_controller.dart';
@@ -875,8 +871,7 @@ class _AddListingState extends State<AddListing> {
     box.write('latitude', latitude);
     print(latitude);
     print(longitude);
-    Get.snackbar(
-        'Success', "Your Current Location is selected",
+    Get.snackbar('Success', "Your Current Location is selected",
         snackPosition: SnackPosition.BOTTOM);
 
     print(currentLocation.toString());
