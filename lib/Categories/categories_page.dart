@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Categories/Widgets/CategoryCard.dart';
-import 'package:realestapp/Controllers/categories_controller.dart';
+import 'package:lagosabuja/Categories/Widgets/CategoryCard.dart';
+import 'package:lagosabuja/Controllers/categories_controller.dart';
 import '../Utils/color_scheme.dart';
 import 'categories.dart';
 

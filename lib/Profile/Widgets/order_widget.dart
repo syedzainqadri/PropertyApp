@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
-import 'package:realestapp/Profile/PaymentResultScreen.dart';
-import 'package:realestapp/Profile/order_detail_screen.dart';
+import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
+import 'package:lagosabuja/Profile/PaymentResultScreen.dart';
+import 'package:lagosabuja/Profile/order_detail_screen.dart';
 
 class OrderWidget extends StatefulWidget {
   final orderId, title, price, status, method, createdDate;

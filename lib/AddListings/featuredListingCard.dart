@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/favorite_listing_controller.dart';
-import 'package:realestapp/Controllers/listing_detail_controller.dart';
-import 'package:realestapp/Controllers/review_controller.dart';
+import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
+import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
+import 'package:lagosabuja/Controllers/review_controller.dart';
 import '../Utils/color_scheme.dart';
 import 'listing_details.dart';
 
@@ -76,7 +76,7 @@ class FeaturedListingCard extends StatelessWidget {
                       height: 20,
                       width: 80,
                       decoration: const BoxDecoration(
-                        color: lightGreen,
+                        color: greenBaseColor,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
                             bottomLeft: Radius.circular(10)),
@@ -88,7 +88,7 @@ class FeaturedListingCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               letterSpacing: .5,
                               fontWeight: FontWeight.w500,
-                              color: Colors.black,
+                              color: white,
                               fontSize: 12),
                         ),
                       ),
@@ -120,7 +120,7 @@ class FeaturedListingCard extends StatelessWidget {
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     const Icon(
                       Icons.pin_drop,
-                      color: lightGreen,
+                      color: greenBaseColor,
                       size: 15,
                     ),
                     const SizedBox(

@@ -3,13 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:realestapp/AddListings/Widgets/TextAreaForForm.dart';
-import 'package:realestapp/AddListings/Widgets/TextFieldForForm.dart';
-import 'package:realestapp/AddListings/add_listings.dart';
-import 'package:realestapp/Controllers/editlisting_controller.dart';
-import 'package:realestapp/Controllers/my_listings_controller.dart';
-import 'package:realestapp/Profile/my_listings.dart';
-import 'package:realestapp/Utils/color_scheme.dart';
+import 'package:lagosabuja/AddListings/Widgets/TextAreaForForm.dart';
+import 'package:lagosabuja/AddListings/Widgets/TextFieldForForm.dart';
+import 'package:lagosabuja/AddListings/add_listings.dart';
+import 'package:lagosabuja/Controllers/editlisting_controller.dart';
+import 'package:lagosabuja/Controllers/my_listings_controller.dart';
+import 'package:lagosabuja/Profile/my_listings.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class EditListingScreen extends StatefulWidget {
   var listingId;

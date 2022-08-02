@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:realestapp/AddListings/add_listings.dart';
-import 'package:realestapp/Utils/color_scheme.dart';
+import 'package:lagosabuja/AddListings/add_listings.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 import '../Controllers/location_controller.dart';
 
 class SelectCity extends StatefulWidget {
@@ -21,7 +21,6 @@ class _SelectCityState extends State<SelectCity> {
   final box = GetStorage();
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -65,7 +64,6 @@ class _SelectCityState extends State<SelectCity> {
                     // Get.offAll(const AddListing());
                     Get.back();
                     Get.back();
-
                   },
                   child: Container(
                     width: double.infinity,

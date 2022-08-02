@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/favorite_listing_controller.dart';
-import 'package:realestapp/Controllers/review_controller.dart';
+import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
+import 'package:lagosabuja/Controllers/review_controller.dart';
 import '../AddListings/listing_details.dart';
 import '../Controllers/listing_detail_controller.dart';
 import '../Models/all_listing_model.dart';

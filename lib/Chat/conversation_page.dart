@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/chat_controller.dart';
+import 'package:lagosabuja/Controllers/chat_controller.dart';
 
 import '../Utils/color_scheme.dart';
 import 'chat_ui.dart';
@@ -20,18 +20,23 @@ class _ConversationPageState extends State<ConversationPage> {
     return Obx(() {
       return chatController.isLoading.value
           ? const Center(child: CircularProgressIndicator())
-          : chatController.allChats.isEmpty? Center(child: Text("No Chats")) : ListView.builder(
-              itemCount: chatController.allChats.length,
-              itemBuilder: (context, index) {
-                return chat(
-                    chatController.allChats.value[index].listing!.images![0].src
-                        .toString(),
-                    chatController.allChats.value[index].listing!.title
-                        .toString(),
-                    chatController.allChats.value[index].lastMessage.toString(),
-                    chatController.allChats.value[index].listingId.toString());
-              },
-            );
+          : chatController.allChats.isEmpty
+              ? Center(child: Text("No Chats"))
+              : ListView.builder(
+                  itemCount: chatController.allChats.length,
+                  itemBuilder: (context, index) {
+                    return chat(
+                        chatController
+                            .allChats.value[index].listing!.images![0].src
+                            .toString(),
+                        chatController.allChats.value[index].listing!.title
+                            .toString(),
+                        chatController.allChats.value[index].lastMessage
+                            .toString(),
+                        chatController.allChats.value[index].listingId
+                            .toString());
+                  },
+                );
     });
   }
 

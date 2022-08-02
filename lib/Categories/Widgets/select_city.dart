@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:realestapp/AddListings/add_listings.dart';
-import 'package:realestapp/Controllers/location_controller.dart';
-import 'package:realestapp/Utils/color_scheme.dart';
+import 'package:lagosabuja/AddListings/add_listings.dart';
+import 'package:lagosabuja/Controllers/location_controller.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class SelectCityFilters extends StatefulWidget {
   const SelectCityFilters({

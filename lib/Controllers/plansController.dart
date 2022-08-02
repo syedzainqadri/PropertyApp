@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/checkout_model.dart';
-import 'package:realestapp/Models/membership_model.dart';
-import 'package:realestapp/Models/promotion_Plans.dart';
+import 'package:lagosabuja/Models/checkout_model.dart';
+import 'package:lagosabuja/Models/membership_model.dart';
+import 'package:lagosabuja/Models/promotion_Plans.dart';
 
 class PlansController extends GetxController {
   var box = GetStorage();

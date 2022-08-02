@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:realestapp/Auth/sign_up.dart';
-import 'package:realestapp/Controllers/sign_in_controller.dart';
-import 'package:realestapp/Controllers/socialAuthController/firebaseAuthController.dart';
-import '../Controllers/location_controller.dart';
-import '../Controllers/categories_controller.dart';
-import '../Controllers/chat_controller.dart';
-import '../Controllers/favorite_listing_controller.dart';
-import '../Controllers/listing_type_controller.dart';
-import '../Controllers/listings_controller.dart';
-import '../Controllers/my_listings_controller.dart';
-import '../Home/home.dart';
+import 'package:lagosabuja/Auth/sign_up.dart';
+import 'package:lagosabuja/Controllers/sign_in_controller.dart';
+import 'package:lagosabuja/Controllers/socialAuthController/firebaseAuthController.dart';
 import '../Utils/color_scheme.dart';
 import 'package:get/get.dart';
 import '../Utils/constants.dart';
@@ -56,28 +47,24 @@ class _SignInState extends State<SignIn> {
                     const SizedBox(
                       height: 25,
                     ),
-                    textField(
-                        'E-mail address',
-                        false,
-                        emailController,
-                      onValidate: (v)=> v!.isEmpty? "Required" : null
-                    ),
+                    textField('E-mail address', false, emailController,
+                        onValidate: (v) => v!.isEmpty ? "Required" : null),
                     const SizedBox(
                       height: 15,
                     ),
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(8)
-                      ),
+                          borderRadius: BorderRadius.circular(8)),
                       child: TextFormField(
-                        validator: (v) => v!.isEmpty? "Required" : null,
+                        validator: (v) => v!.isEmpty ? "Required" : null,
                         controller: passwordController,
                         obscureText: true,
                         cursorColor: lightGreen,
                         textInputAction: TextInputAction.next,
                         decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 15, bottom: 20, top: 10),
+                            contentPadding:
+                                EdgeInsets.only(left: 15, bottom: 20, top: 10),
                             // enabledBorder: OutlineInputBorder(
                             //   borderRadius: BorderRadius.circular(10),
                             //   borderSide: const BorderSide(
@@ -95,11 +82,8 @@ class _SignInState extends State<SignIn> {
                             fillColor: white,
                             labelText: "Enter Password",
                             alignLabelWithHint: true,
-                            labelStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 16
-                            )
-                        ),
+                            labelStyle:
+                                TextStyle(color: Colors.grey, fontSize: 16)),
                       ),
                     ),
                     const SizedBox(
@@ -108,21 +92,7 @@ class _SignInState extends State<SignIn> {
                     defaultButton(
                       'Log In',
                       () async {
-                        if(formKey.currentState!.validate()){
-                          // showDialog(
-                          //     context: context,
-                          //     builder: (context) {
-                          //       return Dialog(
-                          //         child: Container(
-                          //           color: Colors.white,
-                          //           height: 200,
-                          //           width: 200,
-                          //           child: Center(
-                          //             child: CircularProgressIndicator(),
-                          //           ),
-                          //         ),
-                          //       );
-                          //     });
+                        if (formKey.currentState!.validate()) {
                           await _signInController.signIn(
                               emailController.text, passwordController.text);
                         }
@@ -135,8 +105,11 @@ class _SignInState extends State<SignIn> {
                     const SizedBox(
                       height: 15,
                     ),
-                    socialButton('Facebook Login',
-                        const FaIcon(FontAwesomeIcons.facebook), darkBlue, () {}),
+                    socialButton(
+                        'Facebook Login',
+                        const FaIcon(FontAwesomeIcons.facebook),
+                        darkBlue,
+                        () {}),
                     const SizedBox(
                       height: 15,
                     ),
@@ -159,7 +132,7 @@ class _SignInState extends State<SignIn> {
                             child: Text(
                               "SignUp",
                               style: TextStyle(
-                                color: brightRed,
+                                color: lightGreen,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),

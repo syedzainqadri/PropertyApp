@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
-import 'package:realestapp/Home/home.dart';
-import 'package:realestapp/Utils/color_scheme.dart';
+import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
+import 'package:lagosabuja/Home/home.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
   var id;

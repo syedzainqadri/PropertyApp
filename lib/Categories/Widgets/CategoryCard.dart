@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Categories/categories.dart';
-import 'package:realestapp/Utils/color_scheme.dart';
+import 'package:lagosabuja/Categories/categories.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class CategoryCard extends StatelessWidget {
   var image;

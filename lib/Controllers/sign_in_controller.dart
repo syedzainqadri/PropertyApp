@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Controllers/categories_controller.dart';
-import 'package:realestapp/Controllers/chat_controller.dart';
-import 'package:realestapp/Controllers/favorite_listing_controller.dart';
-import 'package:realestapp/Controllers/listing_type_controller.dart';
-import 'package:realestapp/Controllers/listings_controller.dart';
-import 'package:realestapp/Controllers/location_controller.dart';
-import 'package:realestapp/Controllers/my_listings_controller.dart';
-import 'package:realestapp/Home/home.dart';
-import 'package:realestapp/Utils/color_scheme.dart';
+import 'package:lagosabuja/Controllers/categories_controller.dart';
+import 'package:lagosabuja/Controllers/chat_controller.dart';
+import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
+import 'package:lagosabuja/Controllers/listing_type_controller.dart';
+import 'package:lagosabuja/Controllers/listings_controller.dart';
+import 'package:lagosabuja/Controllers/location_controller.dart';
+import 'package:lagosabuja/Controllers/my_listings_controller.dart';
+import 'package:lagosabuja/Home/home.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 import '../Models/sign_in_model.dart';
 
 class SignInController extends GetxController {
@@ -19,23 +19,26 @@ class SignInController extends GetxController {
 
   signIn(username, password) async {
     Get.defaultDialog(
-      title: "",
-      content: Container(
-        color: Colors.white,
-        child: Column(
-          children: const [
-             Center(
-              child: CircularProgressIndicator(color: lightGreen,),
-            ),
-             SizedBox(height: 10,),
-             Text(
-              "SigningIn! please wait",
-              style:  TextStyle(color: Colors.black38),
-            )
-          ],
-        ),
-      )
-    );
+        title: "",
+        content: Container(
+          color: Colors.white,
+          child: Column(
+            children: const [
+              Center(
+                child: CircularProgressIndicator(
+                  color: lightGreen,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "SigningIn! please wait",
+                style: TextStyle(color: Colors.black38),
+              )
+            ],
+          ),
+        ));
     var response = await http.post(
       Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/login"),
       headers: <String, String>{

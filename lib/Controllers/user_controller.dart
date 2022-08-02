@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/user_model.dart';
+import 'package:lagosabuja/Models/user_model.dart';
 
 class UserController extends GetxController {
   final token = GetStorage().read('token');

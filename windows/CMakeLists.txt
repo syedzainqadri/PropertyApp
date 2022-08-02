@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(realestapp LANGUAGES CXX)
+project(lagosabuja LANGUAGES CXX)
 
-set(BINARY_NAME "realestapp")
+set(BINARY_NAME "lagosabuja")
 
 cmake_policy(SET CMP0063 NEW)
 

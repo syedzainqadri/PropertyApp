@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:realestapp/Models/all_listing_model.dart';
+import 'package:lagosabuja/Models/all_listing_model.dart';
 
 EditListingModel editListingModelFromJson(String str) =>
     EditListingModel.fromJson(json.decode(str));

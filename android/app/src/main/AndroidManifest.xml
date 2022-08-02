@@ -2,7 +2,7 @@
     package="com.lagosabuja.com">
    <application
         android:requestLegacyExternalStorage="true"
-        android:label="realestapp"
+        android:label="lagosabuja"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         

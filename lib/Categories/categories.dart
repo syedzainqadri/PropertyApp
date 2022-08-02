@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Categories/Widgets/CategoryListingCard.dart';
-import 'package:realestapp/Controllers/listings_controller.dart';
+import 'package:lagosabuja/Categories/Widgets/CategoryListingCard.dart';
+import 'package:lagosabuja/Controllers/listings_controller.dart';
 import '../AddListings/add_listings.dart';
 import '../Utils/color_scheme.dart';
 

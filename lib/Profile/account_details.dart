@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/profile_controller.dart';
-import 'package:realestapp/Controllers/user_controller.dart';
-import 'package:realestapp/Utils/constants.dart';
+import 'package:lagosabuja/Controllers/profile_controller.dart';
+import 'package:lagosabuja/Controllers/user_controller.dart';
+import 'package:lagosabuja/Utils/constants.dart';
 
 import '../Utils/color_scheme.dart';
 
@@ -30,8 +30,6 @@ class _AccountDetailsState extends State<AccountDetails> {
     lastNameController.text = userController.userModel.value.lastName;
     emailController.text = userController.userModel.value.email;
     phoneNoController.text = userController.userModel.value.phone;
-
-
   }
 
   @override
@@ -112,7 +110,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                       height: height * 0.06,
                       width: width * 0.5,
                       child: TextFormField(
-                        validator: (v) => v!.isEmpty? "required" : null,
+                        validator: (v) => v!.isEmpty ? "required" : null,
                         textAlign: TextAlign.start,
                         cursorColor: lightGreen,
                         controller: firstNameController,
@@ -122,8 +120,6 @@ class _AccountDetailsState extends State<AccountDetails> {
                         ),
                       ),
                     ),
-
-
                   ],
                 ),
               ),
@@ -160,7 +156,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                       height: height * 0.06,
                       width: width * 0.5,
                       child: TextFormField(
-                        validator: (v) => v!.isEmpty? "required" : null,
+                        validator: (v) => v!.isEmpty ? "required" : null,
                         textAlign: TextAlign.start,
                         cursorColor: lightGreen,
                         controller: lastNameController,
@@ -222,7 +218,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                       height: height * 0.06,
                       width: width * 0.5,
                       child: TextFormField(
-                        validator: (v) => v!.isEmpty? "required" : null,
+                        validator: (v) => v!.isEmpty ? "required" : null,
                         textAlign: TextAlign.start,
                         cursorColor: lightGreen,
                         controller: emailController,
@@ -268,7 +264,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                       height: height * 0.06,
                       width: width * 0.5,
                       child: TextFormField(
-                        validator: (v) => v!.isEmpty? "required" : null,
+                        validator: (v) => v!.isEmpty ? "required" : null,
                         textAlign: TextAlign.start,
                         cursorColor: lightGreen,
                         controller: phoneNoController,
@@ -288,7 +284,7 @@ class _AccountDetailsState extends State<AccountDetails> {
             Center(
                 child: ElevatedButton(
                     onPressed: () async {
-                      if(formKey.currentState!.validate()){
+                      if (formKey.currentState!.validate()) {
                         await userController.changeProfileDetail(
                             firstNameController.text,
                             lastNameController.text,
@@ -296,7 +292,6 @@ class _AccountDetailsState extends State<AccountDetails> {
                         userController.update();
                         Get.back();
                       }
-
                     },
                     style: ElevatedButton.styleFrom(
                       primary: lightGreen,

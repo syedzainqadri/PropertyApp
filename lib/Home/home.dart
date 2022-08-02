@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:realestapp/Controllers/user_controller.dart';
+import 'package:lagosabuja/Controllers/user_controller.dart';
 import '../AddListings/add_listings.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';
@@ -23,7 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   bool hasAction = true;
-  String title = 'Lagusabuja';
+  String title = 'LagusAbuja';
   late PageController _pageController;
   bool notIntialized = true;
   final MembershipController membershipController =
@@ -52,7 +52,10 @@ class _HomeState extends State<Home> {
               centerTitle: true,
               title: Text(
                 title,
-                style: const TextStyle(color: lightGreen),
+                style: const TextStyle(
+                    color: greenBaseColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
               ),
               leading: Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
@@ -108,7 +111,7 @@ class _HomeState extends State<Home> {
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: CircleAvatar(
-                            backgroundColor: lightGreen,
+                            backgroundColor: greenBaseColor,
                             radius: 30,
                             child: Icon(
                               Icons.add,
@@ -127,7 +130,7 @@ class _HomeState extends State<Home> {
                   setState(() => _currentIndex = index);
                   index == 0
                       ? setState(() {
-                          title = 'Lagusabuja';
+                          title = 'LagusAbuja';
                           hasAction = true;
                         })
                       : index == 1
@@ -145,10 +148,10 @@ class _HomeState extends State<Home> {
                                   hasAction = false;
                                 });
                 },
-                children: <Widget>[
-                  const HomePage(),
-                  const CategoriesPage(),
-                  const ConversationPage(),
+                children: const <Widget>[
+                  HomePage(),
+                  CategoriesPage(),
+                  ConversationPage(),
                   SearchPage(),
                 ],
               ),
@@ -163,25 +166,25 @@ class _HomeState extends State<Home> {
                 BottomNavyBarItem(
                   title: const Text('Home'),
                   icon: const Icon(Icons.home),
-                  activeColor: lightGreen,
+                  activeColor: greenBaseColor,
                   inactiveColor: mediumGrey,
                 ),
                 BottomNavyBarItem(
                   title: const Text('Categories'),
                   icon: const Icon(Icons.category),
-                  activeColor: lightGreen,
+                  activeColor: greenBaseColor,
                   inactiveColor: mediumGrey,
                 ),
                 BottomNavyBarItem(
                   title: const Text('Conversation'),
                   icon: const Icon(Icons.chat),
-                  activeColor: lightGreen,
+                  activeColor: greenBaseColor,
                   inactiveColor: mediumGrey,
                 ),
                 BottomNavyBarItem(
                   title: const Text('Search'),
                   icon: const Icon(Icons.search),
-                  activeColor: lightGreen,
+                  activeColor: greenBaseColor,
                   inactiveColor: mediumGrey,
                 ),
               ],

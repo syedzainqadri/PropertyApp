@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/orders_controller.dart';
-import 'package:realestapp/Profile/Widgets/order_widget.dart';
+import 'package:lagosabuja/Controllers/orders_controller.dart';
+import 'package:lagosabuja/Profile/Widgets/order_widget.dart';
 
 import '../Utils/color_scheme.dart';
 

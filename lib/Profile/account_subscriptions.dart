@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/membership_controller.dart';
-import 'package:realestapp/Models/membership_model.dart';
-import 'package:realestapp/Profile/payment_details.dart';
-import 'package:realestapp/Utils/full_screen_dialog.dart';
+import 'package:lagosabuja/Controllers/membership_controller.dart';
+import 'package:lagosabuja/Models/membership_model.dart';
+import 'package:lagosabuja/Profile/payment_details.dart';
+import 'package:lagosabuja/Utils/full_screen_dialog.dart';
 import '../Controllers/payment_controller.dart';
 import '../Utils/color_scheme.dart';
 
@@ -49,8 +49,8 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
         child: Obx(
           () => ListView.builder(
               itemCount: membershipController.membershipPlans.length,
-              itemBuilder: ((context, index) =>
-                  membershipCard(_membership.membershipPlans.value[index], index))),
+              itemBuilder: ((context, index) => membershipCard(
+                  _membership.membershipPlans.value[index], index))),
         ),
       ),
     );
@@ -60,9 +60,7 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
     return GestureDetector(
       onTap: () async {
         selectedIndex = index;
-        setState(() {
-
-        });
+        setState(() {});
         CustomFullScreenDialog.showDialog();
         await paymentController.getPaymentGateways();
         CustomFullScreenDialog.cancelDialog();
@@ -80,12 +78,14 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
           height: 200,
           child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: selectedIndex == index ? Colors.green : Colors.transparent),
-              borderRadius: BorderRadius.circular(20)
-            ),
+                border: Border.all(
+                    color: selectedIndex == index
+                        ? Colors.green
+                        : Colors.transparent),
+                borderRadius: BorderRadius.circular(20)),
             child: Card(
-              shape:
-                  RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +95,6 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                     width: double.infinity,
                     decoration: const BoxDecoration(
                       color: lightGreen,
-
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
@@ -163,8 +162,8 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: [
-                                            Text(membership
-                                                .promotion.membership.featured.ads
+                                            Text(membership.promotion.membership
+                                                .featured.ads
                                                 .toString()),
                                             const SizedBox(
                                               width: 15,
@@ -188,20 +187,20 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                                       children: [
                                         const Text('Bump Up'),
                                         Padding(
-                                          padding:
-                                              const EdgeInsets.only(right: 18.0),
+                                          padding: const EdgeInsets.only(
+                                              right: 18.0),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
-                                              Text(membership
-                                                  .promotion.membership.bumpUp.ads
+                                              Text(membership.promotion
+                                                  .membership.bumpUp.ads
                                                   .toString()),
                                               const SizedBox(
                                                 width: 15,
                                               ),
-                                              Text(membership.promotion.membership
-                                                  .bumpUp.validate
+                                              Text(membership.promotion
+                                                  .membership.bumpUp.validate
                                                   .toString()),
                                             ],
                                           ),
@@ -230,8 +229,8 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                                             const SizedBox(
                                               width: 15,
                                             ),
-                                            Text(membership
-                                                .promotion.membership.top.validate
+                                            Text(membership.promotion.membership
+                                                .top.validate
                                                 .toString()),
                                           ],
                                         ),

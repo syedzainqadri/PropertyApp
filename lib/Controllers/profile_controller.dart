@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Controllers/sign_in_controller.dart';
+import 'package:lagosabuja/Controllers/sign_in_controller.dart';
 
 class ProfileController extends GetxController {
   SignInController signInController = Get.put(SignInController());

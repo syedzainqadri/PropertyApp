@@ -72,6 +72,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'lagosabuja-8c93b.appspot.com',
     iosClientId:
         '731281729322-7o7e4ld0suscferi5tbt0dse5rdq4o5k.apps.googleusercontent.com',
-    iosBundleId: 'com.classima.realestapp',
+    iosBundleId: 'com.classima.lagosabuja',
   );
 }

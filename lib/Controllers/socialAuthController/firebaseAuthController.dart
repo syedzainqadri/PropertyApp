@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Controllers/socialAuthController/socialAuthController.dart';
+import 'package:lagosabuja/Controllers/socialAuthController/socialAuthController.dart';
 
 class FirebaseAuthController extends GetxController {
   var isDataSubmitting = false.obs;

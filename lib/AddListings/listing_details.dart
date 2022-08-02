@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:realestapp/Chat/chat_ui.dart';
-import 'package:realestapp/Controllers/EmailController.dart';
-import 'package:realestapp/Controllers/listing_detail_controller.dart';
-import 'package:realestapp/Utils/constants.dart';
+import 'package:lagosabuja/Chat/chat_ui.dart';
+import 'package:lagosabuja/Controllers/EmailController.dart';
+import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
+import 'package:lagosabuja/Utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Models/review_model.dart';
 import '../Utils/color_scheme.dart';
@@ -178,6 +178,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                   child: Text(
                     "NGN ${listingDetailsController.listingDetail.value.price}",
                     style: const TextStyle(
+                      color: lightGreen,
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                     ),
@@ -209,122 +210,13 @@ class _ListingDetailsState extends State<ListingDetails> {
                   )),
             ),
 
-            /// old design
-            // Padding(
-            //   padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.center,
-            //     crossAxisAlignment: CrossAxisAlignment.center,
-            //     children: [
-            //       const Expanded(
-            //         child: Divider(
-            //           color: Colors.greenAccent,
-            //           thickness: 3,
-            //         ),
-            //       ),
-            //       //TODO: redesign this section as mentioned in documents
-            //       Padding(
-            //         padding: const EdgeInsets.only(right: 8.0, left: 8.0),
-            //         child: Text(
-            //           'Features'.toUpperCase(),
-            //           style: const TextStyle(fontSize: 20),
-            //         ),
-            //       ),
-            //       const Expanded(
-            //         child: Divider(
-            //           color: Colors.greenAccent,
-            //           thickness: 3,
-            //         ),
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
-            //   child: SizedBox(
-            //     height: height * 0.3,
-            //     child: Card(
-            //       elevation: 1,
-            //       child: GridView.builder(
-            //           physics: const NeverScrollableScrollPhysics(),
-            //           gridDelegate:
-            //               const SliverGridDelegateWithFixedCrossAxisCount(
-            //             crossAxisCount: 4,
-            //           ),
-            //           itemCount: listingDetailsController
-            //                   .listingDetail.value.customFields.length -
-            //               1,
-            //           itemBuilder: (context, index) {
-            //             return Padding(
-            //               padding: const EdgeInsets.only(top: 10.0),
-            //               child: Column(
-            //                 children: [
-            //                   Container(
-            //                     decoration: BoxDecoration(
-            //                       color: Colors.white,
-            //                       borderRadius: BorderRadius.circular(5),
-            //                       boxShadow: [
-            //                         BoxShadow(
-            //                           color: Colors.grey.shade300,
-            //                           offset: const Offset(
-            //                             3.0,
-            //                             3.0,
-            //                           ),
-            //                           blurRadius: 2.0,
-            //                           spreadRadius: 1.0,
-            //                         ), //BoxShadow//BoxShadow
-            //                       ],
-            //                     ),
-            //                     child: const Padding(
-            //                       padding: EdgeInsets.all(8.0),
-            //                       child: Icon(
-            //                         Icons.garage,
-            //                         color: Colors.greenAccent,
-            //                       ),
-            //                     ),
-            //                   ),
-            //                   Padding(
-            //                     padding: const EdgeInsets.only(top: 8.0),
-            //                     child: Text(
-            //                       listingDetailsController.listingDetail.value
-            //                           .customFields[index].label,
-            //                       overflow: TextOverflow.fade,
-            //                       style: const TextStyle(
-            //                           fontSize: 14,
-            //                           fontWeight: FontWeight.w500),
-            //                     ),
-            //                   ),
-            //                   Flexible(
-            //                     child: Container(
-            //                       child: Padding(
-            //                         padding: const EdgeInsets.only(top: 8.0),
-            //                         child: Text(
-            //                           listingDetailsController.listingDetail
-            //                               .value.customFields[index].value
-            //                               .toString()
-            //                               .toUpperCase(),
-            //                           maxLines: 1,
-            //                           style: const TextStyle(fontSize: 12),
-            //                           overflow: TextOverflow.clip,
-            //                           softWrap: false,
-            //                         ),
-            //                       ),
-            //                     ),
-            //                   ),
-            //                 ],
-            //               ),
-            //             );
-            //           }),
-            //     ),
-            //   ),
-            // ),
             /// new design like zameen.com
             const SizedBox(
               height: 10,
             ),
             Stack(
               children: [
-                SizedBox(
+                const SizedBox(
                   //color: Colors.green,
                   width: double.infinity,
                   height: 260,
@@ -356,30 +248,6 @@ class _ListingDetailsState extends State<ListingDetails> {
                                 padding: const EdgeInsets.only(top: 10.0),
                                 child: Column(
                                   children: [
-                                    // Container(
-                                    //   decoration: BoxDecoration(
-                                    //     color: Colors.white,
-                                    //     borderRadius: BorderRadius.circular(5),
-                                    //     boxShadow: [
-                                    //       BoxShadow(
-                                    //         color: Colors.grey.shade300,
-                                    //         offset: const Offset(
-                                    //           3.0,
-                                    //           3.0,
-                                    //         ),
-                                    //         blurRadius: 2.0,
-                                    //         spreadRadius: 1.0,
-                                    //       ), //BoxShadow//BoxShadow
-                                    //     ],
-                                    //   ),
-                                    //   child: const Padding(
-                                    //     padding: EdgeInsets.all(8.0),
-                                    //     child: Icon(
-                                    //       Icons.garage,
-                                    //       color: Colors.greenAccent,
-                                    //     ),
-                                    //   ),
-                                    // ),
                                     Icon(
                                       listingDetailsController
                                                   .listingDetail

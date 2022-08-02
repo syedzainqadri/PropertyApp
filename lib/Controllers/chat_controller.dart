@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/listing_messages_model.dart';
-import 'package:realestapp/Models/startConversationModel.dart';
-import 'package:realestapp/Utils/full_screen_dialog.dart';
+import 'package:lagosabuja/Models/listing_messages_model.dart';
+import 'package:lagosabuja/Models/startConversationModel.dart';
+import 'package:lagosabuja/Utils/full_screen_dialog.dart';
 import '../Models/all_chat_model.dart';
 
 class ChatController extends GetxController {
@@ -87,7 +87,8 @@ class ChatController extends GetxController {
       },
     );
     print(response.body);
-    response.body.contains('false') ? isLoading.value = false
+    response.body.contains('false')
+        ? isLoading.value = false
         : messagesList.value = messagesFromJson(response.body);
     isLoading.value = false;
   }

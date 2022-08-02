@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/payment_model.dart';
+import 'package:lagosabuja/Models/payment_model.dart';
 
 class PaymentController extends GetxController {
   var paymentGateways = List<Payment>.empty(growable: true).obs;

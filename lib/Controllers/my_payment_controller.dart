@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/my_payments_model.dart';
+import 'package:lagosabuja/Models/my_payments_model.dart';
 
 class MyPaymentsController extends GetxController {
   var myPayments = MyPayments().obs;

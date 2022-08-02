@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/EditlistingModel.dart';
-import 'package:realestapp/Models/selected_fields_model.dart';
+import 'package:lagosabuja/Models/EditlistingModel.dart';
+import 'package:lagosabuja/Models/selected_fields_model.dart';
 
 class EditListingController extends GetxController {
   var isLoading = false.obs;

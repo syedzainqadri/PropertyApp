@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/membership_controller.dart';
-import 'package:realestapp/Controllers/plansController.dart';
-import 'package:realestapp/Models/membership_model.dart';
-import 'package:realestapp/Models/promotion_Plans.dart';
-import 'package:realestapp/Profile/payment_details.dart';
+import 'package:lagosabuja/Controllers/membership_controller.dart';
+import 'package:lagosabuja/Controllers/plansController.dart';
+import 'package:lagosabuja/Models/membership_model.dart';
+import 'package:lagosabuja/Models/promotion_Plans.dart';
+import 'package:lagosabuja/Profile/payment_details.dart';
 import '../Controllers/payment_controller.dart';
 import '../Utils/color_scheme.dart';
 

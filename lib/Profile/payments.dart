@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/my_payment_controller.dart';
-import 'package:realestapp/Profile/Widgets/order_widget.dart';
+import 'package:lagosabuja/Controllers/my_payment_controller.dart';
+import 'package:lagosabuja/Profile/Widgets/order_widget.dart';
 
 import '../Utils/color_scheme.dart';
 

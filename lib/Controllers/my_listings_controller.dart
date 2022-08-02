@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/all_listing_model.dart';
+import 'package:lagosabuja/Models/all_listing_model.dart';
 
 class MyListingController extends GetxController {
   var isLoading = false.obs;

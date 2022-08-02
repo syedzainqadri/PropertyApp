@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
-import 'package:realestapp/AddListings/edit_listing.dart';
-import 'package:realestapp/AddListings/editlisting.dart';
-import 'package:realestapp/AddListings/listing_details.dart';
-import 'package:realestapp/BuyPromotions/buyPromotions.dart';
-import 'package:realestapp/Controllers/deleteListingController.dart';
-import 'package:realestapp/Controllers/favorite_listing_controller.dart';
-import 'package:realestapp/Controllers/listing_detail_controller.dart';
-import 'package:realestapp/Controllers/markAsSoldController.dart';
-import 'package:realestapp/Controllers/review_controller.dart';
-import 'package:realestapp/Profile/my_listings.dart';
-import 'package:realestapp/Utils/color_scheme.dart';
+import 'package:lagosabuja/AddListings/edit_listing.dart';
+import 'package:lagosabuja/AddListings/editlisting.dart';
+import 'package:lagosabuja/AddListings/listing_details.dart';
+import 'package:lagosabuja/BuyPromotions/buyPromotions.dart';
+import 'package:lagosabuja/Controllers/deleteListingController.dart';
+import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
+import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
+import 'package:lagosabuja/Controllers/markAsSoldController.dart';
+import 'package:lagosabuja/Controllers/review_controller.dart';
+import 'package:lagosabuja/Profile/my_listings.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class MyListingCard extends StatelessWidget {
   var image;

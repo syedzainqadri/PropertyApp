@@ -3,17 +3,17 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:realestapp/Bindings/bindings.dart';
-import 'package:realestapp/Controllers/featuredListings.dart';
-import 'package:realestapp/Controllers/location_controller.dart';
-import 'package:realestapp/Controllers/categories_controller.dart';
-import 'package:realestapp/Controllers/listings_controller.dart';
-import 'package:realestapp/Controllers/my_listings_controller.dart';
-import 'package:realestapp/Controllers/my_payment_controller.dart';
-import 'package:realestapp/Controllers/orders_controller.dart';
-import 'package:realestapp/Controllers/plansController.dart';
-import 'package:realestapp/Controllers/user_controller.dart';
-import 'package:realestapp/Models/pushNotification_model.dart';
+import 'package:lagosabuja/Bindings/bindings.dart';
+import 'package:lagosabuja/Controllers/featuredListings.dart';
+import 'package:lagosabuja/Controllers/location_controller.dart';
+import 'package:lagosabuja/Controllers/categories_controller.dart';
+import 'package:lagosabuja/Controllers/listings_controller.dart';
+import 'package:lagosabuja/Controllers/my_listings_controller.dart';
+import 'package:lagosabuja/Controllers/my_payment_controller.dart';
+import 'package:lagosabuja/Controllers/orders_controller.dart';
+import 'package:lagosabuja/Controllers/plansController.dart';
+import 'package:lagosabuja/Controllers/user_controller.dart';
+import 'package:lagosabuja/Models/pushNotification_model.dart';
 import 'Auth/sign_in.dart';
 import 'Controllers/favorite_listing_controller.dart';
 import 'Controllers/listing_type_controller.dart';
@@ -53,17 +53,15 @@ void main() async {
         dataBody: message.data['body'],
       );
       AndroidNotification android = message.notification!.android!;
-      if (android != null) {
-        showSimpleNotification(
-          Text(notification.title!),
-          leading: const Icon(Icons.notification_add),
-          subtitle: Text(
-            notification.body!,
-          ),
-          background: Colors.blue,
-          duration: const Duration(seconds: 2),
-        );
-      }
+      showSimpleNotification(
+        Text(notification.title!),
+        leading: const Icon(Icons.notification_add),
+        subtitle: Text(
+          notification.body!,
+        ),
+        background: lightGreen,
+        duration: const Duration(seconds: 2),
+      );
     });
   } else {
     print('permission denied');
@@ -78,20 +76,18 @@ void main() async {
     );
     // RemoteNotification notification = message.notification!;
     AndroidNotification android = message.notification!.android!;
-    if (android != null) {
-      showSimpleNotification(
-        Text(notification.title!),
-        leading: Image.asset(
-          'assets/images/logo.png',
-          height: 50,
-        ),
-        subtitle: Text(
-          notification.body!,
-        ),
-        background: Colors.blue,
-        duration: const Duration(seconds: 2),
-      );
-    }
+    showSimpleNotification(
+      Text(notification.title!),
+      leading: Image.asset(
+        'assets/images/logo.png',
+        height: 50,
+      ),
+      subtitle: Text(
+        notification.body!,
+      ),
+      background: Colors.blue,
+      duration: const Duration(seconds: 2),
+    );
   });
 
   checkForInitialMessage() async {
@@ -157,24 +153,15 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.location_pin,
-              color: lightGreen,
-              size: 120,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
             const Text(
-              'Welcome to Real Estate',
+              'Welcome',
               style: TextStyle(
                 color: lightGreen,
                 fontSize: 28,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(
-              height: 45,
-            ),
+            Image.asset('assets/images/logo4.png'),
             defaultButton('Log In', () {
               Get.to(const SignIn());
             }),

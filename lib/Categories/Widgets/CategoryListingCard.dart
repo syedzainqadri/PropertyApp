@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:realestapp/AddListings/listing_details.dart';
-import 'package:realestapp/Controllers/favorite_listing_controller.dart';
-import 'package:realestapp/Controllers/listing_detail_controller.dart';
-import 'package:realestapp/Controllers/review_controller.dart';
-import 'package:realestapp/Utils/color_scheme.dart';
-import 'package:realestapp/Utils/full_screen_dialog.dart';
+import 'package:lagosabuja/AddListings/listing_details.dart';
+import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
+import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
+import 'package:lagosabuja/Controllers/review_controller.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
+import 'package:lagosabuja/Utils/full_screen_dialog.dart';
 
 class CategoryListingCard extends StatelessWidget {
   var image;

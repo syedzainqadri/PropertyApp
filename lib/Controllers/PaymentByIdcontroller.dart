@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/payment_model.dart';
-import 'package:realestapp/Models/paymenyByIdModel.dart';
+import 'package:lagosabuja/Models/payment_model.dart';
+import 'package:lagosabuja/Models/paymenyByIdModel.dart';
 
 import '../Models/listing_detail_model.dart';
 

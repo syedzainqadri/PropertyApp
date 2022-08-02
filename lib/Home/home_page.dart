@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/AddListings/featuredListingCard.dart';
-import 'package:realestapp/Controllers/featuredListings.dart';
-import 'package:realestapp/Home/widgets/CategoryCard.dart';
+import 'package:lagosabuja/AddListings/featuredListingCard.dart';
+import 'package:lagosabuja/Controllers/featuredListings.dart';
+import 'package:lagosabuja/Home/widgets/CategoryCard.dart';
 import '../AddListings/list_widget.dart';
 import '../Controllers/categories_controller.dart';
 import '../Controllers/listings_controller.dart';
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                         featuredListingController.featuredListing.value.data ==
                                 null
                             ? const CircularProgressIndicator(
-                                color: Colors.greenAccent,
+                                color: greenBaseColor,
                               )
                             : SizedBox(
                                 height: 140,
@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
             Obx(
               () => listingController.allListings.value.data == null
                   ? const CircularProgressIndicator(
-                      color: Colors.greenAccent,
+                      color: greenBaseColor,
                     )
                   : GridView.builder(
                       physics: const ScrollPhysics(),

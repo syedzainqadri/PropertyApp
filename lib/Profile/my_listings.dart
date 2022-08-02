@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/deleteListingController.dart';
-import 'package:realestapp/Controllers/listings_controller.dart';
-import 'package:realestapp/Controllers/my_listings_controller.dart';
-import 'package:realestapp/Profile/Widgets/myLisitngCard.dart';
+import 'package:lagosabuja/Controllers/deleteListingController.dart';
+import 'package:lagosabuja/Controllers/listings_controller.dart';
+import 'package:lagosabuja/Controllers/my_listings_controller.dart';
+import 'package:lagosabuja/Profile/Widgets/myLisitngCard.dart';
 import '../Utils/color_scheme.dart';
 
 class MyListings extends StatefulWidget {

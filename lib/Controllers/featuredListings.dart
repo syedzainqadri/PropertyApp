@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:realestapp/Models/featuredLisitngModel.dart';
+import 'package:lagosabuja/Models/featuredLisitngModel.dart';
 
 class FeaturedListingController extends GetxController {
   var isLoading = false.obs;

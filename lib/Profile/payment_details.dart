@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Controllers/PaymentByIdcontroller.dart';
-import 'package:realestapp/Controllers/membership_controller.dart';
-import 'package:realestapp/Controllers/payment_controller.dart';
-import 'package:realestapp/Models/payment_model.dart';
-import 'package:realestapp/Models/paymenyByIdModel.dart';
-import 'package:realestapp/Profile/PaymentResultScreen.dart';
+import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
+import 'package:lagosabuja/Controllers/membership_controller.dart';
+import 'package:lagosabuja/Controllers/payment_controller.dart';
+import 'package:lagosabuja/Models/payment_model.dart';
+import 'package:lagosabuja/Models/paymenyByIdModel.dart';
+import 'package:lagosabuja/Profile/PaymentResultScreen.dart';
 
 import '../Utils/color_scheme.dart';
 
@@ -145,20 +145,19 @@ class _PaymentDetailsState extends State<PaymentDetails> {
             height: 50,
             child: ElevatedButton(
               onPressed: () async {
-                if(gatewayId == null){
+                if (gatewayId == null) {
                   Get.defaultDialog(
-                    title: "Oops",
-                    content: Text(
-                      "Please select payment method to proceed",
-                    ),
-                    actions: [
-                      MaterialButton(
-                        onPressed: () => Get.back(),
-                        child: Text("OK"),
-                      )
-                    ]
-                  );
-                }else{
+                      title: "Oops",
+                      content: Text(
+                        "Please select payment method to proceed",
+                      ),
+                      actions: [
+                        MaterialButton(
+                          onPressed: () => Get.back(),
+                          child: Text("OK"),
+                        )
+                      ]);
+                } else {
                   await membershipController.membershipCheckout(
                       widget.type, widget.type, gatewayId, widget.id);
                   if (membershipController.checkoutData.value.result ==
@@ -171,8 +170,8 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         'Order Errod', "Order Not Places. Please Try Again",
                         snackPosition: SnackPosition.BOTTOM);
                   }
-                  await paymentDetailsController
-                      .getPaymentById(membershipController.checkoutData.value.id);
+                  await paymentDetailsController.getPaymentById(
+                      membershipController.checkoutData.value.id);
                   Get.to(() => PaymentResultScreen());
                 }
               },

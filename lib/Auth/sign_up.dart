@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:realestapp/Auth/sign_in.dart';
-import 'package:realestapp/Controllers/sign_up_controller.dart';
+import 'package:lagosabuja/Auth/sign_in.dart';
+import 'package:lagosabuja/Controllers/sign_up_controller.dart';
 import '../Models/sign_in_model.dart';
 import '../Utils/constants.dart';
 import '../Utils/color_scheme.dart';
@@ -79,12 +79,10 @@ class _SignUpState extends State<SignUp> {
                     ),
                     //TODO:obsecure cannot be multiline replace these widgets.
 
-
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(8)
-                      ),
+                          borderRadius: BorderRadius.circular(8)),
                       child: TextFormField(
                         keyboardType: TextInputType.text,
                         validator: (v) => v!.isEmpty ? "Required" : null,
@@ -93,7 +91,8 @@ class _SignUpState extends State<SignUp> {
                         cursorColor: lightGreen,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 15, bottom: 20, top: 10),
+                            contentPadding:
+                                EdgeInsets.only(left: 15, bottom: 20, top: 10),
                             border: InputBorder.none,
                             disabledBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -101,11 +100,8 @@ class _SignUpState extends State<SignUp> {
                             fillColor: white,
                             labelText: "Password",
                             alignLabelWithHint: true,
-                            labelStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 16
-                            )
-                        ),
+                            labelStyle:
+                                TextStyle(color: Colors.grey, fontSize: 16)),
                       ),
                     ),
 
@@ -113,12 +109,10 @@ class _SignUpState extends State<SignUp> {
                       height: 15,
                     ),
 
-
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(8)
-                      ),
+                          borderRadius: BorderRadius.circular(8)),
                       child: TextFormField(
                         keyboardType: TextInputType.text,
                         validator: (v) => v!.isEmpty ? "Required" : null,
@@ -127,7 +121,8 @@ class _SignUpState extends State<SignUp> {
                         cursorColor: lightGreen,
                         textInputAction: TextInputAction.next,
                         decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.only(left: 15, bottom: 20, top: 10),
+                            contentPadding:
+                                EdgeInsets.only(left: 15, bottom: 20, top: 10),
                             border: InputBorder.none,
                             disabledBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
@@ -135,11 +130,8 @@ class _SignUpState extends State<SignUp> {
                             fillColor: white,
                             labelText: "Confirm Password",
                             alignLabelWithHint: true,
-                            labelStyle: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 16
-                            )
-                        ),
+                            labelStyle:
+                                TextStyle(color: Colors.grey, fontSize: 16)),
                       ),
                     ),
                     const SizedBox(
