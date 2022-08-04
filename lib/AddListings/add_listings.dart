@@ -789,7 +789,9 @@ class _AddListingState extends State<AddListing> {
                   Get.to(() => const MyListings());
                   Get.snackbar('Listing Posted',
                       'Your listing is pending for Approval from Admin',
-                      snackPosition: SnackPosition.BOTTOM);
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: lightGreen,
+                      colorText: white);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: lightGreen,
@@ -872,7 +874,9 @@ class _AddListingState extends State<AddListing> {
     print(latitude);
     print(longitude);
     Get.snackbar('Success', "Your Current Location is selected",
-        snackPosition: SnackPosition.BOTTOM);
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: lightGreen,
+        colorText: white);
 
     print(currentLocation.toString());
   }

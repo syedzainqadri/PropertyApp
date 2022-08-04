@@ -28,7 +28,6 @@ import '../Models/Categories/category_model.dart' hide CatIcon;
 import '../Models/selected_fields_model.dart';
 import '../Utils/color_scheme.dart';
 import '../Utils/constants.dart';
-import 'select_country.dart';
 
 class EditListing extends StatefulWidget {
   var listingId;
@@ -749,7 +748,9 @@ class _EditListingState extends State<EditListing> {
                   Get.to(() => const MyListings());
                   Get.snackbar('Listing Posted',
                       'Your listing is pending for Approval from Admin',
-                      snackPosition: SnackPosition.BOTTOM);
+                      snackPosition: SnackPosition.BOTTOM,
+                      backgroundColor: lightGreen,
+                      colorText: white);
                 },
                 style: ElevatedButton.styleFrom(
                   primary: lightGreen,

@@ -396,7 +396,9 @@ class _EditListingScreenState extends State<EditListingScreen> {
                         Get.to(() => const MyListings());
                         Get.snackbar('Listing Posted',
                             'Your listing is pending for Approval from Admin',
-                            snackPosition: SnackPosition.BOTTOM);
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: lightGreen,
+                            colorText: white);
                       },
                       style: ElevatedButton.styleFrom(
                         primary: lightGreen,

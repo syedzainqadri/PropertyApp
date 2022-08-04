@@ -8,6 +8,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Controllers/socialAuthController/socialAuthController.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class FirebaseAuthController extends GetxController {
   var isDataSubmitting = false.obs;
@@ -26,7 +27,7 @@ class FirebaseAuthController extends GetxController {
 
   User? get userGetter => firebaseUser.value;
 
-  GoogleSignIn _googleSignIn = GoogleSignIn(
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: [
       'email',
       'profile',
@@ -44,11 +45,10 @@ class FirebaseAuthController extends GetxController {
       UserCredential authResult =
           await auth.signInWithCredential(authCredential);
       // await SocialLoginController().login(authResult.user!.email!);
-      Get.snackbar(
-        "SignedIn",
-        "Signedin Successfully",
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      Get.snackbar("SignedIn", "Signedin Successfully",
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: lightGreen,
+          colorText: white);
       print(googleAuth.idToken);
       print(googleAuth.accessToken);
       await socialSignInController.signInWithGoogle(googleAuth.idToken);
@@ -125,7 +125,9 @@ class FirebaseAuthController extends GetxController {
       // await Get.offAllNamed(Paths.authView);
     } catch (e) {
       Get.snackbar("Error in Signing Out", e.toString(),
-          snackPosition: SnackPosition.BOTTOM);
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.red,
+          colorText: white);
     }
   }
 }

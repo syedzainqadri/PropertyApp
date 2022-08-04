@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/user_model.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class UserController extends GetxController {
   final token = GetStorage().read('token');
@@ -59,13 +60,10 @@ class UserController extends GetxController {
     );
     print(response.body);
     if (response.statusCode == 200) {
-      Get.snackbar(
-        'Success',
-        'Password reset link has been sent to your email',
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.green,
-        borderRadius: 10,
-      );
+      Get.snackbar('Success', 'Password reset link has been sent to your email',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: lightGreen,
+          colorText: white);
     } else {
       Get.snackbar(
         'Error',

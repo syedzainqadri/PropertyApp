@@ -21,74 +21,88 @@ class _MyListingsState extends State<MyListings> {
       Get.put(MyListingController());
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        title: const Text(
-          'My Listings',
-          style: TextStyle(color: lightGreen),
-        ),
-        leading: GestureDetector(
-            onTap: () {
-              Get.back();
-            },
-            child: const Icon(
-              Icons.navigate_before,
-              color: lightGreen,
-              size: 35,
-            )),
-      ),
-      body: Obx(() {
-        return myListingController.isLoading.value == true
-            ? const Center(
-                child: CircularProgressIndicator(
-                color: lightGreen,
-              ))
-            : ListView.builder(
-                padding: const EdgeInsets.only(left: 18.0, right: 18),
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: myListingController.myListings.value.data?.length,
-                itemBuilder: (context, index) {
-                  var items = myListingController.myListings.value.data;
-                  return Dismissible(
-                    key: Key(myListingController
-                        .myListings.value.data![index].listingId
-                        .toString()),
-                    onDismissed: (direction) {
-                      myListingController.refresh();
-                      deleteListingController
-                          .deleteListing(items![index].listingId.toString());
-                      setState(() {
-                        items.removeAt(index);
-                      });
-                    },
-                    background: Container(
-                      color: Colors.red,
-                    ),
-                    child: MyListingCard(
-                        image: myListingController
-                            .myListings.value.data![index].images,
-                        title: myListingController
-                            .myListings.value.data![index].title
-                            .toString(),
-                        city: myListingController.myListings.value.data![index]
-                            .contact!.locations![0].name
-                            .toString(),
-                        price: myListingController
-                            .myListings.value.data![index].price
-                            .toString(),
-                        isFovorite: false,
-                        description: '',
-                        listingId: myListingController
-                            .myListings.value.data![index].listingId),
-                  );
-                },
-              );
-      }),
-    );
+    return myListingController.myListings.value.data == null
+        ? const Scaffold(
+            body: Center(
+              child: Text(
+                'You Have Not Posted Any Thing Yet',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: lightGreen,
+                ),
+              ),
+            ),
+          )
+        : Scaffold(
+            appBar: AppBar(
+              backgroundColor: transparent,
+              elevation: 0.0,
+              centerTitle: true,
+              title: const Text(
+                'My Listings',
+                style: TextStyle(color: lightGreen),
+              ),
+              leading: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: const Icon(
+                    Icons.navigate_before,
+                    color: lightGreen,
+                    size: 35,
+                  )),
+            ),
+            body: Obx(() {
+              return myListingController.isLoading.value == true
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                      color: lightGreen,
+                    ))
+                  : ListView.builder(
+                      padding: const EdgeInsets.only(left: 18.0, right: 18),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount:
+                          myListingController.myListings.value.data?.length,
+                      itemBuilder: (context, index) {
+                        var items = myListingController.myListings.value.data;
+                        return Dismissible(
+                          key: Key(myListingController
+                              .myListings.value.data![index].listingId
+                              .toString()),
+                          onDismissed: (direction) {
+                            myListingController.refresh();
+                            deleteListingController.deleteListing(
+                                items![index].listingId.toString());
+                            setState(() {
+                              items.removeAt(index);
+                            });
+                          },
+                          background: Container(
+                            color: Colors.red,
+                          ),
+                          child: MyListingCard(
+                              image: myListingController
+                                  .myListings.value.data![index].images,
+                              title: myListingController
+                                  .myListings.value.data![index].title
+                                  .toString(),
+                              city: myListingController.myListings.value
+                                  .data![index].contact!.locations![0].name
+                                  .toString(),
+                              price: myListingController
+                                  .myListings.value.data![index].price
+                                  .toString(),
+                              isFovorite: false,
+                              description: '',
+                              listingId: myListingController
+                                  .myListings.value.data![index].listingId),
+                        );
+                      },
+                    );
+            }),
+          );
   }
 
   void doNothing(BuildContext context) {}

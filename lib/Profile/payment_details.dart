@@ -148,13 +148,13 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 if (gatewayId == null) {
                   Get.defaultDialog(
                       title: "Oops",
-                      content: Text(
+                      content: const Text(
                         "Please select payment method to proceed",
                       ),
                       actions: [
                         MaterialButton(
                           onPressed: () => Get.back(),
-                          child: Text("OK"),
+                          child: const Text("OK"),
                         )
                       ]);
                 } else {
@@ -164,11 +164,15 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       "success") {
                     Get.snackbar('Order Places',
                         "Please Make The Payment According to Instructions",
-                        snackPosition: SnackPosition.BOTTOM);
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: lightGreen,
+                        colorText: white);
                   } else {
                     Get.snackbar(
-                        'Order Errod', "Order Not Places. Please Try Again",
-                        snackPosition: SnackPosition.BOTTOM);
+                        'Order Error', "Order Not Places. Please Try Again",
+                        snackPosition: SnackPosition.BOTTOM,
+                        backgroundColor: Colors.red,
+                        colorText: white);
                   }
                   await paymentDetailsController.getPaymentById(
                       membershipController.checkoutData.value.id);

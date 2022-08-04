@@ -8,7 +8,6 @@ import 'package:lagosabuja/Controllers/featuredListings.dart';
 import 'package:lagosabuja/Controllers/location_controller.dart';
 import 'package:lagosabuja/Controllers/categories_controller.dart';
 import 'package:lagosabuja/Controllers/listings_controller.dart';
-import 'package:lagosabuja/Controllers/my_listings_controller.dart';
 import 'package:lagosabuja/Controllers/my_payment_controller.dart';
 import 'package:lagosabuja/Controllers/orders_controller.dart';
 import 'package:lagosabuja/Controllers/plansController.dart';
@@ -108,7 +107,7 @@ void main() async {
     Get.put(ListingController());
     Get.put(FavoriteListingController());
     Get.put(FeaturedListingController());
-    Get.put(MyListingController());
+    // Get.put(MyListingController());
     Get.put(CategoriesController());
     Get.put(LocationsController());
     Get.put(ListingTypeController());
