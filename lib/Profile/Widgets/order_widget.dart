@@ -3,10 +3,11 @@ import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
 import 'package:lagosabuja/Profile/PaymentResultScreen.dart';
 import 'package:lagosabuja/Profile/order_detail_screen.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class OrderWidget extends StatefulWidget {
   final orderId, title, price, status, method, createdDate;
-  OrderWidget(
+  const OrderWidget(
       {Key? key,
       required this.orderId,
       required this.title,
@@ -61,7 +62,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Order Number :',
                       style: TextStyle(
-                          color: Colors.greenAccent,
+                          color: lightGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
@@ -78,7 +79,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Payment Method :',
                       style: TextStyle(
-                          color: Colors.greenAccent,
+                          color: lightGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
@@ -95,7 +96,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Order Ammount :',
                       style: TextStyle(
-                          color: Colors.greenAccent,
+                          color: lightGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
@@ -112,7 +113,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Order Status :',
                       style: TextStyle(
-                          color: Colors.greenAccent,
+                          color: lightGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
@@ -129,7 +130,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Time Created :',
                       style: TextStyle(
-                          color: Colors.greenAccent,
+                          color: lightGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),

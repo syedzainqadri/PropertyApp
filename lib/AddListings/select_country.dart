@@ -47,7 +47,10 @@ class _SelectCountryState extends State<SelectCountry> {
       ),
       body: Obx(
         () => locationsController.isLoading.value
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(
+                color: lightGreen,
+              ))
             : Padding(
                 padding: const EdgeInsets.only(
                     top: 18.0, bottom: 18.0, right: 20, left: 20),

@@ -23,8 +23,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
     final categoriesController = Get.find<CategoriesController>();
     return Obx(
       () => categoriesController.categories == null
-          ? CircularProgressIndicator(
-              color: Colors.greenAccent,
+          ? const CircularProgressIndicator(
+              color: lightGreen,
             )
           : ListView.builder(
               itemCount: categoriesController.categories.length,

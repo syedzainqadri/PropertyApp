@@ -23,7 +23,7 @@ class PaymentResultScreen extends StatelessWidget {
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
-            Get.to(() => Home());
+            Get.to(() => const Home());
           },
           child: const Icon(
             Icons.navigate_before,
@@ -52,9 +52,12 @@ class PaymentResultScreen extends StatelessWidget {
                       orderDetails.paymentDetail.value.id != null
                           ? Text(
                               orderDetails.paymentDetail.value.id.toString(),
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             )
-                          : const CircularProgressIndicator(),
+                          : const CircularProgressIndicator(
+                              color: lightGreen,
+                            ),
                     ],
                   ),
                 ),
@@ -88,7 +91,9 @@ class PaymentResultScreen extends StatelessWidget {
                       orderDetails.paymentDetail.value.price != null
                           ? Text(
                               "\$ ${orderDetails.paymentDetail.value.price.toString()}")
-                          : const CircularProgressIndicator(),
+                          : const CircularProgressIndicator(
+                              color: lightGreen,
+                            ),
                     ],
                   ),
                 ),
@@ -105,7 +110,9 @@ class PaymentResultScreen extends StatelessWidget {
                       orderDetails.paymentDetail.value.status != null
                           ? Text(orderDetails.paymentDetail.value.status
                               .toString())
-                          : const CircularProgressIndicator(),
+                          : const CircularProgressIndicator(
+                              color: lightGreen,
+                            ),
                     ],
                   ),
                 ),
@@ -156,7 +163,7 @@ class PaymentResultScreen extends StatelessWidget {
                     fontSize: 20),
               )),
             ),
-            Divider(
+            const Divider(
               color: lightGreen,
               thickness: 2,
             ),
@@ -166,11 +173,11 @@ class PaymentResultScreen extends StatelessWidget {
               child: Center(
                   child: Text(
                 orderDetails.paymentDetail.value.gateway.instructions,
-                style:
-                    TextStyle(color: Colors.red, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    color: Colors.red, fontWeight: FontWeight.w500),
               )),
             ),
-            Divider(
+            const Divider(
               color: lightGreen,
               thickness: 2,
             ),

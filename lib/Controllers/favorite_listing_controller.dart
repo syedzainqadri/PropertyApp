@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/favorite_listing_model.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class FavoriteListingController extends GetxController {
   var isLoading = false.obs;
@@ -43,6 +44,12 @@ class FavoriteListingController extends GetxController {
         'listing_id': listingId.toString(),
       },
     );
+    Get.snackbar('Success', 'Listing Updated',
+        backgroundColor: lightGreen,
+        colorText: white,
+        snackPosition: SnackPosition.BOTTOM);
+    getMyFavorites();
     isLoading.value = false;
+    print(response.body);
   }
 }

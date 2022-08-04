@@ -4,6 +4,7 @@ import 'package:lagosabuja/AddListings/listing_details.dart';
 import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
 import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
 import 'package:lagosabuja/Controllers/review_controller.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class SearchResultCard extends StatelessWidget {
   var image;
@@ -73,45 +74,31 @@ class SearchResultCard extends StatelessWidget {
                       ),
                     ),
                   ),
-                  // isFovorite
-                  //     ? Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: [
-                  //           IconButton(
-                  //             onPressed: () {
-                  //               favoriteListingController
-                  //                   .addToFavorites(listingId);
-                  //               ScaffoldMessenger.of(context).showSnackBar(
-                  //                   const SnackBar(
-                  //                       content: Text('Added to Favorites')));
-                  //             },
-                  //             icon: const Icon(
-                  //               Icons.favorite,
-                  //               size: 25,
-                  //               color: lightGreen,
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       )
-                  //     : Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: [
-                  //           IconButton(
-                  //             onPressed: () {
-                  //               favoriteListingController
-                  //                   .addToFavorites(listingId);
-                  //               ScaffoldMessenger.of(context).showSnackBar(
-                  //                   const SnackBar(
-                  //                       content: Text('Added to Favorites')));
-                  //             },
-                  //             icon: const Icon(
-                  //               Icons.favorite_border,
-                  //               size: 25,
-                  //               color: lightGreen,
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
+                  Positioned(
+                    top: 10,
+                    right: 0,
+                    child: Container(
+                      height: 20,
+                      width: 80,
+                      decoration: const BoxDecoration(
+                        color: lightGreen,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            bottomLeft: Radius.circular(10)),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'NGN:  ' + price.toString(),
+                          style: const TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                              letterSpacing: .5,
+                              fontWeight: FontWeight.w500,
+                              color: white,
+                              fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(
@@ -131,7 +118,7 @@ class SearchResultCard extends StatelessWidget {
                       const Icon(
                         Icons.place,
                         size: 17,
-                        color: Colors.greenAccent,
+                        color: lightGreen,
                       ),
                       Text(city),
                     ],
@@ -145,7 +132,7 @@ class SearchResultCard extends StatelessWidget {
                       const Icon(
                         Icons.monetization_on,
                         size: 17,
-                        color: Colors.greenAccent,
+                        color: lightGreen,
                       ),
                       Text(price),
                     ],

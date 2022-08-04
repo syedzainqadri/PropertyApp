@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
-import 'package:lagosabuja/Home/home.dart';
 import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
@@ -68,9 +66,12 @@ class OrderDetailsScreen extends StatelessWidget {
                       id != null
                           ? Text(
                               id.toString(),
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
                             )
-                          : const CircularProgressIndicator(),
+                          : const CircularProgressIndicator(
+                              color: lightGreen,
+                            ),
                     ],
                   ),
                 ),
@@ -100,7 +101,9 @@ class OrderDetailsScreen extends StatelessWidget {
                       ),
                       ammount != null
                           ? Text("N ${ammount.toString()}")
-                          : const CircularProgressIndicator(),
+                          : const CircularProgressIndicator(
+                              color: lightGreen,
+                            ),
                     ],
                   ),
                 ),
@@ -116,7 +119,9 @@ class OrderDetailsScreen extends StatelessWidget {
                       ),
                       status != null
                           ? Text(status.toString())
-                          : const CircularProgressIndicator(),
+                          : const CircularProgressIndicator(
+                              color: lightGreen,
+                            ),
                     ],
                   ),
                 ),
@@ -165,7 +170,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     fontSize: 20),
               )),
             ),
-            Divider(
+            const Divider(
               color: lightGreen,
               thickness: 2,
             ),
@@ -175,11 +180,11 @@ class OrderDetailsScreen extends StatelessWidget {
               child: Center(
                   child: Text(
                 instructions,
-                style:
-                    TextStyle(color: Colors.red, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    color: Colors.red, fontWeight: FontWeight.w500),
               )),
             ),
-            Divider(
+            const Divider(
               color: lightGreen,
               thickness: 2,
             ),

@@ -19,9 +19,12 @@ class _ConversationPageState extends State<ConversationPage> {
   Widget build(BuildContext context) {
     return Obx(() {
       return chatController.isLoading.value
-          ? const Center(child: CircularProgressIndicator())
+          ? const Center(
+              child: CircularProgressIndicator(
+              color: lightGreen,
+            ))
           : chatController.allChats.isEmpty
-              ? Center(child: Text("No Chats"))
+              ? const Center(child: Text("No Chats"))
               : ListView.builder(
                   itemCount: chatController.allChats.length,
                   itemBuilder: (context, index) {

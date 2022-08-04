@@ -67,6 +67,8 @@ dependencies:
   firebase_messaging: ^11.4.4
   flutter_local_notifications: ^9.6.1
   overlay_support: ^2.0.1
+  share_plus: ^4.0.10
+  pinch_zoom_image_last: ^0.4.1
 
 dev_dependencies:
   flutter_test:

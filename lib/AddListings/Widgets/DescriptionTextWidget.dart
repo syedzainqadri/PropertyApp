@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class DescriptionTextWidget extends StatefulWidget {
   var text;
@@ -6,8 +7,7 @@ class DescriptionTextWidget extends StatefulWidget {
   DescriptionTextWidget({@required this.text});
 
   @override
-  _DescriptionTextWidgetState createState() =>
-      new _DescriptionTextWidgetState();
+  _DescriptionTextWidgetState createState() => _DescriptionTextWidgetState();
 }
 
 class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
@@ -44,7 +44,7 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
                     children: <Widget>[
                       Text(
                         flag ? "show more" : "show less",
-                        style: const TextStyle(color: Colors.greenAccent),
+                        style: const TextStyle(color: lightGreen),
                       ),
                     ],
                   ),

@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class CustomFullScreenDialog {
   static void showDialog() {
     Get.dialog(
       WillPopScope(
         child: const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            color: lightGreen,
+          ),
         ),
         onWillPop: () => Future.value(false),
       ),

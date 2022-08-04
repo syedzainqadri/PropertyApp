@@ -43,7 +43,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return notIntialized
         ? const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: lightGreen,
+            ),
           )
         : Scaffold(
             appBar: AppBar(

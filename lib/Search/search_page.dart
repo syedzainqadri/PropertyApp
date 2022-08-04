@@ -75,7 +75,7 @@ class _SearchPageState extends State<SearchPage> {
             Obx(() {
               return searchController.searchListings.value.data == null
                   ? const CircularProgressIndicator(
-                      color: Colors.greenAccent,
+                      color: lightGreen,
                     )
                   : Expanded(
                       child: ListView.builder(

@@ -48,7 +48,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
 
   getListingbyId() async {
     await editListingController.getListing(widget.listingId);
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 1), () {
       setState(() {});
     });
     await setCategoryId();
@@ -100,8 +100,11 @@ class _EditListingScreenState extends State<EditListingScreen> {
   @override
   Widget build(BuildContext context) {
     return editListingController.isLoading.value == true
-        ? Scaffold(
-            body: Center(child: CircularProgressIndicator()),
+        ? const Scaffold(
+            body: Center(
+                child: CircularProgressIndicator(
+              color: lightGreen,
+            )),
           )
         : Scaffold(
             appBar: AppBar(
@@ -120,7 +123,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
               centerTitle: true,
               title: Text(
                 editListingController.editListing.value.listing!.title!,
-                style: TextStyle(
+                style: const TextStyle(
                   color: lightGreen,
                 ),
               ),
@@ -221,7 +224,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
                                               items!.removeAt(index);
                                             });
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.delete,
                                             color: Colors.red,
                                           )),
@@ -232,16 +235,16 @@ class _EditListingScreenState extends State<EditListingScreen> {
                             },
                           ),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
                         _getFromGallery();
                       },
-                      child: Text('Add Images'),
+                      child: const Text('Add Images'),
                       style: ButtonStyle(
                           textStyle: MaterialStateProperty.all(
-                            TextStyle(
+                            const TextStyle(
                               fontSize: 15,
                               color: Colors.white,
                             ),

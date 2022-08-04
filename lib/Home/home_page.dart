@@ -31,33 +31,40 @@ class _HomePageState extends State<HomePage> {
     final featuredListingController = Get.find<FeaturedListingController>();
     final categoriesController = Get.find<CategoriesController>();
     return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'All Categories',
-                  style: TextStyle(
-                    color: darkGrey,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
+        child: Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Obx(
+        () => listingController.allListings.value.data == null
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(
+                    color: lightGreen,
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Obx(
-                    () => categoriesController.categories.value == null
-                        ? const CircularProgressIndicator(
-                            color: Colors.greenAccent,
-                          )
-                        : SizedBox(
+                ],
+              )
+            : Column(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'All Categories',
+                        style: TextStyle(
+                          color: darkGrey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: Obx(
+                          () => SizedBox(
                             height: 140,
                             width: double.infinity,
                             child: ListView.builder(
@@ -75,96 +82,94 @@ class _HomePageState extends State<HomePage> {
                               }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
                             ),
                           ),
-                  ),
-                ),
-                // const SizedBox(
-                //   height: 5,
-                // ),
-                const Text(
-                  'Featured Listings',
-                  style: TextStyle(
-                    color: darkGrey,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Obx(
-                    () =>
-                        featuredListingController.featuredListing.value.data ==
-                                null
-                            ? const CircularProgressIndicator(
-                                color: greenBaseColor,
-                              )
-                            : SizedBox(
-                                height: 140,
-                                width: double.infinity,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: featuredListingController
-                                      .featuredListing.value.data!.length,
-                                  itemBuilder: (context, index) {
-                                    return FeaturedListingCard(
-                                      image: featuredListingController
-                                          .featuredListing
-                                          .value
-                                          .data?[index]
-                                          .images,
-                                      title: featuredListingController
-                                          .featuredListing
-                                          .value
-                                          .data?[index]
-                                          .title
-                                          .toString(),
-                                      city: featuredListingController
-                                          .featuredListing
-                                          .value
-                                          .data?[index]
-                                          .contact!
-                                          .locations![0]
-                                          .name
-                                          .toString(),
-                                      price: featuredListingController
-                                          .featuredListing
-                                          .value
-                                          .data?[index]
-                                          .price
-                                          .toString(),
-                                      isFovorite: true,
-                                      listingId: featuredListingController
-                                          .featuredListing
-                                          .value
-                                          .data?[index]
-                                          .listingId,
-                                    );
-                                  }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+                        ),
+                      ),
+                      // const SizedBox(
+                      //   height: 5,
+                      // ),
+                      const Text(
+                        'Featured Listings',
+                        style: TextStyle(
+                          color: darkGrey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0),
+                        child: Obx(
+                          () => featuredListingController
+                                      .featuredListing.value.data ==
+                                  null
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                    color: lightGreen,
+                                  ),
+                                )
+                              : SizedBox(
+                                  height: 140,
+                                  width: double.infinity,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: featuredListingController
+                                        .featuredListing.value.data!.length,
+                                    itemBuilder: (context, index) {
+                                      return FeaturedListingCard(
+                                        image: featuredListingController
+                                            .featuredListing
+                                            .value
+                                            .data?[index]
+                                            .images,
+                                        title: featuredListingController
+                                            .featuredListing
+                                            .value
+                                            .data?[index]
+                                            .title
+                                            .toString(),
+                                        city: featuredListingController
+                                            .featuredListing
+                                            .value
+                                            .data?[index]
+                                            .contact!
+                                            .locations![0]
+                                            .name
+                                            .toString(),
+                                        price: featuredListingController
+                                            .featuredListing
+                                            .value
+                                            .data?[index]
+                                            .price
+                                            .toString(),
+                                        isFovorite: true,
+                                        listingId: featuredListingController
+                                            .featuredListing
+                                            .value
+                                            .data?[index]
+                                            .listingId,
+                                      );
+                                    }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+                                  ),
                                 ),
-                              ),
+                        ),
+                      ),
+                      const Text(
+                        'All Listings',
+                        style: TextStyle(
+                          color: darkGrey,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                    ],
                   ),
-                ),
-                const Text(
-                  'All Listings',
-                  style: TextStyle(
-                    color: darkGrey,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
-            ),
-            Obx(
-              () => listingController.allListings.value.data == null
-                  ? const CircularProgressIndicator(
-                      color: greenBaseColor,
-                    )
-                  : GridView.builder(
+                  Obx(
+                    () => GridView.builder(
                       physics: const ScrollPhysics(),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
@@ -192,10 +197,10 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                     ),
-            ),
-          ],
-        ),
+                  ),
+                ],
+              ),
       ),
-    );
+    ));
   }
 }

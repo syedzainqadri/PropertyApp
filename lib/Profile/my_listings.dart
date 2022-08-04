@@ -42,7 +42,10 @@ class _MyListingsState extends State<MyListings> {
       ),
       body: Obx(() {
         return myListingController.isLoading.value == true
-            ? Center(child: const CircularProgressIndicator())
+            ? const Center(
+                child: CircularProgressIndicator(
+                color: lightGreen,
+              ))
             : ListView.builder(
                 padding: const EdgeInsets.only(left: 18.0, right: 18),
                 scrollDirection: Axis.vertical,

@@ -97,51 +97,12 @@ class CategoryListingCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               letterSpacing: .5,
                               fontWeight: FontWeight.w500,
-                              color: Colors.black,
+                              color: white,
                               fontSize: 12),
                         ),
                       ),
                     ),
                   ),
-                  // isFovorite
-                  //     ? Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: [
-                  //           IconButton(
-                  //             onPressed: () {
-                  //               favoriteListingController
-                  //                   .addToFavorites(listingId);
-                  //               ScaffoldMessenger.of(context).showSnackBar(
-                  //                   const SnackBar(
-                  //                       content: Text('Added to Favorites')));
-                  //             },
-                  //             icon: const Icon(
-                  //               Icons.favorite,
-                  //               size: 25,
-                  //               color: lightGreen,
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       )
-                  //     : Row(
-                  //         mainAxisAlignment: MainAxisAlignment.start,
-                  //         children: [
-                  //           IconButton(
-                  //             onPressed: () {
-                  //               favoriteListingController
-                  //                   .addToFavorites(listingId);
-                  //               ScaffoldMessenger.of(context).showSnackBar(
-                  //                   const SnackBar(
-                  //                       content: Text('Added to Favorites')));
-                  //             },
-                  //             icon: const Icon(
-                  //               Icons.favorite_border,
-                  //               size: 25,
-                  //               color: lightGreen,
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
                 ],
               ),
               const SizedBox(
@@ -161,7 +122,7 @@ class CategoryListingCard extends StatelessWidget {
                       const Icon(
                         Icons.place,
                         size: 17,
-                        color: Colors.greenAccent,
+                        color: lightGreen,
                       ),
                       const SizedBox(
                         width: 10,
@@ -178,7 +139,7 @@ class CategoryListingCard extends StatelessWidget {
                       const Icon(
                         Icons.monetization_on,
                         size: 17,
-                        color: Colors.greenAccent,
+                        color: lightGreen,
                       ),
                       const SizedBox(
                         width: 10,
