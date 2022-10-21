@@ -25,13 +25,9 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseMessaging.instance.getToken().then((token) {
-    print(token);
-  });
-  //firebase messaging instanse initiated
+  FirebaseMessaging.instance.getToken().then((token) {});
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   await messaging.subscribeToTopic('courses');
-  //Firebase Meassage Settings
   NotificationSettings settings = await messaging.requestPermission(
     alert: true,
     announcement: false,
@@ -42,8 +38,6 @@ void main() async {
     sound: true,
   );
   if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-    print('User granted permission: ${settings.authorizationStatus}');
-    //if the app is opened.
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       PushNotification notification = PushNotification(
         title: message.notification!.title,
@@ -66,28 +60,29 @@ void main() async {
     print('permission denied');
   }
 
-  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    PushNotification notification = PushNotification(
-      title: message.notification!.title,
-      body: message.notification!.body,
-      dataTitle: message.data['title'],
-      dataBody: message.data['body'],
-    );
-    // RemoteNotification notification = message.notification!;
-    AndroidNotification android = message.notification!.android!;
-    showSimpleNotification(
-      Text(notification.title!),
-      leading: Image.asset(
-        'assets/images/logo.png',
-        height: 50,
-      ),
-      subtitle: Text(
-        notification.body!,
-      ),
-      background: Colors.blue,
-      duration: const Duration(seconds: 2),
-    );
-  });
+  FirebaseMessaging.onMessageOpenedApp.listen(
+    (RemoteMessage message) {
+      PushNotification notification = PushNotification(
+        title: message.notification!.title,
+        body: message.notification!.body,
+        dataTitle: message.data['title'],
+        dataBody: message.data['body'],
+      );
+      AndroidNotification android = message.notification!.android!;
+      showSimpleNotification(
+        Text(notification.title!),
+        leading: Image.asset(
+          'assets/images/logo.png',
+          height: 50,
+        ),
+        subtitle: Text(
+          notification.body!,
+        ),
+        background: Colors.blue,
+        duration: const Duration(seconds: 2),
+      );
+    },
+  );
 
   checkForInitialMessage() async {
     RemoteMessage? message = await messaging.getInitialMessage();
@@ -107,7 +102,6 @@ void main() async {
     Get.put(ListingController());
     Get.put(FavoriteListingController());
     Get.put(FeaturedListingController());
-    // Get.put(MyListingController());
     Get.put(CategoriesController());
     Get.put(LocationsController());
     Get.put(ListingTypeController());

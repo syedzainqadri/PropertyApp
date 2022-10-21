@@ -1,5 +1,4 @@
-// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
-
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variableså
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
@@ -40,14 +39,15 @@ class ListingCard extends StatelessWidget {
         onTap: () async {
           try {
             await listingDetailsController.getListingById(listingId);
-            // await reviewController.fetchReviews(listingId);
           } finally {
-            Get.to(() => ListingDetails(
-                  id: listingId,
-                  title: title,
-                  images: image,
-                  price: price,
-                ));
+            Get.to(
+              () => ListingDetails(
+                id: listingId,
+                title: title,
+                images: image,
+                price: price,
+              ),
+            );
           }
         },
         child: Card(
@@ -65,7 +65,10 @@ class ListingCard extends StatelessWidget {
                           topRight: Radius.circular(10)),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(image[0].url.toString()),
+                        image: image != null
+                            ? NetworkImage(image[0].url.toString())
+                            : const AssetImage('assets/images/logo.png')
+                                as ImageProvider,
                       ),
                     ),
                   ),
@@ -74,7 +77,6 @@ class ListingCard extends StatelessWidget {
                     right: 0,
                     child: Container(
                       height: 20,
-                      width: 80,
                       decoration: const BoxDecoration(
                         color: greenBaseColor,
                         borderRadius: BorderRadius.only(
@@ -82,14 +84,19 @@ class ListingCard extends StatelessWidget {
                             bottomLeft: Radius.circular(10)),
                       ),
                       child: Center(
-                        child: Text(
-                          'NGN:  ' + price.toString(),
-                          style: const TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: .5,
-                              fontWeight: FontWeight.w500,
-                              color: white,
-                              fontSize: 12),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Text(
+                            price != null
+                                ? 'NGN:  ' + price.toString()
+                                : 'NGN: Not Available',
+                            style: const TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                letterSpacing: .5,
+                                fontWeight: FontWeight.w500,
+                                color: white,
+                                fontSize: 12),
+                          ),
                         ),
                       ),
                     ),
@@ -101,7 +108,7 @@ class ListingCard extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    title,
+                    title ?? '',
                     style: const TextStyle(
                       color: darkGrey,
                       fontSize: 14,
@@ -127,7 +134,7 @@ class ListingCard extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      city,
+                      city ?? '',
                       style: const TextStyle(
                         color: mediumDarkGrey,
                         fontSize: 12,
@@ -136,11 +143,6 @@ class ListingCard extends StatelessWidget {
                   ]),
                 ),
               ),
-              // Column(
-              //   mainAxisAlignment: MainAxisAlignment.end,
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [],
-              // )
             ],
           ),
         ),

@@ -59,7 +59,7 @@ class _CategoryPageState extends State<CategoryPage> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              widget.title,
+              widget.title ?? '',
               style: const TextStyle(
                 color: lightGreen,
               ),

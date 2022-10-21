@@ -63,7 +63,7 @@ class CategoryListingCard extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    width: width * 0.3,
+                    width: width * 0.35,
                     height: height * 0.15,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
@@ -74,7 +74,10 @@ class CategoryListingCard extends StatelessWidget {
                       ),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(image[0].url.toString()),
+                        image: image != null
+                            ? NetworkImage(image[0].url.toString())
+                            : const AssetImage('assets/images/logo4.png')
+                                as ImageProvider,
                       ),
                     ),
                   ),
@@ -83,22 +86,27 @@ class CategoryListingCard extends StatelessWidget {
                     right: 0,
                     child: Container(
                       height: 20,
-                      width: 80,
                       decoration: const BoxDecoration(
                         color: lightGreen,
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10)),
+                          topLeft: Radius.circular(10),
+                          bottomLeft: Radius.circular(10),
+                        ),
                       ),
                       child: Center(
-                        child: Text(
-                          'NGN:  ' + price.toString(),
-                          style: const TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: .5,
-                              fontWeight: FontWeight.w500,
-                              color: white,
-                              fontSize: 12),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Text(
+                            price != null
+                                ? 'NGN:  ' + price.toString()
+                                : 'NGN: Not Available',
+                            style: const TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                letterSpacing: .5,
+                                fontWeight: FontWeight.w500,
+                                color: white,
+                                fontSize: 12),
+                          ),
                         ),
                       ),
                     ),
@@ -106,13 +114,22 @@ class CategoryListingCard extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                width: 30,
+                width: 10,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title),
+                  SizedBox(
+                    width: width * 0.5,
+                    child: Text(
+                      title ?? '',
+                      style: const TextStyle(
+                        overflow: TextOverflow.ellipsis,
+                        letterSpacing: .5,
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -127,7 +144,7 @@ class CategoryListingCard extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text(city),
+                      Text(city ?? ''),
                     ],
                   ),
                   const SizedBox(
@@ -144,7 +161,7 @@ class CategoryListingCard extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Text(price),
+                      Text(price ?? ''),
                     ],
                   ),
                 ],

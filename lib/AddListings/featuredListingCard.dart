@@ -65,7 +65,10 @@ class FeaturedListingCard extends StatelessWidget {
                           topRight: Radius.circular(10)),
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(image[0].url.toString()),
+                        image: image != null
+                            ? NetworkImage(image[0].url.toString())
+                            : const AssetImage('assets/images/logo.png')
+                                as ImageProvider,
                       ),
                     ),
                   ),
@@ -74,7 +77,6 @@ class FeaturedListingCard extends StatelessWidget {
                     right: 0,
                     child: Container(
                       height: 20,
-                      width: 80,
                       decoration: const BoxDecoration(
                         color: greenBaseColor,
                         borderRadius: BorderRadius.only(
@@ -82,14 +84,18 @@ class FeaturedListingCard extends StatelessWidget {
                             bottomLeft: Radius.circular(10)),
                       ),
                       child: Center(
-                        child: Text(
-                          'NGN:  ' + price.toString(),
-                          style: const TextStyle(
-                              overflow: TextOverflow.ellipsis,
-                              letterSpacing: .5,
-                              fontWeight: FontWeight.w500,
-                              color: white,
-                              fontSize: 12),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                          child: Text(
+                            price != null
+                                ? 'NGN:  ' + price.toString()
+                                : 'NGN: Not Available',
+                            style: const TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w500,
+                                color: white,
+                                fontSize: 12),
+                          ),
                         ),
                       ),
                     ),
@@ -100,11 +106,15 @@ class FeaturedListingCard extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 4.0, top: 4.0),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    title,
-                    style: const TextStyle(
-                      color: darkGrey,
-                      fontSize: 14,
+                  child: SizedBox(
+                    width: 160,
+                    child: Text(
+                      title,
+                      style: const TextStyle(
+                        overflow: TextOverflow.ellipsis,
+                        color: darkGrey,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                 ),

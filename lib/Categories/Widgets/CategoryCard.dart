@@ -13,10 +13,12 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(CategoryPage(
-          title: title,
-          id: id,
-        ));
+        Get.to(
+          CategoryPage(
+            title: title,
+            id: id,
+          ),
+        );
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 8.0, left: 20.0, right: 20.0),
@@ -29,7 +31,10 @@ class CategoryCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: NetworkImage(image),
+                  image: image != null
+                      ? NetworkImage(image)
+                      : const AssetImage('assets/images/logo.png')
+                          as ImageProvider,
                 ),
               ),
             ),
@@ -50,7 +55,7 @@ class CategoryCard extends StatelessWidget {
               ),
               child: Center(
                   child: Text(
-                title,
+                title ?? '',
                 style: const TextStyle(color: white, fontSize: 25),
               )),
             ),

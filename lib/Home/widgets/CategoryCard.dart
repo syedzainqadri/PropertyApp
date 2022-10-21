@@ -52,7 +52,10 @@ class CategoryCard extends StatelessWidget {
                   ),
                   image: DecorationImage(
                     fit: BoxFit.fitWidth,
-                    image: NetworkImage(image),
+                    image: image != null
+                        ? NetworkImage(image)
+                        : const AssetImage('assets/images/logo4.png')
+                            as ImageProvider,
                   ),
                 ),
               ),
@@ -61,7 +64,7 @@ class CategoryCard extends StatelessWidget {
               height: 15,
             ),
             Text(
-              '$name'.toUpperCase(),
+              name != null ? '$name'.toUpperCase() : '',
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             ),
           ],

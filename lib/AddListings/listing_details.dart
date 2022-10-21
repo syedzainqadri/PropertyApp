@@ -102,7 +102,7 @@ class _ListingDetailsState extends State<ListingDetails> {
               elevation: 0.0,
               centerTitle: false,
               title: Text(
-                widget.title,
+                widget.title ?? '',
                 style: const TextStyle(color: lightGreen),
               ),
               leadingWidth: 35,
@@ -120,8 +120,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                   padding: const EdgeInsets.all(0.0),
                   child: IconButton(
                     onPressed: () {
-                      Get.to(() =>
-                          ChatUi(listingId: widget.id, title: widget.title));
+                      Get.to(() => ChatUi(
+                          listingId: widget.id, title: widget.title ?? ''));
                     },
                     icon: const Icon(
                       Icons.chat_sharp,
@@ -156,7 +156,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                 IconButton(
                   onPressed: () {
                     Share.share(
-                        '${widget.title} \n ${widget.price} \n ${widget.images[0]}');
+                        '${widget.title ?? ''} \n ${widget.price ?? ''} \n ${widget.images[0] ?? ''}');
                   },
                   icon: const Icon(Icons.share),
                   color: lightGreen,
@@ -250,7 +250,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                     child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          listingDetailsController.listingDetail.value.title,
+                          listingDetailsController.listingDetail.value.title ??
+                              '',
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
@@ -262,7 +263,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                     child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "NGN ${listingDetailsController.listingDetail.value.price}",
+                          "NGN ${listingDetailsController.listingDetail.value.price ?? 'Not Available'}",
                           style: const TextStyle(
                             color: lightGreen,
                             fontSize: 20,
@@ -281,12 +282,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                             const Icon(Icons.pin_drop_outlined),
                             Text(
                               listingDetailsController
-                                      .listingDetail.value.contact.address
-                                      .toString()
-                                      .isEmpty
-                                  ? "N/A"
-                                  : listingDetailsController
-                                      .listingDetail.value.contact.address,
+                                      .listingDetail.value.contact.address ??
+                                  '',
                               style: const TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
