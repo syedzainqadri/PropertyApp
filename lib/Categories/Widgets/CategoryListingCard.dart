@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, must_be_immutable, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -87,7 +89,7 @@ class CategoryListingCard extends StatelessWidget {
                     child: Container(
                       height: 20,
                       decoration: const BoxDecoration(
-                        color: lightGreen,
+                        color: kGreen,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(10),
                           bottomLeft: Radius.circular(10),
@@ -98,8 +100,8 @@ class CategoryListingCard extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                           child: Text(
                             price != null
-                                ? 'NGN:  ' + price.toString()
-                                : 'NGN: Not Available',
+                                ? '$currency:  ' + price.toString()
+                                : '$currency: Not Available',
                             style: const TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 letterSpacing: .5,
@@ -139,7 +141,7 @@ class CategoryListingCard extends StatelessWidget {
                       const Icon(
                         Icons.place,
                         size: 17,
-                        color: lightGreen,
+                        color: kGreen,
                       ),
                       const SizedBox(
                         width: 10,
@@ -156,7 +158,7 @@ class CategoryListingCard extends StatelessWidget {
                       const Icon(
                         Icons.monetization_on,
                         size: 17,
-                        color: lightGreen,
+                        color: kGreen,
                       ),
                       const SizedBox(
                         width: 10,

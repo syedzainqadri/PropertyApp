@@ -2,9 +2,9 @@
 //
 //     final listingsByIdModel = listingsByIdModelFromJson(jsonString);
 
-import 'dart:convert';
+// ignore_for_file: prefer_typing_uninitialized_variables, prefer_null_aware_operators
 
-import 'package:get_storage/get_storage.dart';
+import 'dart:convert';
 
 ListingsByIdModel listingsByIdModelFromJson(String str) =>
     ListingsByIdModel.fromJson(json.decode(str));
@@ -570,9 +570,9 @@ class CustomField {
         options: json["options"] == null
             ? null
             : CustomFieldOptions.fromJson(json["options"]),
-        min: json["min"] == null ? null : json["min"],
-        max: json["max"] == null ? null : json["max"],
-        stepSize: json["step_size"] == null ? null : json["step_size"],
+        min: json["min"],
+        max: json["max"],
+        stepSize: json["step_size"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -589,9 +589,9 @@ class CustomField {
         "value": value,
         "icon": icon,
         "options": options == null ? null : options.toJson(),
-        "min": min == null ? null : min,
-        "max": max == null ? null : max,
-        "step_size": stepSize == null ? null : stepSize,
+        "min": min,
+        "max": max,
+        "step_size": stepSize,
       };
 }
 

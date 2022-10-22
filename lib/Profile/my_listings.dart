@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/deleteListingController.dart';
@@ -29,7 +31,7 @@ class _MyListingsState extends State<MyListings> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: lightGreen,
+                  color: kGreen,
                 ),
               ),
             ),
@@ -41,7 +43,7 @@ class _MyListingsState extends State<MyListings> {
               centerTitle: true,
               title: const Text(
                 'My Listings',
-                style: TextStyle(color: lightGreen),
+                style: TextStyle(color: kGreen),
               ),
               leading: GestureDetector(
                   onTap: () {
@@ -49,7 +51,7 @@ class _MyListingsState extends State<MyListings> {
                   },
                   child: const Icon(
                     Icons.navigate_before,
-                    color: lightGreen,
+                    color: kGreen,
                     size: 35,
                   )),
             ),
@@ -57,7 +59,7 @@ class _MyListingsState extends State<MyListings> {
               return myListingController.isLoading.value == true
                   ? const Center(
                       child: CircularProgressIndicator(
-                      color: lightGreen,
+                      color: kGreen,
                     ))
                   : ListView.builder(
                       padding: const EdgeInsets.only(left: 18.0, right: 18),

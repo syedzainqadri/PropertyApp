@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, must_be_immutable, prefer_typing_uninitialized_variables
+// ignore_for_file: unused_import, must_be_immutable, prefer_typing_uninitialized_variables, deprecated_member_use
 
 import 'dart:convert';
 import 'dart:async';
@@ -65,8 +65,6 @@ class _ListingDetailsState extends State<ListingDetails> {
     for (int i = 0;
         i < favListingController.favoriteListings.value.data.length;
         i++) {
-      print(favListingController.favoriteListings.value.data[i].listingId);
-      print(widget.id);
       if (widget.id ==
           favListingController.favoriteListings.value.data[i].listingId) {
         isFavorited.value = true;
@@ -76,7 +74,6 @@ class _ListingDetailsState extends State<ListingDetails> {
         isFavorited.value = false;
       }
     }
-    print(isFavorited.value);
     Future.delayed(const Duration(seconds: 3))
         .then(((value) => setState(() {})));
     isLoading.value = false;
@@ -87,12 +84,12 @@ class _ListingDetailsState extends State<ListingDetails> {
 
   @override
   Widget build(BuildContext context) {
-    var listing = Get.find<ListingDetailsController>().listingDetail.value;
+    // var listing = Get.find<ListingDetailsController>().listingDetail.value;
     return Obx(() => isLoading.value == true
         ? const Scaffold(
             body: Center(
               child: CircularProgressIndicator(
-                color: lightGreen,
+                color: kGreen,
               ),
             ),
           )
@@ -103,7 +100,7 @@ class _ListingDetailsState extends State<ListingDetails> {
               centerTitle: false,
               title: Text(
                 widget.title ?? '',
-                style: const TextStyle(color: lightGreen),
+                style: const TextStyle(color: kGreen),
               ),
               leadingWidth: 35,
               leading: GestureDetector(
@@ -113,7 +110,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                   child: const Icon(
                     Icons.navigate_before,
                     size: 30,
-                    color: lightGreen,
+                    color: kGreen,
                   )),
               actions: [
                 Padding(
@@ -125,7 +122,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                     },
                     icon: const Icon(
                       Icons.chat_sharp,
-                      color: lightGreen,
+                      color: kGreen,
                     ),
                   ),
                 ),
@@ -138,7 +135,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                             isFavorited.value = true;
                           },
                           icon: const Icon(Icons.favorite_border_rounded),
-                          color: lightGreen,
+                          color: kGreen,
                         )
                       : IconButton(
                           onPressed: () async {
@@ -147,7 +144,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                             isFavorited.value = false;
                           },
                           icon: const Icon(Icons.favorite_rounded),
-                          color: lightGreen,
+                          color: kGreen,
                         ),
                 ),
                 const SizedBox(
@@ -159,7 +156,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                         '${widget.title ?? ''} \n ${widget.price ?? ''} \n ${widget.images[0] ?? ''}');
                   },
                   icon: const Icon(Icons.share),
-                  color: lightGreen,
+                  color: kGreen,
                 ),
                 const SizedBox(
                   width: 5,
@@ -169,7 +166,6 @@ class _ListingDetailsState extends State<ListingDetails> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  //TODO: show indicator on slider
                   CarouselSlider.builder(
                       itemCount: listingDetailsController
                           .listingDetail.value.images.length,
@@ -178,7 +174,6 @@ class _ListingDetailsState extends State<ListingDetails> {
                           padding: const EdgeInsets.only(right: 3.0, left: 3.0),
                           child: InkWell(
                             onTap: () {
-                              //TODO:just do it
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -263,9 +258,9 @@ class _ListingDetailsState extends State<ListingDetails> {
                     child: Container(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "NGN ${listingDetailsController.listingDetail.value.price ?? 'Not Available'}",
+                          "$currency ${listingDetailsController.listingDetail.value.price ?? 'Not Available'}",
                           style: const TextStyle(
-                            color: lightGreen,
+                            color: kGreen,
                             fontSize: 20,
                             fontWeight: FontWeight.w500,
                           ),
@@ -300,7 +295,6 @@ class _ListingDetailsState extends State<ListingDetails> {
                   Stack(
                     children: [
                       const SizedBox(
-                        //color: Colors.green,
                         width: double.infinity,
                         height: 260,
                       ),
@@ -409,24 +403,22 @@ class _ListingDetailsState extends State<ListingDetails> {
                                             ),
                                           ),
                                           Flexible(
-                                            child: Container(
-                                              child: Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 8.0),
-                                                child: Text(
-                                                  listingDetailsController
-                                                      .listingDetail
-                                                      .value
-                                                      .customFields[index]
-                                                      .value
-                                                      .toString()
-                                                      .toUpperCase(),
-                                                  maxLines: 1,
-                                                  style: const TextStyle(
-                                                      fontSize: 11),
-                                                  overflow: TextOverflow.clip,
-                                                  softWrap: false,
-                                                ),
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 8.0),
+                                              child: Text(
+                                                listingDetailsController
+                                                    .listingDetail
+                                                    .value
+                                                    .customFields[index]
+                                                    .value
+                                                    .toString()
+                                                    .toUpperCase(),
+                                                maxLines: 1,
+                                                style: const TextStyle(
+                                                    fontSize: 11),
+                                                overflow: TextOverflow.clip,
+                                                softWrap: false,
                                               ),
                                             ),
                                           ),
@@ -471,7 +463,6 @@ class _ListingDetailsState extends State<ListingDetails> {
                     child: SizedBox(
                       width: double.infinity,
                       height: 300,
-                      //TODO: check zoom functions in google maps
                       child: GoogleMap(
                         zoomControlsEnabled: true,
                         mapToolbarEnabled: true,
@@ -501,7 +492,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                       children: [
                         const Expanded(
                           child: Divider(
-                            color: lightGreen,
+                            color: kGreen,
                             thickness: 3,
                           ),
                         ),
@@ -514,7 +505,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                         ),
                         const Expanded(
                           child: Divider(
-                            color: lightGreen,
+                            color: kGreen,
                             thickness: 3,
                           ),
                         ),
@@ -548,7 +539,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
-                                        color: lightGreen,
+                                        color: kGreen,
                                         borderRadius: BorderRadius.circular(50),
                                         boxShadow: [
                                           BoxShadow(
@@ -715,8 +706,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                     },
                     width: width * 0.25,
                     height: height * 0.06,
-                    iconColor: lightGreen,
-                    buttonColor: Colors.greenAccent,
+                    iconColor: kGreen,
+                    buttonColor: kGreenAccent,
                     buttonText: 'Email',
                     icon: Icons.email,
                   ),
@@ -727,8 +718,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                     },
                     width: width * 0.25,
                     height: height * 0.06,
-                    iconColor: Colors.pink,
-                    buttonColor: Colors.pink[200],
+                    iconColor: kPinkColor,
+                    buttonColor: kLightPink,
                     buttonText: 'Chat',
                     icon: Icons.whatsapp,
                   ),
@@ -802,7 +793,7 @@ review(Data review) {
                 itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 itemBuilder: (context, _) => const Icon(
                   Icons.star,
-                  color: lightGreen,
+                  color: kGreen,
                 ),
                 onRatingUpdate: (rating) {},
               ),

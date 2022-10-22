@@ -1,7 +1,10 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
+import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class TextAreaWidget extends StatelessWidget {
-  TextAreaWidget({
+  const TextAreaWidget({
     Key? key,
     required this.lable,
     required this.controller,
@@ -24,7 +27,7 @@ class TextAreaWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.green[100],
+        color: kkGreen,
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
@@ -34,7 +37,7 @@ class TextAreaWidget extends StatelessWidget {
         controller: controller,
         cursorColor: Colors.black,
         style: const TextStyle(
-          color: Colors.green,
+          color: kGreen,
           fontSize: 24,
         ),
 

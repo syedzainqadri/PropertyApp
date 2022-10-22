@@ -1,11 +1,10 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/all_listing_model.dart';
 import 'package:lagosabuja/Models/selected_fields_model.dart';
-
-import '../Models/Categories/category_model.dart';
-import '../Models/locations_model.dart';
 
 class ListingController extends GetxController {
   var isLoading = false.obs;
@@ -55,23 +54,6 @@ class ListingController extends GetxController {
       videoUrl,
       List<SelectedFieldsModel> customFields,
       amenities) async {
-    print("zipcode is $zipCode");
-    print("address is $address");
-    print("phone is $phone");
-    print("whatsApp is $whatsApp");
-    print("email is $email");
-    print("website is $website");
-    print("location is is $locationId");
-    print("category id is $categoryId");
-    print("location id is $locationId");
-    print("title of the listing is $title");
-    print("Status of the listing is $status");
-    print("Price is $price");
-    print("Price type is $priceType");
-    print("pricing unit is $priceUnit");
-    print("Badges is $badges");
-    print("Images are $images");
-    print("Video is $videoUrl");
     isLoading.value = true;
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
 
@@ -84,13 +66,13 @@ class ListingController extends GetxController {
           http.MultipartFile('gallery[]', stream, length, filename: fileName);
       request.files.add(multipartFileSign);
     }
-    customFields.forEach((element) {
+    for (var element in customFields) {
       if (element.id != 0) {
         request.fields.addAll({
           'custom_fields[${element.id}]': element.choice.id.toString(),
         });
       }
-    });
+    }
 
     request.headers.addAll({
       'Content-Type': 'application/json; charset=UTF-8',
@@ -121,7 +103,6 @@ class ListingController extends GetxController {
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    print(response.body);
     isLoading.value = false;
   }
 }

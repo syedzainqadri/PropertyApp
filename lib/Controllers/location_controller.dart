@@ -9,7 +9,7 @@ class LocationsController extends GetxController {
   var userLocationId = 0.obs;
   var userLocationName = ''.obs;
   final token = GetStorage().read('token');
-RxBool isLoading = true.obs;
+  RxBool isLoading = true.obs;
   List locationDist = [];
 
   @override
@@ -30,7 +30,6 @@ RxBool isLoading = true.obs;
         'Authorization': 'Bearer $token',
       },
     );
-    print("............................DONE..............................");
     isLoading.value = false;
     locations.value = locationsModelFromJson(response.body);
   }
@@ -49,7 +48,6 @@ RxBool isLoading = true.obs;
     );
     isLoading.value = false;
     subLocations.value = locationsModelFromJson(response.body);
-    print(response.body);
   }
 
   updateLocationName(id, name) {

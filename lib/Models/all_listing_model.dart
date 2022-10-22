@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names, duplicate_ignore, prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 
 import 'package:get/get.dart';

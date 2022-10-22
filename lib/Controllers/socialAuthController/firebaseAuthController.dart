@@ -1,4 +1,4 @@
-import 'dart:convert';
+// ignore_for_file: file_names, unused_field, prefer_typing_uninitialized_variables, unused_local_variable, unused_element
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +6,6 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Controllers/socialAuthController/socialAuthController.dart';
 import 'package:lagosabuja/Utils/color_scheme.dart';
 
@@ -47,13 +46,10 @@ class FirebaseAuthController extends GetxController {
       // await SocialLoginController().login(authResult.user!.email!);
       Get.snackbar("SignedIn", "Signedin Successfully",
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: lightGreen,
+          backgroundColor: kGreen,
           colorText: white);
-      print(googleAuth.idToken);
-      print(googleAuth.accessToken);
       await socialSignInController.signInWithGoogle(googleAuth.idToken);
     } catch (error) {
-      print(error);
       Get.snackbar(
         'Failed',
         "Google sign in cancelled",
@@ -67,7 +63,6 @@ class FirebaseAuthController extends GetxController {
     final accessToken = await FacebookAuth.instance.accessToken;
     isLoading.value = false;
     if (accessToken != null) {
-      print(accessToken.toJson());
       final userData = await FacebookAuth.instance.getUserData();
       _accessToken = accessToken;
       _userData = userData;

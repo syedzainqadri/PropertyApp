@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables, file_names
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -40,10 +42,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
   @override
   void initState() {
     super.initState();
-    print(widget.listingId);
     getListingbyId();
-    print(whatsAppController.text);
-    print(categoryId);
   }
 
   getListingbyId() async {
@@ -93,7 +92,6 @@ class _EditListingScreenState extends State<EditListingScreen> {
       categoryId = editListingController
           .editListing.value.listing!.categories![i].termId
           .toString();
-      print('categoryId is $categoryId');
     }
   }
 
@@ -103,7 +101,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
         ? const Scaffold(
             body: Center(
                 child: CircularProgressIndicator(
-              color: lightGreen,
+              color: kGreen,
             )),
           )
         : Scaffold(
@@ -116,7 +114,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
                 },
                 child: const Icon(
                   Icons.navigate_before,
-                  color: lightGreen,
+                  color: kGreen,
                   size: 34,
                 ),
               ),
@@ -124,7 +122,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
               title: Text(
                 editListingController.editListing.value.listing!.title!,
                 style: const TextStyle(
-                  color: lightGreen,
+                  color: kGreen,
                 ),
               ),
             ),
@@ -249,8 +247,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
                               color: Colors.white,
                             ),
                           ),
-                          backgroundColor:
-                              MaterialStateProperty.all(lightGreen),
+                          backgroundColor: MaterialStateProperty.all(kGreen),
                           overlayColor: MaterialStateProperty.all(white)),
                     ),
                   ),
@@ -397,11 +394,11 @@ class _EditListingScreenState extends State<EditListingScreen> {
                         Get.snackbar('Listing Posted',
                             'Your listing is pending for Approval from Admin',
                             snackPosition: SnackPosition.BOTTOM,
-                            backgroundColor: lightGreen,
+                            backgroundColor: kGreen,
                             colorText: white);
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: lightGreen,
+                        primary: kGreen,
                         onSurface: white,
                       ),
                       child: const Text(

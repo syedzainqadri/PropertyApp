@@ -44,7 +44,7 @@ class _HomeState extends State<Home> {
     return notIntialized
         ? const Center(
             child: CircularProgressIndicator(
-              color: lightGreen,
+              color: kGreen,
             ),
           )
         : Scaffold(
@@ -55,9 +55,7 @@ class _HomeState extends State<Home> {
               title: Text(
                 title,
                 style: const TextStyle(
-                    color: greenBaseColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                    color: kGreen, fontSize: 20, fontWeight: FontWeight.bold),
               ),
               leading: Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
@@ -113,7 +111,7 @@ class _HomeState extends State<Home> {
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: CircleAvatar(
-                            backgroundColor: greenBaseColor,
+                            backgroundColor: kGreen,
                             radius: 30,
                             child: Icon(
                               Icons.add,
@@ -168,25 +166,25 @@ class _HomeState extends State<Home> {
                 BottomNavyBarItem(
                   title: const Text('Home'),
                   icon: const Icon(Icons.home),
-                  activeColor: greenBaseColor,
+                  activeColor: kGreen,
                   inactiveColor: mediumGrey,
                 ),
                 BottomNavyBarItem(
                   title: const Text('Categories'),
                   icon: const Icon(Icons.category),
-                  activeColor: greenBaseColor,
+                  activeColor: kGreen,
                   inactiveColor: mediumGrey,
                 ),
                 BottomNavyBarItem(
                   title: const Text('Conversation'),
                   icon: const Icon(Icons.chat),
-                  activeColor: greenBaseColor,
+                  activeColor: kGreen,
                   inactiveColor: mediumGrey,
                 ),
                 BottomNavyBarItem(
                   title: const Text('Search'),
                   icon: const Icon(Icons.search),
-                  activeColor: greenBaseColor,
+                  activeColor: kGreen,
                   inactiveColor: mediumGrey,
                 ),
               ],

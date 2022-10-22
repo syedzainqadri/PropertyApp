@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, must_be_immutable, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/AddListings/listing_details.dart';
@@ -81,14 +83,14 @@ class SearchResultCard extends StatelessWidget {
                       height: 20,
                       width: 80,
                       decoration: const BoxDecoration(
-                        color: lightGreen,
+                        color: kGreen,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
                             bottomLeft: Radius.circular(10)),
                       ),
                       child: Center(
                         child: Text(
-                          'NGN:  ' + price.toString(),
+                          '$currency:  ' + price.toString(),
                           style: const TextStyle(
                               overflow: TextOverflow.ellipsis,
                               letterSpacing: .5,
@@ -118,7 +120,7 @@ class SearchResultCard extends StatelessWidget {
                       const Icon(
                         Icons.place,
                         size: 17,
-                        color: lightGreen,
+                        color: kGreen,
                       ),
                       Text(city),
                     ],
@@ -132,7 +134,7 @@ class SearchResultCard extends StatelessWidget {
                       const Icon(
                         Icons.monetization_on,
                         size: 17,
-                        color: lightGreen,
+                        color: kGreen,
                       ),
                       Text(price),
                     ],

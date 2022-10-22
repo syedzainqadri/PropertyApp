@@ -3,14 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart';
 import 'package:lagosabuja/AddListings/select_city.dart';
 import 'package:lagosabuja/Utils/color_scheme.dart';
 import 'package:lagosabuja/Utils/full_screen_dialog.dart';
-
 import '../Controllers/location_controller.dart';
 
-//select_country.dart
 class SelectCountry extends StatefulWidget {
   const SelectCountry({Key? key}) : super(key: key);
 
@@ -33,7 +30,7 @@ class _SelectCountryState extends State<SelectCountry> {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 34,
           ),
         ),
@@ -41,7 +38,7 @@ class _SelectCountryState extends State<SelectCountry> {
         title: const Text(
           'Select State',
           style: TextStyle(
-            color: lightGreen,
+            color: kGreen,
           ),
         ),
       ),
@@ -49,7 +46,7 @@ class _SelectCountryState extends State<SelectCountry> {
         () => locationsController.isLoading.value
             ? const Center(
                 child: CircularProgressIndicator(
-                color: lightGreen,
+                color: kGreen,
               ))
             : Padding(
                 padding: const EdgeInsets.only(
@@ -67,7 +64,6 @@ class _SelectCountryState extends State<SelectCountry> {
                               'country',
                               locationsController
                                   .locations.value[index].termId);
-                          print(box.read("country"));
                           CustomFullScreenDialog.cancelDialog();
                           Get.to(const SelectCity());
                         },
@@ -75,7 +71,7 @@ class _SelectCountryState extends State<SelectCountry> {
                           width: double.infinity,
                           height: 50,
                           decoration: BoxDecoration(
-                              color: lightGreen,
+                              color: kGreen,
                               border: Border.all(
                                   color: white, style: BorderStyle.solid)),
                           child: Center(

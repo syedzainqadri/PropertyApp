@@ -1,10 +1,6 @@
-// To parse this JSON data, do
-//
-//     final editListingModel = editListingModelFromJson(jsonString);
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables, unnecessary_null_in_if_null_operators
 
 import 'dart:convert';
-
-import 'package:lagosabuja/Models/all_listing_model.dart';
 
 EditListingModel editListingModelFromJson(String str) =>
     EditListingModel.fromJson(json.decode(str));
@@ -240,9 +236,9 @@ class CustomField {
         options: json["options"] == null
             ? null
             : CustomFieldOptions.fromJson(json["options"]),
-        min: json["min"] == null ? null : json["min"],
-        max: json["max"] == null ? null : json["max"],
-        stepSize: json["step_size"] == null ? null : json["step_size"],
+        min: json["min"] ?? null,
+        max: json["max"] ?? null,
+        stepSize: json["step_size"] ?? null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -259,9 +255,9 @@ class CustomField {
         "value": value,
         "icon": icon,
         "options": options == null ? null : options!.toJson(),
-        "min": min == null ? null : min,
-        "max": max == null ? null : max,
-        "step_size": stepSize == null ? null : stepSize,
+        "min": min ?? null,
+        "max": max ?? null,
+        "step_size": stepSize ?? null,
       };
 }
 
@@ -307,6 +303,7 @@ class Choice {
       };
 }
 
+// ignore: constant_identifier_names
 enum Placeholder { EMPTY, AREA, LOCATION }
 
 final placeholderValues = EnumValues({
@@ -969,9 +966,7 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<T, String> get reverse {
-    if (reverseMap == null) {
-      reverseMap = map!.map((k, v) => new MapEntry(v, k));
-    }
+    reverseMap ??= map!.map((k, v) => MapEntry(v, k));
     return reverseMap!;
   }
 }

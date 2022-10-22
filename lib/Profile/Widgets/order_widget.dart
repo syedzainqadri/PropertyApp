@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
-import 'package:lagosabuja/Profile/PaymentResultScreen.dart';
 import 'package:lagosabuja/Profile/order_detail_screen.dart';
 import 'package:lagosabuja/Utils/color_scheme.dart';
 
 class OrderWidget extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final orderId, title, price, status, method, createdDate;
   const OrderWidget(
       {Key? key,
@@ -62,7 +62,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Order Number :',
                       style: TextStyle(
-                          color: lightGreen,
+                          color: kGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
@@ -79,7 +79,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Payment Method :',
                       style: TextStyle(
-                          color: lightGreen,
+                          color: kGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
@@ -96,7 +96,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Order Ammount :',
                       style: TextStyle(
-                          color: lightGreen,
+                          color: kGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
@@ -113,7 +113,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Order Status :',
                       style: TextStyle(
-                          color: lightGreen,
+                          color: kGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),
@@ -130,7 +130,7 @@ class _OrderWidgetState extends State<OrderWidget> {
                     const Text(
                       'Time Created :',
                       style: TextStyle(
-                          color: lightGreen,
+                          color: kGreen,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),

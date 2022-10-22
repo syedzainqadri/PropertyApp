@@ -21,7 +21,6 @@ class _SettingsState extends State<Settings> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     if (box.read("notification") != null) {
       isNotificationSwitched = box.read("notification");
@@ -43,7 +42,7 @@ class _SettingsState extends State<Settings> {
             },
             child: const Icon(
               Icons.navigate_before,
-              color: lightGreen,
+              color: kGreen,
               size: 34,
             ),
           )),
@@ -60,7 +59,7 @@ class _SettingsState extends State<Settings> {
               const Text(
                 'Settings',
                 style: TextStyle(
-                  color: lightGreen,
+                  color: kGreen,
                   fontWeight: FontWeight.w500,
                   fontSize: 40,
                 ),
@@ -204,8 +203,8 @@ class _SettingsState extends State<Settings> {
                           box.write("notification", value);
                         });
                       },
-                      activeTrackColor: Colors.lightGreenAccent,
-                      activeColor: lightGreen,
+                      activeTrackColor: kGreenAccent,
+                      activeColor: kGreen,
                     ),
                   ],
                 ),
@@ -232,8 +231,8 @@ class _SettingsState extends State<Settings> {
                         box.write("AppNotification", value);
                       });
                     },
-                    activeTrackColor: Colors.lightGreenAccent,
-                    activeColor: lightGreen,
+                    activeTrackColor: kGreenAccent,
+                    activeColor: kGreen,
                   ),
                 ],
               ),

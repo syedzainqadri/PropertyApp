@@ -18,7 +18,7 @@ class MyPayments extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Payments History',
-          style: TextStyle(color: lightGreen),
+          style: TextStyle(color: kGreen),
         ),
         leading: GestureDetector(
             onTap: () {
@@ -27,7 +27,7 @@ class MyPayments extends StatelessWidget {
             child: const Icon(
               Icons.navigate_before,
               size: 35,
-              color: lightGreen,
+              color: kGreen,
             )),
       ),
       body: ListView.builder(

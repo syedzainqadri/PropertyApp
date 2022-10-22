@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Categories/Widgets/CategoryCard.dart';
@@ -23,7 +25,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
     return Obx(
       () => categoriesController.categories == null
           ? const CircularProgressIndicator(
-              color: lightGreen,
+              color: kGreen,
             )
           : ListView.builder(
               itemCount: categoriesController.categories.length,

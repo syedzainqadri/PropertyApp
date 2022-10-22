@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/chat_controller.dart';
@@ -15,13 +17,12 @@ class ConversationPage extends StatefulWidget {
 class _ConversationPageState extends State<ConversationPage> {
   final chatController = Get.put(ChatController());
   @override
-  //TODO: if there is no chat them there should be a message 'No Chat Available'
   Widget build(BuildContext context) {
     return Obx(() {
       return chatController.isLoading.value
           ? const Center(
               child: CircularProgressIndicator(
-              color: lightGreen,
+              color: kGreen,
             ))
           : chatController.allChats.isEmpty
               ? const Center(child: Text("No Chats"))

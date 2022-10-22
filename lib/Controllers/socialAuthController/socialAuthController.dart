@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, unused_local_variable
+
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -27,7 +29,6 @@ class SocialSignInController extends GetxController {
               'type': "google_firebase",
             }))
         .then((response) {
-      print(response.body);
       signInModel.value = SignInModel.fromJson(response.body);
       GetStorage().write('isLoggedIn', true);
       GetStorage().write('token', signInModel.value.token);

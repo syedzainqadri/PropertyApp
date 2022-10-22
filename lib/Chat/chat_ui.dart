@@ -1,5 +1,6 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:chat_composer/chat_composer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -28,7 +29,6 @@ class _ChatUiState extends State<ChatUi> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     box.write('listingId', widget.listingId);
     chatController.getAllMessages();
@@ -36,13 +36,12 @@ class _ChatUiState extends State<ChatUi> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: no need reload the state
     var _chatController = Get.find<ChatController>();
     return Obx(() => Scaffold(
           appBar: AppBar(
             elevation: 0.0,
             centerTitle: true,
-            backgroundColor: lightGreen,
+            backgroundColor: kGreen,
             title: Text(widget.title),
             leading: GestureDetector(
                 onTap: () {
@@ -94,7 +93,7 @@ class _ChatUiState extends State<ChatUi> {
                     //  list.add('AUDIO PATH : ' + path!);
                   });
                 },
-                textPadding: EdgeInsets.only(left: 15, right: 15),
+                textPadding: const EdgeInsets.only(left: 15, right: 15),
                 // leading: CupertinoButton(
                 //   padding: EdgeInsets.zero,
                 //   child: const Icon(
@@ -144,7 +143,7 @@ class _ChatUiState extends State<ChatUi> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: lightGreen,
+                color: kGreen,
               ),
               child: Padding(
                 padding: const EdgeInsets.all(12.0),

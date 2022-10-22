@@ -23,7 +23,7 @@ class _MyFavoritesState extends State<MyFavorites> {
         centerTitle: true,
         title: const Text(
           'My Favorites',
-          style: TextStyle(color: lightGreen),
+          style: TextStyle(color: kGreen),
         ),
         leading: GestureDetector(
             onTap: () {
@@ -31,7 +31,7 @@ class _MyFavoritesState extends State<MyFavorites> {
             },
             child: const Icon(
               Icons.navigate_before,
-              color: lightGreen,
+              color: kGreen,
               size: 35,
             )),
       ),

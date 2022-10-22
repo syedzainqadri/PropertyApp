@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/profile_controller.dart';
 import 'package:lagosabuja/Controllers/user_controller.dart';
-import 'package:lagosabuja/Utils/constants.dart';
 
 import '../Utils/color_scheme.dart';
 
@@ -44,7 +43,7 @@ class _AccountDetailsState extends State<AccountDetails> {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 34,
           ),
         ),
@@ -52,7 +51,7 @@ class _AccountDetailsState extends State<AccountDetails> {
         title: const Text(
           'Account Details',
           style: TextStyle(
-            color: lightGreen,
+            color: kGreen,
           ),
         ),
       ),
@@ -112,7 +111,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                       child: TextFormField(
                         validator: (v) => v!.isEmpty ? "required" : null,
                         textAlign: TextAlign.start,
-                        cursorColor: lightGreen,
+                        cursorColor: kGreen,
                         controller: firstNameController,
                         decoration: const InputDecoration(
                           enabledBorder: InputBorder.none,
@@ -158,7 +157,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                       child: TextFormField(
                         validator: (v) => v!.isEmpty ? "required" : null,
                         textAlign: TextAlign.start,
-                        cursorColor: lightGreen,
+                        cursorColor: kGreen,
                         controller: lastNameController,
                         decoration: const InputDecoration(
                           enabledBorder: InputBorder.none,
@@ -220,7 +219,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                       child: TextFormField(
                         validator: (v) => v!.isEmpty ? "required" : null,
                         textAlign: TextAlign.start,
-                        cursorColor: lightGreen,
+                        cursorColor: kGreen,
                         controller: emailController,
                         decoration: const InputDecoration(
                           enabledBorder: InputBorder.none,
@@ -266,7 +265,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                       child: TextFormField(
                         validator: (v) => v!.isEmpty ? "required" : null,
                         textAlign: TextAlign.start,
-                        cursorColor: lightGreen,
+                        cursorColor: kGreen,
                         controller: phoneNoController,
                         decoration: const InputDecoration(
                           enabledBorder: InputBorder.none,
@@ -278,7 +277,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Center(
@@ -294,11 +293,11 @@ class _AccountDetailsState extends State<AccountDetails> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: lightGreen,
+                      primary: kGreen,
                       onSurface: white,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(20.0),
                       child: Text(
                         'Update Profile',
                         style: TextStyle(fontSize: 16),

@@ -1,7 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class TextAreaWidgetForForm extends StatelessWidget {
-  TextAreaWidgetForForm({
+  const TextAreaWidgetForForm({
     Key? key,
     required this.lable,
     required this.controller,

@@ -1,8 +1,10 @@
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables, file_names, invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/AddListings/edit_listing.dart';
 import 'package:lagosabuja/AddListings/listing_details.dart';
-import 'package:lagosabuja/BuyPromotions/buyPromotions.dart';
+import 'package:lagosabuja/BuyPromotions/buy_promotions.dart';
 import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
 import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
 import 'package:lagosabuja/Controllers/markAsSoldController.dart';
@@ -87,14 +89,14 @@ class MyListingCard extends StatelessWidget {
                       height: 20,
                       width: 80,
                       decoration: const BoxDecoration(
-                        color: lightGreen,
+                        color: kGreen,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
                             bottomLeft: Radius.circular(10)),
                       ),
                       child: Center(
                         child: Text(
-                          'NGN:  ' + price.toString(),
+                          '$currency:  ' + price.toString(),
                           style: const TextStyle(
                               overflow: TextOverflow.ellipsis,
                               letterSpacing: .5,
@@ -120,7 +122,7 @@ class MyListingCard extends StatelessWidget {
                   //             icon: const Icon(
                   //               Icons.favorite,
                   //               size: 25,
-                  //               color: lightGreen,
+                  //               color: kGreen,
                   //             ),
                   //           ),
                   //         ],
@@ -139,7 +141,7 @@ class MyListingCard extends StatelessWidget {
                   //             icon: const Icon(
                   //               Icons.favorite_border,
                   //               size: 25,
-                  //               color: lightGreen,
+                  //               color: kGreen,
                   //             ),
                   //           ),
                   //         ],
@@ -208,7 +210,7 @@ class MyListingCard extends StatelessWidget {
                             favoriteListingController.refresh();
                             Get.snackbar('Success', 'Marked As Sold',
                                 snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: lightGreen,
+                                backgroundColor: kGreen,
                                 colorText: white);
                           } else if (value == 'promote') {
                             Get.to(() => const PromotionPlans());

@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member, unused_field, unnecessary_null_comparison
+
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -42,7 +44,6 @@ class _MyFiltersState extends State<MyFilters> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     sortBy.value = sortByGlobalValue.value != null
         ? sortByGlobalValue.toString()
@@ -59,8 +60,6 @@ class _MyFiltersState extends State<MyFilters> {
     _currentRangeValues = const RangeValues(5000, 15000);
     latitude.value = box.read('latitude') ?? '';
     longitude.value = box.read('longitude') ?? '';
-    print(latitude.value);
-    print(longitude.value);
   }
 
   @override
@@ -153,7 +152,6 @@ class _MyFiltersState extends State<MyFilters> {
                     ],
                 onSelected: (String value) async {
                   sortBy.value = value;
-                  print(sortBy.value);
                   sortByGlobalValue.value = value;
                   CustomFullScreenDialog.showDialog();
                   CustomFullScreenDialog.cancelDialog();
@@ -209,13 +207,12 @@ class _MyFiltersState extends State<MyFilters> {
                     totalSwitches: 2,
                     labels: const ['Rent', 'Buy'],
                     activeBgColors: const [
-                      [lightGreen],
-                      [lightGreen]
+                      [kGreen],
+                      [kGreen]
                     ],
                     onToggle: (index) {
                       listingType.value = index == 0 ? "rent" : "buy";
                       iWantTo.value = listingType.value;
-                      print(listingType.value);
                     },
                   ),
                 ],
@@ -253,7 +250,6 @@ class _MyFiltersState extends State<MyFilters> {
                                           'country',
                                           locationsController
                                               .locations.value[index].termId);
-                                      print(box.read("country"));
                                       Navigator.pop(context, true);
                                       showDialog(
                                           context: context,
@@ -300,8 +296,6 @@ class _MyFiltersState extends State<MyFilters> {
                                                                         index]
                                                                     .termId
                                                                     .toString();
-                                                            print(locationId
-                                                                .value);
                                                             locationName.value =
                                                                 locationsController
                                                                     .subLocations
@@ -318,8 +312,7 @@ class _MyFiltersState extends State<MyFilters> {
                                                                 double.infinity,
                                                             height: 50,
                                                             decoration: BoxDecoration(
-                                                                color:
-                                                                    lightGreen,
+                                                                color: kGreen,
                                                                 border: Border.all(
                                                                     color:
                                                                         white,
@@ -354,7 +347,7 @@ class _MyFiltersState extends State<MyFilters> {
                                       width: double.infinity,
                                       height: 50,
                                       decoration: BoxDecoration(
-                                          color: lightGreen,
+                                          color: kGreen,
                                           border: Border.all(
                                               color: white,
                                               style: BorderStyle.solid)),
@@ -404,11 +397,11 @@ class _MyFiltersState extends State<MyFilters> {
                               locationName.value == null
                                   ? const Text(
                                       'Select City',
-                                      style: TextStyle(color: lightGreen),
+                                      style: TextStyle(color: kGreen),
                                     )
                                   : Text(
                                       locationName.toString(),
-                                      style: const TextStyle(color: lightGreen),
+                                      style: const TextStyle(color: kGreen),
                                     ),
                             ],
                           ),
@@ -457,7 +450,7 @@ class _MyFiltersState extends State<MyFilters> {
                       Expanded(
                         child: Slider(
                           inactiveColor: lightGrey,
-                          activeColor: lightGreen,
+                          activeColor: kGreen,
                           value: _distanceRangeValues.value.toDouble(),
                           max: 300,
                           min: 0,
@@ -471,7 +464,6 @@ class _MyFiltersState extends State<MyFilters> {
                               distanceRangeValueGlobal.value =
                                   _distanceRangeValues.value;
                             });
-                            print(distance.value);
                           },
                         ),
                       ),
@@ -494,13 +486,13 @@ class _MyFiltersState extends State<MyFilters> {
                             width: 80,
                             height: 60,
                             decoration: BoxDecoration(
-                              border: Border.all(color: lightGreen),
+                              border: Border.all(color: kGreen),
                               borderRadius: BorderRadius.circular(25),
                             ),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
-                                Icon(Icons.map, color: lightGreen),
+                                Icon(Icons.map, color: kGreen),
                                 SizedBox(
                                   width: 8,
                                 ),
@@ -556,11 +548,11 @@ class _MyFiltersState extends State<MyFilters> {
                             Expanded(
                               child: TextFormField(
                                 controller: startRangeController,
-                                cursorColor: lightGreen,
+                                cursorColor: kGreen,
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
                                   hintText: '0',
-                                  suffixIconColor: lightGreen,
+                                  suffixIconColor: kGreen,
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25),
                                       borderSide:
@@ -568,7 +560,7 @@ class _MyFiltersState extends State<MyFilters> {
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25),
                                       borderSide:
-                                          const BorderSide(color: lightGreen)),
+                                          const BorderSide(color: kGreen)),
                                 ),
                               ),
                             ),
@@ -586,10 +578,10 @@ class _MyFiltersState extends State<MyFilters> {
                               child: TextFormField(
                                 keyboardType: TextInputType.number,
                                 controller: endRangeController,
-                                cursorColor: lightGreen,
+                                cursorColor: kGreen,
                                 decoration: InputDecoration(
                                   hintText: 'Any',
-                                  suffixIconColor: lightGreen,
+                                  suffixIconColor: kGreen,
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25),
                                       borderSide:
@@ -597,7 +589,7 @@ class _MyFiltersState extends State<MyFilters> {
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25),
                                       borderSide:
-                                          const BorderSide(color: lightGreen)),
+                                          const BorderSide(color: kGreen)),
                                 ),
                               ),
                             ),
@@ -608,7 +600,7 @@ class _MyFiltersState extends State<MyFilters> {
                         ),
                         RangeSlider(
                           inactiveColor: lightGrey,
-                          activeColor: lightGreen,
+                          activeColor: kGreen,
                           values: _currentRangeValues,
                           max: 300000,
                           divisions: 1000,
@@ -629,8 +621,6 @@ class _MyFiltersState extends State<MyFilters> {
                                   startRange.value;
                               endRangeControllerGlobal.value = endRange.value;
                             });
-                            print(startRange.value);
-                            print(endRange.value);
                           },
                         ),
                       ],
@@ -702,8 +692,8 @@ class _MyFiltersState extends State<MyFilters> {
                     }
                   },
                   child: const Text('Apply Filters'),
-                  style: ElevatedButton.styleFrom(
-                      primary: lightGreen, elevation: 0.0),
+                  style:
+                      ElevatedButton.styleFrom(primary: kGreen, elevation: 0.0),
                 ),
               ),
             ],
@@ -725,10 +715,10 @@ class _MyFiltersState extends State<MyFilters> {
       onPressed: () {},
       child: Text(title),
       style: ElevatedButton.styleFrom(
-        onPrimary: lightGreen,
+        onPrimary: kGreen,
         primary: transparent,
         elevation: 0.0,
-        side: const BorderSide(color: lightGreen),
+        side: const BorderSide(color: kGreen),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30),
         ),
@@ -760,14 +750,14 @@ class _MyFiltersState extends State<MyFilters> {
             label: const Text('All'),
             icon: const Icon(
               Icons.location_on,
-              color: lightGreen,
+              color: kGreen,
               size: 18,
             ),
             style: ElevatedButton.styleFrom(
-              onPrimary: lightGreen,
+              onPrimary: kGreen,
               primary: transparent,
               elevation: 0.0,
-              side: const BorderSide(color: lightGreen),
+              side: const BorderSide(color: kGreen),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
@@ -781,14 +771,14 @@ class _MyFiltersState extends State<MyFilters> {
             label: const Text('Residential Plot'),
             icon: const Icon(
               Icons.location_on,
-              color: lightGreen,
+              color: kGreen,
               size: 18,
             ),
             style: ElevatedButton.styleFrom(
-              onPrimary: lightGreen,
+              onPrimary: kGreen,
               primary: transparent,
               elevation: 0.0,
-              side: const BorderSide(color: lightGreen),
+              side: const BorderSide(color: kGreen),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
@@ -802,14 +792,14 @@ class _MyFiltersState extends State<MyFilters> {
             label: const Text('Commercial Plot'),
             icon: const Icon(
               Icons.location_on,
-              color: lightGreen,
+              color: kGreen,
               size: 18,
             ),
             style: ElevatedButton.styleFrom(
-              onPrimary: lightGreen,
+              onPrimary: kGreen,
               primary: transparent,
               elevation: 0.0,
-              side: const BorderSide(color: lightGreen),
+              side: const BorderSide(color: kGreen),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),
               ),
@@ -842,9 +832,5 @@ class _MyFiltersState extends State<MyFilters> {
     box.write('latitude', _latitude);
     longitude.value = _longitude;
     latitude.value = _latitude;
-    print(_latitude);
-    print(_longitude);
-
-    print(currentLocation.toString());
   }
 }

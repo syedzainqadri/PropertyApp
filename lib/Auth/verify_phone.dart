@@ -31,7 +31,7 @@
 //             child: const Icon(
 //               Icons.navigate_before,
 //               size: 35,
-//               color: lightGreen,
+//               color: kGreen,
 //             )),
 //       ),
 //       body: SingleChildScrollView(
@@ -44,7 +44,7 @@
 //               const Text(
 //                 'Sign In',
 //                 style: TextStyle(
-//                   color: lightGreen,
+//                   color: kGreen,
 //                   fontWeight: FontWeight.bold,
 //                   fontSize: 30,
 //                 ),
@@ -57,7 +57,7 @@
 //                 child: OTPTextField(
 //                     controller: otpController,
 //                     otpFieldStyle: OtpFieldStyle(
-//                       focusBorderColor: lightGreen,
+//                       focusBorderColor: kGreen,
 //                     ),
 //                     length: 6,
 //                     width: MediaQuery.of(context).size.width,

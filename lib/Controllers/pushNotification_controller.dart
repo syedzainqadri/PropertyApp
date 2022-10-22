@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, unused_local_variable
+
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -22,7 +24,6 @@ class PushNotificationController extends GetxController {
       },
       body: body,
     );
-    print(response.body);
     isLoading.value = false;
   }
 }

@@ -41,7 +41,7 @@ class _SignUpState extends State<SignUp> {
                     const Text(
                       'Create New Account',
                       style: TextStyle(
-                        color: lightGreen,
+                        color: kGreen,
                         fontWeight: FontWeight.bold,
                         fontSize: 28,
                       ),
@@ -77,8 +77,6 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(
                       height: 15,
                     ),
-                    //TODO:obsecure cannot be multiline replace these widgets.
-
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.grey.shade200,
@@ -88,9 +86,9 @@ class _SignUpState extends State<SignUp> {
                         validator: (v) => v!.isEmpty ? "Required" : null,
                         controller: passwordController,
                         obscureText: true,
-                        cursorColor: lightGreen,
+                        cursorColor: kGreen,
                         textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             contentPadding:
                                 EdgeInsets.only(left: 15, bottom: 20, top: 10),
                             border: InputBorder.none,
@@ -118,7 +116,7 @@ class _SignUpState extends State<SignUp> {
                         validator: (v) => v!.isEmpty ? "Required" : null,
                         controller: confirmPasswordController,
                         obscureText: true,
-                        cursorColor: lightGreen,
+                        cursorColor: kGreen,
                         textInputAction: TextInputAction.next,
                         decoration: const InputDecoration(
                             contentPadding:
@@ -137,7 +135,6 @@ class _SignUpState extends State<SignUp> {
                     const SizedBox(
                       height: 15,
                     ),
-                    //TODO: obsecure cannot be multiline replace these widgets.
                     defaultButton('Sign Up', () async {
                       if (formKey.currentState!.validate()) {
                         Get.defaultDialog(
@@ -148,7 +145,7 @@ class _SignUpState extends State<SignUp> {
                                 children: const [
                                   Center(
                                     child: CircularProgressIndicator(
-                                      color: lightGreen,
+                                      color: kGreen,
                                     ),
                                   ),
                                   SizedBox(
@@ -201,7 +198,7 @@ class _SignUpState extends State<SignUp> {
                             child: Text(
                               "Log In",
                               style: TextStyle(
-                                color: lightGreen,
+                                color: kGreen,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),

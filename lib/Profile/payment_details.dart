@@ -1,10 +1,10 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
 import 'package:lagosabuja/Controllers/membership_controller.dart';
 import 'package:lagosabuja/Controllers/payment_controller.dart';
-import 'package:lagosabuja/Models/payment_model.dart';
-import 'package:lagosabuja/Models/paymenyByIdModel.dart';
 import 'package:lagosabuja/Profile/PaymentResultScreen.dart';
 
 import '../Utils/color_scheme.dart';
@@ -58,7 +58,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
       appBar: AppBar(
         title: const Text(
           'Checkout',
-          style: TextStyle(color: lightGreen),
+          style: TextStyle(color: kGreen),
         ),
         centerTitle: true,
         backgroundColor: transparent,
@@ -69,7 +69,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 35,
           ),
         ),
@@ -90,7 +90,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 ),
                 Text(
                   'Select Payment Method',
-                  style: TextStyle(color: lightGreen, fontSize: 22),
+                  style: TextStyle(color: kGreen, fontSize: 22),
                 ),
               ],
             ),
@@ -109,7 +109,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         ),
                         Radio(
                           value: 1,
-                          activeColor: lightGreen,
+                          activeColor: kGreen,
                           groupValue: _radioValue,
                           onChanged: (value) {
                             setState(() {
@@ -165,7 +165,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                     Get.snackbar('Order Places',
                         "Please Make The Payment According to Instructions",
                         snackPosition: SnackPosition.BOTTOM,
-                        backgroundColor: lightGreen,
+                        backgroundColor: kGreen,
                         colorText: white);
                   } else {
                     Get.snackbar(
@@ -184,7 +184,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 style: TextStyle(fontSize: 18),
               ),
               style: ElevatedButton.styleFrom(
-                primary: lightGreen,
+                primary: kGreen,
                 onSurface: white,
               ),
             ),
@@ -211,7 +211,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 height: 40,
                 width: double.infinity,
                 decoration: const BoxDecoration(
-                  color: lightGreen,
+                  color: kGreen,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20),
@@ -299,7 +299,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                       price,
                       textAlign: TextAlign.right,
                       style: const TextStyle(
-                        color: lightGreen,
+                        color: kGreen,
                         fontSize: 18,
                       ),
                     ),

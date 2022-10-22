@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/orders_controller.dart';
@@ -19,7 +18,7 @@ class Orders extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Order History',
-          style: TextStyle(color: lightGreen),
+          style: TextStyle(color: kGreen),
         ),
         leading: GestureDetector(
             onTap: () {
@@ -28,7 +27,7 @@ class Orders extends StatelessWidget {
             child: const Icon(
               Icons.navigate_before,
               size: 35,
-              color: lightGreen,
+              color: kGreen,
             )),
       ),
       body: ListView.builder(

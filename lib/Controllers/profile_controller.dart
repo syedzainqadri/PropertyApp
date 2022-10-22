@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -31,6 +33,5 @@ class ProfileController extends GetxController {
       'phone': phone,
     });
     var res = await request.send();
-    print(res.statusCode);
   }
 }

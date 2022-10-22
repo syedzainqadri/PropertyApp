@@ -45,7 +45,7 @@ class _ProfileState extends State<Profile> {
         centerTitle: true,
         title: const Text(
           'Profile',
-          style: TextStyle(color: lightGreen),
+          style: TextStyle(color: kGreen),
         ),
         leading: GestureDetector(
             onTap: () {
@@ -54,7 +54,7 @@ class _ProfileState extends State<Profile> {
             child: const Icon(
               Icons.navigate_before,
               size: 35,
-              color: lightGreen,
+              color: kGreen,
             )),
       ),
       body: SingleChildScrollView(
@@ -78,12 +78,12 @@ class _ProfileState extends State<Profile> {
                           ),
                           child: const Center(
                             child: CircularProgressIndicator(
-                              color: lightGreen,
+                              color: kGreen,
                             ),
                           ),
                         )
                       : Badge(
-                          badgeColor: lightGreen,
+                          badgeColor: kGreen,
                           badgeContent: const Icon(
                             Icons.camera_alt,
                             color: white,
@@ -133,7 +133,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 profileParameters(
-                    "My Listings", Icons.list, lightGreen, const MyListings()),
+                    "My Listings", Icons.list, kGreen, const MyListings()),
                 profileParameters("My Favorites", Icons.favorite, brightRed,
                     const MyFavorites()),
                 profileParameters("Account Detials", Icons.person, mediumBlue,
@@ -143,7 +143,7 @@ class _ProfileState extends State<Profile> {
                 profileParameters(
                     "Settings", Icons.settings, mediumGrey, const Settings()),
                 profileParameters(
-                    "Orders", Icons.shopping_cart, lightGreen, Orders()),
+                    "Orders", Icons.shopping_cart, kGreen, Orders()),
                 profileParameters(
                     "Payments", Icons.payment, mediumBlue, MyPayments()),
                 const SizedBox(

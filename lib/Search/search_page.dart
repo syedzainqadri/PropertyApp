@@ -1,3 +1,5 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, invalid_use_of_protected_member
+
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,7 +37,6 @@ class _SearchPageState extends State<SearchPage> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            // TODO: include sortby along search field.
             Row(
               children: [
                 Expanded(
@@ -46,8 +47,8 @@ class _SearchPageState extends State<SearchPage> {
                         hintText: 'Search for Listings',
                         prefixIcon: const Icon(Icons.search),
                         suffixIcon: const Icon(Icons.close),
-                        suffixIconColor: lightGreen,
-                        prefixIconColor: lightGreen,
+                        suffixIconColor: kGreen,
+                        prefixIconColor: kGreen,
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: const BorderSide(
@@ -57,7 +58,7 @@ class _SearchPageState extends State<SearchPage> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: const BorderSide(
-                            color: lightGreen,
+                            color: kGreen,
                           ),
                         ),
                       ),
@@ -75,7 +76,7 @@ class _SearchPageState extends State<SearchPage> {
             Obx(() {
               return searchController.searchListings.value.data == null
                   ? const CircularProgressIndicator(
-                      color: lightGreen,
+                      color: kGreen,
                     )
                   : Expanded(
                       child: ListView.builder(
@@ -173,7 +174,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: lightGreen,
+                        primary: kGreen,
                         elevation: 0.0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
@@ -250,11 +251,10 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
             padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
             child: Obx(
               () => ChipsChoice<ListingTypes>.single(
-                choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                choiceStyle: const C2ChoiceStyle(color: kGreen),
                 wrapped: true,
                 onChanged: (val) {
                   listingType.value = val;
-                  print(listingType.value.id.toString());
                 },
                 value: listingType.value,
                 choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
@@ -276,7 +276,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
             child: ChipsChoice<CategoriesModel>.single(
-              choiceStyle: const C2ChoiceStyle(color: lightGreen),
+              choiceStyle: const C2ChoiceStyle(color: kGreen),
               wrapped: true,
               value: category,
               choiceItems: C2Choice.listFrom<CategoriesModel, CategoriesModel>(
@@ -292,7 +292,6 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                   pricingTypes = PricType();
                   pricingTypes.id = '';
                   pricingTypes.name = '';
-                  print(category.termId);
                 });
               },
             ),
@@ -302,7 +301,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                   child: ChipsChoice<LocationsModel>.single(
-                    choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                    choiceStyle: const C2ChoiceStyle(color: kGreen),
                     wrapped: true,
                     value: subCategory,
                     choiceItems:
@@ -318,7 +317,6 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                       setState(() {
                         subCategorySelected = true;
                         subCategory = val;
-                        print(subCategory.termId);
                       });
                     },
                   ),
@@ -343,7 +341,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5.0),
                           child: ChipsChoice<PriceUnit>.single(
-                            choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                            choiceStyle: const C2ChoiceStyle(color: kGreen),
                             wrapped: true,
                             value: priceUnits,
                             choiceItems:
@@ -355,7 +353,6 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                             ),
                             onChanged: (val) {
                               setState(() => priceUnits = val);
-                              print(priceUnits.id);
                             },
                           ),
                         ),
@@ -369,7 +366,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 5.0),
                           child: RadioGroup<PricType>.builder(
-                            activeColor: lightGreen,
+                            activeColor: kGreen,
                             direction: Axis.horizontal,
                             groupValue: priceTypes,
                             onChanged: (value) => setState(() {
@@ -444,7 +441,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                                                       });
                                                     },
                                                     checkColor: white,
-                                                    activeColor: lightGreen,
+                                                    activeColor: kGreen,
                                                   ),
                                                   Text(
                                                     "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
@@ -485,7 +482,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                                               ChipsChoice<Choice>.single(
                                                 choiceStyle:
                                                     const C2ChoiceStyle(
-                                                        color: lightGreen),
+                                                        color: kGreen),
                                                 wrapped: true,
                                                 value: selectedFields[index]
                                                     .choice,
@@ -547,7 +544,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                                                   ChipsChoice<Choice>.single(
                                                     choiceStyle:
                                                         const C2ChoiceStyle(
-                                                            color: lightGreen),
+                                                            color: kGreen),
                                                     wrapped: true,
                                                     value: selectedFields[index]
                                                         .choice,
@@ -579,7 +576,6 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                                                                     .id,
                                                                 val));
                                                       });
-                                                      print(customField);
                                                     },
                                                   ),
                                                 ],

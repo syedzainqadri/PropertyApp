@@ -2,6 +2,8 @@
 //
 //     final myPayments = myPaymentsFromJson(jsonString);
 
+// ignore_for_file: prefer_typing_uninitialized_variables, constant_identifier_names
+
 import 'dart:convert';
 
 MyPayments myPaymentsFromJson(String str) =>
@@ -131,7 +133,7 @@ class EnumValues<T> {
   EnumValues(this.map);
 
   Map<T, String> get reverse {
-    reverseMap ??= map.map((k, v) => new MapEntry(v, k));
+    reverseMap ??= map.map((k, v) => MapEntry(v, k));
     return reverseMap;
   }
 }

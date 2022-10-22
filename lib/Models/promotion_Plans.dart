@@ -1,6 +1,4 @@
-// To parse this JSON data, do
-//
-//     final promotionPlanModel = promotionPlanModelFromJson(jsonString);
+// ignore_for_file: file_names, prefer_typing_uninitialized_variables
 
 import 'dart:convert';
 

@@ -112,7 +112,7 @@
 //               child: const Icon(
 //                 Icons.navigate_before,
 //                 size: 35,
-//                 color: lightGreen,
+//                 color: kGreen,
 //               )),
 //         ),
 //         body: SingleChildScrollView(
@@ -125,7 +125,7 @@
 //                 const Text(
 //                   'Create New Account',
 //                   style: TextStyle(
-//                     color: lightGreen,
+//                     color: kGreen,
 //                     fontWeight: FontWeight.bold,
 //                     fontSize: 30,
 //                   ),
@@ -135,7 +135,7 @@
 //                 ),
 //                 Center(
 //                   child: Badge(
-//                     badgeColor: lightGreen,
+//                     badgeColor: kGreen,
 //                     badgeContent: const Icon(
 //                       Icons.camera_alt,
 //                       color: white,
@@ -173,7 +173,7 @@
 //                     borderRadius: BorderRadius.circular(30),
 //                     border: Border.all(
 //                         color: isActive
-//                             ? lightGreen
+//                             ? kGreen
 //                             : darkGrey),
 //                   ),
 //                   child: Row(
@@ -194,7 +194,7 @@
 //                           },
 //                           child: TextField(
 //                             focusNode: _phoneFocus,
-//                             cursorColor: lightGreen,
+//                             cursorColor: kGreen,
 //                             decoration: const InputDecoration(
 //                               enabledBorder: InputBorder.none,
 //                               focusedBorder: InputBorder.none,

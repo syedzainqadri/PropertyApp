@@ -1,4 +1,4 @@
-// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, invalid_use_of_protected_member, avoid_print
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_typing_uninitialized_variables, invalid_use_of_protected_member, avoid_print, must_be_immutable
 
 import 'dart:convert';
 import 'dart:io';
@@ -76,11 +76,6 @@ class _AddListingState extends State<AddListing> {
 
   @override
   Widget build(BuildContext context) {
-    //TODO: Add a loading indicator
-    //TODO: Location selected is not shown
-    //TODO: show snackbar on click of location "Your Current Location is selected",
-    //TODO: Categories are not shown
-    //TODO: Custom Fields & Pricing Types are not shown
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -91,7 +86,7 @@ class _AddListingState extends State<AddListing> {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 34,
           ),
         ),
@@ -99,7 +94,7 @@ class _AddListingState extends State<AddListing> {
         title: const Text(
           'Add Listing',
           style: TextStyle(
-            color: lightGreen,
+            color: kGreen,
           ),
         ),
       ),
@@ -133,7 +128,7 @@ class _AddListingState extends State<AddListing> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: lightGreen,
+                            primary: kGreen,
                             elevation: 0.0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
@@ -268,7 +263,7 @@ class _AddListingState extends State<AddListing> {
                           width: 100,
                           height: 100,
                           decoration: BoxDecoration(
-                            color: lightGreen,
+                            color: kGreen,
                             shape: BoxShape.rectangle,
                             borderRadius: BorderRadius.circular(18),
                           ),
@@ -315,7 +310,7 @@ class _AddListingState extends State<AddListing> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
                 child: ChipsChoice<ListingTypes>.single(
-                  choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                  choiceStyle: const C2ChoiceStyle(color: kGreen),
                   wrapped: true,
                   value: listingType,
                   choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
@@ -337,7 +332,7 @@ class _AddListingState extends State<AddListing> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: ChipsChoice<CategoriesModel>.single(
-                  choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                  choiceStyle: const C2ChoiceStyle(color: kGreen),
                   wrapped: true,
                   value: category,
                   choiceItems:
@@ -355,7 +350,7 @@ class _AddListingState extends State<AddListing> {
                             children: const [
                               Center(
                                 child: CircularProgressIndicator(
-                                  color: lightGreen,
+                                  color: kGreen,
                                 ),
                               ),
                               SizedBox(
@@ -390,7 +385,7 @@ class _AddListingState extends State<AddListing> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 5.0, horizontal: 20),
                       child: ChipsChoice<LocationsModel>.single(
-                        choiceStyle: const C2ChoiceStyle(color: lightGreen),
+                        choiceStyle: const C2ChoiceStyle(color: kGreen),
                         wrapped: true,
                         value: subCategory,
                         choiceItems:
@@ -429,8 +424,7 @@ class _AddListingState extends State<AddListing> {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 5.0),
                               child: ChipsChoice<PricType>.single(
-                                choiceStyle:
-                                    const C2ChoiceStyle(color: lightGreen),
+                                choiceStyle: const C2ChoiceStyle(color: kGreen),
                                 wrapped: true,
                                 value: pricingTypes,
                                 choiceItems:
@@ -484,8 +478,7 @@ class _AddListingState extends State<AddListing> {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 5.0),
                               child: ChipsChoice<PriceUnit>.single(
-                                choiceStyle:
-                                    const C2ChoiceStyle(color: lightGreen),
+                                choiceStyle: const C2ChoiceStyle(color: kGreen),
                                 wrapped: true,
                                 value: priceUnits,
                                 choiceItems:
@@ -510,7 +503,7 @@ class _AddListingState extends State<AddListing> {
                             //   padding:
                             //       const EdgeInsets.symmetric(vertical: 5.0),
                             //   child: RadioGroup<PricType>.builder(
-                            //     activeColor: lightGreen,
+                            //     activeColor: kGreen,
                             //     direction: Axis.horizontal,
                             //     groupValue: priceTypes,
                             //     onChanged: (value) => setState(() {
@@ -587,7 +580,7 @@ class _AddListingState extends State<AddListing> {
                                                           });
                                                         },
                                                         checkColor: white,
-                                                        activeColor: lightGreen,
+                                                        activeColor: kGreen,
                                                       ),
                                                       Text(
                                                         "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
@@ -629,7 +622,7 @@ class _AddListingState extends State<AddListing> {
                                                   ChipsChoice<Choice>.single(
                                                     choiceStyle:
                                                         const C2ChoiceStyle(
-                                                            color: lightGreen),
+                                                            color: kGreen),
                                                     wrapped: true,
                                                     value: selectedFields[index]
                                                         .choice,
@@ -695,8 +688,7 @@ class _AddListingState extends State<AddListing> {
                                                           Choice>.single(
                                                         choiceStyle:
                                                             const C2ChoiceStyle(
-                                                                color:
-                                                                    lightGreen),
+                                                                color: kGreen),
                                                         wrapped: true,
                                                         value: selectedFields[
                                                                 index]
@@ -756,7 +748,7 @@ class _AddListingState extends State<AddListing> {
                   print('my price input is ${priceController.text}');
                   var _latitude = await box.read('latitude');
                   var _longitude = await box.read('longitude');
-                  var location = await box.read("city");
+                  // var location = await box.read("city");
                   await listingsController.addListing(
                     zipCodeController.text,
                     addressController.text,
@@ -790,11 +782,11 @@ class _AddListingState extends State<AddListing> {
                   Get.snackbar('Listing Posted',
                       'Your listing is pending for Approval from Admin',
                       snackPosition: SnackPosition.BOTTOM,
-                      backgroundColor: lightGreen,
+                      backgroundColor: kGreen,
                       colorText: white);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: lightGreen,
+                  primary: kGreen,
                   onSurface: white,
                 ),
                 child: const Text(
@@ -875,7 +867,7 @@ class _AddListingState extends State<AddListing> {
     print(longitude);
     Get.snackbar('Success', "Your Current Location is selected",
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: lightGreen,
+        backgroundColor: kGreen,
         colorText: white);
 
     print(currentLocation.toString());

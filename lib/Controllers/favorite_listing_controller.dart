@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -45,11 +47,10 @@ class FavoriteListingController extends GetxController {
       },
     );
     Get.snackbar('Success', 'Listing Updated',
-        backgroundColor: lightGreen,
+        backgroundColor: kGreen,
         colorText: white,
         snackPosition: SnackPosition.BOTTOM);
     getMyFavorites();
     isLoading.value = false;
-    print(response.body);
   }
 }

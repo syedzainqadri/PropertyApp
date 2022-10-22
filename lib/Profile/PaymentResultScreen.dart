@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
@@ -16,7 +17,7 @@ class PaymentResultScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Payment Details',
-          style: TextStyle(color: lightGreen),
+          style: TextStyle(color: kGreen),
         ),
         centerTitle: true,
         backgroundColor: transparent,
@@ -27,7 +28,7 @@ class PaymentResultScreen extends StatelessWidget {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 35,
           ),
         ),
@@ -47,7 +48,7 @@ class PaymentResultScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Order Id',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       orderDetails.paymentDetail.value.id != null
                           ? Text(
@@ -56,7 +57,7 @@ class PaymentResultScreen extends StatelessWidget {
                                   const TextStyle(fontWeight: FontWeight.bold),
                             )
                           : const CircularProgressIndicator(
-                              color: lightGreen,
+                              color: kGreen,
                             ),
                     ],
                   ),
@@ -69,7 +70,7 @@ class PaymentResultScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Order Date',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       orderDetails.paymentDetail.value.createdDate != null
                           ? Text(orderDetails.paymentDetail.value.createdDate
@@ -86,13 +87,13 @@ class PaymentResultScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Order Amount',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       orderDetails.paymentDetail.value.price != null
                           ? Text(
                               "\$ ${orderDetails.paymentDetail.value.price.toString()}")
                           : const CircularProgressIndicator(
-                              color: lightGreen,
+                              color: kGreen,
                             ),
                     ],
                   ),
@@ -105,13 +106,13 @@ class PaymentResultScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Order Status',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       orderDetails.paymentDetail.value.status != null
                           ? Text(orderDetails.paymentDetail.value.status
                               .toString())
                           : const CircularProgressIndicator(
-                              color: lightGreen,
+                              color: kGreen,
                             ),
                     ],
                   ),
@@ -124,7 +125,7 @@ class PaymentResultScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Payment Date',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       orderDetails.paymentDetail.value.paidDate != ""
                           ? Text(orderDetails.paymentDetail.value.paidDate
@@ -141,7 +142,7 @@ class PaymentResultScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Payment Method',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       orderDetails.paymentDetail.value.gateway != null
                           ? Text(orderDetails.paymentDetail.value.gateway.title
@@ -164,7 +165,7 @@ class PaymentResultScreen extends StatelessWidget {
               )),
             ),
             const Divider(
-              color: lightGreen,
+              color: kGreen,
               thickness: 2,
             ),
             Padding(
@@ -178,7 +179,7 @@ class PaymentResultScreen extends StatelessWidget {
               )),
             ),
             const Divider(
-              color: lightGreen,
+              color: kGreen,
               thickness: 2,
             ),
           ],

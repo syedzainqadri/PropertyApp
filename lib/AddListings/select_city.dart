@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lagosabuja/AddListings/add_listings.dart';
 import 'package:lagosabuja/Utils/color_scheme.dart';
 import '../Controllers/location_controller.dart';
 
@@ -31,7 +30,7 @@ class _SelectCityState extends State<SelectCity> {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 34,
           ),
         ),
@@ -39,7 +38,7 @@ class _SelectCityState extends State<SelectCity> {
         title: const Text(
           'Select City',
           style: TextStyle(
-            color: lightGreen,
+            color: kGreen,
           ),
         ),
       ),
@@ -59,9 +58,6 @@ class _SelectCityState extends State<SelectCity> {
                             .subLocations.value[index].name);
                     box.write('city',
                         locationsController.subLocations.value[index].termId);
-                    // box.write('latitude', locationsController.subLocations.value[index].);
-                    print(box.read("city"));
-                    // Get.offAll(const AddListing());
                     Get.back();
                     Get.back();
                   },
@@ -69,7 +65,7 @@ class _SelectCityState extends State<SelectCity> {
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                        color: lightGreen,
+                        color: kGreen,
                         border:
                             Border.all(color: white, style: BorderStyle.solid)),
                     child: Center(

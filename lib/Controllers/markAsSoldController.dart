@@ -1,16 +1,12 @@
+// ignore_for_file: file_names, unused_local_variable
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Models/favorite_listing_model.dart';
 
 class MarkAsSoldController extends GetxController {
   var isLoading = false.obs;
   final token = GetStorage().read('token');
-
-  @override
-  onInit() {
-    super.onInit();
-  }
 
   markAsSold(String id) async {
     isLoading.value = true;
@@ -25,6 +21,5 @@ class MarkAsSoldController extends GetxController {
       },
     );
     isLoading.value = false;
-    print(response.body);
   }
 }

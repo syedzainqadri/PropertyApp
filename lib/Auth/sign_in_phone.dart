@@ -111,7 +111,7 @@
 //               child: const Icon(
 //                 Icons.navigate_before,
 //                 size: 35,
-//                 color: lightGreen,
+//                 color: kGreen,
 //               )),
 //         ),
 //         body: SingleChildScrollView(
@@ -124,7 +124,7 @@
 //                 const Text(
 //                   'Sign In',
 //                   style: TextStyle(
-//                     color: lightGreen,
+//                     color: kGreen,
 //                     fontWeight: FontWeight.bold,
 //                     fontSize: 30,
 //                   ),
@@ -137,7 +137,7 @@
 //                   height: 60,
 //                   decoration: BoxDecoration(
 //                     borderRadius: BorderRadius.circular(30),
-//                     border: Border.all(color: _phoneFocus.hasPrimaryFocus?lightGreen:darkGrey),
+//                     border: Border.all(color: _phoneFocus.hasPrimaryFocus?kGreen:darkGrey),
 //                   ),
 //                   child: Row(
 //                     children: [
@@ -151,7 +151,7 @@
 //                        Expanded(
 //                         child: TextField(
 //                           focusNode: _phoneFocus,
-//                           cursorColor: lightGreen,
+//                           cursorColor: kGreen,
 //                           decoration: const InputDecoration(
 //                             enabledBorder: InputBorder.none,
 //                             focusedBorder: InputBorder.none,

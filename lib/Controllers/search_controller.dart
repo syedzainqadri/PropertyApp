@@ -41,14 +41,6 @@ class SearchController extends GetxController {
     var _priceStart = priceStart == '' ? '' : priceStart;
     var _priceEnd = priceEnd == '' ? '' : priceEnd;
     var _sortBy = sortBy == '' ? '' : sortBy;
-    print(_type);
-    print(_location);
-    print(_lat);
-    print(_log);
-    print(_range);
-    print(_priceStart);
-    print(_priceEnd);
-    print(sortBy);
     String url =
         "https://lagosabuja.com/wp-json/rtcl/v1/listings?price_range=$_priceStart,$_priceEnd&order_by=$_sortBy&listing_type=$_type&locations[]=$_location&latitude=$_lat&longitude=$_log&radius_search=$_range&custom_fields={'_field_4216':[], '_field_4316':[],'_field_4321':[]}";
     var response = await http.get(
@@ -76,7 +68,6 @@ class SearchController extends GetxController {
       },
     );
     searchListings.value = allListingsFromJson(response.body);
-    print(searchListings.value);
     isLoading.value = false;
   }
 }

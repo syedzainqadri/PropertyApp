@@ -8,7 +8,7 @@ class CustomFullScreenDialog {
       WillPopScope(
         child: const Center(
           child: CircularProgressIndicator(
-            color: lightGreen,
+            color: kGreen,
           ),
         ),
         onWillPop: () => Future.value(false),

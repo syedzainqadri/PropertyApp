@@ -24,7 +24,6 @@ class UserController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    print(response.body);
     userModel.value = userModelFromJson(response.body);
   }
 
@@ -43,7 +42,6 @@ class UserController extends GetxController {
     var resData = await res.stream.bytesToString().then((value) {
       return json.decode(value);
     });
-    print(resData);
     userModel.value = userModelFromJson(jsonEncode(resData));
     update();
   }
@@ -58,11 +56,10 @@ class UserController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    print(response.body);
     if (response.statusCode == 200) {
       Get.snackbar('Success', 'Password reset link has been sent to your email',
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: lightGreen,
+          backgroundColor: kGreen,
           colorText: white);
     } else {
       Get.snackbar(

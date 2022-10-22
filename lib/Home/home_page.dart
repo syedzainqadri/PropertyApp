@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/AddListings/featuredListingCard.dart';
@@ -38,7 +40,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: const [
                     CircularProgressIndicator(
-                      color: lightGreen,
+                      color: kGreen,
                     ),
                   ],
                 )
@@ -101,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                                     null
                                 ? const Center(
                                     child: CircularProgressIndicator(
-                                      color: lightGreen,
+                                      color: kGreen,
                                     ),
                                   )
                                 : SizedBox(

@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart';
 import 'package:lagosabuja/AddListings/select_city.dart';
 import 'package:lagosabuja/Controllers/location_controller.dart';
 import 'package:lagosabuja/Utils/color_scheme.dart';
@@ -31,7 +30,7 @@ class _SelectCountryFiltersState extends State<SelectCountryFilters> {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 34,
           ),
         ),
@@ -39,7 +38,7 @@ class _SelectCountryFiltersState extends State<SelectCountryFilters> {
         title: const Text(
           'Select State',
           style: TextStyle(
-            color: lightGreen,
+            color: kGreen,
           ),
         ),
       ),
@@ -56,14 +55,13 @@ class _SelectCountryFiltersState extends State<SelectCountryFilters> {
                         locationsController.locations.value[index].termId);
                     box.write('country',
                         locationsController.locations.value[index].termId);
-                    print(box.read("country"));
                     Get.to(const SelectCity());
                   },
                   child: Container(
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                        color: lightGreen,
+                        color: kGreen,
                         border:
                             Border.all(color: white, style: BorderStyle.solid)),
                     child: Center(

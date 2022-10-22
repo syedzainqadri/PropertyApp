@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:get/utils.dart';
-
 Messages messagesFromJson(String str) => Messages.fromJson(json.decode(str));
 
 class Messages {

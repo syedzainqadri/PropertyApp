@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Utils/color_scheme.dart';
@@ -30,7 +32,7 @@ class OrderDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           'Order Details',
-          style: TextStyle(color: lightGreen),
+          style: TextStyle(color: kGreen),
         ),
         centerTitle: true,
         backgroundColor: transparent,
@@ -41,7 +43,7 @@ class OrderDetailsScreen extends StatelessWidget {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 35,
           ),
         ),
@@ -61,7 +63,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Order Id',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       id != null
                           ? Text(
@@ -70,7 +72,7 @@ class OrderDetailsScreen extends StatelessWidget {
                                   const TextStyle(fontWeight: FontWeight.bold),
                             )
                           : const CircularProgressIndicator(
-                              color: lightGreen,
+                              color: kGreen,
                             ),
                     ],
                   ),
@@ -83,7 +85,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Order Date',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       date != null ? Text(date.toString()) : const SizedBox(),
                     ],
@@ -97,12 +99,12 @@ class OrderDetailsScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Order Amount',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       ammount != null
                           ? Text("N ${ammount.toString()}")
                           : const CircularProgressIndicator(
-                              color: lightGreen,
+                              color: kGreen,
                             ),
                     ],
                   ),
@@ -115,12 +117,12 @@ class OrderDetailsScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Order Status',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       status != null
                           ? Text(status.toString())
                           : const CircularProgressIndicator(
-                              color: lightGreen,
+                              color: kGreen,
                             ),
                     ],
                   ),
@@ -133,7 +135,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Payment Date',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       paymentDue != ""
                           ? Text(paymentDue.toString())
@@ -149,7 +151,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     children: [
                       const Text(
                         'Payment Method',
-                        style: TextStyle(color: lightGreen, fontSize: 14),
+                        style: TextStyle(color: kGreen, fontSize: 14),
                       ),
                       paymentMethod != null
                           ? Text(paymentMethod.toString())
@@ -171,7 +173,7 @@ class OrderDetailsScreen extends StatelessWidget {
               )),
             ),
             const Divider(
-              color: lightGreen,
+              color: kGreen,
               thickness: 2,
             ),
             Padding(
@@ -185,7 +187,7 @@ class OrderDetailsScreen extends StatelessWidget {
               )),
             ),
             const Divider(
-              color: lightGreen,
+              color: kGreen,
               thickness: 2,
             ),
           ],

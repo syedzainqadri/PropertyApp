@@ -1,8 +1,9 @@
+// ignore_for_file: unused_local_variable, equal_keys_in_map
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/EditlistingModel.dart';
-import 'package:lagosabuja/Models/selected_fields_model.dart';
 
 class EditListingController extends GetxController {
   var isLoading = false.obs;
@@ -22,7 +23,6 @@ class EditListingController extends GetxController {
       },
     );
     editListing.value = editListingModelFromJson(response.body);
-    print(response.body);
     isLoading.value = false;
   }
 
@@ -40,17 +40,6 @@ class EditListingController extends GetxController {
     videoUrl,
     categoryId,
   ) async {
-    print("Listing id is $listingId");
-    print("address is $address");
-    print("phone is $phone");
-    print("whatsApp is $whatsApp");
-    print("email is $email");
-    print("website is $website");
-    print("title of the listing is $title");
-    print("Price is $price");
-    print("Images are $images");
-    print("Video is $videoUrl");
-    print("Category is $categoryId");
     isLoading.value = true;
     String url =
         'https://lagosabuja.com/wp-json/rtcl/v1/listing/form?listing_id=$listingId';
@@ -83,7 +72,6 @@ class EditListingController extends GetxController {
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    print(response.body);
     isLoading.value = false;
   }
 
@@ -102,9 +90,6 @@ class EditListingController extends GetxController {
     images,
     videoUrl,
   ) async {
-    print("Listing id is $listingId");
-    print("images to delete are $imagestodelete");
-    print("Category is $categoryId");
     String url =
         'https://lagosabuja.com/wp-json/rtcl/v1/listing/form?listing_id=$listingId';
 
@@ -126,12 +111,8 @@ class EditListingController extends GetxController {
       'price': price.toString(),
       'description': description.toString(),
       'video_urls': videoUrl.toString(),
-      'category_id': categoryId.toString(),
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    print(response.body);
   }
 }
-
-// 'gallery_delete[]':

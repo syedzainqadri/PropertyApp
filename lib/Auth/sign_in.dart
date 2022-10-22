@@ -39,7 +39,7 @@ class _SignInState extends State<SignIn> {
                     const Text(
                       'Sign In',
                       style: TextStyle(
-                        color: lightGreen,
+                        color: kGreen,
                         fontWeight: FontWeight.bold,
                         fontSize: 30,
                       ),
@@ -60,7 +60,7 @@ class _SignInState extends State<SignIn> {
                         validator: (v) => v!.isEmpty ? "Required" : null,
                         controller: passwordController,
                         obscureText: true,
-                        cursorColor: lightGreen,
+                        cursorColor: kGreen,
                         textInputAction: TextInputAction.next,
                         decoration: const InputDecoration(
                             contentPadding:
@@ -73,7 +73,7 @@ class _SignInState extends State<SignIn> {
                             // focusedBorder: OutlineInputBorder(
                             //   borderRadius: BorderRadius.circular(30),
                             //   borderSide: const BorderSide(
-                            //       color: lightGreen, style: BorderStyle.solid, width: 1),
+                            //       color: kGreen, style: BorderStyle.solid, width: 1),
                             // ),
                             border: InputBorder.none,
                             disabledBorder: InputBorder.none,
@@ -108,7 +108,7 @@ class _SignInState extends State<SignIn> {
                     socialButton(
                         'Facebook Login',
                         const FaIcon(FontAwesomeIcons.facebook),
-                        darkBlue,
+                        kDarkBlue,
                         () {}),
                     const SizedBox(
                       height: 15,
@@ -132,7 +132,7 @@ class _SignInState extends State<SignIn> {
                             child: Text(
                               "SignUp",
                               style: TextStyle(
-                                color: lightGreen,
+                                color: kGreen,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),

@@ -1,8 +1,8 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/membership_controller.dart';
 import 'package:lagosabuja/Controllers/plansController.dart';
-import 'package:lagosabuja/Models/membership_model.dart';
 import 'package:lagosabuja/Models/promotion_Plans.dart';
 import 'package:lagosabuja/Profile/payment_details.dart';
 import '../Controllers/payment_controller.dart';
@@ -28,7 +28,7 @@ class _PromotionPlansState extends State<PromotionPlans> {
       appBar: AppBar(
         title: const Text(
           'Buy Promotion',
-          style: TextStyle(color: lightGreen),
+          style: TextStyle(color: kGreen),
         ),
         centerTitle: true,
         backgroundColor: transparent,
@@ -39,7 +39,7 @@ class _PromotionPlansState extends State<PromotionPlans> {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 35,
           ),
         ),
@@ -82,7 +82,7 @@ class _PromotionPlansState extends State<PromotionPlans> {
                   height: 40,
                   width: double.infinity,
                   decoration: const BoxDecoration(
-                    color: lightGreen,
+                    color: kGreen,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20),
@@ -242,10 +242,9 @@ class _PromotionPlansState extends State<PromotionPlans> {
                               id: promotionPlans.id,
                             ));
                           },
-                          //TODO: curency symbol is NGN
-                          child: Text('NGN${promotionPlans.price}'),
+                          child: Text('$currency${promotionPlans.price}'),
                           style: ElevatedButton.styleFrom(
-                            primary: lightGreen,
+                            primary: kGreen,
                             onSurface: white,
                           ),
                         ),

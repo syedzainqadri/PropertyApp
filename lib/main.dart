@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable, unused_element
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -52,13 +54,11 @@ void main() async {
         subtitle: Text(
           notification.body!,
         ),
-        background: lightGreen,
+        background: kGreen,
         duration: const Duration(seconds: 2),
       );
     });
-  } else {
-    print('permission denied');
-  }
+  } else {}
 
   FirebaseMessaging.onMessageOpenedApp.listen(
     (RemoteMessage message) {
@@ -149,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const Text(
               'Welcome',
               style: TextStyle(
-                color: lightGreen,
+                color: kGreen,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
               ),

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:convert';
 
 Checkout checkoutFromJson(String str) => Checkout.fromJson(json.decode(str));

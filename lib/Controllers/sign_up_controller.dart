@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,16 +22,6 @@ class SignUpController extends GetxController {
         'last_name': lastName,
         'phone': phone,
       },
-    );
-    print(
-      jsonEncode(<String, dynamic>{
-        'username': username,
-        'password': password,
-        'email': email,
-        'first_name': firstName,
-        'last_name': lastName,
-        'phone': phone,
-      }),
     );
 
     if (response.statusCode == 200) {
@@ -56,7 +48,6 @@ class SignUpController extends GetxController {
               ],
             ),
           ));
-      print(result);
       Get.snackbar('Error', response.toString(),
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: Colors.red,

@@ -1,7 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
-  TextFieldWidget({
+  const TextFieldWidget({
     Key? key,
     required this.lable,
     required this.controller,

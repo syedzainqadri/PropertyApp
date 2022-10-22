@@ -1,10 +1,9 @@
-import 'dart:convert';
+// ignore_for_file: file_names
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/checkout_model.dart';
-import 'package:lagosabuja/Models/membership_model.dart';
 import 'package:lagosabuja/Models/promotion_Plans.dart';
 
 class PlansController extends GetxController {
@@ -14,7 +13,9 @@ class PlansController extends GetxController {
   var paymetId = ''.obs;
   var token = GetStorage().read('token');
 
+  @override
   onInit() {
+    super.onInit();
     getPromotionPlans();
   }
 
@@ -30,7 +31,7 @@ class PlansController extends GetxController {
     promotionPlans.value = promotionPlanModelFromJson(response.body);
   }
 
-  PromotionPlanCheckout(type, promotionType, gatewayId, planId) async {
+  promotionPlanCheckout(type, promotionType, gatewayId, planId) async {
     var response = await http.post(
         Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/checkout"),
         headers: <String, String>{

@@ -26,7 +26,7 @@ class SignInController extends GetxController {
             children: const [
               Center(
                 child: CircularProgressIndicator(
-                  color: lightGreen,
+                  color: kGreen,
                 ),
               ),
               SizedBox(

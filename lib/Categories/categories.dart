@@ -54,14 +54,14 @@ class _CategoryPageState extends State<CategoryPage> {
             },
             child: const Icon(Icons.add),
             foregroundColor: white,
-            backgroundColor: lightGreen,
+            backgroundColor: kGreen,
           ),
           appBar: AppBar(
             centerTitle: true,
             title: Text(
               widget.title ?? '',
               style: const TextStyle(
-                color: lightGreen,
+                color: kGreen,
               ),
             ),
             elevation: 0.0,
@@ -69,7 +69,7 @@ class _CategoryPageState extends State<CategoryPage> {
             leading: IconButton(
               icon: const Icon(
                 Icons.navigate_before,
-                color: lightGreen,
+                color: kGreen,
                 size: 34,
               ),
               onPressed: () {
@@ -210,7 +210,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                   ),
                                   Radio(
                                     toggleable: true,
-                                    activeColor: lightGreen,
+                                    activeColor: kGreen,
                                     value: 0,
                                     groupValue: _radioValue,
                                     onChanged: (value) {
@@ -239,7 +239,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                   ),
                                   Radio(
                                     value: 1,
-                                    activeColor: lightGreen,
+                                    activeColor: kGreen,
                                     groupValue: _radioValue,
                                     onChanged: (value) {
                                       _handleRadioValueChange(value as int);
@@ -268,7 +268,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                   ),
                                   Radio(
                                     value: 2,
-                                    activeColor: lightGreen,
+                                    activeColor: kGreen,
                                     groupValue: _radioValue,
                                     onChanged: (value) {
                                       _handleRadioValueChange(value as int);
@@ -297,7 +297,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                   ),
                                   Radio(
                                     value: 3,
-                                    activeColor: lightGreen,
+                                    activeColor: kGreen,
                                     groupValue: _radioValue,
                                     onChanged: (value) {
                                       _handleRadioValueChange(value as int);

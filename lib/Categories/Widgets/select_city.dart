@@ -31,7 +31,7 @@ class _SelectCityFiltersState extends State<SelectCityFilters> {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 34,
           ),
         ),
@@ -39,7 +39,7 @@ class _SelectCityFiltersState extends State<SelectCityFilters> {
         title: const Text(
           'Select City',
           style: TextStyle(
-            color: lightGreen,
+            color: kGreen,
           ),
         ),
       ),
@@ -59,15 +59,13 @@ class _SelectCityFiltersState extends State<SelectCityFilters> {
                             .subLocations.value[index].name);
                     box.write('city',
                         locationsController.subLocations.value[index].termId);
-                    // box.write('latitude', locationsController.subLocations.value[index].);
-                    print(box.read("city"));
                     Get.offAll(const AddListing());
                   },
                   child: Container(
                     width: double.infinity,
                     height: 50,
                     decoration: BoxDecoration(
-                        color: lightGreen,
+                        color: kGreen,
                         border:
                             Border.all(color: white, style: BorderStyle.solid)),
                     child: Center(

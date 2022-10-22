@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variableså
+// ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variableså, prefer_typing_uninitialized_variables
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
@@ -78,7 +78,7 @@ class ListingCard extends StatelessWidget {
                     child: Container(
                       height: 20,
                       decoration: const BoxDecoration(
-                        color: greenBaseColor,
+                        color: kGreen,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(10),
                             bottomLeft: Radius.circular(10)),
@@ -88,8 +88,8 @@ class ListingCard extends StatelessWidget {
                           padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                           child: Text(
                             price != null
-                                ? 'NGN:  ' + price.toString()
-                                : 'NGN: Not Available',
+                                ? '$currency:  ' + price.toString()
+                                : '$currency: Not Available',
                             style: const TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 letterSpacing: .5,
@@ -127,7 +127,7 @@ class ListingCard extends StatelessWidget {
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
                     const Icon(
                       Icons.pin_drop,
-                      color: greenBaseColor,
+                      color: kGreen,
                       size: 15,
                     ),
                     const SizedBox(

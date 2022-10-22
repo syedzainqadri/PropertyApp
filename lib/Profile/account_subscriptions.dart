@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/membership_controller.dart';
@@ -29,7 +31,7 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
       appBar: AppBar(
         title: const Text(
           'Upgrade Account',
-          style: TextStyle(color: lightGreen),
+          style: TextStyle(color: kGreen),
         ),
         centerTitle: true,
         backgroundColor: transparent,
@@ -40,7 +42,7 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
           },
           child: const Icon(
             Icons.navigate_before,
-            color: lightGreen,
+            color: kGreen,
             size: 35,
           ),
         ),
@@ -94,7 +96,7 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                     height: 40,
                     width: double.infinity,
                     decoration: const BoxDecoration(
-                      color: lightGreen,
+                      color: kGreen,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20),
@@ -256,7 +258,7 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
                             },
                             child: Text('\$${membership.price}'),
                             style: ElevatedButton.styleFrom(
-                              primary: lightGreen,
+                              primary: kGreen,
                               onSurface: white,
                             ),
                           ),

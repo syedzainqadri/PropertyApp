@@ -1,10 +1,10 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/listing_messages_model.dart';
-import 'package:lagosabuja/Models/startConversationModel.dart';
-import 'package:lagosabuja/Utils/full_screen_dialog.dart';
 import '../Models/all_chat_model.dart';
 
 class ChatController extends GetxController {
@@ -17,7 +17,6 @@ class ChatController extends GetxController {
   @override
   onInit() {
     getAllChats();
-    // getAllMessages();
     super.onInit();
   }
 
@@ -32,7 +31,6 @@ class ChatController extends GetxController {
       },
       body: jsonEncode(permas),
     );
-    print('conversation id is : ${jsonDecode(response.body)["con_id"]}');
     await sendChatConversation(
         listingId, text, jsonDecode(response.body)['con_id']);
     var data = jsonDecode(response.body);
@@ -53,8 +51,6 @@ class ChatController extends GetxController {
       },
       body: body,
     );
-    print(
-        'conversation initiated is: ${jsonDecode(response.body)['message_id'] = listingId}');
     await sendChatMessage(
         conId, jsonDecode(response.body)['message_id'], listingId);
   }
@@ -76,7 +72,6 @@ class ChatController extends GetxController {
     isLoading.value = true;
 
     var listingId = box.read('listingId');
-    print(listingId);
     var response = await http.get(
       Uri.parse(
           "https://lagosabuja.com/wp-json/rtcl/v1/my/chat/check?listing_id=$listingId"),
@@ -86,7 +81,6 @@ class ChatController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    print(response.body);
     response.body.contains('false')
         ? isLoading.value = false
         : messagesList.value = messagesFromJson(response.body);
