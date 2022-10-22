@@ -34,14 +34,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     image: categoriesController.categories[i].icon!.url,
                     title: categoriesController.categories[i].name,
                     id: categoriesController.categories[i].termId);
-              }, //listings[position].images[0].urlString.substring(int startIndex, [ int endIndex ])
+              },
             ),
     );
-  }
-
-  @override
-  void dispose() {
-    // categoriesController.dispose();
-    super.dispose();
   }
 }

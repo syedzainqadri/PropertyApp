@@ -21,7 +21,6 @@ class _SignInState extends State<SignIn> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
-  // final userController = Get.put(UserController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,16 +64,6 @@ class _SignInState extends State<SignIn> {
                         decoration: const InputDecoration(
                             contentPadding:
                                 EdgeInsets.only(left: 15, bottom: 20, top: 10),
-                            // enabledBorder: OutlineInputBorder(
-                            //   borderRadius: BorderRadius.circular(10),
-                            //   borderSide: const BorderSide(
-                            //       color: mediumGrey, style: BorderStyle.solid, width: 1),
-                            // ),
-                            // focusedBorder: OutlineInputBorder(
-                            //   borderRadius: BorderRadius.circular(30),
-                            //   borderSide: const BorderSide(
-                            //       color: kGreen, style: BorderStyle.solid, width: 1),
-                            // ),
                             border: InputBorder.none,
                             disabledBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,

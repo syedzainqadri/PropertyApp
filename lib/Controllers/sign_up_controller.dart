@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-//After signup the user should be redirected to login page instead of home page.
 class SignUpController extends GetxController {
   signUp(username, email, password, firstName, lastName, phone) async {
     var response = await http.post(

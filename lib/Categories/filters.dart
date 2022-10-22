@@ -105,7 +105,6 @@ class _MyFiltersState extends State<MyFilters> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //Toggle
             PopupMenuButton<String>(
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -417,8 +416,6 @@ class _MyFiltersState extends State<MyFilters> {
                 ),
               ),
             ),
-            //Search Locations
-
             divide(),
             Padding(
               padding: const EdgeInsets.only(
@@ -507,12 +504,10 @@ class _MyFiltersState extends State<MyFilters> {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.only(top: 5, bottom: 5),
               child: Column(
                 children: [
-                  //Price Range
                   divide(),
                   Padding(
                     padding: const EdgeInsets.only(

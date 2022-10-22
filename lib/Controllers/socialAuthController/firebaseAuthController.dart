@@ -43,7 +43,6 @@ class FirebaseAuthController extends GetxController {
           idToken: googleAuth.idToken, accessToken: googleAuth.accessToken);
       UserCredential authResult =
           await auth.signInWithCredential(authCredential);
-      // await SocialLoginController().login(authResult.user!.email!);
       Get.snackbar("SignedIn", "Signedin Successfully",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: kGreen,
@@ -83,7 +82,6 @@ class FirebaseAuthController extends GetxController {
             FacebookAuthProvider.credential(loginResult.accessToken!.token);
         final UserCredential authResult =
             await auth.signInWithCredential(facebookAuthCredential);
-        // await SocialLoginController().login(authResult.user!.email!);
       }
     } on FirebaseAuthException catch (e) {
       var title = '';
@@ -117,7 +115,6 @@ class FirebaseAuthController extends GetxController {
       await FacebookAuth.instance.logOut();
       _accessToken = null;
       _userData = null;
-      // await Get.offAllNamed(Paths.authView);
     } catch (e) {
       Get.snackbar("Error in Signing Out", e.toString(),
           snackPosition: SnackPosition.BOTTOM,

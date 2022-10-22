@@ -102,11 +102,9 @@ class _SignUpState extends State<SignUp> {
                                 TextStyle(color: Colors.grey, fontSize: 16)),
                       ),
                     ),
-
                     const SizedBox(
                       height: 15,
                     ),
-
                     Container(
                       decoration: BoxDecoration(
                           color: Colors.grey.shade200,
@@ -169,23 +167,14 @@ class _SignUpState extends State<SignUp> {
                           user = SignInModel.fromJson(response);
                           Get.back();
                           Get.back();
-                          // Get.to(const Home());
                         } else {
                           Get.back();
-                          // Get.snackbar('Error', 'something went wrong',
-                          //     snackPosition: SnackPosition.BOTTOM,
-                          //     backgroundColor: Colors.red,
-                          //     icon: const Icon(Icons.error, color: Colors.white));
                         }
                       }
                     }),
                     const SizedBox(
                       height: 15,
                     ),
-                    // const Center(child: Text('OR')),
-                    // const SizedBox(
-                    //   height: 15,
-                    // ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

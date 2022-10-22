@@ -16,7 +16,6 @@ class PromotionPlans extends StatefulWidget {
 }
 
 class _PromotionPlansState extends State<PromotionPlans> {
-//  int _radioValue = 0;
   final PlansController plansController = Get.put(PlansController());
   final PaymentController paymentController = Get.put(PaymentController());
 
@@ -150,15 +149,9 @@ class _PromotionPlansState extends State<PromotionPlans> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: const [
-                                          // Text(promotionPlans
-                                          //     .promotion.regular.featured.ads
-                                          //     .toString()),
                                           SizedBox(
                                             width: 15,
                                           ),
-                                          // Text(promotionPlans.promotion.regular
-                                          //     .featured.validate
-                                          //     .toString()),
                                         ],
                                       ),
                                     ),
@@ -181,15 +174,9 @@ class _PromotionPlansState extends State<PromotionPlans> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.end,
                                           children: const [
-                                            // Text(promotionPlans
-                                            //     .promotion.regular.bumpUp.ads
-                                            //     .toString()),
                                             SizedBox(
                                               width: 15,
                                             ),
-                                            // Text(promotionPlans.promotion
-                                            //     .regular.bumpUp.validate
-                                            //     .toString()),
                                           ],
                                         ),
                                       ),
@@ -211,15 +198,9 @@ class _PromotionPlansState extends State<PromotionPlans> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
                                         children: const [
-                                          // Text(promotionPlans
-                                          //     .promotion.regular.top.ads
-                                          //     .toString()),
                                           SizedBox(
                                             width: 15,
                                           ),
-                                          // Text(promotionPlans
-                                          //     .promotion.regular.top.validate
-                                          //     .toString()),
                                         ],
                                       ),
                                     ),

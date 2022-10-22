@@ -355,7 +355,6 @@ class _EditListingState extends State<EditListing> {
                         wrapped: true,
                         value: subCategory,
                         choiceItems:
-                            //this should be coming from category model not location Model
                             C2Choice.listFrom<LocationsModel, LocationsModel>(
                           source: categoriesController.subCategories.value,
                           value: (i, v) => v,
@@ -435,32 +434,6 @@ class _EditListingState extends State<EditListing> {
                                             ],
                                           )
                                         : const Offstage(),
-                            // TitleWidget(
-                            //   padding: 5.0,
-                            //   text: 'Select Pricing Terms',
-                            // ),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(vertical: 5.0),
-                            //   child: ChipsChoice<PriceUnit>.single(
-                            //     choiceStyle:
-                            //         const C2ChoiceStyle(color: kGreen),
-                            //     wrapped: true,
-                            //     value: priceUnits,
-                            //     choiceItems:
-                            //         C2Choice.listFrom<PriceUnit, PriceUnit>(
-                            //       source: listingConfigController
-                            //           .listingConfig.value.config.priceUnits,
-                            //       value: (i, v) => v,
-                            //       label: (i, v) => v.name,
-                            //     ),
-                            //     onChanged: (val) {
-                            //       setState(() => priceUnits = val);
-                            //       print(priceUnits.id);
-                            //     },
-                            //   ),
-                            // ),
-                            // add here pricing unit
                             TitleWidget(
                               padding: 5.0,
                               text: 'Select Negotiation Term',
@@ -712,7 +685,6 @@ class _EditListingState extends State<EditListing> {
                 onPressed: () async {
                   var _latitude = await box.read('latitude');
                   var _longitude = await box.read('longitude');
-                  // var location = await box.read("city");
                   await listingsController.addListing(
                     zipCodeController.text,
                     addressController.text,

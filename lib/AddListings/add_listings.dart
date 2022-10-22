@@ -155,20 +155,14 @@ class _AddListingState extends State<AddListing> {
                   ],
                 ),
               ),
-
               const SizedBox(
                 height: 10,
               ),
-              // TitleWidget(
-              //   text: 'Title',
-              //   padding: 5.0,
-              // ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Title", false, titleController),
               ),
-
               TitleWidget(
                 padding: 5.0,
                 text: 'Description',
@@ -179,71 +173,36 @@ class _AddListingState extends State<AddListing> {
                 child: textField("Description", false, descriptionController,
                     maxLine: 4),
               ),
-
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Phone Number',
-              // ),
-
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Phone*", false, phoneNumberController),
               ),
-
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Zip Code',
-              // ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Zip Code*", false, zipCodeController),
               ),
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Address',
-              // ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Address*", false, addressController),
               ),
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Email',
-              // ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Email*", false, emailController),
               ),
-
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'WhatsApp Number',
-              // ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("WhatsApp Number*", false, whatsAppController),
               ),
-
-              // TitleWidget(
-              //   padding: 5.0,
-              //   text: 'Website',
-              // ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: textField("Website", false, websiteController),
               ),
-
-              // TitleWidget(
-              //   text: 'Video Url',
-              //   padding: 5.0,
-              // ),
-
               TitleWidget(
                 text: 'Select Images',
                 padding: 5.0,
@@ -296,7 +255,6 @@ class _AddListingState extends State<AddListing> {
                   ),
                 ),
               ),
-
               Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
@@ -389,7 +347,6 @@ class _AddListingState extends State<AddListing> {
                         wrapped: true,
                         value: subCategory,
                         choiceItems:
-                            //this should be coming from category model not location Model
                             C2Choice.listFrom<LocationsModel, LocationsModel>(
                           source: categoriesController.subCategories.value,
                           value: (i, v) => v,
@@ -494,28 +451,6 @@ class _AddListingState extends State<AddListing> {
                                 },
                               ),
                             ),
-                            // add here pricing unit
-                            // TitleWidget(
-                            //   padding: 5.0,
-                            //   text: 'Select Negotiation Term',
-                            // ),
-                            // Padding(
-                            //   padding:
-                            //       const EdgeInsets.symmetric(vertical: 5.0),
-                            //   child: RadioGroup<PricType>.builder(
-                            //     activeColor: kGreen,
-                            //     direction: Axis.horizontal,
-                            //     groupValue: priceTypes,
-                            //     onChanged: (value) => setState(() {
-                            //       priceTypes = value;
-                            //     }),
-                            //     items: listingConfigController
-                            //         .listingConfig.value.config.priceTypes,
-                            //     itemBuilder: (item) => RadioButtonBuilder(
-                            //       item.name,
-                            //     ),
-                            //   ),
-                            // ),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5.0, horizontal: 20),
@@ -605,7 +540,6 @@ class _AddListingState extends State<AddListing> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  /// purpuse
                                                   const SizedBox(
                                                     height: 20,
                                                   ),
@@ -748,7 +682,6 @@ class _AddListingState extends State<AddListing> {
                   print('my price input is ${priceController.text}');
                   var _latitude = await box.read('latitude');
                   var _longitude = await box.read('longitude');
-                  // var location = await box.read("city");
                   await listingsController.addListing(
                     zipCodeController.text,
                     addressController.text,

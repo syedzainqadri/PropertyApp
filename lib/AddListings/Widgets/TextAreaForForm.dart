@@ -29,7 +29,6 @@ class TextAreaWidgetForForm extends StatelessWidget {
           borderRadius: BorderRadius.circular(10), border: Border.all()),
       child: TextField(
         maxLines: 8,
-        // textAlign: TextAlign.center,
         obscureText: obsecure,
         controller: controller,
         cursorColor: Colors.black,
@@ -37,11 +36,9 @@ class TextAreaWidgetForForm extends StatelessWidget {
           color: Colors.black,
           fontSize: 24,
         ),
-
         decoration: InputDecoration(
             fillColor: Colors.black,
             border: InputBorder.none,
-            // hintTextDirection: TextDirection.rtl,
             icon: Icon(
               leadingIcon,
               color: Colors.green,

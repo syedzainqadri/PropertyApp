@@ -22,7 +22,6 @@ class ChatUi extends StatefulWidget {
 class _ChatUiState extends State<ChatUi> {
   var box = GetStorage();
   var list = [].obs;
-  // Rx<List<Widget>> list = Rx<List<Widget>>[].obs;
   TextEditingController con = TextEditingController();
   final ChatController chatController = Get.put(ChatController());
   final UserController userController = Get.put(UserController());
@@ -89,40 +88,9 @@ class _ChatUiState extends State<ChatUi> {
                   con.text = '';
                 },
                 onRecordEnd: (path) {
-                  setState(() {
-                    //  list.add('AUDIO PATH : ' + path!);
-                  });
+                  setState(() {});
                 },
                 textPadding: const EdgeInsets.only(left: 15, right: 15),
-                // leading: CupertinoButton(
-                //   padding: EdgeInsets.zero,
-                //   child: const Icon(
-                //     Icons.insert_emoticon_outlined,
-                //     size: 25,
-                //     color: Colors.grey,
-                //   ),
-                //   onPressed: () {},
-                // ),
-                // actions: [
-                //   CupertinoButton(
-                //     padding: EdgeInsets.zero,
-                //     child: const Icon(
-                //       Icons.attach_file_rounded,
-                //       size: 25,
-                //       color: Colors.grey,
-                //     ),
-                //     onPressed: () {},
-                //   ),
-                //   CupertinoButton(
-                //     padding: EdgeInsets.zero,
-                //     child: const Icon(
-                //       Icons.camera_alt_rounded,
-                //       size: 25,
-                //       color: Colors.grey,
-                //     ),
-                //     onPressed: () {},
-                //   ),
-                // ],
               ),
             ],
           ),

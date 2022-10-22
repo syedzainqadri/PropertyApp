@@ -32,7 +32,6 @@ class TextAreaWidget extends StatelessWidget {
       ),
       child: TextField(
         maxLines: 8,
-        // textAlign: TextAlign.center,
         obscureText: obsecure,
         controller: controller,
         cursorColor: Colors.black,
@@ -40,11 +39,9 @@ class TextAreaWidget extends StatelessWidget {
           color: kGreen,
           fontSize: 24,
         ),
-
         decoration: InputDecoration(
             fillColor: Colors.black,
             border: InputBorder.none,
-            // hintTextDirection: TextDirection.rtl,
             icon: Icon(
               leadingIcon,
               color: Colors.green,

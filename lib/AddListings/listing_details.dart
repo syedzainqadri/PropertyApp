@@ -84,7 +84,6 @@ class _ListingDetailsState extends State<ListingDetails> {
 
   @override
   Widget build(BuildContext context) {
-    // var listing = Get.find<ListingDetailsController>().listingDetail.value;
     return Obx(() => isLoading.value == true
         ? const Scaffold(
             body: Center(
@@ -287,8 +286,6 @@ class _ListingDetailsState extends State<ListingDetails> {
                           ],
                         )),
                   ),
-
-                  /// new design like zameen.com
                   const SizedBox(
                     height: 10,
                   ),
@@ -302,7 +299,6 @@ class _ListingDetailsState extends State<ListingDetails> {
                         padding: const EdgeInsets.all(20.0),
                         child: Container(
                           decoration: BoxDecoration(
-                              //color: Colors.pink,
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
                                   color: Colors.black.withOpacity(0.3))),
@@ -450,7 +446,6 @@ class _ListingDetailsState extends State<ListingDetails> {
                       ),
                     ],
                   ),
-
                   Padding(
                     padding: const EdgeInsets.only(top: 8, right: 8, left: 8),
                     child: DescriptionTextWidget(
@@ -527,8 +522,6 @@ class _ListingDetailsState extends State<ListingDetails> {
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 3,
                                 childAspectRatio: 2.5,
-                                // crossAxisSpacing: 5,
-                                // mainAxisSpacing: 5
                               ),
                               itemCount: listingDetailsController
                                   .listingDetail.value.amenities.value.length,
@@ -550,7 +543,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                             ),
                                             blurRadius: 2.0,
                                             spreadRadius: 1.0,
-                                          ), //BoxShadow//BoxShadow
+                                          ),
                                         ],
                                       ),
                                       child: const Padding(
@@ -612,8 +605,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                               builder: (context, setState) {
                                 return Dialog(
                                   shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          20.0)), //this right here
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
                                   child: SizedBox(
                                     height: 400,
                                     child: Padding(
@@ -640,7 +633,6 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                   style: TextStyle(
                                                       color: Colors.green,
                                                       fontSize: 25,
-                                                      // fontFamily: 'Noto Nastaliq Urdu',
                                                       fontWeight:
                                                           FontWeight.normal),
                                                 ),

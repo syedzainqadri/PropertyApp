@@ -40,7 +40,6 @@ class FeaturedListingCard extends StatelessWidget {
         onTap: () async {
           try {
             await listingDetailsController.getListingById(listingId);
-            // await reviewController.fetchReviews(listingId);
           } finally {
             Get.to(() => ListingDetails(
                   id: listingId,
@@ -123,7 +122,7 @@ class FeaturedListingCard extends StatelessWidget {
                 height: 4,
               ),
               Padding(
-                padding: const EdgeInsets.only(right: 4.0, bottom: 4.0),
+                padding: const EdgeInsets.only(right: 0.0, bottom: 4.0),
                 child: Container(
                   alignment: Alignment.bottomRight,
                   child:
@@ -146,11 +145,6 @@ class FeaturedListingCard extends StatelessWidget {
                   ]),
                 ),
               ),
-              // Column(
-              //   mainAxisAlignment: MainAxisAlignment.end,
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [],
-              // )
             ],
           ),
         ),

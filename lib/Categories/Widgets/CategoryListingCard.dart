@@ -47,7 +47,6 @@ class CategoryListingCard extends StatelessWidget {
           CustomFullScreenDialog.showDialog();
           try {
             await listingDetailsController.getListingById(listingId);
-            // await reviewController.fetchReviews(listingId);
           } finally {
             CustomFullScreenDialog.cancelDialog();
             Get.to(() => ListingDetails(

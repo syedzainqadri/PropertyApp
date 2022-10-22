@@ -43,7 +43,7 @@ class Datum {
     this.promotions,
     this.badges,
     this.contact,
-    // this.store,
+    this.store,
   });
 
   int? listingId;
@@ -65,7 +65,7 @@ class Datum {
   List<Promotion>? promotions;
   List<String>? badges;
   Contact? contact;
-  // Store? store;
+  Store? store;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         listingId: json["listing_id"],
@@ -91,7 +91,7 @@ class Datum {
             json["promotions"].map((x) => promotionValues.map![x])),
         badges: List<String>.from(json["badges"].map((x) => x)),
         contact: Contact.fromJson(json["contact"]),
-        // store: Store.fromJson(json["store"]),
+        store: Store.fromJson(json["store"]),
       );
 }
 
@@ -396,25 +396,25 @@ enum Status { PUBLISH }
 
 final statusValues = EnumValues({"publish": Status.PUBLISH});
 
-// class Store {
-//   Store({
-//     this.id,
-//     this.title,
-//   });
+class Store {
+  Store({
+    this.id,
+    this.title,
+  });
 
-//   int? id;
-//   Title? title;
+  int? id;
+  Title? title;
 
-//   factory Store.fromJson(Map<String, dynamic> json) => Store(
-//         id: json["id"],
-//         title: titleValues.map![json["title"]],
-//       );
+  factory Store.fromJson(Map<String, dynamic> json) => Store(
+        id: json["id"],
+        title: titleValues.map![json["title"]],
+      );
 
-//   Map<String, dynamic> toJson() => {
-//         "id": id,
-//         "title": titleValues.reverse![title],
-//       };
-// }
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "title": titleValues.reverse![title],
+      };
+}
 
 enum Title { SUNSHINE, MY_STORE, MARK_STREET }
 

@@ -30,7 +30,6 @@ class TextFieldWidgetForForm extends StatelessWidget {
         border: Border.all(),
       ),
       child: TextField(
-        // textAlign: TextAlign.center,
         obscureText: obsecure,
         controller: controller,
         cursorColor: Colors.black,
@@ -38,11 +37,9 @@ class TextFieldWidgetForForm extends StatelessWidget {
           color: Colors.black,
           fontSize: 24,
         ),
-
         decoration: InputDecoration(
             fillColor: Colors.black,
             border: InputBorder.none,
-            // hintTextDirection: TextDirection.rtl,
             icon: Icon(
               leadingIcon,
               color: Colors.green,

@@ -59,7 +59,7 @@ class _CategoryPageState extends State<CategoryPage> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              widget.title ?? '',
+              widget.title,
               style: const TextStyle(
                 color: kGreen,
               ),
@@ -190,7 +190,6 @@ class _CategoryPageState extends State<CategoryPage> {
                               const EdgeInsets.only(left: 28.0, right: 28.0),
                           child: Column(
                             children: [
-                              //Popular
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -219,7 +218,6 @@ class _CategoryPageState extends State<CategoryPage> {
                                   ),
                                 ],
                               ),
-//Newest
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -247,8 +245,6 @@ class _CategoryPageState extends State<CategoryPage> {
                                   ),
                                 ],
                               ),
-
-                              //Price (Low to High)
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -276,8 +272,6 @@ class _CategoryPageState extends State<CategoryPage> {
                                   ),
                                 ],
                               ),
-
-                              //Price (High to Low)
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

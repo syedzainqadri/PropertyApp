@@ -45,7 +45,7 @@ class GridViewFeatures extends StatelessWidget {
                             ),
                             blurRadius: 2.0,
                             spreadRadius: 1.0,
-                          ), //BoxShadow//BoxShadow
+                          ),
                         ],
                       ),
                       child: const Padding(
