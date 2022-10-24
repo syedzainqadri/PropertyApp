@@ -17,7 +17,7 @@ import '../Controllers/categories_controller.dart';
 import '../Controllers/listing_config_controller.dart';
 import '../Models/listing_configuration_model.dart';
 import '../Models/listing_types_model.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 import 'package:range_slider_flutter/range_slider_flutter.dart';
 
 class SearchPage extends StatefulWidget {

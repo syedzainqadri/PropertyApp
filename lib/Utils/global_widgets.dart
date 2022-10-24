@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../Auth/sign_up.dart';
-import 'color_scheme.dart';
+import 'const.dart';
 
 textField(hintText, obscureText, controller,
     {String? Function(String?)? onValidate,

@@ -7,7 +7,7 @@ import 'package:lagosabuja/AddListings/listing_details.dart';
 import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
 import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
 import 'package:lagosabuja/Controllers/review_controller.dart';
-import 'package:lagosabuja/Utils/color_scheme.dart';
+import 'package:lagosabuja/Utils/const.dart';
 import 'package:lagosabuja/Utils/full_screen_dialog.dart';
 
 class CategoryListingCard extends StatelessWidget {
@@ -77,8 +77,7 @@ class CategoryListingCard extends StatelessWidget {
                         fit: BoxFit.cover,
                         image: image != null
                             ? NetworkImage(image[0].url.toString())
-                            : const AssetImage('assets/images/logo4.png')
-                                as ImageProvider,
+                            : const AssetImage('logo') as ImageProvider,
                       ),
                     ),
                   ),

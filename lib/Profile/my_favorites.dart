@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../AddListings/list_widget.dart';
 import '../Controllers/favorite_listing_controller.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class MyFavorites extends StatefulWidget {
   const MyFavorites({Key? key}) : super(key: key);

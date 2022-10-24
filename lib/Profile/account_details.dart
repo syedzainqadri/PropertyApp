@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/profile_controller.dart';
 import 'package:lagosabuja/Controllers/user_controller.dart';
 
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class AccountDetails extends StatefulWidget {
   const AccountDetails({Key? key}) : super(key: key);

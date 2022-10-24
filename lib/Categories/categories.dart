@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lagosabuja/Categories/Widgets/CategoryListingCard.dart';
 import 'package:lagosabuja/Controllers/listings_controller.dart';
 import '../AddListings/add_listings.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class CategoryPage extends StatefulWidget {
   final String title;

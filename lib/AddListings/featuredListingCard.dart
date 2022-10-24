@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
 import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
 import 'package:lagosabuja/Controllers/review_controller.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 import 'listing_details.dart';
 
 class FeaturedListingCard extends StatelessWidget {

@@ -6,7 +6,7 @@ import 'package:lagosabuja/Controllers/plansController.dart';
 import 'package:lagosabuja/Models/promotion_Plans.dart';
 import 'package:lagosabuja/Profile/payment_details.dart';
 import '../Controllers/payment_controller.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class PromotionPlans extends StatefulWidget {
   const PromotionPlans({Key? key}) : super(key: key);

@@ -56,8 +56,7 @@ class CategoryCard extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     image: image != null
                         ? NetworkImage(image)
-                        : const AssetImage('assets/images/logo4.png')
-                            as ImageProvider,
+                        : const AssetImage('logo') as ImageProvider,
                   ),
                 ),
               ),

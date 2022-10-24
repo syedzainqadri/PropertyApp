@@ -11,7 +11,7 @@ import 'package:lagosabuja/AddListings/add_listings.dart';
 import 'package:lagosabuja/Controllers/editlisting_controller.dart';
 import 'package:lagosabuja/Controllers/my_listings_controller.dart';
 import 'package:lagosabuja/Profile/my_listings.dart';
-import 'package:lagosabuja/Utils/color_scheme.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class EditListingScreen extends StatefulWidget {
   var listingId;

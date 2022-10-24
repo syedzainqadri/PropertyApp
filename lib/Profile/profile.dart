@@ -11,7 +11,7 @@ import 'package:lagosabuja/Profile/payments.dart';
 import '../Auth/sign_in.dart';
 import '../Controllers/user_controller.dart';
 import 'account_details.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 import 'my_favorites.dart';
 import 'my_listings.dart';
 import 'account_subscriptions.dart';

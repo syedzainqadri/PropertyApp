@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/my_payment_controller.dart';
 import 'package:lagosabuja/Profile/Widgets/order_widget.dart';
 
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class MyPayments extends StatelessWidget {
   final myPaymentsController = Get.put(MyPaymentsController());

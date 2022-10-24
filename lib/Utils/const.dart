@@ -18,3 +18,5 @@ const mediumBlue = Color.fromARGB(255, 19, 102, 170);
 const brightRed = Color.fromARGB(255, 244, 31, 15);
 
 const currency = 'NGN';
+const profiePicute = 'assets/images/1.png';
+const logo = 'assets/images/logo4.png';

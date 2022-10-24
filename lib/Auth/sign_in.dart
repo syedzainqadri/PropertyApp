@@ -3,9 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:lagosabuja/Auth/sign_up.dart';
 import 'package:lagosabuja/Controllers/sign_in_controller.dart';
 import 'package:lagosabuja/Controllers/socialAuthController/firebaseAuthController.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 import 'package:get/get.dart';
-import '../Utils/constants.dart';
+import '../Utils/global_widgets.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);

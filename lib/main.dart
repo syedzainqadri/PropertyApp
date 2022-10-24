@@ -20,8 +20,8 @@ import 'Controllers/favorite_listing_controller.dart';
 import 'Controllers/listing_type_controller.dart';
 import 'Controllers/search_controller.dart';
 import 'Home/home.dart';
-import 'Utils/color_scheme.dart';
-import 'Utils/constants.dart';
+import 'Utils/const.dart';
+import 'Utils/global_widgets.dart';
 import 'package:get_storage/get_storage.dart';
 
 void main() async {
@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Image.asset('assets/images/logo4.png'),
+            Image.asset(logo),
             defaultButton('Log In', () {
               Get.to(const SignIn());
             }),

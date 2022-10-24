@@ -11,7 +11,7 @@ import 'package:lagosabuja/Controllers/listings_controller.dart';
 import 'package:lagosabuja/Controllers/location_controller.dart';
 import 'package:lagosabuja/Controllers/my_listings_controller.dart';
 import 'package:lagosabuja/Home/home.dart';
-import 'package:lagosabuja/Utils/color_scheme.dart';
+import 'package:lagosabuja/Utils/const.dart';
 import '../Models/sign_in_model.dart';
 
 class SignInController extends GetxController {

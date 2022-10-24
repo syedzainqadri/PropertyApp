@@ -7,7 +7,7 @@ import 'package:lagosabuja/Models/membership_model.dart';
 import 'package:lagosabuja/Profile/payment_details.dart';
 import 'package:lagosabuja/Utils/full_screen_dialog.dart';
 import '../Controllers/payment_controller.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class AccountSubscription extends StatefulWidget {
   const AccountSubscription({Key? key}) : super(key: key);

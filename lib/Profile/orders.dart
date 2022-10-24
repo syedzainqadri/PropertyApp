@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/orders_controller.dart';
 import 'package:lagosabuja/Profile/Widgets/order_widget.dart';
 
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class Orders extends StatelessWidget {
   Orders({Key? key}) : super(key: key);

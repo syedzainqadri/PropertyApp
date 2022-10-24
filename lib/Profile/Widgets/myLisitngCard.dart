@@ -9,7 +9,7 @@ import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
 import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
 import 'package:lagosabuja/Controllers/markAsSoldController.dart';
 import 'package:lagosabuja/Controllers/review_controller.dart';
-import 'package:lagosabuja/Utils/color_scheme.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class MyListingCard extends StatelessWidget {
   var image;

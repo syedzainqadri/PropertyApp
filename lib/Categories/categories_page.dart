@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Categories/Widgets/CategoryCard.dart';
 import 'package:lagosabuja/Controllers/categories_controller.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class CategoriesPage extends StatefulWidget {
   const CategoriesPage({Key? key}) : super(key: key);

@@ -11,7 +11,7 @@ import 'package:lagosabuja/Utils/full_screen_dialog.dart';
 import 'package:lagosabuja/Utils/global_Variable.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../Controllers/location_controller.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class MyFilters extends StatefulWidget {
   const MyFilters({Key? key}) : super(key: key);

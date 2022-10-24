@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
 import 'package:lagosabuja/Home/home.dart';
-import 'package:lagosabuja/Utils/color_scheme.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class PaymentResultScreen extends StatelessWidget {
   PaymentResultScreen({Key? key}) : super(key: key);

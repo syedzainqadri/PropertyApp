@@ -21,8 +21,8 @@ import 'package:lagosabuja/Profile/my_listings.dart';
 import '../Controllers/listings_controller.dart';
 import '../Models/Categories/category_model.dart' hide CatIcon;
 import '../Models/selected_fields_model.dart';
-import '../Utils/color_scheme.dart';
-import '../Utils/constants.dart';
+import '../Utils/const.dart';
+import '../Utils/global_widgets.dart';
 import 'select_country.dart';
 
 class AddListing extends StatefulWidget {

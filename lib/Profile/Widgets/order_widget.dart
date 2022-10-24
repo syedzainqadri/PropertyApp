@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
 import 'package:lagosabuja/Profile/order_detail_screen.dart';
-import 'package:lagosabuja/Utils/color_scheme.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class OrderWidget extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables

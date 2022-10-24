@@ -7,7 +7,7 @@ import 'package:lagosabuja/Controllers/membership_controller.dart';
 import 'package:lagosabuja/Controllers/payment_controller.dart';
 import 'package:lagosabuja/Profile/PaymentResultScreen.dart';
 
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class PaymentDetails extends StatefulWidget {
   final String title;

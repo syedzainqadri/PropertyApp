@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lagosabuja/AddListings/select_city.dart';
-import 'package:lagosabuja/Utils/color_scheme.dart';
+import 'package:lagosabuja/Utils/const.dart';
 import 'package:lagosabuja/Utils/full_screen_dialog.dart';
 import '../Controllers/location_controller.dart';
 

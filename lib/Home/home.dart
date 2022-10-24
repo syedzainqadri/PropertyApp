@@ -8,7 +8,7 @@ import '../Chat/conversation_page.dart';
 import '../Controllers/membership_controller.dart';
 import '../Profile/profile.dart';
 import '../Search/search_page.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 import 'home_page.dart';
 
 class Home extends StatefulWidget {
@@ -97,7 +97,7 @@ class _HomeState extends State<Home> {
                                   ),
                                   image: const DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: AssetImage('assets/images/1.png'),
+                                    image: AssetImage(profiePicute),
                                   ),
                                 )),
                           )),

@@ -8,7 +8,7 @@ import 'package:lagosabuja/Home/widgets/CategoryCard.dart';
 import '../AddListings/list_widget.dart';
 import '../Controllers/categories_controller.dart';
 import '../Controllers/listings_controller.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

@@ -6,7 +6,7 @@ import 'package:lagosabuja/Controllers/deleteListingController.dart';
 import 'package:lagosabuja/Controllers/listings_controller.dart';
 import 'package:lagosabuja/Controllers/my_listings_controller.dart';
 import 'package:lagosabuja/Profile/Widgets/myLisitngCard.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/const.dart';
 
 class MyListings extends StatefulWidget {
   const MyListings({Key? key}) : super(key: key);

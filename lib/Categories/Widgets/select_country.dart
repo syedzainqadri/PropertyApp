@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lagosabuja/AddListings/select_city.dart';
 import 'package:lagosabuja/Controllers/location_controller.dart';
-import 'package:lagosabuja/Utils/color_scheme.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class SelectCountryFilters extends StatefulWidget {
   const SelectCountryFilters({Key? key}) : super(key: key);

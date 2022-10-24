@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:lagosabuja/Auth/sign_in.dart';
 import 'package:lagosabuja/Controllers/sign_up_controller.dart';
 import '../Models/sign_in_model.dart';
-import '../Utils/constants.dart';
-import '../Utils/color_scheme.dart';
+import '../Utils/global_widgets.dart';
+import '../Utils/const.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
