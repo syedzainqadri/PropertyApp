@@ -23,7 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _currentIndex = 0;
   bool hasAction = true;
-  String title = 'LagusAbuja';
+  String title = appName;
   late PageController _pageController;
   bool notIntialized = true;
   final MembershipController membershipController =
@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
                   setState(() => _currentIndex = index);
                   index == 0
                       ? setState(() {
-                          title = 'LagusAbuja';
+                          title = appName;
                           hasAction = true;
                         })
                       : index == 1
