@@ -4,11 +4,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:lagosabuja/Utils/const.dart';
 
 class SignUpController extends GetxController {
   signUp(username, email, password, firstName, lastName, phone) async {
     var response = await http.post(
-      Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/signup"),
+      Uri.parse(signupUrl),
       headers: <String, String>{
         'Accept': 'application/json',
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',

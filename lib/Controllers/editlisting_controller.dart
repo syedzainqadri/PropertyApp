@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/EditlistingModel.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class EditListingController extends GetxController {
   var isLoading = false.obs;
@@ -12,8 +13,7 @@ class EditListingController extends GetxController {
 
   getListing(var listingId) async {
     isLoading.value = true;
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/listing/form?listing_id=$listingId';
+    String url = editListingUrl + listingId;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -41,8 +41,7 @@ class EditListingController extends GetxController {
     categoryId,
   ) async {
     isLoading.value = true;
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/listing/form?listing_id=$listingId';
+    String url = editListingUrl + listingId;
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
     for (int i = 0; i < images.length; i++) {
@@ -90,8 +89,7 @@ class EditListingController extends GetxController {
     images,
     videoUrl,
   ) async {
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/listing/form?listing_id=$listingId';
+    String url = editListingUrl + listingId;
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
     request.headers.addAll({

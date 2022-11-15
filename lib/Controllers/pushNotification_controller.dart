@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:lagosabuja/Utils/const.dart';
 
 class PushNotificationController extends GetxController {
   var box = GetStorage();
@@ -15,8 +16,7 @@ class PushNotificationController extends GetxController {
       'push_token': pushToken,
     });
     var response = await http.post(
-      Uri.parse(
-          "https://lagosabuja.com/wp-json/rtcl/v1/push-notification/register"),
+      Uri.parse(pushNotificationUrl),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',

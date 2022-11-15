@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/all_listing_model.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class MyListingController extends GetxController {
   var isLoading = false.obs;
@@ -16,7 +17,7 @@ class MyListingController extends GetxController {
 
   getMyListing() async {
     isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/listings';
+    String url = myListingUrl;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

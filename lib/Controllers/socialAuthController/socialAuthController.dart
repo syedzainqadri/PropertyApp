@@ -13,13 +13,14 @@ import 'package:lagosabuja/Controllers/location_controller.dart';
 import 'package:lagosabuja/Controllers/my_listings_controller.dart';
 import 'package:lagosabuja/Home/home.dart';
 import 'package:lagosabuja/Models/sign_in_model.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class SocialSignInController extends GetxController {
   Rx<SignInModel> signInModel = SignInModel().obs;
 
   signInWithGoogle(googleIDToken) async {
     var response = await http
-        .post(Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/social-login"),
+        .post(Uri.parse(socialLoginUrl),
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
               'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',

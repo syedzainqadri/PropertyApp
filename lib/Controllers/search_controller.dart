@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:lagosabuja/Utils/const.dart';
 import '../Models/all_listing_model.dart';
 
 class SearchController extends GetxController {
@@ -16,8 +17,7 @@ class SearchController extends GetxController {
 
   getSearchedListings(searchString) async {
     isLoading.value = true;
-    String url =
-        "https://lagosabuja.com/wp-json/rtcl/v1/listings?search=$searchString";
+    String url = listingSearchUrl + searchString;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -41,8 +41,8 @@ class SearchController extends GetxController {
     var _priceStart = priceStart == '' ? '' : priceStart;
     var _priceEnd = priceEnd == '' ? '' : priceEnd;
     var _sortBy = sortBy == '' ? '' : sortBy;
-    String url =
-        "https://lagosabuja.com/wp-json/rtcl/v1/listings?price_range=$_priceStart,$_priceEnd&order_by=$_sortBy&listing_type=$_type&locations[]=$_location&latitude=$_lat&longitude=$_log&radius_search=$_range&custom_fields={'_field_4216':[], '_field_4316':[],'_field_4321':[]}";
+    String url = filterSearchUrl +
+        "$_priceStart,$_priceEnd&order_by=$_sortBy&listing_type=$_type&locations[]=$_location&latitude=$_lat&longitude=$_log&radius_search=$_range&custom_fields={'_field_4216':[], '_field_4316':[],'_field_4321':[]}";
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -57,8 +57,7 @@ class SearchController extends GetxController {
 
   sortListing(String sortedBy) async {
     isLoading.value = true;
-    String url =
-        "https://lagosabuja.com/wp-json/rtcl/v1/listings?orderBy=$sortedBy";
+    String url = sortSearchUrl + sortedBy;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

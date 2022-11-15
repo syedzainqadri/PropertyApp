@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:lagosabuja/Utils/const.dart';
 
 class MarkAsSoldController extends GetxController {
   var isLoading = false.obs;
@@ -10,8 +11,7 @@ class MarkAsSoldController extends GetxController {
 
   markAsSold(String id) async {
     isLoading.value = true;
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/my/mark-as-sold?listing_id=$id';
+    String url = markAsSoldUrl + id;
     var response = await http.post(
       Uri.parse(url),
       headers: <String, String>{

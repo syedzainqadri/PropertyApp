@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:lagosabuja/Utils/const.dart';
 import '../Models/listing_detail_model.dart';
 
 class ListingDetailsController extends GetxController {
@@ -8,7 +8,7 @@ class ListingDetailsController extends GetxController {
 
   getListingById(listingId) async {
     var response = await http.get(
-      Uri.parse('https://lagosabuja.com/wp-json/rtcl/v1/listings/$listingId'),
+      Uri.parse(listingUrl + listingId),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',

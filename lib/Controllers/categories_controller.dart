@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:lagosabuja/Utils/const.dart';
 import '../Models/Categories/category_model.dart';
 import '../Models/locations_model.dart';
 
@@ -13,7 +14,7 @@ class CategoriesController extends GetxController {
   }
 
   getCategories() async {
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/categories';
+    String url = categoriesUrl;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -27,8 +28,7 @@ class CategoriesController extends GetxController {
   }
 
   getSubCategories(categoryId) async {
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/categories?parent_id=$categoryId';
+    String url = subCategoriesUrl + '$categoryId';
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

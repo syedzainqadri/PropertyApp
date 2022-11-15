@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:lagosabuja/Utils/const.dart';
 import '../Models/locations_model.dart';
 
 class LocationsController extends GetxController {
@@ -21,7 +22,7 @@ class LocationsController extends GetxController {
 
   getLocation() async {
     isLoading.value = false;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/locations';
+    String url = locationUrl;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -36,8 +37,7 @@ class LocationsController extends GetxController {
 
   getSubLocation(locationId) async {
     isLoading.value = true;
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/locations?parent_id=$locationId';
+    String url = locationByIdUrl + locationId;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

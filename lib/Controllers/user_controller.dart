@@ -17,7 +17,7 @@ class UserController extends GetxController {
 
   getUser() async {
     var response = await http.get(
-      Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my"),
+      Uri.parse(profileUrl),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
@@ -28,8 +28,7 @@ class UserController extends GetxController {
   }
 
   changeProfileDetail(firstName, lastName, phone) async {
-    var request = http.MultipartRequest(
-        'POST', Uri.parse('https://lagosabuja.com/wp-json/rtcl/v1/my'));
+    var request = http.MultipartRequest('POST', Uri.parse(profileUrl));
     request.headers['Content-Type'] = 'application/json; charset=UTF-8';
     request.headers['X-API-KEY'] = '835c5442-20ca-4d51-9e32-fae11c35fd42';
     request.headers['Authorization'] = 'Bearer $token';
@@ -48,8 +47,7 @@ class UserController extends GetxController {
 
   changePassword(email) async {
     var response = await http.post(
-      Uri.parse(
-          "https://lagosabuja.com/wp-json/rtcl/v1/reset-password?user_login=$email"),
+      Uri.parse(resetPasswordUrl + email),
       headers: <String, String>{
         'Content-Type': "application/json",
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',

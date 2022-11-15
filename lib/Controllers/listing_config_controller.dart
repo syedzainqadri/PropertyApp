@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:lagosabuja/Utils/const.dart';
 import '../Models/listing_configuration_model.dart';
 
 class ListingConfigController extends GetxController {
@@ -8,8 +9,7 @@ class ListingConfigController extends GetxController {
   var listingConfig = ListingConfiguration().obs;
 
   getConfiguration(categoryId) async {
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/listing/form?category_id=$categoryId';
+    String url = listingConfigUrl + categoryId;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

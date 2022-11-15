@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/all_listing_model.dart';
 import 'package:lagosabuja/Models/selected_fields_model.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class ListingController extends GetxController {
   var isLoading = false.obs;
@@ -19,7 +20,7 @@ class ListingController extends GetxController {
 
   getAllListing() async {
     isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listings';
+    String url = listingUrl;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -55,7 +56,7 @@ class ListingController extends GetxController {
       List<SelectedFieldsModel> customFields,
       amenities) async {
     isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
+    String url = addListingUrl;
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
     for (int i = 0; i < images.length; i++) {

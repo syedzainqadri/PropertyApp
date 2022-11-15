@@ -19,7 +19,7 @@ class FavoriteListingController extends GetxController {
 
   getMyFavorites() async {
     isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/favourites';
+    String url = favUrl;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
@@ -34,7 +34,7 @@ class FavoriteListingController extends GetxController {
 
   addToFavorites(listingId) async {
     isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/favourites';
+    String url = favUrl;
     var response = await http.post(
       Uri.parse(url),
       headers: <String, String>{

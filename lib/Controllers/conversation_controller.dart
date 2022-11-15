@@ -5,11 +5,12 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:lagosabuja/Utils/const.dart';
 
 class ConversationController extends GetxController {
   startConversation(listingId, message) async {
     var response = await http.post(
-      Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my/chat/conversation"),
+      Uri.parse(myConversationsUrl),
       headers: <String, String>{
         'Accept': 'application/json',
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
@@ -24,7 +25,7 @@ class ConversationController extends GetxController {
 
   sendMessage(listingId, message, connectionId) async {
     var response = await http.post(
-      Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my/chat/message"),
+      Uri.parse(myMessagesUrl),
       headers: <String, String>{
         'Accept': 'application/json',
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
@@ -39,8 +40,7 @@ class ConversationController extends GetxController {
   }
 
   getChatConversation(connectionId) async {
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/my/chat/conversation?con_id=';
+    String url = myConversationsByIdUrl;
     url = url + connectionId;
     var response = await http.get(
       Uri.parse(url),
@@ -53,8 +53,7 @@ class ConversationController extends GetxController {
   }
 
   getListingsChat(listingId) async {
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/my/chat/check?listing_id=';
+    String url = myConversationsByListingIdUrl;
     url = url + listingId;
     var response = await http.get(
       Uri.parse(url),
@@ -67,7 +66,7 @@ class ConversationController extends GetxController {
   }
 
   getAllChat() async {
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/my/chat';
+    String url = myChatUrl;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{

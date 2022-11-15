@@ -40,7 +40,7 @@ class SignInController extends GetxController {
           ),
         ));
     var response = await http.post(
-      Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/login"),
+      Uri.parse(loginUrl),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',

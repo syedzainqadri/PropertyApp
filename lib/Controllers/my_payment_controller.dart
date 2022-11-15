@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/my_payments_model.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class MyPaymentsController extends GetxController {
   var myPayments = MyPayments().obs;
@@ -15,7 +16,7 @@ class MyPaymentsController extends GetxController {
 
   getAllPayments() async {
     var response = await http.get(
-      Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/payments"),
+      Uri.parse(paymentUrl),
       headers: <String, String>{
         'Accept': 'application/json',
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',

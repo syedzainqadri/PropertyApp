@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:lagosabuja/Models/featuredLisitngModel.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class FeaturedListingController extends GetxController {
   var isLoading = false.obs;
@@ -18,8 +19,7 @@ class FeaturedListingController extends GetxController {
 
   getFeaturedListing() async {
     isLoading.value = true;
-    String url =
-        'https://lagosabuja.com/wp-json/rtcl/v1/listings?promotion_in[]=featured';
+    String url = featuredListingUrl;
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
