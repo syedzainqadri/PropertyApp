@@ -24,7 +24,7 @@ class FeaturedListingController extends GetxController {
       Uri.parse(url),
       headers: <String, String>{
         'Accept': 'application/json',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
       },
     );
     featuredListing.value = featuredListingsFromJson(response.body);

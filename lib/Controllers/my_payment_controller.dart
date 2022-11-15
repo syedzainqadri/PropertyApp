@@ -19,7 +19,7 @@ class MyPaymentsController extends GetxController {
       Uri.parse(paymentUrl),
       headers: <String, String>{
         'Accept': 'application/json',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
         'Authorization': 'Bearer $token',
       },
     );

@@ -21,8 +21,10 @@ const currency = 'NGN';
 const profiePicute = 'assets/images/1.png';
 const logo = 'assets/images/logo4.png';
 
+//Api Key
+const apiKey = '00442860-6506-4d01-9ab5-1f4d2267b0e0';
 //API URLS
-const baseUrl = 'https://lagosabuja.com/wp-json/rtcl/v1/';
+const baseUrl = 'https://gharounda.pk/wp-json/rtcl/v1/';
 const loginUrl = baseUrl + 'login';
 const signupUrl = baseUrl + 'signup';
 const socialLoginUrl = baseUrl + 'social-login';

@@ -15,7 +15,7 @@ class ReviewController extends GetxController {
       Uri.parse(listingReviewUrl + listingId),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
       },
     );
     var reviews = reviewFromJson(response.body);

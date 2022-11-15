@@ -27,7 +27,7 @@ class ChatController extends GetxController {
       Uri.parse(chatUrl),
       headers: <String, String>{
         'Content-Type': "application/json",
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
         'Authorization': 'Bearer $token',
       },
       body: jsonEncode(permas),
@@ -47,7 +47,7 @@ class ChatController extends GetxController {
       Uri.parse(messageUrl),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
         'Authorization': 'Bearer $token',
       },
       body: body,
@@ -61,7 +61,7 @@ class ChatController extends GetxController {
       Uri.parse(baseUrl + messageUrl + "?con_id=$conId&message_id=$messageId"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
         'Authorization': 'Bearer $token',
       },
     );
@@ -76,7 +76,7 @@ class ChatController extends GetxController {
       Uri.parse(chatlistingByIdUrl + listingId),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
         'Authorization': 'Bearer $token',
       },
     );
@@ -92,7 +92,7 @@ class ChatController extends GetxController {
       Uri.parse(myChatUrl),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
         'Authorization': 'Bearer $token',
       },
     );

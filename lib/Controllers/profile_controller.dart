@@ -13,7 +13,7 @@ class ProfileController extends GetxController {
   changeProfile(image) async {
     var request = http.MultipartRequest('POST', Uri.parse(profileImageUrl));
     request.headers['Content-Type'] = 'application/json; charset=UTF-8';
-    request.headers['X-API-KEY'] = '835c5442-20ca-4d51-9e32-fae11c35fd42';
+    request.headers['X-API-KEY'] = apiKey;
     request.headers['Authorization'] = 'Bearer $token';
     request.files.add(http.MultipartFile.fromBytes(
         'image', File(image!.path).readAsBytesSync(),
@@ -24,7 +24,7 @@ class ProfileController extends GetxController {
   changeProfileDetail(firstName, lastName, phone) async {
     var request = http.MultipartRequest('POST', Uri.parse(profileUrl));
     request.headers['Content-Type'] = 'application/json; charset=UTF-8';
-    request.headers['X-API-KEY'] = '835c5442-20ca-4d51-9e32-fae11c35fd42';
+    request.headers['X-API-KEY'] = apiKey;
     request.headers['Authorization'] = 'Bearer $token';
     request.fields.addAll({
       'first_name': firstName,

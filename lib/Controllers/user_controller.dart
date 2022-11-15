@@ -20,7 +20,7 @@ class UserController extends GetxController {
       Uri.parse(profileUrl),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
         'Authorization': 'Bearer $token',
       },
     );
@@ -30,7 +30,7 @@ class UserController extends GetxController {
   changeProfileDetail(firstName, lastName, phone) async {
     var request = http.MultipartRequest('POST', Uri.parse(profileUrl));
     request.headers['Content-Type'] = 'application/json; charset=UTF-8';
-    request.headers['X-API-KEY'] = '835c5442-20ca-4d51-9e32-fae11c35fd42';
+    request.headers['X-API-KEY'] = apiKey;
     request.headers['Authorization'] = 'Bearer $token';
     request.fields.addAll({
       'first_name': firstName,
@@ -50,7 +50,7 @@ class UserController extends GetxController {
       Uri.parse(resetPasswordUrl + email),
       headers: <String, String>{
         'Content-Type': "application/json",
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        'X-API-KEY': apiKey,
         'Authorization': 'Bearer $token',
       },
     );
