@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Categories/Widgets/CategoryCard.dart';
-import 'package:lagosabuja/Controllers/categories_controller.dart';
+import 'package:gharounda/Categories/Widgets/CategoryCard.dart';
+import 'package:gharounda/Controllers/categories_controller.dart';
 import '../Utils/const.dart';
 
 class CategoriesPage extends StatefulWidget {

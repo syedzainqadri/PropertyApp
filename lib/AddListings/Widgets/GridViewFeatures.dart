@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class GridViewFeatures extends StatelessWidget {
   var count;

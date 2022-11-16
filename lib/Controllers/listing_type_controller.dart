@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Models/listing_types_model.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Models/listing_types_model.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class ListingTypeController extends GetxController {
   final token = GetStorage().read('token');

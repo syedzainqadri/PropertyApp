@@ -3,8 +3,8 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Models/EditlistingModel.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Models/EditlistingModel.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class EditListingController extends GetxController {
   var isLoading = false.obs;

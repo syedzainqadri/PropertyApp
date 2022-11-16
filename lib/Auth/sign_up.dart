@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Auth/sign_in.dart';
-import 'package:lagosabuja/Controllers/sign_up_controller.dart';
+import 'package:gharounda/Auth/sign_in.dart';
+import 'package:gharounda/Controllers/sign_up_controller.dart';
 import '../Models/sign_in_model.dart';
 import '../Utils/global_widgets.dart';
 import '../Utils/const.dart';

@@ -1,9 +1,9 @@
 // ignore_for_file: file_names
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/PaymentByIdcontroller.dart';
-import 'package:lagosabuja/Home/home.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Controllers/PaymentByIdcontroller.dart';
+import 'package:gharounda/Home/home.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class PaymentResultScreen extends StatelessWidget {
   PaymentResultScreen({Key? key}) : super(key: key);

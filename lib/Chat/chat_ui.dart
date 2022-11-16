@@ -4,8 +4,8 @@ import 'package:chat_composer/chat_composer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lagosabuja/Controllers/chat_controller.dart';
-import 'package:lagosabuja/Controllers/user_controller.dart';
+import 'package:gharounda/Controllers/chat_controller.dart';
+import 'package:gharounda/Controllers/user_controller.dart';
 import '../Utils/const.dart';
 
 class ChatUi extends StatefulWidget {

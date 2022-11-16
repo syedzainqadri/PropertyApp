@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Models/order_model.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Models/order_model.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class OrdersController extends GetxController {
   var orders = Order().obs;

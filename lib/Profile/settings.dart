@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lagosabuja/Controllers/user_controller.dart';
+import 'package:gharounda/Controllers/user_controller.dart';
 
 import '../Utils/const.dart';
 import 'account_details.dart';

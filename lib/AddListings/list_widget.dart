@@ -1,9 +1,9 @@
 // ignore_for_file: must_be_immutable, prefer_typing_uninitialized_variableså, prefer_typing_uninitialized_variables
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
-import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
-import 'package:lagosabuja/Controllers/review_controller.dart';
+import 'package:gharounda/Controllers/favorite_listing_controller.dart';
+import 'package:gharounda/Controllers/listing_detail_controller.dart';
+import 'package:gharounda/Controllers/review_controller.dart';
 import '../Utils/const.dart';
 import 'listing_details.dart';
 

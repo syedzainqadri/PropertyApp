@@ -3,9 +3,9 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Models/checkout_model.dart';
-import 'package:lagosabuja/Models/promotion_Plans.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Models/checkout_model.dart';
+import 'package:gharounda/Models/promotion_Plans.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class PlansController extends GetxController {
   var box = GetStorage();

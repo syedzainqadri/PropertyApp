@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
-import 'package:lagosabuja/Controllers/user_controller.dart';
+import 'package:gharounda/Controllers/user_controller.dart';
 import '../AddListings/add_listings.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';

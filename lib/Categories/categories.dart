@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Categories/Widgets/CategoryListingCard.dart';
-import 'package:lagosabuja/Controllers/listings_controller.dart';
+import 'package:gharounda/Categories/Widgets/CategoryListingCard.dart';
+import 'package:gharounda/Controllers/listings_controller.dart';
 import '../AddListings/add_listings.dart';
 import '../Utils/const.dart';
 

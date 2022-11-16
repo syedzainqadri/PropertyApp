@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(lagosabuja LANGUAGES CXX)
 
-set(BINARY_NAME "lagosabuja")
+set(BINARY_NAME "gharounda")
 
 cmake_policy(SET CMP0063 NEW)
 

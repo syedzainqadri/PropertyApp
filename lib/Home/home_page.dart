@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/AddListings/featuredListingCard.dart';
-import 'package:lagosabuja/Controllers/featuredListings.dart';
-import 'package:lagosabuja/Home/widgets/CategoryCard.dart';
+import 'package:gharounda/AddListings/featuredListingCard.dart';
+import 'package:gharounda/Controllers/featuredListings.dart';
+import 'package:gharounda/Home/widgets/CategoryCard.dart';
 import '../AddListings/list_widget.dart';
 import '../Controllers/categories_controller.dart';
 import '../Controllers/listings_controller.dart';

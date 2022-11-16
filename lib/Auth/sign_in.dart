@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:lagosabuja/Auth/sign_up.dart';
-import 'package:lagosabuja/Controllers/sign_in_controller.dart';
-import 'package:lagosabuja/Controllers/socialAuthController/firebaseAuthController.dart';
+import 'package:gharounda/Auth/sign_up.dart';
+import 'package:gharounda/Controllers/sign_in_controller.dart';
+import 'package:gharounda/Controllers/socialAuthController/firebaseAuthController.dart';
 import '../Utils/const.dart';
 import 'package:get/get.dart';
 import '../Utils/global_widgets.dart';

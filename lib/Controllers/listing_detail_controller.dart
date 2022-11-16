@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Utils/const.dart';
 import '../Models/listing_detail_model.dart';
 
 class ListingDetailsController extends GetxController {

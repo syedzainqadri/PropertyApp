@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/orders_controller.dart';
-import 'package:lagosabuja/Profile/Widgets/order_widget.dart';
+import 'package:gharounda/Controllers/orders_controller.dart';
+import 'package:gharounda/Profile/Widgets/order_widget.dart';
 
 import '../Utils/const.dart';
 

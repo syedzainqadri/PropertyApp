@@ -2,14 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/AddListings/edit_listing.dart';
-import 'package:lagosabuja/AddListings/listing_details.dart';
-import 'package:lagosabuja/BuyPromotions/buy_promotions.dart';
-import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
-import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
-import 'package:lagosabuja/Controllers/markAsSoldController.dart';
-import 'package:lagosabuja/Controllers/review_controller.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/AddListings/edit_listing.dart';
+import 'package:gharounda/AddListings/listing_details.dart';
+import 'package:gharounda/BuyPromotions/buy_promotions.dart';
+import 'package:gharounda/Controllers/favorite_listing_controller.dart';
+import 'package:gharounda/Controllers/listing_detail_controller.dart';
+import 'package:gharounda/Controllers/markAsSoldController.dart';
+import 'package:gharounda/Controllers/review_controller.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class MyListingCard extends StatelessWidget {
   var image;

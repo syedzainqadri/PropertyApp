@@ -4,8 +4,8 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Models/listing_messages_model.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Models/listing_messages_model.dart';
+import 'package:gharounda/Utils/const.dart';
 import '../Models/all_chat_model.dart';
 
 class ChatController extends GetxController {

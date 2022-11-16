@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Utils/const.dart';
 import '../Models/listing_configuration_model.dart';
 
 class ListingConfigController extends GetxController {

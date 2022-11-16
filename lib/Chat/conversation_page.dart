@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/chat_controller.dart';
+import 'package:gharounda/Controllers/chat_controller.dart';
 
 import '../Utils/const.dart';
 import 'chat_ui.dart';

@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Models/checkout_model.dart';
-import 'package:lagosabuja/Models/membership_model.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Models/checkout_model.dart';
+import 'package:gharounda/Models/membership_model.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class MembershipController extends GetxController {
   var box = GetStorage();

@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/plansController.dart';
-import 'package:lagosabuja/Models/promotion_Plans.dart';
-import 'package:lagosabuja/Profile/payment_details.dart';
+import 'package:gharounda/Controllers/plansController.dart';
+import 'package:gharounda/Models/promotion_Plans.dart';
+import 'package:gharounda/Profile/payment_details.dart';
 import '../Controllers/payment_controller.dart';
 import '../Utils/const.dart';
 

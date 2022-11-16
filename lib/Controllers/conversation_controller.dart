@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class ConversationController extends GetxController {
   startConversation(listingId, message) async {

@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:lagosabuja/AddListings/listing_details.dart';
-import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
-import 'package:lagosabuja/Controllers/listing_detail_controller.dart';
-import 'package:lagosabuja/Controllers/review_controller.dart';
-import 'package:lagosabuja/Utils/const.dart';
-import 'package:lagosabuja/Utils/full_screen_dialog.dart';
+import 'package:gharounda/AddListings/listing_details.dart';
+import 'package:gharounda/Controllers/favorite_listing_controller.dart';
+import 'package:gharounda/Controllers/listing_detail_controller.dart';
+import 'package:gharounda/Controllers/review_controller.dart';
+import 'package:gharounda/Utils/const.dart';
+import 'package:gharounda/Utils/full_screen_dialog.dart';
 
 class CategoryListingCard extends StatelessWidget {
   var image;

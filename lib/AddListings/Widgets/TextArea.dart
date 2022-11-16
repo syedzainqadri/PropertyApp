@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class TextAreaWidget extends StatelessWidget {
   const TextAreaWidget({

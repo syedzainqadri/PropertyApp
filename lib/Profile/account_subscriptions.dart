@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/membership_controller.dart';
-import 'package:lagosabuja/Models/membership_model.dart';
-import 'package:lagosabuja/Profile/payment_details.dart';
-import 'package:lagosabuja/Utils/full_screen_dialog.dart';
+import 'package:gharounda/Controllers/membership_controller.dart';
+import 'package:gharounda/Models/membership_model.dart';
+import 'package:gharounda/Profile/payment_details.dart';
+import 'package:gharounda/Utils/full_screen_dialog.dart';
 import '../Controllers/payment_controller.dart';
 import '../Utils/const.dart';
 

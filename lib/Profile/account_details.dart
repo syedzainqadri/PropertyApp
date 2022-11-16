@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/profile_controller.dart';
-import 'package:lagosabuja/Controllers/user_controller.dart';
+import 'package:gharounda/Controllers/profile_controller.dart';
+import 'package:gharounda/Controllers/user_controller.dart';
 
 import '../Utils/const.dart';
 

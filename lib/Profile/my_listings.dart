@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/deleteListingController.dart';
-import 'package:lagosabuja/Controllers/listings_controller.dart';
-import 'package:lagosabuja/Controllers/my_listings_controller.dart';
-import 'package:lagosabuja/Profile/Widgets/myLisitngCard.dart';
+import 'package:gharounda/Controllers/deleteListingController.dart';
+import 'package:gharounda/Controllers/listings_controller.dart';
+import 'package:gharounda/Controllers/my_listings_controller.dart';
+import 'package:gharounda/Profile/Widgets/myLisitngCard.dart';
 import '../Utils/const.dart';
 
 class MyListings extends StatefulWidget {

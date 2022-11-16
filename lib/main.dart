@@ -5,16 +5,16 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:overlay_support/overlay_support.dart';
-import 'package:lagosabuja/Bindings/bindings.dart';
-import 'package:lagosabuja/Controllers/featuredListings.dart';
-import 'package:lagosabuja/Controllers/location_controller.dart';
-import 'package:lagosabuja/Controllers/categories_controller.dart';
-import 'package:lagosabuja/Controllers/listings_controller.dart';
-import 'package:lagosabuja/Controllers/my_payment_controller.dart';
-import 'package:lagosabuja/Controllers/orders_controller.dart';
-import 'package:lagosabuja/Controllers/plansController.dart';
-import 'package:lagosabuja/Controllers/user_controller.dart';
-import 'package:lagosabuja/Models/pushNotification_model.dart';
+import 'package:gharounda/Bindings/bindings.dart';
+import 'package:gharounda/Controllers/featuredListings.dart';
+import 'package:gharounda/Controllers/location_controller.dart';
+import 'package:gharounda/Controllers/categories_controller.dart';
+import 'package:gharounda/Controllers/listings_controller.dart';
+import 'package:gharounda/Controllers/my_payment_controller.dart';
+import 'package:gharounda/Controllers/orders_controller.dart';
+import 'package:gharounda/Controllers/plansController.dart';
+import 'package:gharounda/Controllers/user_controller.dart';
+import 'package:gharounda/Models/pushNotification_model.dart';
 import 'Auth/sign_in.dart';
 import 'Controllers/favorite_listing_controller.dart';
 import 'Controllers/listing_type_controller.dart';
@@ -154,7 +154,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Image.asset(logo),
+            const SizedBox(
+              height: 20,
+            ),
             defaultButton('Log In', () {
               Get.to(const SignIn());
             }),

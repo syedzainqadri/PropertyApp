@@ -5,8 +5,8 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:lagosabuja/Controllers/socialAuthController/socialAuthController.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Controllers/socialAuthController/socialAuthController.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class FirebaseAuthController extends GetxController {
   var isDataSubmitting = false.obs;

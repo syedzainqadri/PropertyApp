@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lagosabuja/Categories/categories.dart';
-import 'package:lagosabuja/Utils/const.dart';
+import 'package:gharounda/Categories/categories.dart';
+import 'package:gharounda/Utils/const.dart';
 
 class CategoryCard extends StatelessWidget {
   var id;

@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
-import 'package:lagosabuja/Controllers/categories_controller.dart';
-import 'package:lagosabuja/Controllers/chat_controller.dart';
-import 'package:lagosabuja/Controllers/favorite_listing_controller.dart';
-import 'package:lagosabuja/Controllers/featuredListings.dart';
-import 'package:lagosabuja/Controllers/listings_controller.dart';
-import 'package:lagosabuja/Controllers/my_listings_controller.dart';
-import 'package:lagosabuja/Controllers/socialAuthController/firebaseAuthController.dart';
-import 'package:lagosabuja/Controllers/socialAuthController/socialAuthController.dart';
-import 'package:lagosabuja/Controllers/user_controller.dart';
+import 'package:gharounda/Controllers/categories_controller.dart';
+import 'package:gharounda/Controllers/chat_controller.dart';
+import 'package:gharounda/Controllers/favorite_listing_controller.dart';
+import 'package:gharounda/Controllers/featuredListings.dart';
+import 'package:gharounda/Controllers/listings_controller.dart';
+import 'package:gharounda/Controllers/my_listings_controller.dart';
+import 'package:gharounda/Controllers/socialAuthController/firebaseAuthController.dart';
+import 'package:gharounda/Controllers/socialAuthController/socialAuthController.dart';
+import 'package:gharounda/Controllers/user_controller.dart';
 
 class MyBindings extends Bindings {
   @override
