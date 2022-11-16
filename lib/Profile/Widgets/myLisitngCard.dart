@@ -248,7 +248,7 @@ class MyListingCard extends StatelessWidget {
                                 children: const [
                                   Icon(
                                     Icons.announcement,
-                                    color: kGreenColor,
+                                    color: kGreen,
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -256,7 +256,7 @@ class MyListingCard extends StatelessWidget {
                                   Text(
                                     'Promote',
                                     style: TextStyle(
-                                      color: kGreenColor,
+                                      color: kGreen,
                                       fontSize: 20,
                                     ),
                                   ),

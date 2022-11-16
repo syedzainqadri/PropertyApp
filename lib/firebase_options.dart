@@ -47,31 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAgLQuFmrlzMsUX1VS-PuVs2JkYbwNXkZI',
-    appId: '1:731281729322:web:920abb9f1c965cd28c6053',
-    messagingSenderId: '731281729322',
-    projectId: 'lagosabuja-8c93b',
-    authDomain: 'lagosabuja-8c93b.firebaseapp.com',
-    storageBucket: 'lagosabuja-8c93b.appspot.com',
-    measurementId: 'G-V2SBLKFE05',
+    apiKey: 'AIzaSyAQtAa17tFKvT8BI5NsnNz_DZS7lzncbt8',
+    appId: '1:798267470755:web:a9b58cf86e85d801466016',
+    messagingSenderId: '798267470755',
+    projectId: 'gharounda-c8678',
+    authDomain: 'gharounda-c8678.firebaseapp.com',
+    storageBucket: 'gharounda-c8678.appspot.com',
+    measurementId: 'G-VCBNVJFT3R',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAant5Apn7RYQdqrbrbsmdTrPFg1gmNn60',
-    appId: '1:731281729322:android:7fe1a5be74a2575f8c6053',
-    messagingSenderId: '731281729322',
-    projectId: 'lagosabuja-8c93b',
-    storageBucket: 'lagosabuja-8c93b.appspot.com',
+    apiKey: 'AIzaSyA-Cq5vMLWr9ADMGY_shWWVutJlFBc5QmU',
+    appId: '1:798267470755:android:7c829cf86d804f98466016',
+    messagingSenderId: '798267470755',
+    projectId: 'gharounda-c8678',
+    storageBucket: 'gharounda-c8678.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAkvO3gyyCHwlhsJ3gba3XWBWghmfkaUp8',
-    appId: '1:731281729322:ios:ae892978141e29078c6053',
-    messagingSenderId: '731281729322',
-    projectId: 'lagosabuja-8c93b',
-    storageBucket: 'lagosabuja-8c93b.appspot.com',
-    iosClientId:
-        '731281729322-7o7e4ld0suscferi5tbt0dse5rdq4o5k.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBt-uW2lRj1fjLj9TalJxv_x8i-q-m2S0c',
+    appId: '1:798267470755:ios:71a915a91dd71de3466016',
+    messagingSenderId: '798267470755',
+    projectId: 'gharounda-c8678',
+    storageBucket: 'gharounda-c8678.appspot.com',
+    iosClientId: '798267470755-l5657m35m0dl3pb525jlkk2qvmp0m032.apps.googleusercontent.com',
     iosBundleId: 'com.classima.lagosabuja',
   );
 }

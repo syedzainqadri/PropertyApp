@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 //Change Color Scheem As required in this file
-const kGreen = Color.fromARGB(255, 62, 173, 0);
-const kkGreen = Color.fromARGB(255, 200, 230, 201);
+// const kGreen = Color.fromARGB(255, 62, 173, 0);
+const kGreen = Color.fromARGB(255, 188, 144, 44);
 const kBlueColor = Colors.blue;
 const kBlueAccesentColor = Colors.blueAccent;
 const kLightBlackColor = Colors.black38;
@@ -10,8 +10,8 @@ const kRedColor = Colors.red;
 const kBlackColor = Colors.black;
 const kGreyColor = Colors.grey;
 const kLightGreyColor = Color.fromARGB(255, 224, 224, 224);
-const kGreenAccentColor = Colors.greenAccent;
-const kGreenColor = Colors.green;
+const kGreenAccentColor = Color.fromARGB(255, 188, 144, 44);
+// const kGreenColor = Colors.green;
 const kAmberColor = Colors.amber;
 const kTransparent = Colors.transparent;
 const kWhite = Colors.white;

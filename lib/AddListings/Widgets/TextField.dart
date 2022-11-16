@@ -27,7 +27,7 @@ class TextFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: kGreenColor[100],
+        color: kGreen,
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
@@ -35,7 +35,7 @@ class TextFieldWidget extends StatelessWidget {
         controller: controller,
         cursorColor: kBlackColor,
         style: const TextStyle(
-          color: kGreenColor,
+          color: kGreen,
           fontSize: 24,
         ),
         decoration: InputDecoration(
@@ -43,11 +43,11 @@ class TextFieldWidget extends StatelessWidget {
             border: InputBorder.none,
             icon: Icon(
               leadingIcon,
-              color: kGreenColor,
+              color: kGreen,
             ),
             hintText: lable,
             hintStyle: const TextStyle(
-              color: kGreenColor,
+              color: kGreen,
               fontSize: 24,
             ),
             suffixIcon: trailing),

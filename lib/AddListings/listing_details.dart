@@ -631,7 +631,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                   'Contact US',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
-                                                      color: kGreenColor,
+                                                      color: kGreen,
                                                       fontSize: 25,
                                                       fontWeight:
                                                           FontWeight.normal),

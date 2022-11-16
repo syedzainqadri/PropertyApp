@@ -43,11 +43,11 @@ class TextFieldWidgetForForm extends StatelessWidget {
             border: InputBorder.none,
             icon: Icon(
               leadingIcon,
-              color: kGreenColor,
+              color: kGreen,
             ),
             hintText: lable,
             hintStyle: const TextStyle(
-              color: kGreenColor,
+              color: kGreen,
               fontSize: 24,
             ),
             suffixIcon: trailing),

@@ -81,7 +81,7 @@ class _AccountSubscriptionState extends State<AccountSubscription> {
           child: Container(
             decoration: BoxDecoration(
                 border: Border.all(
-                    color: selectedIndex == index ? kGreenColor : kTransparent),
+                    color: selectedIndex == index ? kGreen : kTransparent),
                 borderRadius: BorderRadius.circular(20)),
             child: Card(
               shape: RoundedRectangleBorder(

@@ -224,7 +224,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                 inactiveTrackBarHeight: 10,
                 activeTrackBar: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: kGreenColor,
+                  color: kGreen,
                 ),
                 inactiveTrackBar: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -232,7 +232,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                 ),
               ),
               fontSize: 15,
-              textBackgroundColor: kGreenColor,
+              textBackgroundColor: kGreen,
               onDragging: (handlerIndex, lowerValue, upperValue) {
                 _lowerValue = lowerValue;
                 _upperValue = upperValue;

@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "731281729322",
-    "project_id": "lagosabuja-8c93b",
-    "storage_bucket": "lagosabuja-8c93b.appspot.com"
+    "project_number": "798267470755",
+    "project_id": "gharounda-c8678",
+    "storage_bucket": "gharounda-c8678.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:731281729322:android:7fe1a5be74a2575f8c6053",
+        "mobilesdk_app_id": "1:798267470755:android:7c829cf86d804f98466016",
         "android_client_info": {
-          "package_name": "com.lagosabuja.com"
+          "package_name": "com.gharounda.pk"
         }
       },
       "oauth_client": [
         {
-          "client_id": "731281729322-lclrlu4hciptch7vaa2csquqbqc1sk6i.apps.googleusercontent.com",
+          "client_id": "798267470755-tstfn204etcskgqf3450kadttnemva4h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAant5Apn7RYQdqrbrbsmdTrPFg1gmNn60"
+          "current_key": "AIzaSyA-Cq5vMLWr9ADMGY_shWWVutJlFBc5QmU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "731281729322-lclrlu4hciptch7vaa2csquqbqc1sk6i.apps.googleusercontent.com",
+              "client_id": "798267470755-tstfn204etcskgqf3450kadttnemva4h.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "798267470755-l5657m35m0dl3pb525jlkk2qvmp0m032.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.classima.lagosabuja"
+              }
             }
           ]
         }
