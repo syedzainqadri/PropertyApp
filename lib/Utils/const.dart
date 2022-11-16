@@ -24,6 +24,7 @@ const kLightGrey = Color.fromARGB(255, 206, 205, 205);
 const kDarkBlue = Color.fromARGB(255, 1, 29, 52);
 const kMediumBlue = Color.fromARGB(255, 19, 102, 170);
 const kBrightRed = Color.fromARGB(255, 244, 31, 15);
+
 //asset constents
 String appName = 'Gharounda';
 const currency = 'PKR';
