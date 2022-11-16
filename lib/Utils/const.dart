@@ -26,7 +26,7 @@ const kMediumBlue = Color.fromARGB(255, 19, 102, 170);
 const kBrightRed = Color.fromARGB(255, 244, 31, 15);
 //asset constents
 String appName = 'Gharounda';
-const currency = 'NGN';
+const currency = 'PKR';
 const profiePicute = 'assets/images/1.png';
 const logo = 'assets/images/logo4.png';
 
