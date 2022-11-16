@@ -78,7 +78,7 @@ void main() async {
         subtitle: Text(
           notification.body!,
         ),
-        background: Colors.blue,
+        background: kBlueColor,
         duration: const Duration(seconds: 2),
       );
     },

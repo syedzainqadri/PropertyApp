@@ -84,7 +84,7 @@ class _ConversationPageState extends State<ConversationPage> {
                   ),
                   Text(
                     name,
-                    style: const TextStyle(fontSize: 18, color: darkGrey),
+                    style: const TextStyle(fontSize: 18, color: kDarkGrey),
                   ),
                   const SizedBox(
                     height: 8,
@@ -97,7 +97,7 @@ class _ConversationPageState extends State<ConversationPage> {
                         maxLines: 1,
                         style: const TextStyle(
                             fontSize: 16,
-                            color: mediumGrey,
+                            color: kMediumGrey,
                             overflow: TextOverflow.clip),
                       ),
                     ),

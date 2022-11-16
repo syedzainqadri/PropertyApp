@@ -21,7 +21,7 @@ class _SelectCountryFiltersState extends State<SelectCountryFilters> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
@@ -61,14 +61,14 @@ class _SelectCountryFiltersState extends State<SelectCountryFilters> {
                     height: 50,
                     decoration: BoxDecoration(
                         color: kGreen,
-                        border:
-                            Border.all(color: white, style: BorderStyle.solid)),
+                        border: Border.all(
+                            color: kWhite, style: BorderStyle.solid)),
                     child: Center(
                       child: Text(
                         locationsController.locations.value[index].name,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          color: white,
+                          color: kWhite,
                           fontSize: 20,
                         ),
                       ),

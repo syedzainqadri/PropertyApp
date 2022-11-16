@@ -34,21 +34,21 @@ class TextAreaWidget extends StatelessWidget {
         maxLines: 8,
         obscureText: obsecure,
         controller: controller,
-        cursorColor: Colors.black,
+        cursorColor: kBlackColor,
         style: const TextStyle(
           color: kGreen,
           fontSize: 24,
         ),
         decoration: InputDecoration(
-            fillColor: Colors.black,
+            fillColor: kBlackColor,
             border: InputBorder.none,
             icon: Icon(
               leadingIcon,
-              color: Colors.green,
+              color: kGreenColor,
             ),
             hintText: lable,
             hintStyle: const TextStyle(
-              color: Colors.green,
+              color: kGreenColor,
               fontSize: 24,
             ),
             suffixIcon: trailing),

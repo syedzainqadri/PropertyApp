@@ -48,7 +48,7 @@ class FavoriteListingController extends GetxController {
     );
     Get.snackbar('Success', 'Listing Updated',
         backgroundColor: kGreen,
-        colorText: white,
+        colorText: kWhite,
         snackPosition: SnackPosition.BOTTOM);
     getMyFavorites();
     isLoading.value = false;

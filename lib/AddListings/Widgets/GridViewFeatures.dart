@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class GridViewFeatures extends StatelessWidget {
   var count;
@@ -34,12 +35,12 @@ class GridViewFeatures extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: kWhite,
                         borderRadius: BorderRadius.circular(5),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
-                            color: Colors.grey.shade300,
-                            offset: const Offset(
+                            color: kLightGreyColor,
+                            offset: Offset(
                               3.0,
                               3.0,
                             ),
@@ -52,7 +53,7 @@ class GridViewFeatures extends StatelessWidget {
                         padding: EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.home,
-                          color: Colors.greenAccent,
+                          color: kGreenAccentColor,
                         ),
                       ),
                     ),

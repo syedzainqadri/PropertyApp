@@ -44,7 +44,7 @@ class CategoryCard extends StatelessWidget {
               height: 100,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.black38,
+                color: kLightBlackColor,
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
@@ -52,13 +52,13 @@ class CategoryCard extends StatelessWidget {
               height: 100,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: transparent,
+                color: kTransparent,
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
                   child: Text(
                 title ?? '',
-                style: const TextStyle(color: white, fontSize: 25),
+                style: const TextStyle(color: kWhite, fontSize: 25),
               )),
             ),
           ],

@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, must_be_immutable, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class BottomSheetButton extends StatelessWidget {
   BottomSheetButton({
@@ -46,7 +47,7 @@ class BottomSheetButton extends StatelessWidget {
               Text(
                 buttonText,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: kWhite,
                   fontSize: 20,
                 ),
               ),

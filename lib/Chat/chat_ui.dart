@@ -48,7 +48,7 @@ class _ChatUiState extends State<ChatUi> {
                   box.remove('listingId');
                 },
                 child:
-                    const Icon(Icons.navigate_before, size: 35, color: white)),
+                    const Icon(Icons.navigate_before, size: 35, color: kWhite)),
           ),
           body: Column(
             children: [
@@ -117,7 +117,7 @@ class _ChatUiState extends State<ChatUi> {
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   message,
-                  style: const TextStyle(color: white, fontSize: 17),
+                  style: const TextStyle(color: kWhite, fontSize: 17),
                 ),
               ),
             ),
@@ -141,13 +141,13 @@ class _ChatUiState extends State<ChatUi> {
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
-                color: lightGrey,
+                color: kLightGrey,
               ),
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
                   message,
-                  style: const TextStyle(color: darkGrey, fontSize: 17),
+                  style: const TextStyle(color: kDarkGrey, fontSize: 17),
                 ),
               ),
             ),

@@ -34,7 +34,7 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: kTransparent,
           elevation: 0.0,
           leading: GestureDetector(
             onTap: () {
@@ -72,7 +72,7 @@ class _SettingsState extends State<Settings> {
                   Icon(
                     Icons.person,
                     size: 30,
-                    color: darkGrey,
+                    color: kDarkGrey,
                   ),
                   SizedBox(
                     width: 12,
@@ -80,7 +80,7 @@ class _SettingsState extends State<Settings> {
                   Text(
                     'Account',
                     style: TextStyle(
-                      color: darkGrey,
+                      color: kDarkGrey,
                       fontWeight: FontWeight.w500,
                       fontSize: 22,
                     ),
@@ -91,38 +91,12 @@ class _SettingsState extends State<Settings> {
                 height: 15,
               ),
               const Divider(
-                color: darkGrey,
+                color: kDarkGrey,
                 thickness: 0.3,
               ),
               const SizedBox(
                 height: 5,
               ),
-              // GestureDetector(
-              //   onTap: () {
-              //     Get.to(const AccountDetails());
-              //   },
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: const [
-              //       Text(
-              //         'Edit Profile',
-              //         style: TextStyle(
-              //           color: mediumGrey,
-              //           fontWeight: FontWeight.w500,
-              //           fontSize: 18,
-              //         ),
-              //       ),
-              //       Icon(
-              //         Icons.navigate_next,
-              //         size: 35,
-              //         color: mediumGrey,
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
               GestureDetector(
                 onTap: () {
                   var email = userController.userModel.value.email;
@@ -134,7 +108,7 @@ class _SettingsState extends State<Settings> {
                     Text(
                       'Change Password',
                       style: TextStyle(
-                        color: mediumGrey,
+                        color: kMediumGrey,
                         fontWeight: FontWeight.w500,
                         fontSize: 18,
                       ),
@@ -142,7 +116,7 @@ class _SettingsState extends State<Settings> {
                     Icon(
                       Icons.navigate_next,
                       size: 35,
-                      color: mediumGrey,
+                      color: kMediumGrey,
                     ),
                   ],
                 ),
@@ -155,7 +129,7 @@ class _SettingsState extends State<Settings> {
                   Icon(
                     Icons.notification_add,
                     size: 30,
-                    color: darkGrey,
+                    color: kDarkGrey,
                   ),
                   SizedBox(
                     width: 12,
@@ -163,7 +137,7 @@ class _SettingsState extends State<Settings> {
                   Text(
                     'Notifications',
                     style: TextStyle(
-                      color: darkGrey,
+                      color: kDarkGrey,
                       fontWeight: FontWeight.w500,
                       fontSize: 22,
                     ),
@@ -174,7 +148,7 @@ class _SettingsState extends State<Settings> {
                 height: 15,
               ),
               const Divider(
-                color: darkGrey,
+                color: kDarkGrey,
                 thickness: 0.3,
               ),
               const SizedBox(
@@ -190,7 +164,7 @@ class _SettingsState extends State<Settings> {
                     const Text(
                       'Notification',
                       style: TextStyle(
-                        color: mediumGrey,
+                        color: kMediumGrey,
                         fontWeight: FontWeight.w500,
                         fontSize: 18,
                       ),
@@ -203,7 +177,7 @@ class _SettingsState extends State<Settings> {
                           box.write("notification", value);
                         });
                       },
-                      activeTrackColor: kGreenAccent,
+                      activeTrackColor: kGreenAccentColor,
                       activeColor: kGreen,
                     ),
                   ],
@@ -218,7 +192,7 @@ class _SettingsState extends State<Settings> {
                   const Text(
                     'App Notification',
                     style: TextStyle(
-                      color: mediumGrey,
+                      color: kMediumGrey,
                       fontWeight: FontWeight.w500,
                       fontSize: 18,
                     ),
@@ -231,7 +205,7 @@ class _SettingsState extends State<Settings> {
                         box.write("AppNotification", value);
                       });
                     },
-                    activeTrackColor: kGreenAccent,
+                    activeTrackColor: kGreenAccentColor,
                     activeColor: kGreen,
                   ),
                 ],

@@ -18,7 +18,7 @@ class _MyFavoritesState extends State<MyFavorites> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         centerTitle: true,
         title: const Text(

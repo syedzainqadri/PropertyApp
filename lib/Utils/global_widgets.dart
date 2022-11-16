@@ -9,7 +9,7 @@ textField(hintText, obscureText, controller,
     TextInputType? textInputType}) {
   return Container(
     decoration: BoxDecoration(
-        color: Colors.grey.shade200, borderRadius: BorderRadius.circular(8)),
+        color: kLightGreyColor, borderRadius: BorderRadius.circular(8)),
     child: TextFormField(
       maxLines: maxLine,
       keyboardType: textInputType,
@@ -24,10 +24,10 @@ textField(hintText, obscureText, controller,
           disabledBorder: InputBorder.none,
           enabledBorder: InputBorder.none,
           focusedBorder: InputBorder.none,
-          fillColor: white,
+          fillColor: kWhite,
           labelText: hintText,
           alignLabelWithHint: true,
-          labelStyle: const TextStyle(color: Colors.grey, fontSize: 16)),
+          labelStyle: const TextStyle(color: kGreyColor, fontSize: 16)),
     ),
   );
 }
@@ -41,12 +41,12 @@ defaultButton(title, onPressed) {
       child: Text(
         title,
         style: const TextStyle(
-          color: white,
+          color: kWhite,
           fontSize: 20,
         ),
       ),
       style: ElevatedButton.styleFrom(
-        primary: kGreen,
+        backgroundColor: kGreen,
         elevation: 0.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
@@ -64,12 +64,12 @@ socialButton(title, icon, color, onTap) {
       label: Text(
         title,
         style: const TextStyle(
-          color: white,
+          color: kWhite,
           fontSize: 20,
         ),
       ),
       style: ElevatedButton.styleFrom(
-        primary: color,
+        backgroundColor: color,
         elevation: 0.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
@@ -99,11 +99,11 @@ class SignupButton extends StatelessWidget {
           ),
         ),
         style: ElevatedButton.styleFrom(
-          primary: transparent,
+          backgroundColor: kTransparent,
           elevation: 0.0,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          side: const BorderSide(color: darkGrey),
+          side: const BorderSide(color: kDarkGrey),
         ),
       ),
     );

@@ -92,7 +92,7 @@ class FeaturedListingCard extends StatelessWidget {
                             style: const TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 fontWeight: FontWeight.w500,
-                                color: white,
+                                color: kWhite,
                                 fontSize: 12),
                           ),
                         ),
@@ -111,7 +111,7 @@ class FeaturedListingCard extends StatelessWidget {
                       title,
                       style: const TextStyle(
                         overflow: TextOverflow.ellipsis,
-                        color: darkGrey,
+                        color: kDarkGrey,
                         fontSize: 14,
                       ),
                     ),
@@ -138,7 +138,7 @@ class FeaturedListingCard extends StatelessWidget {
                     Text(
                       city,
                       style: const TextStyle(
-                        color: mediumDarkGrey,
+                        color: kMediumDarkGrey,
                         fontSize: 12,
                       ),
                     )

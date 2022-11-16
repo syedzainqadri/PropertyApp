@@ -53,7 +53,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
+                          color: kLightGreyColor,
                           borderRadius: BorderRadius.circular(8)),
                       child: TextFormField(
                         validator: (v) => v!.isEmpty ? "Required" : null,
@@ -68,11 +68,11 @@ class _SignInState extends State<SignIn> {
                             disabledBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none,
-                            fillColor: white,
+                            fillColor: kWhite,
                             labelText: "Enter Password",
                             alignLabelWithHint: true,
                             labelStyle:
-                                TextStyle(color: Colors.grey, fontSize: 16)),
+                                TextStyle(color: kGreyColor, fontSize: 16)),
                       ),
                     ),
                     const SizedBox(
@@ -103,7 +103,7 @@ class _SignInState extends State<SignIn> {
                       height: 15,
                     ),
                     socialButton('Google Login',
-                        const FaIcon(FontAwesomeIcons.google), brightRed, () {
+                        const FaIcon(FontAwesomeIcons.google), kBrightRed, () {
                       _firebaseAuthController.googleLogin();
                     }),
                     const SizedBox(

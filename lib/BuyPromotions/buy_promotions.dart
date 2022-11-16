@@ -23,14 +23,14 @@ class _PromotionPlansState extends State<PromotionPlans> {
   Widget build(BuildContext context) {
     var _promotions = Get.find<PlansController>();
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: kWhite,
       appBar: AppBar(
         title: const Text(
           'Buy Promotion',
           style: TextStyle(color: kGreen),
         ),
         centerTitle: true,
-        backgroundColor: transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
@@ -90,13 +90,13 @@ class _PromotionPlansState extends State<PromotionPlans> {
                   child: Center(
                       child: Text(
                     promotionPlans.title,
-                    style: const TextStyle(color: white, fontSize: 18),
+                    style: const TextStyle(color: kWhite, fontSize: 18),
                   )),
                 ),
                 Expanded(
                   child: Container(
                     decoration: const BoxDecoration(
-                      color: Colors.white,
+                      color: kWhite,
                       borderRadius: BorderRadius.only(
                         bottomRight: Radius.circular(20),
                         bottomLeft: Radius.circular(20),
@@ -135,7 +135,7 @@ class _PromotionPlansState extends State<PromotionPlans> {
                                 ),
                                 const Divider(
                                   thickness: 0.4,
-                                  color: darkGrey,
+                                  color: kDarkGrey,
                                 ),
                                 Row(
                                   mainAxisAlignment:
@@ -161,7 +161,7 @@ class _PromotionPlansState extends State<PromotionPlans> {
                                   height: 8,
                                 ),
                                 Container(
-                                  color: Colors.black12,
+                                  color: kBlackColor,
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -225,8 +225,9 @@ class _PromotionPlansState extends State<PromotionPlans> {
                           },
                           child: Text('$currency${promotionPlans.price}'),
                           style: ElevatedButton.styleFrom(
-                            primary: kGreen,
-                            onSurface: white,
+                            backgroundColor: kGreen,
+                            disabledForegroundColor: kWhite.withOpacity(0.38),
+                            disabledBackgroundColor: kWhite.withOpacity(0.12),
                           ),
                         ),
                         const SizedBox(

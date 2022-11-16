@@ -49,7 +49,7 @@ class _HomeState extends State<Home> {
           )
         : Scaffold(
             appBar: AppBar(
-              backgroundColor: transparent,
+              backgroundColor: kTransparent,
               elevation: 0.0,
               centerTitle: true,
               title: Text(
@@ -72,7 +72,7 @@ class _HomeState extends State<Home> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: mediumGrey,
+                                    color: kMediumGrey,
                                   ),
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
@@ -93,7 +93,7 @@ class _HomeState extends State<Home> {
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
-                                    color: mediumGrey,
+                                    color: kMediumGrey,
                                   ),
                                   image: const DecorationImage(
                                     fit: BoxFit.cover,
@@ -115,7 +115,7 @@ class _HomeState extends State<Home> {
                             radius: 30,
                             child: Icon(
                               Icons.add,
-                              color: Colors.white,
+                              color: kWhite,
                             ),
                           ),
                         ),
@@ -167,25 +167,25 @@ class _HomeState extends State<Home> {
                   title: const Text('Home'),
                   icon: const Icon(Icons.home),
                   activeColor: kGreen,
-                  inactiveColor: mediumGrey,
+                  inactiveColor: kMediumGrey,
                 ),
                 BottomNavyBarItem(
                   title: const Text('Categories'),
                   icon: const Icon(Icons.category),
                   activeColor: kGreen,
-                  inactiveColor: mediumGrey,
+                  inactiveColor: kMediumGrey,
                 ),
                 BottomNavyBarItem(
                   title: const Text('Conversation'),
                   icon: const Icon(Icons.chat),
                   activeColor: kGreen,
-                  inactiveColor: mediumGrey,
+                  inactiveColor: kMediumGrey,
                 ),
                 BottomNavyBarItem(
                   title: const Text('Search'),
                   icon: const Icon(Icons.search),
                   activeColor: kGreen,
-                  inactiveColor: mediumGrey,
+                  inactiveColor: kMediumGrey,
                 ),
               ],
             ),
@@ -233,14 +233,14 @@ class _HomeState extends State<Home> {
                       Text(
                         street,
                         style: const TextStyle(
-                          color: darkGrey,
+                          color: kDarkGrey,
                           fontSize: 15,
                         ),
                       ),
                       Text(
                         'Added on $date',
                         style: const TextStyle(
-                          color: mediumGrey,
+                          color: kMediumGrey,
                           fontSize: 15,
                         ),
                       ),
@@ -249,7 +249,7 @@ class _HomeState extends State<Home> {
                   Text(
                     location,
                     style: const TextStyle(
-                      color: darkGrey,
+                      color: kDarkGrey,
                       fontSize: 15,
                     ),
                   ),
@@ -267,7 +267,7 @@ class _HomeState extends State<Home> {
                   Text(
                     '\$$price',
                     style: const TextStyle(
-                      color: darkGrey,
+                      color: kDarkGrey,
                       fontSize: 15,
                     ),
                   ),

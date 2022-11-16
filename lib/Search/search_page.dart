@@ -52,7 +52,7 @@ class _SearchPageState extends State<SearchPage> {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: const BorderSide(
-                            color: darkGrey,
+                            color: kDarkGrey,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -108,7 +108,7 @@ class _SearchPageState extends State<SearchPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.filter_list),
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: kGreenAccentColor,
         onPressed: () {
           Get.to(const MyFilters());
         },
@@ -169,12 +169,12 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                       label: const Text(
                         'Add Location',
                         style: TextStyle(
-                          color: white,
+                          color: kWhite,
                           fontSize: 18,
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: kGreen,
+                        backgroundColor: kGreen,
                         elevation: 0.0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
@@ -204,7 +204,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
             padding: EdgeInsets.only(left: 20),
             child: Text(
               "Price Range",
-              style: TextStyle(color: darkGrey, fontSize: 16),
+              style: TextStyle(color: kDarkGrey, fontSize: 16),
             ),
           ),
           Padding(
@@ -224,15 +224,15 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                 inactiveTrackBarHeight: 10,
                 activeTrackBar: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.green,
+                  color: kGreenColor,
                 ),
                 inactiveTrackBar: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey,
+                  color: kGreyColor,
                 ),
               ),
               fontSize: 15,
-              textBackgroundColor: Colors.green,
+              textBackgroundColor: kGreenColor,
               onDragging: (handlerIndex, lowerValue, upperValue) {
                 _lowerValue = lowerValue;
                 _upperValue = upperValue;
@@ -244,7 +244,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
             padding: EdgeInsets.only(left: 20),
             child: Text(
               "Select Listing Type",
-              style: TextStyle(color: darkGrey, fontSize: 16),
+              style: TextStyle(color: kDarkGrey, fontSize: 16),
             ),
           ),
           Padding(
@@ -270,7 +270,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
             padding: EdgeInsets.only(left: 20),
             child: Text(
               "Select A Category",
-              style: TextStyle(color: darkGrey, fontSize: 16),
+              style: TextStyle(color: kDarkGrey, fontSize: 16),
             ),
           ),
           Padding(
@@ -335,7 +335,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                           padding: EdgeInsets.only(left: 20),
                           child: Text(
                             "Select Pricing Terms",
-                            style: TextStyle(color: darkGrey, fontSize: 16),
+                            style: TextStyle(color: kDarkGrey, fontSize: 16),
                           ),
                         ),
                         Padding(
@@ -360,7 +360,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                           padding: EdgeInsets.only(left: 20),
                           child: Text(
                             "Select Negotiation Term",
-                            style: TextStyle(color: darkGrey, fontSize: 16),
+                            style: TextStyle(color: kDarkGrey, fontSize: 16),
                           ),
                         ),
                         Padding(
@@ -407,7 +407,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                                                   .customFields[index]
                                                   .label,
                                               style: const TextStyle(
-                                                  color: darkGrey,
+                                                  color: kDarkGrey,
                                                   fontSize: 16),
                                             ),
                                           ),
@@ -440,7 +440,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                                                         }
                                                       });
                                                     },
-                                                    checkColor: white,
+                                                    checkColor: kWhite,
                                                     activeColor: kGreen,
                                                   ),
                                                   Text(
@@ -476,7 +476,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                                                     .customFields[index]
                                                     .label,
                                                 style: const TextStyle(
-                                                    color: darkGrey,
+                                                    color: kDarkGrey,
                                                     fontSize: 20),
                                               ),
                                               ChipsChoice<Choice>.single(
@@ -538,7 +538,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                                                         .customFields[index]
                                                         .label,
                                                     style: const TextStyle(
-                                                        color: darkGrey,
+                                                        color: kDarkGrey,
                                                         fontSize: 20),
                                                   ),
                                                   ChipsChoice<Choice>.single(

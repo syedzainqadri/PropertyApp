@@ -54,14 +54,14 @@ class _PaymentDetailsState extends State<PaymentDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: kWhite,
       appBar: AppBar(
         title: const Text(
           'Checkout',
           style: TextStyle(color: kGreen),
         ),
         centerTitle: true,
-        backgroundColor: transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
@@ -166,13 +166,13 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                         "Please Make The Payment According to Instructions",
                         snackPosition: SnackPosition.BOTTOM,
                         backgroundColor: kGreen,
-                        colorText: white);
+                        colorText: kWhite);
                   } else {
                     Get.snackbar(
                         'Order Error', "Order Not Places. Please Try Again",
                         snackPosition: SnackPosition.BOTTOM,
-                        backgroundColor: Colors.red,
-                        colorText: white);
+                        backgroundColor: kRedColor,
+                        colorText: kWhite);
                   }
                   await paymentDetailsController.getPaymentById(
                       membershipController.checkoutData.value.id);
@@ -184,8 +184,9 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 style: TextStyle(fontSize: 18),
               ),
               style: ElevatedButton.styleFrom(
-                primary: kGreen,
-                onSurface: white,
+                backgroundColor: kGreen,
+                disabledForegroundColor: kWhite.withOpacity(0.38),
+                disabledBackgroundColor: kWhite.withOpacity(0.12),
               ),
             ),
           ),
@@ -220,7 +221,7 @@ class _PaymentDetailsState extends State<PaymentDetails> {
                 child: const Center(
                     child: Text(
                   'Payment Detail',
-                  style: TextStyle(color: white, fontSize: 18),
+                  style: TextStyle(color: kWhite, fontSize: 18),
                 )),
               ),
               Padding(

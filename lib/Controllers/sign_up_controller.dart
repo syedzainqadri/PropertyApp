@@ -35,7 +35,7 @@ class SignUpController extends GetxController {
       Get.defaultDialog(
           title: "",
           content: Container(
-            color: Colors.white,
+            color: kWhite,
             child: Column(
               children: [
                 const SizedBox(
@@ -43,15 +43,15 @@ class SignUpController extends GetxController {
                 ),
                 Text(
                   "${result['error_message']}",
-                  style: const TextStyle(color: Colors.black38),
+                  style: const TextStyle(color: kLightBlackColor),
                 )
               ],
             ),
           ));
       Get.snackbar('Error', response.toString(),
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          icon: const Icon(Icons.error, color: Colors.white));
+          backgroundColor: kRedColor,
+          icon: const Icon(Icons.error, color: kWhite));
       return null;
     }
   }

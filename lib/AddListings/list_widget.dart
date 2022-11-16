@@ -94,7 +94,7 @@ class ListingCard extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 letterSpacing: .5,
                                 fontWeight: FontWeight.w500,
-                                color: white,
+                                color: kWhite,
                                 fontSize: 12),
                           ),
                         ),
@@ -110,7 +110,7 @@ class ListingCard extends StatelessWidget {
                   child: Text(
                     title ?? '',
                     style: const TextStyle(
-                      color: darkGrey,
+                      color: kDarkGrey,
                       fontSize: 14,
                     ),
                   ),
@@ -136,7 +136,7 @@ class ListingCard extends StatelessWidget {
                     Text(
                       city ?? '',
                       style: const TextStyle(
-                        color: mediumDarkGrey,
+                        color: kMediumDarkGrey,
                         fontSize: 12,
                       ),
                     )

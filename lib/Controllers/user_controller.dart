@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -58,13 +57,13 @@ class UserController extends GetxController {
       Get.snackbar('Success', 'Password reset link has been sent to your email',
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: kGreen,
-          colorText: white);
+          colorText: kWhite);
     } else {
       Get.snackbar(
         'Error',
         'Something went wrong',
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
+        backgroundColor: kRedColor,
         borderRadius: 10,
       );
     }

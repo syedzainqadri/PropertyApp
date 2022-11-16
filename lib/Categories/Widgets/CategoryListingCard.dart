@@ -104,7 +104,7 @@ class CategoryListingCard extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 letterSpacing: .5,
                                 fontWeight: FontWeight.w500,
-                                color: white,
+                                color: kWhite,
                                 fontSize: 12),
                           ),
                         ),

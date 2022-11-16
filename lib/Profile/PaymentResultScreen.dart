@@ -20,7 +20,7 @@ class PaymentResultScreen extends StatelessWidget {
           style: TextStyle(color: kGreen),
         ),
         centerTitle: true,
-        backgroundColor: transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
@@ -159,7 +159,7 @@ class PaymentResultScreen extends StatelessWidget {
                   child: Text(
                 'Payment Instruction',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: kBlackColor,
                     fontWeight: FontWeight.w500,
                     fontSize: 20),
               )),
@@ -175,7 +175,7 @@ class PaymentResultScreen extends StatelessWidget {
                   child: Text(
                 orderDetails.paymentDetail.value.gateway.instructions,
                 style: const TextStyle(
-                    color: Colors.red, fontWeight: FontWeight.w500),
+                    color: kRedColor, fontWeight: FontWeight.w500),
               )),
             ),
             const Divider(

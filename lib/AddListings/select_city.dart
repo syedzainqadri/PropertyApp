@@ -22,7 +22,7 @@ class _SelectCityState extends State<SelectCity> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
@@ -66,14 +66,14 @@ class _SelectCityState extends State<SelectCity> {
                     height: 50,
                     decoration: BoxDecoration(
                         color: kGreen,
-                        border:
-                            Border.all(color: white, style: BorderStyle.solid)),
+                        border: Border.all(
+                            color: kWhite, style: BorderStyle.solid)),
                     child: Center(
                       child: Text(
                         locationsController.subLocations.value[index].name,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                          color: white,
+                          color: kWhite,
                           fontSize: 20,
                         ),
                       ),

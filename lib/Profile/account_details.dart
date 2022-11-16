@@ -35,7 +35,7 @@ class _AccountDetailsState extends State<AccountDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
@@ -69,7 +69,7 @@ class _AccountDetailsState extends State<AccountDetails> {
               child: Text(
                 'PUBLIC INFO',
                 style: TextStyle(
-                  color: mediumGrey,
+                  color: kMediumGrey,
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
                 ),
@@ -80,7 +80,7 @@ class _AccountDetailsState extends State<AccountDetails> {
             ),
             Card(
               margin: const EdgeInsets.all(0.0),
-              color: white,
+              color: kWhite,
               child: Padding(
                 padding: const EdgeInsets.only(
                   left: 18.0,
@@ -94,18 +94,18 @@ class _AccountDetailsState extends State<AccountDetails> {
                     const Text(
                       'First Name',
                       style: TextStyle(
-                        color: darkGrey,
+                        color: kDarkGrey,
                         fontSize: 17,
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: mediumGrey,
+                            color: kMediumGrey,
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(5),
-                          color: Colors.white),
+                          color: kWhite),
                       height: height * 0.06,
                       width: width * 0.5,
                       child: TextFormField(
@@ -126,7 +126,7 @@ class _AccountDetailsState extends State<AccountDetails> {
             Card(
               margin: const EdgeInsets.all(0.0),
               elevation: 1.0,
-              color: white,
+              color: kWhite,
               child: Padding(
                 padding: const EdgeInsets.only(
                   left: 18.0,
@@ -140,18 +140,18 @@ class _AccountDetailsState extends State<AccountDetails> {
                     const Text(
                       'Last Name',
                       style: TextStyle(
-                        color: darkGrey,
+                        color: kDarkGrey,
                         fontSize: 17,
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: mediumGrey,
+                            color: kMediumGrey,
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(5),
-                          color: Colors.white),
+                          color: kWhite),
                       height: height * 0.06,
                       width: width * 0.5,
                       child: TextFormField(
@@ -177,7 +177,7 @@ class _AccountDetailsState extends State<AccountDetails> {
               child: Text(
                 'PRIVATE DETAILS',
                 style: TextStyle(
-                  color: mediumGrey,
+                  color: kMediumGrey,
                   fontSize: 19,
                   fontWeight: FontWeight.bold,
                 ),
@@ -188,7 +188,7 @@ class _AccountDetailsState extends State<AccountDetails> {
             ),
             Card(
               margin: const EdgeInsets.all(0.0),
-              color: white,
+              color: kWhite,
               child: Padding(
                 padding: const EdgeInsets.only(
                   left: 18.0,
@@ -202,18 +202,18 @@ class _AccountDetailsState extends State<AccountDetails> {
                     const Text(
                       'Email',
                       style: TextStyle(
-                        color: darkGrey,
+                        color: kDarkGrey,
                         fontSize: 17,
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: mediumGrey,
+                            color: kMediumGrey,
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(5),
-                          color: Colors.white),
+                          color: kWhite),
                       height: height * 0.06,
                       width: width * 0.5,
                       child: TextFormField(
@@ -234,7 +234,7 @@ class _AccountDetailsState extends State<AccountDetails> {
             Card(
               margin: const EdgeInsets.all(0.0),
               elevation: 1.0,
-              color: white,
+              color: kWhite,
               child: Padding(
                 padding: const EdgeInsets.only(
                   left: 18.0,
@@ -248,18 +248,18 @@ class _AccountDetailsState extends State<AccountDetails> {
                     const Text(
                       'Phone Number',
                       style: TextStyle(
-                        color: darkGrey,
+                        color: kDarkGrey,
                         fontSize: 17,
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
                           border: Border.all(
-                            color: mediumGrey,
+                            color: kMediumGrey,
                             width: 1,
                           ),
                           borderRadius: BorderRadius.circular(5),
-                          color: Colors.white),
+                          color: kWhite),
                       height: height * 0.06,
                       width: width * 0.5,
                       child: TextFormField(
@@ -293,8 +293,9 @@ class _AccountDetailsState extends State<AccountDetails> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: kGreen,
-                      onSurface: white,
+                      backgroundColor: kGreen,
+                      disabledForegroundColor: kWhite.withOpacity(0.38),
+                      disabledBackgroundColor: kWhite.withOpacity(0.12),
                     ),
                     child: const Padding(
                       padding: EdgeInsets.all(20.0),

@@ -14,7 +14,7 @@ class CustomFullScreenDialog {
         onWillPop: () => Future.value(false),
       ),
       barrierDismissible: false,
-      barrierColor: Colors.white,
+      barrierColor: kWhite,
       useSafeArea: true,
     );
   }

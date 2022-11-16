@@ -21,7 +21,7 @@ class SignInController extends GetxController {
     Get.defaultDialog(
         title: "",
         content: Container(
-          color: Colors.white,
+          color: kWhite,
           child: Column(
             children: const [
               Center(
@@ -34,7 +34,7 @@ class SignInController extends GetxController {
               ),
               Text(
                 "SigningIn! please wait",
-                style: TextStyle(color: Colors.black38),
+                style: TextStyle(color: kLightBlackColor),
               )
             ],
           ),
@@ -68,8 +68,8 @@ class SignInController extends GetxController {
       Get.back();
       Get.snackbar('Error', 'Invalid username or password',
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          icon: const Icon(Icons.error, color: Colors.white));
+          backgroundColor: kRedColor,
+          icon: const Icon(Icons.error, color: kWhite));
     }
   }
 }

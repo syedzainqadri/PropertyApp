@@ -40,7 +40,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         centerTitle: true,
         title: const Text(
@@ -74,7 +74,7 @@ class _ProfileState extends State<Profile> {
                           height: 120,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(color: mediumGrey),
+                            border: Border.all(color: kMediumGrey),
                           ),
                           child: const Center(
                             child: CircularProgressIndicator(
@@ -86,7 +86,7 @@ class _ProfileState extends State<Profile> {
                           badgeColor: kGreen,
                           badgeContent: const Icon(
                             Icons.camera_alt,
-                            color: white,
+                            color: kWhite,
                           ),
                           position: const BadgePosition(bottom: 1, end: 1),
                           child: GestureDetector(
@@ -99,7 +99,7 @@ class _ProfileState extends State<Profile> {
                                 height: 120,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
-                                  border: Border.all(color: mediumGrey),
+                                  border: Border.all(color: kMediumGrey),
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
                                     image: NetworkImage(userController
@@ -118,7 +118,7 @@ class _ProfileState extends State<Profile> {
                     () => Text(
                       "${userController.userModel.value.firstName} ${userController.userModel.value.lastName}",
                       style: const TextStyle(
-                        color: darkGrey,
+                        color: kDarkGrey,
                         fontSize: 22,
                         fontWeight: FontWeight.w500,
                       ),
@@ -134,18 +134,18 @@ class _ProfileState extends State<Profile> {
               children: [
                 profileParameters(
                     "My Listings", Icons.list, kGreen, const MyListings()),
-                profileParameters("My Favorites", Icons.favorite, brightRed,
+                profileParameters("My Favorites", Icons.favorite, kBrightRed,
                     const MyFavorites()),
-                profileParameters("Account Detials", Icons.person, mediumBlue,
+                profileParameters("Account Detials", Icons.person, kMediumBlue,
                     const AccountDetails()),
-                profileParameters("Upgrade Account", Icons.upgrade,
-                    Colors.amber, const AccountSubscription()),
+                profileParameters("Upgrade Account", Icons.upgrade, kAmberColor,
+                    const AccountSubscription()),
                 profileParameters(
-                    "Settings", Icons.settings, mediumGrey, const Settings()),
+                    "Settings", Icons.settings, kMediumGrey, const Settings()),
                 profileParameters(
                     "Orders", Icons.shopping_cart, kGreen, Orders()),
                 profileParameters(
-                    "Payments", Icons.payment, mediumBlue, MyPayments()),
+                    "Payments", Icons.payment, kMediumBlue, MyPayments()),
                 const SizedBox(
                   height: 15,
                 ),
@@ -160,7 +160,7 @@ class _ProfileState extends State<Profile> {
                   child: const Text(
                     'Logout',
                     style: TextStyle(
-                      color: darkGrey,
+                      color: kDarkGrey,
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
                     ),
@@ -203,7 +203,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 Text(
                   text,
-                  style: const TextStyle(color: darkGrey, fontSize: 17),
+                  style: const TextStyle(color: kDarkGrey, fontSize: 17),
                 ),
               ],
             ),
@@ -211,7 +211,7 @@ class _ProfileState extends State<Profile> {
         ),
         const Divider(
           thickness: 0.4,
-          color: mediumGrey,
+          color: kMediumGrey,
         ),
       ],
     );

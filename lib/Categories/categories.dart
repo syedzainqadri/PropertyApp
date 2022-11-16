@@ -53,7 +53,7 @@ class _CategoryPageState extends State<CategoryPage> {
               Get.to(const AddListing());
             },
             child: const Icon(Icons.add),
-            foregroundColor: white,
+            foregroundColor: kWhite,
             backgroundColor: kGreen,
           ),
           appBar: AppBar(
@@ -65,7 +65,7 @@ class _CategoryPageState extends State<CategoryPage> {
               ),
             ),
             elevation: 0.0,
-            backgroundColor: Colors.transparent,
+            backgroundColor: kTransparent,
             leading: IconButton(
               icon: const Icon(
                 Icons.navigate_before,
@@ -80,7 +80,7 @@ class _CategoryPageState extends State<CategoryPage> {
           body: Column(
             children: [
               const Divider(
-                color: mediumGrey,
+                color: kMediumGrey,
                 thickness: 0.5,
               ),
               Expanded(
@@ -120,7 +120,7 @@ class _CategoryPageState extends State<CategoryPage> {
         ),
         showSort
             ? Scaffold(
-                backgroundColor: Colors.black54,
+                backgroundColor: kBlackColor,
                 body: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -129,7 +129,7 @@ class _CategoryPageState extends State<CategoryPage> {
                           MediaQuery.of(context).size.height / 1.6,
                       width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
-                        color: white,
+                        color: kWhite,
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30),
@@ -147,7 +147,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                 children: const [
                                   Icon(
                                     Icons.sort,
-                                    color: mediumGrey,
+                                    color: kMediumGrey,
                                     size: 30,
                                   ),
                                   SizedBox(
@@ -156,7 +156,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                   Text(
                                     'Sort By',
                                     style: TextStyle(
-                                      color: darkGrey,
+                                      color: kDarkGrey,
                                       fontSize: 20,
                                       decoration: TextDecoration.none,
                                     ),
@@ -171,7 +171,7 @@ class _CategoryPageState extends State<CategoryPage> {
                                 },
                                 child: const Icon(
                                   Icons.close,
-                                  color: mediumGrey,
+                                  color: kMediumGrey,
                                   size: 30,
                                 ),
                               ),
@@ -182,7 +182,7 @@ class _CategoryPageState extends State<CategoryPage> {
                           height: 10,
                         ),
                         const Divider(
-                          color: mediumGrey,
+                          color: kMediumGrey,
                           thickness: 0.2,
                         ),
                         Padding(

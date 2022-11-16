@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Categories/categories.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class CategoryCard extends StatelessWidget {
   var id;
@@ -28,11 +29,11 @@ class CategoryCard extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: kWhite,
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: const [
                   BoxShadow(
-                    color: Colors.grey,
+                    color: kGreyColor,
                     offset: Offset(
                       3.0,
                       3.0,

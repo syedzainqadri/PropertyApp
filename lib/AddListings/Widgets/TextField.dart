@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:lagosabuja/Utils/const.dart';
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
@@ -26,27 +27,27 @@ class TextFieldWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.green[100],
+        color: kGreenColor[100],
         borderRadius: BorderRadius.circular(10),
       ),
       child: TextField(
         obscureText: obsecure,
         controller: controller,
-        cursorColor: Colors.black,
+        cursorColor: kBlackColor,
         style: const TextStyle(
-          color: Colors.green,
+          color: kGreenColor,
           fontSize: 24,
         ),
         decoration: InputDecoration(
-            fillColor: Colors.black,
+            fillColor: kBlackColor,
             border: InputBorder.none,
             icon: Icon(
               leadingIcon,
-              color: Colors.green,
+              color: kGreenColor,
             ),
             hintText: lable,
             hintStyle: const TextStyle(
-              color: Colors.green,
+              color: kGreenColor,
               fontSize: 24,
             ),
             suffixIcon: trailing),

@@ -94,7 +94,7 @@ class _ListingDetailsState extends State<ListingDetails> {
           )
         : Scaffold(
             appBar: AppBar(
-              backgroundColor: transparent,
+              backgroundColor: kTransparent,
               elevation: 0.0,
               centerTitle: false,
               title: Text(
@@ -177,7 +177,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return Dialog(
-                                      backgroundColor: Colors.transparent,
+                                      backgroundColor: kTransparent,
                                       child: SizedBox(
                                         height: height * 0.25,
                                         width: width,
@@ -232,8 +232,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                                     shape: BoxShape.circle,
                                     color: (Theme.of(context).brightness ==
                                                 Brightness.dark
-                                            ? Colors.white
-                                            : Colors.black)
+                                            ? kWhite
+                                            : kBlackColor)
                                         .withOpacity(
                                             _current == index ? 0.9 : 0.4)),
                               ),
@@ -301,7 +301,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                  color: Colors.black.withOpacity(0.3))),
+                                  color: kBlackColor.withOpacity(0.3))),
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 left: 10, right: 10, top: 20),
@@ -431,9 +431,9 @@ class _ListingDetailsState extends State<ListingDetails> {
                         left: (width / 2) - 60,
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: kWhite,
                               border: Border.all(
-                                  color: Colors.black.withOpacity(0.3))),
+                                  color: kBlackColor.withOpacity(0.3))),
                           child: const Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
@@ -534,10 +534,10 @@ class _ListingDetailsState extends State<ListingDetails> {
                                       decoration: BoxDecoration(
                                         color: kGreen,
                                         borderRadius: BorderRadius.circular(50),
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
-                                            color: Colors.grey.shade300,
-                                            offset: const Offset(
+                                            color: kLightGreyColor,
+                                            offset: Offset(
                                               3.0,
                                               3.0,
                                             ),
@@ -550,7 +550,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                         padding: EdgeInsets.all(3.0),
                                         child: Icon(
                                           Icons.done,
-                                          color: Colors.white,
+                                          color: kWhite,
                                         ),
                                       ),
                                     ),
@@ -580,7 +580,7 @@ class _ListingDetailsState extends State<ListingDetails> {
             ),
             bottomSheet: Container(
               height: height * 0.09,
-              color: Colors.white,
+              color: kWhite,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -591,8 +591,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                     },
                     width: width * 0.25,
                     height: height * 0.06,
-                    iconColor: Colors.blue,
-                    buttonColor: Colors.blue[200],
+                    iconColor: kBlueColor,
+                    buttonColor: kBlueColor[200],
                     buttonText: 'Call',
                     icon: Icons.phone,
                   ),
@@ -631,7 +631,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                   'Contact US',
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
-                                                      color: Colors.green,
+                                                      color: kGreenColor,
                                                       fontSize: 25,
                                                       fontWeight:
                                                           FontWeight.normal),
@@ -699,7 +699,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                     width: width * 0.25,
                     height: height * 0.06,
                     iconColor: kGreen,
-                    buttonColor: kGreenAccent,
+                    buttonColor: kGreenAccentColor,
                     buttonText: 'Email',
                     icon: Icons.email,
                   ),
@@ -739,7 +739,7 @@ review(Data review) {
                 height: 50,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: mediumGrey),
+                  border: Border.all(color: kMediumGrey),
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: NetworkImage(
@@ -756,7 +756,7 @@ review(Data review) {
                 children: [
                   Text(
                     review.authorName,
-                    style: const TextStyle(fontSize: 16, color: darkGrey),
+                    style: const TextStyle(fontSize: 16, color: kDarkGrey),
                   ),
                   const SizedBox(
                     height: 10,
@@ -766,7 +766,7 @@ review(Data review) {
                     maxLines: 1,
                     style: const TextStyle(
                         fontSize: 14,
-                        color: mediumGrey,
+                        color: kMediumGrey,
                         overflow: TextOverflow.clip),
                   ),
                 ],
@@ -793,7 +793,7 @@ review(Data review) {
           ),
           Text(
             review.content.raw,
-            style: const TextStyle(fontSize: 16, color: darkGrey),
+            style: const TextStyle(fontSize: 16, color: kDarkGrey),
           ),
         ],
       ),

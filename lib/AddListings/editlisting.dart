@@ -105,7 +105,7 @@ class _EditListingState extends State<EditListing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
@@ -158,7 +158,7 @@ class _EditListingState extends State<EditListing> {
                           child: const Icon(
                             Icons.camera_alt,
                             size: 40,
-                            color: white,
+                            color: kWhite,
                           ),
                         ),
                       ),
@@ -517,7 +517,7 @@ class _EditListingState extends State<EditListing> {
                                                             }
                                                           });
                                                         },
-                                                        checkColor: white,
+                                                        checkColor: kWhite,
                                                         activeColor: kGreen,
                                                       ),
                                                       Text(
@@ -553,7 +553,7 @@ class _EditListingState extends State<EditListing> {
                                                         .customFields[index]
                                                         .label,
                                                     style: const TextStyle(
-                                                        color: darkGrey,
+                                                        color: kDarkGrey,
                                                         fontSize: 20),
                                                   ),
                                                   ChipsChoice<Choice>.single(
@@ -618,7 +618,7 @@ class _EditListingState extends State<EditListing> {
                                                             .customFields[index]
                                                             .label,
                                                         style: const TextStyle(
-                                                            color: darkGrey,
+                                                            color: kDarkGrey,
                                                             fontSize: 20),
                                                       ),
                                                       ChipsChoice<
@@ -718,11 +718,12 @@ class _EditListingState extends State<EditListing> {
                       'Your listing is pending for Approval from Admin',
                       snackPosition: SnackPosition.BOTTOM,
                       backgroundColor: kGreen,
-                      colorText: white);
+                      colorText: kWhite);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: kGreen,
-                  onSurface: white,
+                  backgroundColor: kGreen,
+                  disabledForegroundColor: kWhite.withOpacity(0.38),
+                  disabledBackgroundColor: kWhite.withOpacity(0.12),
                 ),
                 child: const Text(
                   'Post Listing',
@@ -802,7 +803,7 @@ class TitleWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: padding, horizontal: 20),
       child: Text(
         text,
-        style: const TextStyle(color: darkGrey, fontSize: 20),
+        style: const TextStyle(color: kDarkGrey, fontSize: 20),
       ),
     );
   }

@@ -79,7 +79,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
+                          color: kLightGreyColor,
                           borderRadius: BorderRadius.circular(8)),
                       child: TextFormField(
                         keyboardType: TextInputType.text,
@@ -95,11 +95,11 @@ class _SignUpState extends State<SignUp> {
                             disabledBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none,
-                            fillColor: white,
+                            fillColor: kWhite,
                             labelText: "Password",
                             alignLabelWithHint: true,
                             labelStyle:
-                                TextStyle(color: Colors.grey, fontSize: 16)),
+                                TextStyle(color: kGreyColor, fontSize: 16)),
                       ),
                     ),
                     const SizedBox(
@@ -107,7 +107,7 @@ class _SignUpState extends State<SignUp> {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
+                          color: kLightGreyColor,
                           borderRadius: BorderRadius.circular(8)),
                       child: TextFormField(
                         keyboardType: TextInputType.text,
@@ -123,11 +123,11 @@ class _SignUpState extends State<SignUp> {
                             disabledBorder: InputBorder.none,
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none,
-                            fillColor: white,
+                            fillColor: kWhite,
                             labelText: "Confirm Password",
                             alignLabelWithHint: true,
                             labelStyle:
-                                TextStyle(color: Colors.grey, fontSize: 16)),
+                                TextStyle(color: kGreyColor, fontSize: 16)),
                       ),
                     ),
                     const SizedBox(
@@ -138,7 +138,7 @@ class _SignUpState extends State<SignUp> {
                         Get.defaultDialog(
                             title: "",
                             content: Container(
-                              color: Colors.white,
+                              color: kWhite,
                               child: Column(
                                 children: const [
                                   Center(
@@ -151,7 +151,7 @@ class _SignUpState extends State<SignUp> {
                                   ),
                                   Text(
                                     "SigningIn! please wait",
-                                    style: TextStyle(color: Colors.black38),
+                                    style: TextStyle(color: kLightBlackColor),
                                   )
                                 ],
                               ),

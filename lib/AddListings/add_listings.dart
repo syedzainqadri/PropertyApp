@@ -78,7 +78,7 @@ class _AddListingState extends State<AddListing> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         leading: GestureDetector(
           onTap: () {
@@ -123,12 +123,12 @@ class _AddListingState extends State<AddListing> {
                           label: const Text(
                             'Add Location',
                             style: TextStyle(
-                              color: white,
+                              color: kWhite,
                               fontSize: 18,
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: kGreen,
+                            backgroundColor: kGreen,
                             elevation: 0.0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
@@ -229,7 +229,7 @@ class _AddListingState extends State<AddListing> {
                           child: const Icon(
                             Icons.camera_alt,
                             size: 40,
-                            color: white,
+                            color: kWhite,
                           ),
                         ),
                       ),
@@ -303,7 +303,7 @@ class _AddListingState extends State<AddListing> {
                     Get.defaultDialog(
                         title: "",
                         content: Container(
-                          color: Colors.white,
+                          color: kWhite,
                           child: Column(
                             children: const [
                               Center(
@@ -316,7 +316,7 @@ class _AddListingState extends State<AddListing> {
                               ),
                               Text(
                                 "Loading",
-                                style: TextStyle(color: Colors.black38),
+                                style: TextStyle(color: kLightBlackColor),
                               )
                             ],
                           ),
@@ -514,7 +514,7 @@ class _AddListingState extends State<AddListing> {
                                                             }
                                                           });
                                                         },
-                                                        checkColor: white,
+                                                        checkColor: kWhite,
                                                         activeColor: kGreen,
                                                       ),
                                                       Text(
@@ -550,7 +550,7 @@ class _AddListingState extends State<AddListing> {
                                                         .customFields[index]
                                                         .label,
                                                     style: const TextStyle(
-                                                        color: darkGrey,
+                                                        color: kDarkGrey,
                                                         fontSize: 20),
                                                   ),
                                                   ChipsChoice<Choice>.single(
@@ -615,7 +615,7 @@ class _AddListingState extends State<AddListing> {
                                                             .customFields[index]
                                                             .label,
                                                         style: const TextStyle(
-                                                            color: darkGrey,
+                                                            color: kDarkGrey,
                                                             fontSize: 20),
                                                       ),
                                                       ChipsChoice<
@@ -716,11 +716,12 @@ class _AddListingState extends State<AddListing> {
                       'Your listing is pending for Approval from Admin',
                       snackPosition: SnackPosition.BOTTOM,
                       backgroundColor: kGreen,
-                      colorText: white);
+                      colorText: kWhite);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: kGreen,
-                  onSurface: white,
+                  backgroundColor: kGreen,
+                  disabledForegroundColor: kWhite.withOpacity(0.38),
+                  disabledBackgroundColor: kWhite.withOpacity(0.12),
                 ),
                 child: const Text(
                   'Post Listing',
@@ -758,11 +759,11 @@ class _AddListingState extends State<AddListing> {
           padding: const EdgeInsets.all(30.0),
           child: Container(
             decoration:
-                const BoxDecoration(color: Colors.red, shape: BoxShape.circle),
+                const BoxDecoration(color: kRedColor, shape: BoxShape.circle),
             child: IconButton(
               icon: const Icon(
                 Icons.close,
-                color: Colors.white,
+                color: kWhite,
               ),
               onPressed: () {
                 setState(() {
@@ -801,7 +802,7 @@ class _AddListingState extends State<AddListing> {
     Get.snackbar('Success', "Your Current Location is selected",
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: kGreen,
-        colorText: white);
+        colorText: kWhite);
 
     print(currentLocation.toString());
   }
@@ -822,7 +823,7 @@ class TitleWidget extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: padding, horizontal: 20),
       child: Text(
         text,
-        style: const TextStyle(color: darkGrey, fontSize: 16),
+        style: const TextStyle(color: kDarkGrey, fontSize: 16),
       ),
     );
   }

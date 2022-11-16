@@ -106,7 +106,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
           )
         : Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: kTransparent,
               elevation: 0.0,
               leading: GestureDetector(
                 onTap: () {
@@ -184,7 +184,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
                                     },
                                     icon: const Icon(
                                       Icons.delete,
-                                      color: Colors.red,
+                                      color: kRedColor,
                                     )),
                               )
                             ],
@@ -224,7 +224,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
                                           },
                                           icon: const Icon(
                                             Icons.delete,
-                                            color: Colors.red,
+                                            color: kRedColor,
                                           )),
                                     )
                                   ],
@@ -244,11 +244,11 @@ class _EditListingScreenState extends State<EditListingScreen> {
                           textStyle: MaterialStateProperty.all(
                             const TextStyle(
                               fontSize: 15,
-                              color: Colors.white,
+                              color: kWhite,
                             ),
                           ),
                           backgroundColor: MaterialStateProperty.all(kGreen),
-                          overlayColor: MaterialStateProperty.all(white)),
+                          overlayColor: MaterialStateProperty.all(kWhite)),
                     ),
                   ),
                   TitleWidget(
@@ -395,11 +395,12 @@ class _EditListingScreenState extends State<EditListingScreen> {
                             'Your listing is pending for Approval from Admin',
                             snackPosition: SnackPosition.BOTTOM,
                             backgroundColor: kGreen,
-                            colorText: white);
+                            colorText: kWhite);
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: kGreen,
-                        onSurface: white,
+                        backgroundColor: kGreen,
+                        disabledForegroundColor: kWhite.withOpacity(0.38),
+                        disabledBackgroundColor: kWhite.withOpacity(0.12),
                       ),
                       child: const Text(
                         'Update Listing',

@@ -65,20 +65,20 @@ class _MyFiltersState extends State<MyFilters> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kWhite,
       appBar: AppBar(
         title: const Text(
           'Filters',
           style: TextStyle(
-            color: darkGrey,
+            color: kDarkGrey,
           ),
         ),
         elevation: 0.0,
-        backgroundColor: transparent,
+        backgroundColor: kTransparent,
         leading: IconButton(
           icon: const Icon(
             Icons.navigate_before,
-            color: darkGrey,
+            color: kDarkGrey,
             size: 34,
           ),
           onPressed: () {
@@ -95,7 +95,7 @@ class _MyFiltersState extends State<MyFilters> {
               child: const Text(
                 'Close',
                 style: TextStyle(
-                  color: mediumGrey,
+                  color: kMediumGrey,
                 ),
               ),
             ),
@@ -112,10 +112,10 @@ class _MyFiltersState extends State<MyFilters> {
                       height: 30,
                       width: 300,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: kWhite,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(
-                          color: Colors.black,
+                          color: kBlackColor,
                         ),
                       ),
                       child: Center(
@@ -185,14 +185,14 @@ class _MyFiltersState extends State<MyFilters> {
                     children: const [
                       Icon(
                         Icons.verified,
-                        color: mediumGrey,
+                        color: kMediumGrey,
                       ),
                       SizedBox(
                         width: 8,
                       ),
                       Text(
                         'I want to',
-                        style: TextStyle(color: darkGrey),
+                        style: TextStyle(color: kDarkGrey),
                       ),
                     ],
                   ),
@@ -200,9 +200,9 @@ class _MyFiltersState extends State<MyFilters> {
                     minWidth: 65.0,
                     initialLabelIndex: listingType.value == 'buy' ? 1 : 0,
                     cornerRadius: 20.0,
-                    activeFgColor: white,
-                    inactiveBgColor: lightGrey,
-                    inactiveFgColor: darkGrey,
+                    activeFgColor: kWhite,
+                    inactiveBgColor: kLightGrey,
+                    inactiveFgColor: kDarkGrey,
                     totalSwitches: 2,
                     labels: const ['Rent', 'Buy'],
                     activeBgColors: const [
@@ -231,7 +231,7 @@ class _MyFiltersState extends State<MyFilters> {
                             'Select State',
                             textAlign: TextAlign.center,
                           ),
-                          backgroundColor: Colors.white,
+                          backgroundColor: kWhite,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0)),
                           content: SizedBox(
@@ -314,7 +314,7 @@ class _MyFiltersState extends State<MyFilters> {
                                                                 color: kGreen,
                                                                 border: Border.all(
                                                                     color:
-                                                                        white,
+                                                                        kWhite,
                                                                     style: BorderStyle
                                                                         .solid)),
                                                             child: Center(
@@ -329,7 +329,7 @@ class _MyFiltersState extends State<MyFilters> {
                                                                         .center,
                                                                 style:
                                                                     const TextStyle(
-                                                                  color: white,
+                                                                  color: kWhite,
                                                                   fontSize: 20,
                                                                 ),
                                                               ),
@@ -348,7 +348,7 @@ class _MyFiltersState extends State<MyFilters> {
                                       decoration: BoxDecoration(
                                           color: kGreen,
                                           border: Border.all(
-                                              color: white,
+                                              color: kWhite,
                                               style: BorderStyle.solid)),
                                       child: Center(
                                         child: Text(
@@ -356,7 +356,7 @@ class _MyFiltersState extends State<MyFilters> {
                                               .locations.value[index].name,
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(
-                                            color: white,
+                                            color: kWhite,
                                             fontSize: 20,
                                           ),
                                         ),
@@ -376,7 +376,7 @@ class _MyFiltersState extends State<MyFilters> {
                       children: [
                         const Icon(
                           Icons.location_pin,
-                          color: mediumGrey,
+                          color: kMediumGrey,
                         ),
                         const SizedBox(
                           width: 8,
@@ -388,7 +388,7 @@ class _MyFiltersState extends State<MyFilters> {
                             children: [
                               const Text(
                                 'City',
-                                style: TextStyle(color: darkGrey),
+                                style: TextStyle(color: kDarkGrey),
                               ),
                               const SizedBox(
                                 width: 4,
@@ -409,7 +409,7 @@ class _MyFiltersState extends State<MyFilters> {
                     ),
                     const Icon(
                       Icons.navigate_next,
-                      color: mediumGrey,
+                      color: kMediumGrey,
                       size: 35,
                     ),
                   ],
@@ -427,14 +427,14 @@ class _MyFiltersState extends State<MyFilters> {
                     children: const [
                       Icon(
                         Icons.map,
-                        color: mediumGrey,
+                        color: kMediumGrey,
                       ),
                       SizedBox(
                         width: 8,
                       ),
                       Text(
                         'Select Locations',
-                        style: TextStyle(color: darkGrey),
+                        style: TextStyle(color: kDarkGrey),
                       ),
                     ],
                   ),
@@ -446,7 +446,7 @@ class _MyFiltersState extends State<MyFilters> {
                     children: [
                       Expanded(
                         child: Slider(
-                          inactiveColor: lightGrey,
+                          inactiveColor: kLightGrey,
                           activeColor: kGreen,
                           value: _distanceRangeValues.value.toDouble(),
                           max: 300,
@@ -474,9 +474,9 @@ class _MyFiltersState extends State<MyFilters> {
                         child: Badge(
                           badgeContent: const Icon(
                             Icons.location_pin,
-                            color: brightRed,
+                            color: kBrightRed,
                           ),
-                          badgeColor: transparent,
+                          badgeColor: kTransparent,
                           elevation: 0.0,
                           position: const BadgePosition(top: -16.0, end: -8.0),
                           child: Container(
@@ -522,14 +522,14 @@ class _MyFiltersState extends State<MyFilters> {
                               children: const [
                                 FaIcon(
                                   FontAwesomeIcons.tag,
-                                  color: mediumGrey,
+                                  color: kMediumGrey,
                                 ),
                                 SizedBox(
                                   width: 8,
                                 ),
                                 Text(
                                   'Price Range',
-                                  style: TextStyle(color: darkGrey),
+                                  style: TextStyle(color: kDarkGrey),
                                 ),
                               ],
                             ),
@@ -551,7 +551,7 @@ class _MyFiltersState extends State<MyFilters> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25),
                                       borderSide:
-                                          const BorderSide(color: mediumGrey)),
+                                          const BorderSide(color: kMediumGrey)),
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25),
                                       borderSide:
@@ -580,7 +580,7 @@ class _MyFiltersState extends State<MyFilters> {
                                   enabledBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25),
                                       borderSide:
-                                          const BorderSide(color: mediumGrey)),
+                                          const BorderSide(color: kMediumGrey)),
                                   focusedBorder: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(25),
                                       borderSide:
@@ -594,7 +594,7 @@ class _MyFiltersState extends State<MyFilters> {
                           height: 9,
                         ),
                         RangeSlider(
-                          inactiveColor: lightGrey,
+                          inactiveColor: kLightGrey,
                           activeColor: kGreen,
                           values: _currentRangeValues,
                           max: 300000,
@@ -629,7 +629,7 @@ class _MyFiltersState extends State<MyFilters> {
       ),
       bottomNavigationBar: Container(
         height: 90,
-        color: transparent,
+        color: kTransparent,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Row(
@@ -654,7 +654,7 @@ class _MyFiltersState extends State<MyFilters> {
                 },
                 child: const Text(
                   'Reset',
-                  style: TextStyle(color: mediumGrey, fontSize: 16),
+                  style: TextStyle(color: kMediumGrey, fontSize: 16),
                 ),
               ),
               const SizedBox(
@@ -681,14 +681,14 @@ class _MyFiltersState extends State<MyFilters> {
                         'Error',
                         'Please select a location',
                         snackPosition: SnackPosition.BOTTOM,
-                        backgroundColor: Colors.red,
-                        colorText: white,
+                        backgroundColor: kRedColor,
+                        colorText: kWhite,
                       );
                     }
                   },
                   child: const Text('Apply Filters'),
-                  style:
-                      ElevatedButton.styleFrom(primary: kGreen, elevation: 0.0),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: kGreen, elevation: 0.0),
                 ),
               ),
             ],
@@ -701,7 +701,7 @@ class _MyFiltersState extends State<MyFilters> {
   divide() {
     return const Divider(
       thickness: 0.4,
-      color: darkGrey,
+      color: kDarkGrey,
     );
   }
 
@@ -710,8 +710,8 @@ class _MyFiltersState extends State<MyFilters> {
       onPressed: () {},
       child: Text(title),
       style: ElevatedButton.styleFrom(
-        onPrimary: kGreen,
-        primary: transparent,
+        foregroundColor: kGreen,
+        backgroundColor: kTransparent,
         elevation: 0.0,
         side: const BorderSide(color: kGreen),
         shape: RoundedRectangleBorder(
@@ -726,8 +726,8 @@ class _MyFiltersState extends State<MyFilters> {
       onPressed: () {},
       child: Text(title),
       style: ElevatedButton.styleFrom(
-        onPrimary: darkGrey,
-        primary: lightGrey,
+        foregroundColor: kDarkGrey,
+        backgroundColor: kLightGrey,
         elevation: 0.0,
         shape: const CircleBorder(),
       ),
@@ -749,8 +749,8 @@ class _MyFiltersState extends State<MyFilters> {
               size: 18,
             ),
             style: ElevatedButton.styleFrom(
-              onPrimary: kGreen,
-              primary: transparent,
+              foregroundColor: kGreen,
+              backgroundColor: kTransparent,
               elevation: 0.0,
               side: const BorderSide(color: kGreen),
               shape: RoundedRectangleBorder(
@@ -770,8 +770,8 @@ class _MyFiltersState extends State<MyFilters> {
               size: 18,
             ),
             style: ElevatedButton.styleFrom(
-              onPrimary: kGreen,
-              primary: transparent,
+              foregroundColor: kGreen,
+              backgroundColor: kTransparent,
               elevation: 0.0,
               side: const BorderSide(color: kGreen),
               shape: RoundedRectangleBorder(
@@ -791,8 +791,8 @@ class _MyFiltersState extends State<MyFilters> {
               size: 18,
             ),
             style: ElevatedButton.styleFrom(
-              onPrimary: kGreen,
-              primary: transparent,
+              foregroundColor: kGreen,
+              backgroundColor: kTransparent,
               elevation: 0.0,
               side: const BorderSide(color: kGreen),
               shape: RoundedRectangleBorder(

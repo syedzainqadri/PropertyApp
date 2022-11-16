@@ -101,7 +101,7 @@ class MyListingCard extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                               letterSpacing: .5,
                               fontWeight: FontWeight.w500,
-                              color: white,
+                              color: kWhite,
                               fontSize: 12),
                         ),
                       ),
@@ -172,7 +172,7 @@ class MyListingCard extends StatelessWidget {
                         const Icon(
                           Icons.place,
                           size: 17,
-                          color: Colors.greenAccent,
+                          color: kGreenAccentColor,
                         ),
                         Text(city),
                       ],
@@ -186,7 +186,7 @@ class MyListingCard extends StatelessWidget {
                         const Icon(
                           Icons.monetization_on,
                           size: 17,
-                          color: Colors.greenAccent,
+                          color: kGreenAccentColor,
                         ),
                         Text(price),
                       ],
@@ -211,7 +211,7 @@ class MyListingCard extends StatelessWidget {
                             Get.snackbar('Success', 'Marked As Sold',
                                 snackPosition: SnackPosition.BOTTOM,
                                 backgroundColor: kGreen,
-                                colorText: white);
+                                colorText: kWhite);
                           } else if (value == 'promote') {
                             Get.to(() => const PromotionPlans());
                           } else if (value == 'Edit') {
@@ -227,7 +227,7 @@ class MyListingCard extends StatelessWidget {
                                 children: const [
                                   Icon(
                                     Icons.edit,
-                                    color: Colors.blueAccent,
+                                    color: kBlueAccesentColor,
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -235,7 +235,7 @@ class MyListingCard extends StatelessWidget {
                                   Text(
                                     'Edit',
                                     style: TextStyle(
-                                      color: Colors.blueAccent,
+                                      color: kBlueAccesentColor,
                                       fontSize: 20,
                                     ),
                                   ),
@@ -248,7 +248,7 @@ class MyListingCard extends StatelessWidget {
                                 children: const [
                                   Icon(
                                     Icons.announcement,
-                                    color: Colors.green,
+                                    color: kGreenColor,
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -256,7 +256,7 @@ class MyListingCard extends StatelessWidget {
                                   Text(
                                     'Promote',
                                     style: TextStyle(
-                                      color: Colors.green,
+                                      color: kGreenColor,
                                       fontSize: 20,
                                     ),
                                   ),
@@ -267,14 +267,14 @@ class MyListingCard extends StatelessWidget {
                             PopupMenuItem(
                               child: Row(
                                 children: const [
-                                  Icon(Icons.replay, color: Colors.greenAccent),
+                                  Icon(Icons.replay, color: kGreenAccentColor),
                                   SizedBox(
                                     width: 10,
                                   ),
                                   Text(
                                     'Mark As Sold',
                                     style: TextStyle(
-                                      color: Colors.greenAccent,
+                                      color: kGreenAccentColor,
                                       fontSize: 20,
                                     ),
                                   ),

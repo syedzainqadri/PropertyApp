@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, unused_field, prefer_typing_uninitialized_variables, unused_local_variable, unused_element
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -46,14 +45,14 @@ class FirebaseAuthController extends GetxController {
       Get.snackbar("SignedIn", "Signedin Successfully",
           snackPosition: SnackPosition.BOTTOM,
           backgroundColor: kGreen,
-          colorText: white);
+          colorText: kWhite);
       await socialSignInController.signInWithGoogle(googleAuth.idToken);
     } catch (error) {
       Get.snackbar(
         'Failed',
         "Google sign in cancelled",
-        colorText: Colors.white,
-        backgroundColor: Colors.red,
+        colorText: kWhite,
+        backgroundColor: kRedColor,
       );
     }
   }
@@ -118,8 +117,8 @@ class FirebaseAuthController extends GetxController {
     } catch (e) {
       Get.snackbar("Error in Signing Out", e.toString(),
           snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: white);
+          backgroundColor: kRedColor,
+          colorText: kWhite);
     }
   }
 }

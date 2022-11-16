@@ -38,7 +38,7 @@ class _MyListingsState extends State<MyListings> {
           )
         : Scaffold(
             appBar: AppBar(
-              backgroundColor: transparent,
+              backgroundColor: kTransparent,
               elevation: 0.0,
               centerTitle: true,
               title: const Text(
@@ -82,7 +82,7 @@ class _MyListingsState extends State<MyListings> {
                             });
                           },
                           background: Container(
-                            color: Colors.red,
+                            color: kRedColor,
                           ),
                           child: MyListingCard(
                               image: myListingController

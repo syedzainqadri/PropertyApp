@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                         const Text(
                           'All Categories',
                           style: TextStyle(
-                            color: darkGrey,
+                            color: kDarkGrey,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                         const Text(
                           'Featured Listings',
                           style: TextStyle(
-                            color: darkGrey,
+                            color: kDarkGrey,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                         const Text(
                           'All Listings',
                           style: TextStyle(
-                            color: darkGrey,
+                            color: kDarkGrey,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
