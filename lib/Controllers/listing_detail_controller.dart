@@ -8,7 +8,7 @@ class ListingDetailsController extends GetxController {
 
   getListingById(listingId) async {
     var response = await http.get(
-      Uri.parse(listingUrl + listingId),
+      Uri.parse(listingUrl + listingId.toString()),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'X-API-KEY': apiKey,

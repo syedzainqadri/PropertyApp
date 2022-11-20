@@ -45,6 +45,7 @@ class _ListingDetailsState extends State<ListingDetails> {
   @override
   void initState() {
     checkWishlist();
+    print(listingDetailsController.listingDetail.value.contact.longitude);
     super.initState();
   }
 
@@ -453,31 +454,35 @@ class _ListingDetailsState extends State<ListingDetails> {
                           .listingDetail.value.description,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 300,
-                      child: GoogleMap(
-                        zoomControlsEnabled: true,
-                        mapToolbarEnabled: true,
-                        mapType: MapType.normal,
-                        initialCameraPosition: CameraPosition(
-                          target: LatLng(
-                              double.parse(listingDetailsController
-                                  .listingDetail.value.contact.latitude
-                                  .toString()),
-                              double.parse(listingDetailsController
-                                  .listingDetail.value.contact.longitude
-                                  .toString())),
-                          zoom: 14.4746,
+                  listingDetailsController
+                              .listingDetail.value.contact.latitude ==
+                          ""
+                      ? const SizedBox()
+                      : Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: SizedBox(
+                            width: double.infinity,
+                            height: 300,
+                            child: GoogleMap(
+                              zoomControlsEnabled: true,
+                              mapToolbarEnabled: true,
+                              mapType: MapType.normal,
+                              initialCameraPosition: CameraPosition(
+                                target: LatLng(
+                                    double.parse(listingDetailsController
+                                        .listingDetail.value.contact.latitude
+                                        .toString()),
+                                    double.parse(listingDetailsController
+                                        .listingDetail.value.contact.longitude
+                                        .toString())),
+                                zoom: 14.4746,
+                              ),
+                              onMapCreated: (GoogleMapController controller) {
+                                _controller.complete(controller);
+                              },
+                            ),
+                          ),
                         ),
-                        onMapCreated: (GoogleMapController controller) {
-                          _controller.complete(controller);
-                        },
-                      ),
-                    ),
-                  ),
                   Padding(
                     padding:
                         const EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0),
