@@ -37,7 +37,7 @@ class LocationsController extends GetxController {
 
   getSubLocation(locationId) async {
     isLoading.value = true;
-    String url = locationByIdUrl + locationId;
+    String url = locationByIdUrl + locationId.toString();
     var response = await http.get(
       Uri.parse(url),
       headers: <String, String>{
