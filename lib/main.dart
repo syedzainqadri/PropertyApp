@@ -27,9 +27,7 @@ import 'package:get_storage/get_storage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  FirebaseMessaging.instance.getToken().then((token) {
-    print(token);
-  });
+  FirebaseMessaging.instance.getToken().then((token) {});
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   await messaging.subscribeToTopic('properties');
   NotificationSettings settings = await messaging.requestPermission(
@@ -123,7 +121,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return OverlaySupport(
       child: GetMaterialApp(
-        initialBinding: MyBindings(),
+        initialBinding: AppBindings(),
         debugShowCheckedModeBanner: false,
         home:
             GetStorage().read('isLoggedIn') ? const Home() : const MyHomePage(),

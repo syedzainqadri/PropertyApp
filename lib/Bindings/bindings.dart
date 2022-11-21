@@ -9,17 +9,19 @@ import 'package:gharounda/Controllers/socialAuthController/firebaseAuthControlle
 import 'package:gharounda/Controllers/socialAuthController/socialAuthController.dart';
 import 'package:gharounda/Controllers/user_controller.dart';
 
-class MyBindings extends Bindings {
+class AppBindings extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<ListingController>(() => ListingController(), fenix: true);
     Get.lazyPut<FeaturedListingController>(() => FeaturedListingController(),
         fenix: true);
-    Get.lazyPut(() => FavoriteListingController(), fenix: true);
+    Get.lazyPut<FavoriteListingController>(() => FavoriteListingController(),
+        fenix: true);
     Get.lazyPut(() => MyListingController());
-    Get.lazyPut(() => CategoriesController());
-    Get.lazyPut<ChatController>(() => ChatController());
-    Get.lazyPut(() => UserController(), fenix: true);
+    Get.lazyPut<CategoriesController>(() => CategoriesController(),
+        fenix: true);
+    Get.lazyPut<ChatController>(() => ChatController(), fenix: true);
+    Get.lazyPut<UserController>(() => UserController(), fenix: true);
     Get.lazyPut<MyListingController>(() => MyListingController(), fenix: true);
     Get.lazyPut<FirebaseAuthController>(() => FirebaseAuthController(),
         fenix: true);
