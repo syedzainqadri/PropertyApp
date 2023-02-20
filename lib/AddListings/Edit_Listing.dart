@@ -332,7 +332,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
                         vertical: 5.0, horizontal: 20),
                     child: TextFieldWidgetForForm(
                       controller: whatsAppController,
-                      leadingIcon: Icons.whatsapp,
+                      leadingIcon: Icons.chat,
                       lable: 'WhatsApp Number',
                       obsecure: false,
                     ),
@@ -398,8 +398,9 @@ class _EditListingScreenState extends State<EditListingScreen> {
                             colorText: white);
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: kGreen,
-                        onSurface: white,
+                        backgroundColor: kGreen,
+                        disabledForegroundColor: white.withOpacity(0.38),
+                        disabledBackgroundColor: white.withOpacity(0.12),
                       ),
                       child: const Text(
                         'Update Listing',
@@ -411,7 +412,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
 
   _getFromGallery() async {
     List<XFile>? _images = await ImagePicker().pickMultiImage();
-    for (int i = 0; i < _images!.length; i++) {
+    for (int i = 0; i < _images.length; i++) {
       setState(() {
         images!.addAll(_images);
       });

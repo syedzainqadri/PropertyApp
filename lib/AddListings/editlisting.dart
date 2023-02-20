@@ -265,7 +265,7 @@ class _EditListingState extends State<EditListing> {
                     const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
                 child: TextFieldWidgetForForm(
                   controller: whatsAppController,
-                  leadingIcon: Icons.whatsapp,
+                  leadingIcon: Icons.chat,
                   lable: 'WhatsApp Number',
                   obsecure: false,
                 ),
@@ -331,7 +331,7 @@ class _EditListingState extends State<EditListing> {
                       C2Choice.listFrom<CategoriesModel, CategoriesModel>(
                     source: categoriesController.categories.value,
                     value: (i, v) => v,
-                    label: (i, v) => v.name,
+                    label: (i, v) => v.name!,
                   ),
                   onChanged: (val) async {
                     await categoriesController.getSubCategories(val.termId);
@@ -722,8 +722,9 @@ class _EditListingState extends State<EditListing> {
                       colorText: white);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: kGreen,
-                  onSurface: white,
+                  backgroundColor: kGreen,
+                  disabledForegroundColor: white.withOpacity(0.38),
+                  disabledBackgroundColor: white.withOpacity(0.12),
                 ),
                 child: const Text(
                   'Post Listing',
@@ -735,7 +736,7 @@ class _EditListingState extends State<EditListing> {
 
   _getFromGallery() async {
     List<XFile>? images = await ImagePicker().pickMultiImage();
-    for (int i = 0; i < images!.length; i++) {
+    for (int i = 0; i < images.length; i++) {
       setState(() {
         imageFiles!.addAll(images);
       });

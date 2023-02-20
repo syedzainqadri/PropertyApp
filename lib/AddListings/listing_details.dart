@@ -713,7 +713,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                     iconColor: kPinkColor,
                     buttonColor: kLightPink,
                     buttonText: 'Chat',
-                    icon: Icons.whatsapp,
+                    icon: Icons.chat,
                   ),
                 ],
               ),

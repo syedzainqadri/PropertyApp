@@ -128,7 +128,7 @@ class _AddListingState extends State<AddListing> {
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
-                            primary: kGreen,
+                            backgroundColor: kGreen,
                             elevation: 0.0,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30)),
@@ -297,7 +297,7 @@ class _AddListingState extends State<AddListing> {
                       C2Choice.listFrom<CategoriesModel, CategoriesModel>(
                     source: categoriesController.categories.value,
                     value: (i, v) => v,
-                    label: (i, v) => v.name,
+                    label: (i, v) => v.name!,
                   ),
                   onChanged: (val) async {
                     Get.defaultDialog(
@@ -719,8 +719,9 @@ class _AddListingState extends State<AddListing> {
                       colorText: white);
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: kGreen,
-                  onSurface: white,
+                  backgroundColor: kGreen,
+                  disabledForegroundColor: white.withOpacity(0.38),
+                  disabledBackgroundColor: white.withOpacity(0.12),
                 ),
                 child: const Text(
                   'Post Listing',
@@ -732,7 +733,7 @@ class _AddListingState extends State<AddListing> {
 
   _getFromGallery() async {
     List<XFile>? images = await ImagePicker().pickMultiImage();
-    for (int i = 0; i < images!.length; i++) {
+    for (int i = 0; i < images.length; i++) {
       setState(() {
         imageFiles!.addAll(images);
       });

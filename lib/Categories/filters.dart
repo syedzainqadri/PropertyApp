@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member, unused_field, unnecessary_null_comparison
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -471,14 +471,15 @@ class _MyFiltersState extends State<MyFilters> {
                         onTap: () {
                           locationService();
                         },
-                        child: Badge(
+                        child: badges.Badge(
                           badgeContent: const Icon(
                             Icons.location_pin,
                             color: brightRed,
                           ),
-                          badgeColor: transparent,
-                          elevation: 0.0,
-                          position: const BadgePosition(top: -16.0, end: -8.0),
+                          // badgesbadgeColor: transparent,
+                          // elevation: 0.0,
+                          position: badges.BadgePosition.topEnd(
+                              top: -16.0, end: -8.0),
                           child: Container(
                             width: 80,
                             height: 60,
@@ -687,8 +688,8 @@ class _MyFiltersState extends State<MyFilters> {
                     }
                   },
                   child: const Text('Apply Filters'),
-                  style:
-                      ElevatedButton.styleFrom(primary: kGreen, elevation: 0.0),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: kGreen, elevation: 0.0),
                 ),
               ),
             ],
@@ -710,7 +711,7 @@ class _MyFiltersState extends State<MyFilters> {
       onPressed: () {},
       child: Text(title),
       style: ElevatedButton.styleFrom(
-        onPrimary: kGreen,
+        foregroundColor: kGreen,
         primary: transparent,
         elevation: 0.0,
         side: const BorderSide(color: kGreen),
@@ -726,7 +727,7 @@ class _MyFiltersState extends State<MyFilters> {
       onPressed: () {},
       child: Text(title),
       style: ElevatedButton.styleFrom(
-        onPrimary: darkGrey,
+        foregroundColor: darkGrey,
         primary: lightGrey,
         elevation: 0.0,
         shape: const CircleBorder(),
@@ -749,7 +750,7 @@ class _MyFiltersState extends State<MyFilters> {
               size: 18,
             ),
             style: ElevatedButton.styleFrom(
-              onPrimary: kGreen,
+              foregroundColor: kGreen,
               primary: transparent,
               elevation: 0.0,
               side: const BorderSide(color: kGreen),
@@ -770,7 +771,7 @@ class _MyFiltersState extends State<MyFilters> {
               size: 18,
             ),
             style: ElevatedButton.styleFrom(
-              onPrimary: kGreen,
+              foregroundColor: kGreen,
               primary: transparent,
               elevation: 0.0,
               side: const BorderSide(color: kGreen),
@@ -791,7 +792,7 @@ class _MyFiltersState extends State<MyFilters> {
               size: 18,
             ),
             style: ElevatedButton.styleFrom(
-              onPrimary: kGreen,
+              foregroundColor: kGreen,
               primary: transparent,
               elevation: 0.0,
               side: const BorderSide(color: kGreen),

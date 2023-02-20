@@ -174,7 +174,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
                         ),
                       ),
                       style: ElevatedButton.styleFrom(
-                        primary: kGreen,
+                        backgroundColor: kGreen,
                         elevation: 0.0,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30)),
@@ -282,7 +282,7 @@ class _FillterBottomSheetState extends State<FillterBottomSheet> {
               choiceItems: C2Choice.listFrom<CategoriesModel, CategoriesModel>(
                 source: categoriesController.categories.value,
                 value: (i, v) => v,
-                label: (i, v) => v.name,
+                label: (i, v) => v.name!,
               ),
               onChanged: (val) async {
                 await categoriesController.getSubCategories(val.termId);

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -82,13 +82,14 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                         )
-                      : Badge(
-                          badgeColor: kGreen,
+                      : badges.Badge(
+                          // badgeColor: kGreen,
                           badgeContent: const Icon(
                             Icons.camera_alt,
                             color: white,
                           ),
-                          position: const BadgePosition(bottom: 1, end: 1),
+                          position:
+                              badges.BadgePosition.bottomEnd(bottom: 1, end: 1),
                           child: GestureDetector(
                             onTap: () async {
                               await uploadPicutre();
