@@ -5,7 +5,7 @@ import '../Models/all_listing_model.dart';
 
 class SearchController extends GetxController {
   var isLoading = false.obs;
-  var searchListings = AllListings().obs;
+  var searchListings = Alllistings().obs;
   final token = GetStorage().read('token');
 
   @override
@@ -26,7 +26,7 @@ class SearchController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    searchListings.value = allListingsFromJson(response.body);
+    searchListings.value = alllistingsFromJson(response.body);
     isLoading.value = false;
   }
 
@@ -51,7 +51,7 @@ class SearchController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    searchListings.value = allListingsFromJson(response.body);
+    searchListings.value = alllistingsFromJson(response.body);
     isLoading.value = false;
   }
 
@@ -67,7 +67,7 @@ class SearchController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    searchListings.value = allListingsFromJson(response.body);
+    searchListings.value = alllistingsFromJson(response.body);
     isLoading.value = false;
   }
 }

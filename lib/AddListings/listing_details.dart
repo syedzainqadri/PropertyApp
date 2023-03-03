@@ -77,6 +77,7 @@ class _ListingDetailsState extends State<ListingDetails> {
     Future.delayed(const Duration(seconds: 3))
         .then(((value) => setState(() {})));
     isLoading.value = false;
+    print(isLoading.value);
   }
 
   double height = Get.height;
@@ -167,7 +168,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                 children: [
                   CarouselSlider.builder(
                       itemCount: listingDetailsController
-                          .listingDetail.value.images.length,
+                          .listingDetail.value.images!.length,
                       itemBuilder: (context, index, realIndex) {
                         return Padding(
                           padding: const EdgeInsets.only(right: 3.0, left: 3.0),
@@ -186,8 +187,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                                               listingDetailsController
                                                   .listingDetail
                                                   .value
-                                                  .images[index]
-                                                  .url,
+                                                  .images![index]
+                                                  .url!,
                                               fit: BoxFit.cover),
                                         ),
                                       ),
@@ -196,7 +197,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                             },
                             child: ImageSliderWidget(
                               image: listingDetailsController
-                                  .listingDetail.value.images[index].url,
+                                  .listingDetail.value.images![index].url,
                               width: width,
                               height: height * 0.26,
                             ),
@@ -219,7 +220,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(
                         listingDetailsController
-                            .listingDetail.value.images.length,
+                            .listingDetail.value.images!.length,
                         (index) => GestureDetector(
                               onTap: () =>
                                   sliderController.animateToPage(_current),
@@ -276,7 +277,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                             const Icon(Icons.pin_drop_outlined),
                             Text(
                               listingDetailsController
-                                      .listingDetail.value.contact.address ??
+                                      .listingDetail.value.contact!.address ??
                                   '',
                               style: const TextStyle(
                                 fontSize: 12,
@@ -316,7 +317,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                   itemCount: listingDetailsController
                                           .listingDetail
                                           .value
-                                          .customFields
+                                          .customFields!
                                           .length -
                                       1,
                                   itemBuilder: (context, index) {
@@ -328,21 +329,22 @@ class _ListingDetailsState extends State<ListingDetails> {
                                             listingDetailsController
                                                         .listingDetail
                                                         .value
-                                                        .customFields[index]
+                                                        .customFields![index]
                                                         .label ==
                                                     "Type"
                                                 ? Icons.home_work_outlined
                                                 : listingDetailsController
                                                             .listingDetail
                                                             .value
-                                                            .customFields[index]
+                                                            .customFields![
+                                                                index]
                                                             .label ==
                                                         "Parking"
                                                     ? Icons.car_rental
                                                     : listingDetailsController
                                                                 .listingDetail
                                                                 .value
-                                                                .customFields[
+                                                                .customFields![
                                                                     index]
                                                                 .label ==
                                                             "Bedroom"
@@ -350,7 +352,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                         : listingDetailsController
                                                                     .listingDetail
                                                                     .value
-                                                                    .customFields[
+                                                                    .customFields![
                                                                         index]
                                                                     .label ==
                                                                 "Bath"
@@ -359,7 +361,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                             : listingDetailsController
                                                                         .listingDetail
                                                                         .value
-                                                                        .customFields[
+                                                                        .customFields![
                                                                             index]
                                                                         .label ==
                                                                     "Sqft"
@@ -368,17 +370,17 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                                 : listingDetailsController
                                                                             .listingDetail
                                                                             .value
-                                                                            .customFields[
+                                                                            .customFields![
                                                                                 index]
                                                                             .label ==
                                                                         "Purpose"
                                                                     ? Icons
                                                                         .admin_panel_settings_outlined
-                                                                    : listingDetailsController.listingDetail.value.customFields[index].label ==
+                                                                    : listingDetailsController.listingDetail.value.customFields![index].label ==
                                                                             "Location"
                                                                         ? Icons
                                                                             .pin_drop_outlined
-                                                                        : listingDetailsController.listingDetail.value.customFields[index].label ==
+                                                                        : listingDetailsController.listingDetail.value.customFields![index].label ==
                                                                                 "Build Year"
                                                                             ? Icons.calendar_today_outlined
                                                                             : Icons.error_outline_sharp,
@@ -390,8 +392,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                                               listingDetailsController
                                                   .listingDetail
                                                   .value
-                                                  .customFields[index]
-                                                  .label,
+                                                  .customFields![index]
+                                                  .label!,
                                               overflow: TextOverflow.fade,
                                               style: const TextStyle(
                                                   fontSize: 14,
@@ -406,7 +408,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                 listingDetailsController
                                                     .listingDetail
                                                     .value
-                                                    .customFields[index]
+                                                    .customFields![index]
                                                     .value
                                                     .toString()
                                                     .toUpperCase(),
@@ -465,10 +467,10 @@ class _ListingDetailsState extends State<ListingDetails> {
                         initialCameraPosition: CameraPosition(
                           target: LatLng(
                               double.parse(listingDetailsController
-                                  .listingDetail.value.contact.latitude
+                                  .listingDetail.value.contact!.latitude
                                   .toString()),
                               double.parse(listingDetailsController
-                                  .listingDetail.value.contact.longitude
+                                  .listingDetail.value.contact!.longitude
                                   .toString())),
                           zoom: 14.4746,
                         ),
@@ -524,7 +526,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                 childAspectRatio: 2.5,
                               ),
                               itemCount: listingDetailsController
-                                  .listingDetail.value.amenities.value.length,
+                                  .listingDetail.value.customFields!.length,
                               itemBuilder: (context, index) {
                                 return Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -559,7 +561,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                                     ),
                                     Text(
                                       listingDetailsController.listingDetail
-                                          .value.amenities.value[index],
+                                          .value.customFields![index].label
+                                          .toString(),
                                       overflow: TextOverflow.fade,
                                       style: const TextStyle(
                                           fontSize: 10,
@@ -587,7 +590,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                   BottomSheetButton(
                     onTap: () {
                       launch(
-                          "tel://${listingDetailsController.listingDetail.value.contact.phone}");
+                          "tel://${listingDetailsController.listingDetail.value.contact!.phone}");
                     },
                     width: width * 0.25,
                     height: height * 0.06,
@@ -706,7 +709,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                   BottomSheetButton(
                     onTap: () {
                       launch(
-                          'https://wa.me/${listingDetailsController.listingDetail.value.contact.whatsappNumber}?text=Hello');
+                          'https://wa.me/${listingDetailsController.listingDetail.value.contact!.whatsappNumber}?text=Hello');
                     },
                     width: width * 0.25,
                     height: height * 0.06,

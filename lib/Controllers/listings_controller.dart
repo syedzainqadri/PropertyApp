@@ -8,7 +8,7 @@ import 'package:lagosabuja/Models/selected_fields_model.dart';
 
 class ListingController extends GetxController {
   var isLoading = false.obs;
-  var allListings = AllListings().obs;
+  var allListings = Alllistings().obs;
   final token = GetStorage().read('token');
 
   @override
@@ -27,7 +27,8 @@ class ListingController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    allListings.value = allListingsFromJson(response.body);
+    print("here is the all listing response: ${response.body}");
+    allListings.value = alllistingsFromJson(response.body);
     isLoading.value = false;
   }
 

@@ -15,5 +15,6 @@ class ListingDetailsController extends GetxController {
       },
     );
     listingDetail.value = listingsByIdModelFromJson(response.body);
+    print("this is the response: ${response.body}");
   }
 }

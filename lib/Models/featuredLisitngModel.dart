@@ -86,7 +86,7 @@ class Datum {
         images:
             RxList<Image>.from(json["images"].map((x) => Image.fromJson(x))),
         createdAt: DateTime.parse(json["created_at"]),
-        createdAtGmt: DateTime.parse(json["created_at_gmt"]),
+        // createdAtGmt: DateTime.parse(json["created_at_gmt"]),
         viewCount: json["view_count"],
         promotions: List<Promotion>.from(
             json["promotions"].map((x) => promotionValues.map![x])),

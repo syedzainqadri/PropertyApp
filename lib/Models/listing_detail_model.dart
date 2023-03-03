@@ -1,9 +1,3 @@
-// To parse this JSON data, do
-//
-//     final listingsByIdModel = listingsByIdModelFromJson(jsonString);
-
-// ignore_for_file: prefer_typing_uninitialized_variables, prefer_null_aware_operators
-
 import 'dart:convert';
 
 ListingsByIdModel listingsByIdModelFromJson(String str) =>
@@ -27,8 +21,8 @@ class ListingsByIdModel {
     this.adType,
     this.status,
     this.images,
+    this.dateCreated,
     this.createdAt,
-    this.createdAtGmt,
     this.viewCount,
     this.promotions,
     this.badges,
@@ -39,39 +33,37 @@ class ListingsByIdModel {
     this.videoUrls,
     this.author,
     this.customFields,
-    this.amenities,
     this.related,
     this.review,
   });
 
-  var listingId;
-  var authorId;
-  var title;
-  var pricingType;
-  var price;
-  var maxPrice;
-  var priceType;
-  var priceUnits;
-  var priceUnit;
-  var categories;
-  var adType;
-  var status;
-  var images;
-  var createdAt;
-  var createdAtGmt;
-  var viewCount;
-  var promotions;
-  var badges;
-  var contact;
-  var store;
-  var url;
-  var description;
-  var videoUrls;
-  var author;
-  var customFields;
-  var amenities;
-  var related;
-  var review;
+  int? listingId;
+  int? authorId;
+  String? title;
+  String? pricingType;
+  String? price;
+  String? maxPrice;
+  String? priceType;
+  List<dynamic>? priceUnits;
+  String? priceUnit;
+  List<Category>? categories;
+  String? adType;
+  String? status;
+  List<Image>? images;
+  DateCreated? dateCreated;
+  DateTime? createdAt;
+  int? viewCount;
+  List<String>? promotions;
+  List<String>? badges;
+  Contact? contact;
+  Store? store;
+  String? url;
+  String? description;
+  List<dynamic>? videoUrls;
+  Author? author;
+  List<CustomField>? customFields;
+  List<Related>? related;
+  Review? review;
 
   factory ListingsByIdModel.fromJson(Map<String, dynamic> json) =>
       ListingsByIdModel(
@@ -82,18 +74,17 @@ class ListingsByIdModel {
         price: json["price"],
         maxPrice: json["max_price"],
         priceType: json["price_type"],
-        priceUnits: List<PriceUnit>.from(
-            json["price_units"].map((x) => PriceUnit.fromJson(x))),
+        priceUnits: List<dynamic>.from(json["price_units"].map((x) => x)),
         priceUnit: json["price_unit"],
         categories: List<Category>.from(
             json["categories"].map((x) => Category.fromJson(x))),
         adType: json["ad_type"],
         status: json["status"],
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        dateCreated: DateCreated.fromJson(json["date_created"]),
         createdAt: DateTime.parse(json["created_at"]),
-        createdAtGmt: DateTime.parse(json["created_at_gmt"]),
         viewCount: json["view_count"],
-        promotions: List<dynamic>.from(json["promotions"].map((x) => x)),
+        promotions: List<String>.from(json["promotions"].map((x) => x)),
         badges: List<String>.from(json["badges"].map((x) => x)),
         contact: Contact.fromJson(json["contact"]),
         store: Store.fromJson(json["store"]),
@@ -103,7 +94,6 @@ class ListingsByIdModel {
         author: Author.fromJson(json["author"]),
         customFields: List<CustomField>.from(
             json["custom_fields"].map((x) => CustomField.fromJson(x))),
-        amenities: Amenities.fromJson(json["amenities"]),
         related:
             List<Related>.from(json["related"].map((x) => Related.fromJson(x))),
         review: Review.fromJson(json["review"]),
@@ -117,134 +107,27 @@ class ListingsByIdModel {
         "price": price,
         "max_price": maxPrice,
         "price_type": priceType,
-        "price_units": List<dynamic>.from(priceUnits.map((x) => x.toJson())),
+        "price_units": List<dynamic>.from(priceUnits!.map((x) => x)),
         "price_unit": priceUnit,
-        "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+        "categories": List<dynamic>.from(categories!.map((x) => x.toJson())),
         "ad_type": adType,
         "status": status,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
-        "created_at": createdAt.toIso8601String(),
-        "created_at_gmt": createdAtGmt.toIso8601String(),
+        "images": List<dynamic>.from(images!.map((x) => x.toJson())),
+        "date_created": dateCreated!.toJson(),
+        "created_at": createdAt!.toIso8601String(),
         "view_count": viewCount,
-        "promotions": List<dynamic>.from(promotions.map((x) => x)),
-        "badges": List<dynamic>.from(badges.map((x) => x)),
-        "contact": contact.toJson(),
-        "store": store.toJson(),
+        "promotions": List<dynamic>.from(promotions!.map((x) => x)),
+        "badges": List<dynamic>.from(badges!.map((x) => x)),
+        "contact": contact!.toJson(),
+        "store": store!.toJson(),
         "url": url,
         "description": description,
-        "video_urls": List<dynamic>.from(videoUrls.map((x) => x)),
-        "author": author.toJson(),
+        "video_urls": List<dynamic>.from(videoUrls!.map((x) => x)),
+        "author": author!.toJson(),
         "custom_fields":
-            List<dynamic>.from(customFields.map((x) => x.toJson())),
-        "amenities": amenities.toJson(),
-        "related": List<dynamic>.from(related.map((x) => x.toJson())),
-        "review": review.toJson(),
-      };
-}
-
-class Amenities {
-  Amenities({
-    this.id,
-    this.metaKey,
-    this.label,
-    this.slug,
-    this.description,
-    this.searchable,
-    this.listable,
-    this.type,
-    this.required,
-    this.placeholder,
-    this.value,
-    this.icon,
-    this.options,
-  });
-
-  var id;
-  var metaKey;
-  var label;
-  var slug;
-  var description;
-  var searchable;
-  var listable;
-  var type;
-  var required;
-  var placeholder;
-  var value;
-  var icon;
-  var options;
-
-  factory Amenities.fromJson(Map<String, dynamic> json) => Amenities(
-        id: json["id"],
-        metaKey: json["meta_key"],
-        label: json["label"],
-        slug: json["slug"],
-        description: json["description"],
-        searchable: json["searchable"],
-        listable: json["listable"],
-        type: json["type"],
-        required: json["required"],
-        placeholder: json["placeholder"],
-        value: List<String>.from(json["value"].map((x) => x)),
-        icon: json["icon"],
-        options: AmenitiesOptions.fromJson(json["options"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "meta_key": metaKey,
-        "label": label,
-        "slug": slug,
-        "description": description,
-        "searchable": searchable,
-        "listable": listable,
-        "type": type,
-        "required": required,
-        "placeholder": placeholder,
-        "value": List<dynamic>.from(value.map((x) => x)),
-        "icon": icon,
-        "options": options.toJson(),
-      };
-}
-
-class AmenitiesOptions {
-  AmenitiesOptions({
-    this.optionsDefault,
-    this.choices,
-  });
-
-  var optionsDefault;
-  var choices;
-
-  factory AmenitiesOptions.fromJson(Map<String, dynamic> json) =>
-      AmenitiesOptions(
-        optionsDefault: json["default"],
-        choices: List<PurpleChoice>.from(
-            json["choices"].map((x) => PurpleChoice.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "default": optionsDefault,
-        "choices": List<dynamic>.from(choices.map((x) => x.toJson())),
-      };
-}
-
-class PurpleChoice {
-  PurpleChoice({
-    this.id,
-    this.name,
-  });
-
-  var id;
-  var name;
-
-  factory PurpleChoice.fromJson(Map<String, dynamic> json) => PurpleChoice(
-        id: json["id"],
-        name: json["name"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
+            List<dynamic>.from(customFields!.map((x) => x.toJson())),
+        "related": List<dynamic>.from(related!.map((x) => x.toJson())),
+        "review": review!.toJson(),
       };
 }
 
@@ -266,28 +149,26 @@ class Author {
     this.latitude,
     this.longitude,
     this.ppThumbUrl,
-    this.membership,
     this.store,
   });
 
-  var firstName;
-  var lastName;
-  var description;
-  var id;
-  var isAdmin;
-  var email;
-  var username;
-  var phone;
-  var whatsappNumber;
-  var website;
-  var locations;
-  var zipcode;
-  var address;
-  var latitude;
-  var longitude;
-  var ppThumbUrl;
-  var membership;
-  var store;
+  String? firstName;
+  String? lastName;
+  String? description;
+  int? id;
+  bool? isAdmin;
+  String? email;
+  String? username;
+  String? phone;
+  String? whatsappNumber;
+  String? website;
+  List<dynamic>? locations;
+  String? zipcode;
+  String? address;
+  String? latitude;
+  String? longitude;
+  String? ppThumbUrl;
+  bool? store;
 
   factory Author.fromJson(Map<String, dynamic> json) => Author(
         firstName: json["first_name"],
@@ -306,7 +187,6 @@ class Author {
         latitude: json["latitude"],
         longitude: json["longitude"],
         ppThumbUrl: json["pp_thumb_url"],
-        membership: Membership.fromJson(json["membership"]),
         store: json["store"],
       );
 
@@ -321,90 +201,13 @@ class Author {
         "phone": phone,
         "whatsapp_number": whatsappNumber,
         "website": website,
-        "locations": List<dynamic>.from(locations.map((x) => x)),
+        "locations": List<dynamic>.from(locations!.map((x) => x)),
         "zipcode": zipcode,
         "address": address,
         "latitude": latitude,
         "longitude": longitude,
         "pp_thumb_url": ppThumbUrl,
-        "membership": membership.toJson(),
         "store": store,
-      };
-}
-
-class Membership {
-  Membership({
-    this.isExpired,
-    this.expiredAt,
-    this.remainingAds,
-    this.postedAds,
-    this.promotions,
-  });
-
-  var isExpired;
-  var expiredAt;
-  var remainingAds;
-  var postedAds;
-  var promotions;
-
-  factory Membership.fromJson(Map<String, dynamic> json) => Membership(
-        isExpired: json["is_expired"],
-        expiredAt: DateTime.parse(json["expired_at"]),
-        remainingAds: json["remaining_ads"],
-        postedAds: json["posted_ads"],
-        promotions: Promotions.fromJson(json["promotions"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "is_expired": isExpired,
-        "expired_at": expiredAt.toIso8601String(),
-        "remaining_ads": remainingAds,
-        "posted_ads": postedAds,
-        "promotions": promotions.toJson(),
-      };
-}
-
-class Promotions {
-  Promotions({
-    this.featured,
-    this.top,
-    this.bumpUp,
-  });
-
-  var featured;
-  var top;
-  var bumpUp;
-
-  factory Promotions.fromJson(Map<String, dynamic> json) => Promotions(
-        featured: BumpUp.fromJson(json["featured"]),
-        top: BumpUp.fromJson(json["_top"]),
-        bumpUp: BumpUp.fromJson(json["_bump_up"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "featured": featured.toJson(),
-        "_top": top.toJson(),
-        "_bump_up": bumpUp.toJson(),
-      };
-}
-
-class BumpUp {
-  BumpUp({
-    this.ads,
-    this.validate,
-  });
-
-  var ads;
-  var validate;
-
-  factory BumpUp.fromJson(Map<String, dynamic> json) => BumpUp(
-        ads: json["ads"],
-        validate: json["validate"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "ads": ads,
-        "validate": validate,
       };
 }
 
@@ -422,16 +225,16 @@ class Category {
     this.filter,
   });
 
-  var termId;
-  var name;
-  var slug;
-  var termGroup;
-  var termTaxonomyId;
-  var taxonomy;
-  var description;
-  var parent;
-  var count;
-  var filter;
+  int? termId;
+  String? name;
+  String? slug;
+  int? termGroup;
+  int? termTaxonomyId;
+  Taxonomy? taxonomy;
+  String? description;
+  int? parent;
+  int? count;
+  Filter? filter;
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         termId: json["term_id"],
@@ -439,11 +242,11 @@ class Category {
         slug: json["slug"],
         termGroup: json["term_group"],
         termTaxonomyId: json["term_taxonomy_id"],
-        taxonomy: json["taxonomy"],
+        taxonomy: taxonomyValues.map[json["taxonomy"]],
         description: json["description"],
         parent: json["parent"],
         count: json["count"],
-        filter: json["filter"],
+        filter: filterValues.map[json["filter"]],
       );
 
   Map<String, dynamic> toJson() => {
@@ -452,13 +255,24 @@ class Category {
         "slug": slug,
         "term_group": termGroup,
         "term_taxonomy_id": termTaxonomyId,
-        "taxonomy": taxonomy,
+        "taxonomy": taxonomyValues.reverse[taxonomy],
         "description": description,
         "parent": parent,
         "count": count,
-        "filter": filter,
+        "filter": filterValues.reverse[filter],
       };
 }
+
+enum Filter { RAW }
+
+final filterValues = EnumValues({"raw": Filter.RAW});
+
+enum Taxonomy { RTCL_CATEGORY, RTCL_LOCATION }
+
+final taxonomyValues = EnumValues({
+  "rtcl_category": Taxonomy.RTCL_CATEGORY,
+  "rtcl_location": Taxonomy.RTCL_LOCATION
+});
 
 class Contact {
   Contact({
@@ -475,17 +289,17 @@ class Contact {
     this.geoAddress,
   });
 
-  var locations;
-  var latitude;
-  var longitude;
-  var hideMap;
-  var zipcode;
-  var address;
-  var phone;
-  var whatsappNumber;
-  var email;
-  var website;
-  var geoAddress;
+  List<Category>? locations;
+  String? latitude;
+  String? longitude;
+  bool? hideMap;
+  String? zipcode;
+  String? address;
+  String? phone;
+  String? whatsappNumber;
+  String? email;
+  String? website;
+  String? geoAddress;
 
   factory Contact.fromJson(Map<String, dynamic> json) => Contact(
         locations: List<Category>.from(
@@ -503,7 +317,7 @@ class Contact {
       );
 
   Map<String, dynamic> toJson() => {
-        "locations": List<dynamic>.from(locations.map((x) => x.toJson())),
+        "locations": List<dynamic>.from(locations!.map((x) => x.toJson())),
         "latitude": latitude,
         "longitude": longitude,
         "hide_map": hideMap,
@@ -527,32 +341,32 @@ class CustomField {
     this.searchable,
     this.listable,
     this.type,
+    this.icon,
     this.required,
     this.placeholder,
     this.value,
-    this.icon,
     this.options,
     this.min,
     this.max,
     this.stepSize,
   });
 
-  var id;
-  var metaKey;
-  var label;
-  var slug;
-  var description;
-  var searchable;
-  var listable;
-  var type;
-  var required;
-  var placeholder;
-  var value;
-  var icon;
-  var options;
-  var min;
-  var max;
-  var stepSize;
+  int? id;
+  String? metaKey;
+  String? label;
+  String? slug;
+  String? description;
+  String? searchable;
+  String? listable;
+  String? type;
+  String? icon;
+  bool? required;
+  String? placeholder;
+  dynamic value;
+  Options? options;
+  String? min;
+  String? max;
+  String? stepSize;
 
   factory CustomField.fromJson(Map<String, dynamic> json) => CustomField(
         id: json["id"],
@@ -563,13 +377,11 @@ class CustomField {
         searchable: json["searchable"],
         listable: json["listable"],
         type: json["type"],
+        icon: json["icon"],
         required: json["required"],
         placeholder: json["placeholder"],
         value: json["value"],
-        icon: json["icon"],
-        options: json["options"] == null
-            ? null
-            : CustomFieldOptions.fromJson(json["options"]),
+        options: Options.fromJson(json["options"]),
         min: json["min"],
         max: json["max"],
         stepSize: json["step_size"],
@@ -584,49 +396,48 @@ class CustomField {
         "searchable": searchable,
         "listable": listable,
         "type": type,
+        "icon": icon,
         "required": required,
         "placeholder": placeholder,
         "value": value,
-        "icon": icon,
-        "options": options == null ? null : options.toJson(),
+        "options": options!.toJson(),
         "min": min,
         "max": max,
         "step_size": stepSize,
       };
 }
 
-class CustomFieldOptions {
-  CustomFieldOptions({
+class Options {
+  Options({
     this.optionsDefault,
     this.choices,
   });
 
-  var optionsDefault;
-  var choices;
+  dynamic optionsDefault;
+  List<Choice>? choices;
 
-  factory CustomFieldOptions.fromJson(Map<String, dynamic> json) =>
-      CustomFieldOptions(
+  factory Options.fromJson(Map<String, dynamic> json) => Options(
         optionsDefault: json["default"],
-        choices: List<FluffyChoice>.from(
-            json["choices"].map((x) => FluffyChoice.fromJson(x))),
+        choices:
+            List<Choice>.from(json["choices"].map((x) => Choice.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "default": optionsDefault,
-        "choices": List<dynamic>.from(choices.map((x) => x.toJson())),
+        "choices": List<dynamic>.from(choices!.map((x) => x.toJson())),
       };
 }
 
-class FluffyChoice {
-  FluffyChoice({
+class Choice {
+  Choice({
     this.id,
     this.name,
   });
 
-  var id;
-  var name;
+  dynamic id;
+  String? name;
 
-  factory FluffyChoice.fromJson(Map<String, dynamic> json) => FluffyChoice(
+  factory Choice.fromJson(Map<String, dynamic> json) => Choice(
         id: json["id"],
         name: json["name"],
       );
@@ -634,6 +445,30 @@ class FluffyChoice {
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
+      };
+}
+
+class DateCreated {
+  DateCreated({
+    this.date,
+    this.timezoneType,
+    this.timezone,
+  });
+
+  DateTime? date;
+  int? timezoneType;
+  String? timezone;
+
+  factory DateCreated.fromJson(Map<String, dynamic> json) => DateCreated(
+        date: DateTime.parse(json["date"]),
+        timezoneType: json["timezone_type"],
+        timezone: json["timezone"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "date": date!.toIso8601String(),
+        "timezone_type": timezoneType,
+        "timezone": timezone,
       };
 }
 
@@ -652,17 +487,17 @@ class Image {
     this.srcsetSizes,
   });
 
-  var id;
-  var title;
-  var caption;
-  var url;
-  var alt;
-  var src;
-  var srcset;
-  var sizes;
-  var srcW;
-  var srcH;
-  var srcsetSizes;
+  int? id;
+  String? title;
+  String? caption;
+  String? url;
+  String? alt;
+  String? src;
+  bool? srcset;
+  Sizes? sizes;
+  int? srcW;
+  int? srcH;
+  String? srcsetSizes;
 
   factory Image.fromJson(Map<String, dynamic> json) => Image(
         id: json["ID"],
@@ -686,7 +521,7 @@ class Image {
         "alt": alt,
         "src": src,
         "srcset": srcset,
-        "sizes": sizes.toJson(),
+        "sizes": sizes!.toJson(),
         "src_w": srcW,
         "src_h": srcH,
         "srcset_sizes": srcsetSizes,
@@ -700,9 +535,9 @@ class Sizes {
     this.thumbnail,
   });
 
-  var full;
-  var medium;
-  var thumbnail;
+  Full? full;
+  Full? medium;
+  Full? thumbnail;
 
   factory Sizes.fromJson(Map<String, dynamic> json) => Sizes(
         full: Full.fromJson(json["full"]),
@@ -711,9 +546,9 @@ class Sizes {
       );
 
   Map<String, dynamic> toJson() => {
-        "full": full.toJson(),
-        "medium": medium.toJson(),
-        "thumbnail": thumbnail.toJson(),
+        "full": full!.toJson(),
+        "medium": medium!.toJson(),
+        "thumbnail": thumbnail!.toJson(),
       };
 }
 
@@ -724,9 +559,9 @@ class Full {
     this.height,
   });
 
-  var src;
-  var width;
-  var height;
+  String? src;
+  int? width;
+  int? height;
 
   factory Full.fromJson(Map<String, dynamic> json) => Full(
         src: json["src"],
@@ -738,30 +573,6 @@ class Full {
         "src": src,
         "width": width,
         "height": height,
-      };
-}
-
-class PriceUnit {
-  PriceUnit({
-    this.id,
-    this.name,
-    this.short,
-  });
-
-  var id;
-  var name;
-  var short;
-
-  factory PriceUnit.fromJson(Map<String, dynamic> json) => PriceUnit(
-        id: json["id"],
-        name: json["name"],
-        short: json["short"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "short": short,
       };
 }
 
@@ -780,8 +591,8 @@ class Related {
     this.adType,
     this.status,
     this.images,
+    this.dateCreated,
     this.createdAt,
-    this.createdAtGmt,
     this.viewCount,
     this.promotions,
     this.badges,
@@ -789,26 +600,26 @@ class Related {
     this.store,
   });
 
-  var listingId;
-  var authorId;
-  var title;
-  var pricingType;
-  var price;
-  var maxPrice;
-  var priceType;
-  var priceUnits;
-  var priceUnit;
-  var categories;
-  var adType;
-  var status;
-  var images;
-  var createdAt;
-  var createdAtGmt;
-  var viewCount;
-  var promotions;
-  var badges;
-  var contact;
-  var store;
+  int? listingId;
+  int? authorId;
+  String? title;
+  String? pricingType;
+  String? price;
+  String? maxPrice;
+  String? priceType;
+  List<dynamic>? priceUnits;
+  String? priceUnit;
+  List<Category>? categories;
+  String? adType;
+  String? status;
+  List<Image>? images;
+  DateCreated? dateCreated;
+  DateTime? createdAt;
+  int? viewCount;
+  List<String>? promotions;
+  List<String>? badges;
+  Contact? contact;
+  Store? store;
 
   factory Related.fromJson(Map<String, dynamic> json) => Related(
         listingId: json["listing_id"],
@@ -818,18 +629,17 @@ class Related {
         price: json["price"],
         maxPrice: json["max_price"],
         priceType: json["price_type"],
-        priceUnits: List<PriceUnit>.from(
-            json["price_units"].map((x) => PriceUnit.fromJson(x))),
+        priceUnits: List<dynamic>.from(json["price_units"].map((x) => x)),
         priceUnit: json["price_unit"],
         categories: List<Category>.from(
             json["categories"].map((x) => Category.fromJson(x))),
         adType: json["ad_type"],
         status: json["status"],
         images: List<Image>.from(json["images"].map((x) => Image.fromJson(x))),
+        dateCreated: DateCreated.fromJson(json["date_created"]),
         createdAt: DateTime.parse(json["created_at"]),
-        createdAtGmt: DateTime.parse(json["created_at_gmt"]),
         viewCount: json["view_count"],
-        promotions: List<dynamic>.from(json["promotions"].map((x) => x)),
+        promotions: List<String>.from(json["promotions"].map((x) => x)),
         badges: List<String>.from(json["badges"].map((x) => x)),
         contact: Contact.fromJson(json["contact"]),
         store: Store.fromJson(json["store"]),
@@ -843,19 +653,19 @@ class Related {
         "price": price,
         "max_price": maxPrice,
         "price_type": priceType,
-        "price_units": List<dynamic>.from(priceUnits.map((x) => x.toJson())),
+        "price_units": List<dynamic>.from(priceUnits!.map((x) => x)),
         "price_unit": priceUnit,
-        "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+        "categories": List<dynamic>.from(categories!.map((x) => x.toJson())),
         "ad_type": adType,
         "status": status,
-        "images": List<dynamic>.from(images.map((x) => x.toJson())),
-        "created_at": createdAt.toIso8601String(),
-        "created_at_gmt": createdAtGmt.toIso8601String(),
+        "images": List<dynamic>.from(images!.map((x) => x.toJson())),
+        "date_created": dateCreated!.toJson(),
+        "created_at": createdAt!.toIso8601String(),
         "view_count": viewCount,
-        "promotions": List<dynamic>.from(promotions.map((x) => x)),
-        "badges": List<dynamic>.from(badges.map((x) => x)),
-        "contact": contact.toJson(),
-        "store": store.toJson(),
+        "promotions": List<dynamic>.from(promotions!.map((x) => x)),
+        "badges": List<dynamic>.from(badges!.map((x) => x)),
+        "contact": contact!.toJson(),
+        "store": store!.toJson(),
       };
 }
 
@@ -865,8 +675,8 @@ class Store {
     this.title,
   });
 
-  var id;
-  var title;
+  int? id;
+  String? title;
 
   factory Store.fromJson(Map<String, dynamic> json) => Store(
         id: json["id"],
@@ -884,14 +694,14 @@ class Review {
     this.rating,
   });
 
-  var rating;
+  Rating? rating;
 
   factory Review.fromJson(Map<String, dynamic> json) => Review(
         rating: Rating.fromJson(json["rating"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "rating": rating.toJson(),
+        "rating": rating!.toJson(),
       };
 }
 
@@ -901,8 +711,8 @@ class Rating {
     this.count,
   });
 
-  var average;
-  var count;
+  String? average;
+  int? count;
 
   factory Rating.fromJson(Map<String, dynamic> json) => Rating(
         average: json["average"],
@@ -913,4 +723,16 @@ class Rating {
         "average": average,
         "count": count,
       };
+}
+
+class EnumValues<T> {
+  Map<String, T> map;
+  late Map<T, String> reverseMap;
+
+  EnumValues(this.map);
+
+  Map<T, String> get reverse {
+    reverseMap = map.map((k, v) => MapEntry(v, k));
+    return reverseMap;
+  }
 }

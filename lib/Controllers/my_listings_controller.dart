@@ -5,7 +5,7 @@ import 'package:lagosabuja/Models/all_listing_model.dart';
 
 class MyListingController extends GetxController {
   var isLoading = false.obs;
-  var myListings = AllListings().obs;
+  var myListings = Alllistings().obs;
   final token = GetStorage().read('token');
 
   @override
@@ -25,7 +25,7 @@ class MyListingController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    myListings.value = allListingsFromJson(response.body);
+    myListings.value = alllistingsFromJson(response.body);
     isLoading.value = false;
     // print(response.body);
   }
