@@ -77,7 +77,7 @@ class CategoryListingCard extends StatelessWidget {
                         fit: BoxFit.cover,
                         image: image != null
                             ? NetworkImage(image[0].url.toString())
-                            : const AssetImage('logo') as ImageProvider,
+                            : const AssetImage(logo) as ImageProvider,
                       ),
                     ),
                   ),

@@ -72,7 +72,7 @@ void main() async {
       showSimpleNotification(
         Text(notification.title!),
         leading: Image.asset(
-          'assets/images/logo.png',
+          logo,
           height: 50,
         ),
         subtitle: Text(

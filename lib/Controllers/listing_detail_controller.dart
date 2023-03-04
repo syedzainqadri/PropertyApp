@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import '../Models/listing_detail_model.dart';
 
 class ListingDetailsController extends GetxController {
-  var listingDetail = ListingsByIdModel().obs;
+  var listingDetail = ListingByIdModel().obs;
 
   getListingById(listingId) async {
     var response = await http.get(
@@ -14,7 +14,9 @@ class ListingDetailsController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    listingDetail.value = listingsByIdModelFromJson(response.body);
     print("this is the response: ${response.body}");
+    listingDetail.value = listingByIdModelFromJson(response.body);
+    List<Image> image = listingDetail.value.images!;
+    print(image);
   }
 }

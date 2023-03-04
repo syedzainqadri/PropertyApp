@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Categories/categories.dart';
 
+import '../../Utils/const.dart';
+
 class CategoryCard extends StatelessWidget {
   var id;
   var image;
@@ -56,7 +58,7 @@ class CategoryCard extends StatelessWidget {
                     fit: BoxFit.fitWidth,
                     image: image != null
                         ? NetworkImage(image)
-                        : const AssetImage('logo') as ImageProvider,
+                        : const AssetImage(logo) as ImageProvider,
                   ),
                 ),
               ),

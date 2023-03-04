@@ -1,13 +1,17 @@
+// To parse this JSON data, do
+//
+//     final listingByIdModel = listingByIdModelFromJson(jsonString);
+
 import 'dart:convert';
 
-ListingsByIdModel listingsByIdModelFromJson(String str) =>
-    ListingsByIdModel.fromJson(json.decode(str));
+ListingByIdModel listingByIdModelFromJson(String str) =>
+    ListingByIdModel.fromJson(json.decode(str));
 
-String listingsByIdModelToJson(ListingsByIdModel data) =>
+String listingByIdModelToJson(ListingByIdModel data) =>
     json.encode(data.toJson());
 
-class ListingsByIdModel {
-  ListingsByIdModel({
+class ListingByIdModel {
+  ListingByIdModel({
     this.listingId,
     this.authorId,
     this.title,
@@ -37,36 +41,36 @@ class ListingsByIdModel {
     this.review,
   });
 
-  int? listingId;
-  int? authorId;
-  String? title;
-  String? pricingType;
-  String? price;
-  String? maxPrice;
-  String? priceType;
-  List<dynamic>? priceUnits;
-  String? priceUnit;
-  List<Category>? categories;
-  String? adType;
-  String? status;
-  List<Image>? images;
-  DateCreated? dateCreated;
-  DateTime? createdAt;
-  int? viewCount;
-  List<String>? promotions;
-  List<String>? badges;
-  Contact? contact;
-  Store? store;
-  String? url;
-  String? description;
-  List<dynamic>? videoUrls;
-  Author? author;
-  List<CustomField>? customFields;
-  List<Related>? related;
-  Review? review;
+  var listingId;
+  var authorId;
+  var title;
+  var pricingType;
+  var price;
+  var maxPrice;
+  var priceType;
+  var priceUnits;
+  var priceUnit;
+  var categories;
+  var adType;
+  var status;
+  var images;
+  var dateCreated;
+  var createdAt;
+  var viewCount;
+  var promotions;
+  var badges;
+  var contact;
+  var store;
+  var url;
+  var description;
+  var videoUrls;
+  var author;
+  var customFields;
+  var related;
+  var review;
 
-  factory ListingsByIdModel.fromJson(Map<String, dynamic> json) =>
-      ListingsByIdModel(
+  factory ListingByIdModel.fromJson(Map<String, dynamic> json) =>
+      ListingByIdModel(
         listingId: json["listing_id"],
         authorId: json["author_id"],
         title: json["title"],
@@ -345,7 +349,7 @@ class CustomField {
     this.required,
     this.placeholder,
     this.value,
-    this.options,
+    // this.options,
     this.min,
     this.max,
     this.stepSize,
@@ -363,7 +367,7 @@ class CustomField {
   bool? required;
   String? placeholder;
   dynamic value;
-  Options? options;
+  // Options? options;
   String? min;
   String? max;
   String? stepSize;
@@ -381,7 +385,7 @@ class CustomField {
         required: json["required"],
         placeholder: json["placeholder"],
         value: json["value"],
-        options: Options.fromJson(json["options"]),
+        // options: Options.fromJson(json["options"]),
         min: json["min"],
         max: json["max"],
         stepSize: json["step_size"],
@@ -400,53 +404,53 @@ class CustomField {
         "required": required,
         "placeholder": placeholder,
         "value": value,
-        "options": options!.toJson(),
+        // "options": options!.toJson(),
         "min": min,
         "max": max,
         "step_size": stepSize,
       };
 }
 
-class Options {
-  Options({
-    this.optionsDefault,
-    this.choices,
-  });
+// class Options {
+//   Options({
+//     this.optionsDefault,
+//     this.choices,
+//   });
 
-  dynamic optionsDefault;
-  List<Choice>? choices;
+//   dynamic optionsDefault;
+//   List<Choice>? choices;
 
-  factory Options.fromJson(Map<String, dynamic> json) => Options(
-        optionsDefault: json["default"],
-        choices:
-            List<Choice>.from(json["choices"].map((x) => Choice.fromJson(x))),
-      );
+//   factory Options.fromJson(Map<String, dynamic> json) => Options(
+//         optionsDefault: json["default"],
+//         choices:
+//             List<Choice>.from(json["choices"].map((x) => Choice.fromJson(x))),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "default": optionsDefault,
-        "choices": List<dynamic>.from(choices!.map((x) => x.toJson())),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "default": optionsDefault,
+//         "choices": List<dynamic>.from(choices!.map((x) => x.toJson())),
+//       };
+// }
 
-class Choice {
-  Choice({
-    this.id,
-    this.name,
-  });
+// class Choice {
+//   Choice({
+//     this.id,
+//     this.name,
+//   });
 
-  dynamic id;
-  String? name;
+//   dynamic id;
+//   String? name;
 
-  factory Choice.fromJson(Map<String, dynamic> json) => Choice(
-        id: json["id"],
-        name: json["name"],
-      );
+//   factory Choice.fromJson(Map<String, dynamic> json) => Choice(
+//         id: json["id"],
+//         name: json["name"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "name": name,
+//       };
+// }
 
 class DateCreated {
   DateCreated({
