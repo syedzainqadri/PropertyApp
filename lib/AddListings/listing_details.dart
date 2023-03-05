@@ -175,12 +175,17 @@ class _ListingDetailsState extends State<ListingDetails> {
                           child: InkWell(
                             onTap: () {
                               showDialog(
+                                  barrierColor: Colors.black54,
+                                  useSafeArea: true,
+                                  barrierDismissible: true,
                                   context: context,
                                   builder: (BuildContext context) {
                                     return Dialog(
+                                      elevation: 0,
+                                      alignment: Alignment.center,
                                       backgroundColor: Colors.transparent,
                                       child: SizedBox(
-                                        height: height * 0.25,
+                                        height: height,
                                         width: width,
                                         child: PinchZoomImage(
                                           image: Image.network(
@@ -206,7 +211,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                       },
                       options: CarouselOptions(
                           height: height * 0.26,
-                          autoPlay: true,
+                          autoPlay: false,
                           autoPlayCurve: Curves.easeInCirc,
                           pauseAutoPlayOnManualNavigate: true,
                           aspectRatio: 2.0,
@@ -411,7 +416,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                     .customFields![index]
                                                     .value
                                                     .toString()
-                                                    .toUpperCase(),
+                                                    .toLowerCase(),
                                                 maxLines: 1,
                                                 style: const TextStyle(
                                                     fontSize: 11),

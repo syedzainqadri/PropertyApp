@@ -23,8 +23,8 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
     super.initState();
 
     if (widget.text.length > 50) {
-      firstHalf = widget.text.substring(0, 50);
-      secondHalf = widget.text.substring(50, widget.text.length);
+      firstHalf = widget.text.substring(0, 200);
+      secondHalf = widget.text.substring(200, widget.text.length);
     } else {
       firstHalf = widget.text;
       secondHalf = "";

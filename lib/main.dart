@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lagosabuja/Controllers/configControllers/config_controller.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:lagosabuja/Bindings/bindings.dart';
 import 'package:lagosabuja/Controllers/featuredListings.dart';
@@ -99,6 +100,7 @@ void main() async {
   await GetStorage.init();
   GetStorage().writeIfNull('isLoggedIn', false);
   if (GetStorage().read('isLoggedIn')) {
+    Get.put(ConfigController());
     Get.put(ListingController());
     Get.put(FavoriteListingController());
     Get.put(FeaturedListingController());

@@ -27,7 +27,6 @@ class ListingController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    print("here is the all listing response: ${response.body}");
     allListings.value = alllistingsFromJson(response.body);
     isLoading.value = false;
   }

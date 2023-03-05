@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -276,8 +275,11 @@ class _AddListingState extends State<AddListing> {
                     value: (i, v) => v,
                     label: (i, v) => v.name,
                   ),
+                  choiceActiveStyle: const C2ChoiceStyle(color: Colors.black),
                   onChanged: (val) {
                     setState(() => listingType = val);
+                    categoriesController
+                        .getCategoriesByListingType(listingType);
                     print(listingType.id.toString());
                   },
                 ),
@@ -286,54 +288,57 @@ class _AddListingState extends State<AddListing> {
                 padding: 5.0,
                 text: 'Select A Category',
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: ChipsChoice<CategoriesModel>.single(
-                  choiceStyle: const C2ChoiceStyle(color: kGreen),
-                  wrapped: true,
-                  value: category,
-                  choiceItems:
-                      C2Choice.listFrom<CategoriesModel, CategoriesModel>(
-                    source: categoriesController.categories.value,
-                    value: (i, v) => v,
-                    label: (i, v) => v.name!,
-                  ),
-                  onChanged: (val) async {
-                    Get.defaultDialog(
-                        title: "",
-                        content: Container(
-                          color: Colors.white,
-                          child: Column(
-                            children: const [
-                              Center(
-                                child: CircularProgressIndicator(
-                                  color: kGreen,
+              categoriesController.categoryByTypes.value == null
+                  ? const Text('Please Select a Category')
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5.0, horizontal: 20),
+                      child: ChipsChoice<CategoriesModel>.single(
+                        choiceStyle: const C2ChoiceStyle(color: kGreen),
+                        wrapped: true,
+                        value: category,
+                        choiceItems:
+                            C2Choice.listFrom<CategoriesModel, CategoriesModel>(
+                          source: categoriesController.categoryByTypes.value,
+                          value: (i, v) => v,
+                          label: (i, v) => v.name!,
+                        ),
+                        onChanged: (val) async {
+                          Get.defaultDialog(
+                              title: "",
+                              content: Container(
+                                color: Colors.white,
+                                child: Column(
+                                  children: const [
+                                    Center(
+                                      child: CircularProgressIndicator(
+                                        color: kGreen,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      "Loading",
+                                      style: TextStyle(color: Colors.black38),
+                                    )
+                                  ],
                                 ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Loading",
-                                style: TextStyle(color: Colors.black38),
-                              )
-                            ],
-                          ),
-                        ));
-                    await categoriesController.getSubCategories(val.termId);
-                    Get.back();
-                    setState(() {
-                      categorySelected = true;
-                      category = val;
-                      pricingTypes = PricType();
-                      pricingTypes.id = '';
-                      pricingTypes.name = '';
-                      print(category.termId);
-                    });
-                  },
-                ),
-              ),
+                              ));
+                          await categoriesController
+                              .getSubCategories(val.termId);
+                          Get.back();
+                          setState(() {
+                            categorySelected = true;
+                            category = val;
+                            pricingTypes = PricType();
+                            pricingTypes.id = '';
+                            pricingTypes.name = '';
+                            print(category.termId);
+                          });
+                        },
+                      ),
+                    ),
               TitleWidget(
                 padding: 5.0,
                 text: 'Select Subcategory',

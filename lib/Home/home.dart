@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:lagosabuja/Controllers/configControllers/config_controller.dart';
 import 'package:lagosabuja/Controllers/user_controller.dart';
 import '../AddListings/add_listings.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';
 import '../Controllers/membership_controller.dart';
+import '../Profile/account_subscriptions.dart';
 import '../Profile/profile.dart';
 import '../Search/search_page.dart';
 import '../Utils/const.dart';
@@ -28,6 +30,7 @@ class _HomeState extends State<Home> {
   bool notIntialized = true;
   final MembershipController membershipController =
       Get.put(MembershipController());
+  final ConfigController configController = Get.put(ConfigController());
   final userController = Get.find<UserController>();
   @override
   void initState() {
@@ -106,7 +109,33 @@ class _HomeState extends State<Home> {
                   ? [
                       GestureDetector(
                         onTap: () {
-                          Get.to(const AddListing());
+                          if (configController.config.value.membershipEnabled ==
+                                  true &&
+                              configController
+                                      .newListingConfig.value.eligible ==
+                                  true) {
+                            Get.to(const AddListing());
+                          } else if (configController
+                                  .config.value.membershipEnabled !=
+                              true) {
+                            Get.snackbar(
+                              'No Membership',
+                              'You do not have a membership yet kindly select one',
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.red,
+                              colorText: white,
+                            );
+                            //TODO: route the user to Membership
+                            Get.to(const AccountSubscription());
+                          } else {
+                            Get.snackbar(
+                              'Not Eligible',
+                              'You are not Eligible to post',
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.red,
+                              colorText: white,
+                            );
+                          }
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
