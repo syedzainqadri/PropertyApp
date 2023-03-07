@@ -61,10 +61,11 @@ class AddListing extends StatelessWidget {
   final whatsAppController = TextEditingController();
   final locationsController = Get.put(LocationsController());
   List<dynamic> amenities = [false];
+  var imageSelected = false.obs;
   List<SelectedFieldsModel> selectedFields = List<SelectedFieldsModel>.filled(
       20, SelectedFieldsModel(0, Choice(id: '0', name: '0')),
       growable: true);
-  List<XFile>? imageFiles = [];
+  RxList imageFiles = [].obs;
   final box = GetStorage();
   var location = Location();
 
@@ -211,6 +212,7 @@ class AddListing extends StatelessWidget {
                         GestureDetector(
                           onTap: () async {
                             await _getFromGallery();
+                            imageSelected.value = true;
                           },
                           child: Container(
                             width: 100,
@@ -233,17 +235,20 @@ class AddListing extends StatelessWidget {
                         SizedBox(
                           width: 200,
                           height: 100,
-                          child: ListView.builder(
-                              physics: const ScrollPhysics(),
-                              shrinkWrap: true,
-                              primary: false,
-                              reverse: true,
-                              scrollDirection: Axis.horizontal,
-                              itemCount: imageFiles?.length,
-                              itemBuilder: (context, index) {
-                                return imageContainer(
-                                    File(imageFiles![index].path), index);
-                              }),
+                          child: imageSelected.value
+                              ? ListView.builder(
+                                  physics: const ScrollPhysics(),
+                                  shrinkWrap: true,
+                                  primary: false,
+                                  reverse: true,
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: imageFiles.length,
+                                  itemBuilder: (context, index) {
+                                    return imageContainer(
+                                        File(imageFiles.value[index].path),
+                                        index);
+                                  })
+                              : const Offstage(),
                         ),
                       ],
                     ),
@@ -731,7 +736,27 @@ class AddListing extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () async {
-                  print('my price input is ${priceController.text}');
+                  Get.defaultDialog(
+                      title: "",
+                      content: Container(
+                        color: Colors.white,
+                        child: Column(
+                          children: const [
+                            Center(
+                              child: CircularProgressIndicator(
+                                color: kGreen,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "Posting",
+                              style: TextStyle(color: Colors.black38),
+                            )
+                          ],
+                        ),
+                      ));
                   var _latitude = await box.read('latitude');
                   var _longitude = await box.read('longitude');
                   await listingsController.addListing(
@@ -741,7 +766,7 @@ class AddListing extends StatelessWidget {
                     whatsAppController.text,
                     emailController.text,
                     websiteController.text,
-                    locationsController.userLocationId.value,
+                    box.read('city'),
                     subCategory.termId,
                     listingType.id,
                     titleController.text,
@@ -763,7 +788,8 @@ class AddListing extends StatelessWidget {
                     jsonEncode(myAmenities),
                   );
                   await myListingController.getMyListing();
-                  Get.to(() => const MyListings());
+
+                  Get.to(() => MyListings());
                   Get.snackbar('Listing Posted',
                       'Your listing is pending for Approval from Admin',
                       snackPosition: SnackPosition.BOTTOM,
@@ -786,7 +812,8 @@ class AddListing extends StatelessWidget {
   _getFromGallery() async {
     List<XFile>? images = await ImagePicker().pickMultiImage();
     for (int i = 0; i < images.length; i++) {
-      imageFiles!.addAll(images);
+      imageFiles.value.addAll(images);
+      print(imageFiles.value);
     }
   }
 
@@ -816,7 +843,7 @@ class AddListing extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                imageFiles!.removeAt(index);
+                imageFiles.removeAt(index);
               },
             ),
           ),

@@ -134,7 +134,7 @@ class _ProfileState extends State<Profile> {
             Column(
               children: [
                 profileParameters(
-                    "My Listings", Icons.list, kGreen, const MyListings()),
+                    "My Listings", Icons.list, kGreen, MyListings()),
                 profileParameters("My Favorites", Icons.favorite, brightRed,
                     const MyFavorites()),
                 profileParameters("Account Detials", Icons.person, mediumBlue,

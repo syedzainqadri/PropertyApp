@@ -28,6 +28,7 @@ class ListingController extends GetxController {
       },
     );
     allListings.value = alllistingsFromJson(response.body);
+    print(allListings.value.data!.length);
     isLoading.value = false;
   }
 
@@ -55,6 +56,7 @@ class ListingController extends GetxController {
       List<SelectedFieldsModel> customFields,
       amenities) async {
     isLoading.value = true;
+    print('locationis $locationId');
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -103,6 +105,7 @@ class ListingController extends GetxController {
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
+    print(response.body);
     isLoading.value = false;
   }
 }

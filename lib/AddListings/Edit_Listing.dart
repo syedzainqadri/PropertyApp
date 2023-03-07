@@ -390,7 +390,7 @@ class _EditListingScreenState extends State<EditListingScreen> {
                           categoryId,
                         );
                         await myListingController.getMyListing();
-                        Get.to(() => const MyListings());
+                        Get.to(() => MyListings());
                         Get.snackbar('Listing Posted',
                             'Your listing is pending for Approval from Admin',
                             snackPosition: SnackPosition.BOTTOM,

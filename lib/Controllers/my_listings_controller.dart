@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:lagosabuja/Models/all_listing_model.dart';
+import '../Models/myListingModel/my_listing_model.dart';
 
 class MyListingController extends GetxController {
   var isLoading = false.obs;
-  var myListings = Alllistings().obs;
+  var myListings = MyListingModel().obs;
   final token = GetStorage().read('token');
 
   @override
@@ -25,8 +27,13 @@ class MyListingController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-    myListings.value = alllistingsFromJson(response.body);
+    var json = jsonDecode(response.body);
+    var map = Map.from(json);
+    print(map.length);
+
+    myListings.value = myListingModelFromJson(response.body);
+    print(myListings.value.data!.length);
+    print(myListings.value.pagination!.total);
     isLoading.value = false;
-    // print(response.body);
   }
 }
