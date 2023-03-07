@@ -28,6 +28,7 @@ class CategoriesController extends GetxController {
   }
 
   getCategoriesByListingType(listingType) async {
+    print(listingType);
     String url =
         'https://lagosabuja.com/wp-json/rtcl/v1/categories?listing_type=$listingType';
     var response = await http.get(

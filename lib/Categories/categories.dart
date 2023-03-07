@@ -50,7 +50,7 @@ class _CategoryPageState extends State<CategoryPage> {
         Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Get.to(const AddListing());
+              Get.to(AddListing());
             },
             child: const Icon(Icons.add),
             foregroundColor: white,

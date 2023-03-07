@@ -59,7 +59,7 @@ class _SelectCityFiltersState extends State<SelectCityFilters> {
                             .subLocations.value[index].name);
                     box.write('city',
                         locationsController.subLocations.value[index].termId);
-                    Get.offAll(const AddListing());
+                    Get.offAll(AddListing());
                   },
                   child: Container(
                     width: double.infinity,

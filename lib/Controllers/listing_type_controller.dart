@@ -23,7 +23,7 @@ class ListingTypeController extends GetxController {
         'Authorization': 'Bearer $token',
       },
     );
-
+    print(response.body);
     listingTypes.value = listingTypesFromJson(response.body);
   }
 }

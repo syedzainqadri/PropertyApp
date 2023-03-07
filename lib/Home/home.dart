@@ -114,7 +114,7 @@ class _HomeState extends State<Home> {
                               configController
                                       .newListingConfig.value.eligible ==
                                   true) {
-                            Get.to(const AddListing());
+                            Get.to(AddListing());
                           } else if (configController
                                   .config.value.membershipEnabled !=
                               true) {

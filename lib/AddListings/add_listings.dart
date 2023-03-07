@@ -24,21 +24,20 @@ import '../Utils/const.dart';
 import '../Utils/global_widgets.dart';
 import 'select_country.dart';
 
-class AddListing extends StatefulWidget {
-  const AddListing({Key? key}) : super(key: key);
+class AddListing extends StatelessWidget {
+  AddListing({Key? key}) : super(key: key);
 
-  @override
-  State<AddListing> createState() => _AddListingState();
-}
-
-class _AddListingState extends State<AddListing> {
   final listingTypeController = Get.put(ListingTypeController());
   final MyListingController myListingController =
       Get.put(MyListingController());
   final categoriesController = Get.put(CategoriesController());
   final listingConfigController = Get.put(ListingConfigController());
-  bool categorySelected = false;
-  bool subCategorySelected = false;
+  var categorySelected = false.obs;
+  var subCategorySelected = false.obs;
+  var pricingTypesSelected = false.obs;
+  var pricingTypesbool = false.obs;
+  var pricingUnitSelected = false.obs;
+  var amenistiesSelected = false.obs;
   final listingsController = Get.put(ListingController());
   var category;
   var subCategory;
@@ -47,7 +46,7 @@ class _AddListingState extends State<AddListing> {
   var pricingTypes;
   var priceUnits;
   var customField;
-  var myAmenities = List<String>.empty(growable: true);
+  var myAmenities = List<String>.empty(growable: true).obs;
   final priceController = TextEditingController();
   final priceStartController = TextEditingController();
   final priceEndController = TextEditingController();
@@ -68,10 +67,6 @@ class _AddListingState extends State<AddListing> {
   List<XFile>? imageFiles = [];
   final box = GetStorage();
   var location = Location();
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,15 +92,15 @@ class _AddListingState extends State<AddListing> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Obx(
-                () => Row(
+      body: Obx(
+        () => SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
@@ -153,225 +148,224 @@ class _AddListingState extends State<AddListing> {
                         : const Offstage(),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Title", false, titleController),
-              ),
-              TitleWidget(
-                padding: 5.0,
-                text: 'Description',
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Description", false, descriptionController,
-                    maxLine: 4),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Phone*", false, phoneNumberController),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Zip Code*", false, zipCodeController),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Address*", false, addressController),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Email*", false, emailController),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("WhatsApp Number*", false, whatsAppController),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Website", false, websiteController),
-              ),
-              TitleWidget(
-                text: 'Select Images',
-                padding: 5.0,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 10.0, horizontal: 20),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          await _getFromGallery();
-                        },
-                        child: Container(
-                          width: 100,
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child: textField("Title", false, titleController),
+                ),
+                TitleWidget(
+                  padding: 5.0,
+                  text: 'Description',
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child: textField("Description", false, descriptionController,
+                      maxLine: 4),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child: textField("Phone*", false, phoneNumberController),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child: textField("Zip Code*", false, zipCodeController),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child: textField("Address*", false, addressController),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child: textField("Email*", false, emailController),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child:
+                      textField("WhatsApp Number*", false, whatsAppController),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child: textField("Website", false, websiteController),
+                ),
+                TitleWidget(
+                  text: 'Select Images',
+                  padding: 5.0,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10.0, horizontal: 20),
+                    child: Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () async {
+                            await _getFromGallery();
+                          },
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            decoration: BoxDecoration(
+                              color: kGreen,
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(18),
+                            ),
+                            child: const Icon(
+                              Icons.camera_alt,
+                              size: 40,
+                              color: white,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        SizedBox(
+                          width: 200,
                           height: 100,
-                          decoration: BoxDecoration(
-                            color: kGreen,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                          child: const Icon(
-                            Icons.camera_alt,
-                            size: 40,
-                            color: white,
-                          ),
+                          child: ListView.builder(
+                              physics: const ScrollPhysics(),
+                              shrinkWrap: true,
+                              primary: false,
+                              reverse: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: imageFiles?.length,
+                              itemBuilder: (context, index) {
+                                return imageContainer(
+                                    File(imageFiles![index].path), index);
+                              }),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SizedBox(
-                        width: 200,
-                        height: 100,
-                        child: ListView.builder(
-                            physics: const ScrollPhysics(),
-                            shrinkWrap: true,
-                            primary: false,
-                            reverse: true,
-                            scrollDirection: Axis.horizontal,
-                            itemCount: imageFiles?.length,
-                            itemBuilder: (context, index) {
-                              return imageContainer(
-                                  File(imageFiles![index].path), index);
-                            }),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
-                child: textField("Video url", false, videoController),
-              ),
-              TitleWidget(
-                text: 'Select Listing Type',
-                padding: 5.0,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
-                child: ChipsChoice<ListingTypes>.single(
-                  choiceStyle: const C2ChoiceStyle(color: kGreen),
-                  wrapped: true,
-                  value: listingType,
-                  choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
-                    source: listingTypeController.listingTypes.value,
-                    value: (i, v) => v,
-                    label: (i, v) => v.name,
-                  ),
-                  choiceActiveStyle: const C2ChoiceStyle(color: Colors.black),
-                  onChanged: (val) {
-                    setState(() => listingType = val);
-                    categoriesController
-                        .getCategoriesByListingType(listingType);
-                    print(listingType.id.toString());
-                  },
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20),
+                  child: textField("Video url", false, videoController),
                 ),
-              ),
-              TitleWidget(
-                padding: 5.0,
-                text: 'Select A Category',
-              ),
-              categoriesController.categoryByTypes.value == null
-                  ? const Text('Please Select a Category')
-                  : Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5.0, horizontal: 20),
-                      child: ChipsChoice<CategoriesModel>.single(
-                        choiceStyle: const C2ChoiceStyle(color: kGreen),
-                        wrapped: true,
-                        value: category,
-                        choiceItems:
-                            C2Choice.listFrom<CategoriesModel, CategoriesModel>(
-                          source: categoriesController.categoryByTypes.value,
-                          value: (i, v) => v,
-                          label: (i, v) => v.name!,
-                        ),
-                        onChanged: (val) async {
-                          Get.defaultDialog(
-                              title: "",
-                              content: Container(
-                                color: Colors.white,
-                                child: Column(
-                                  children: const [
-                                    Center(
-                                      child: CircularProgressIndicator(
-                                        color: kGreen,
+                TitleWidget(
+                  text: 'Select Listing Type',
+                  padding: 5.0,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 0.0, horizontal: 20),
+                  child: ChipsChoice<ListingTypes>.single(
+                    choiceStyle: const C2ChoiceStyle(color: kGreen),
+                    wrapped: true,
+                    value: listingType,
+                    choiceItems: C2Choice.listFrom<ListingTypes, ListingTypes>(
+                      source: listingTypeController.listingTypes.value,
+                      value: (i, v) => v,
+                      label: (i, v) => v.name,
+                    ),
+                    choiceActiveStyle: const C2ChoiceStyle(color: Colors.black),
+                    onChanged: (val) {
+                      listingType = val;
+                      categoriesController.getCategoriesByListingType(
+                          listingType.id.toString());
+                    },
+                  ),
+                ),
+                TitleWidget(
+                  padding: 5.0,
+                  text: 'Select A Category',
+                ),
+                categoriesController.categoryByTypes.value.isEmpty
+                    ? const Text('Please Select a Category')
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 20),
+                        child: ChipsChoice<CategoriesModel>.single(
+                          choiceStyle: const C2ChoiceStyle(color: kGreen),
+                          wrapped: true,
+                          value: category,
+                          choiceActiveStyle:
+                              const C2ChoiceStyle(color: Colors.black),
+                          choiceItems: C2Choice.listFrom<CategoriesModel,
+                              CategoriesModel>(
+                            source: categoriesController.categoryByTypes.value,
+                            value: (i, v) => v,
+                            label: (i, v) => v.name!,
+                          ),
+                          onChanged: (val) async {
+                            Get.defaultDialog(
+                                title: "",
+                                content: Container(
+                                  color: Colors.white,
+                                  child: Column(
+                                    children: const [
+                                      Center(
+                                        child: CircularProgressIndicator(
+                                          color: kGreen,
+                                        ),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      "Loading",
-                                      style: TextStyle(color: Colors.black38),
-                                    )
-                                  ],
-                                ),
-                              ));
-                          await categoriesController
-                              .getSubCategories(val.termId);
-                          Get.back();
-                          setState(() {
-                            categorySelected = true;
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      Text(
+                                        "Loading",
+                                        style: TextStyle(color: Colors.black38),
+                                      )
+                                    ],
+                                  ),
+                                ));
+                            await categoriesController
+                                .getSubCategories(val.termId);
+                            Get.back();
+                            categorySelected.value = true;
                             category = val;
                             pricingTypes = PricType();
                             pricingTypes.id = '';
                             pricingTypes.name = '';
                             print(category.termId);
-                          });
-                        },
-                      ),
-                    ),
-              TitleWidget(
-                padding: 5.0,
-                text: 'Select Subcategory',
-              ),
-              categorySelected
-                  ? Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 5.0, horizontal: 20),
-                      child: ChipsChoice<LocationsModel>.single(
-                        choiceStyle: const C2ChoiceStyle(color: kGreen),
-                        wrapped: true,
-                        value: subCategory,
-                        choiceItems:
-                            C2Choice.listFrom<LocationsModel, LocationsModel>(
-                          source: categoriesController.subCategories.value,
-                          value: (i, v) => v,
-                          label: (i, v) => v.name,
+                          },
                         ),
-                        onChanged: (val) async {
-                          await listingConfigController
-                              .getConfiguration(val.termId);
-                          setState(() {
-                            subCategorySelected = true;
+                      ),
+                TitleWidget(
+                  padding: 5.0,
+                  text: 'Select Subcategory',
+                ),
+                categorySelected.value
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5.0, horizontal: 20),
+                        child: ChipsChoice<LocationsModel>.single(
+                          choiceStyle: const C2ChoiceStyle(color: kGreen),
+                          wrapped: true,
+                          value: subCategory,
+                          choiceActiveStyle:
+                              const C2ChoiceStyle(color: Colors.black),
+                          choiceItems:
+                              C2Choice.listFrom<LocationsModel, LocationsModel>(
+                            source: categoriesController.subCategories.value,
+                            value: (i, v) => v,
+                            label: (i, v) => v.name,
+                          ),
+                          onChanged: (val) async {
+                            await listingConfigController
+                                .getConfiguration(val.termId);
+
+                            subCategorySelected.value = true;
                             subCategory = val;
                             print(subCategory.termId);
-                          });
-                        },
-                      ),
-                    )
-                  : const Offstage(),
-              subCategorySelected
-                  ? Obx(() {
-                      return Padding(
+                          },
+                        ),
+                      )
+                    : const Offstage(),
+                subCategorySelected.value
+                    ? Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 5.0, horizontal: 20.0),
                         child: Column(
@@ -389,6 +383,8 @@ class _AddListingState extends State<AddListing> {
                                 choiceStyle: const C2ChoiceStyle(color: kGreen),
                                 wrapped: true,
                                 value: pricingTypes,
+                                choiceActiveStyle:
+                                    const C2ChoiceStyle(color: Colors.black),
                                 choiceItems:
                                     C2Choice.listFrom<PricType, PricType>(
                                   source: listingConfigController
@@ -397,14 +393,15 @@ class _AddListingState extends State<AddListing> {
                                   label: (i, v) => v.name,
                                 ),
                                 onChanged: (val) {
-                                  setState(() => pricingTypes = val);
+                                  pricingTypesSelected.value = false;
+                                  pricingTypes = val;
                                   print(pricingTypes.id);
+                                  pricingTypesSelected.value = true;
                                 },
                               ),
                             ),
-                            pricingTypes.id == ''
-                                ? const Offstage()
-                                : pricingTypes.id == 'price'
+                            pricingTypesSelected.value
+                                ? pricingTypes.id == 'price'
                                     ? textField('Price', false, priceController,
                                         textInputType: TextInputType.number)
                                     : pricingTypes.id == 'range'
@@ -431,31 +428,43 @@ class _AddListingState extends State<AddListing> {
                                               ),
                                             ],
                                           )
-                                        : const Offstage(),
+                                        : const Center(
+                                            child: Text('Price is disabled'))
+                                : const Offstage(),
                             TitleWidget(
                               padding: 5.0,
                               text: 'Select Pricing Terms',
                             ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 5.0),
-                              child: ChipsChoice<PriceUnit>.single(
-                                choiceStyle: const C2ChoiceStyle(color: kGreen),
-                                wrapped: true,
-                                value: priceUnits,
-                                choiceItems:
-                                    C2Choice.listFrom<PriceUnit, PriceUnit>(
-                                  source: listingConfigController
-                                      .listingConfig.value.config.priceUnits,
-                                  value: (i, v) => v,
-                                  label: (i, v) => v.name,
-                                ),
-                                onChanged: (val) {
-                                  setState(() => priceUnits = val);
-                                  print(priceUnits.id);
-                                },
-                              ),
-                            ),
+                            pricingTypesSelected.value
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 5.0),
+                                    child: ChipsChoice<PriceUnit>.single(
+                                      choiceStyle:
+                                          const C2ChoiceStyle(color: kGreen),
+                                      wrapped: true,
+                                      value: priceUnits,
+                                      choiceActiveStyle: const C2ChoiceStyle(
+                                          color: Colors.black),
+                                      choiceItems: C2Choice.listFrom<PriceUnit,
+                                          PriceUnit>(
+                                        source: listingConfigController
+                                            .listingConfig
+                                            .value
+                                            .config
+                                            .priceUnits,
+                                        value: (i, v) => v,
+                                        label: (i, v) => v.name,
+                                      ),
+                                      onChanged: (val) {
+                                        pricingTypesSelected.value = false;
+                                        priceUnits = val;
+                                        print(priceUnits.id);
+                                        pricingTypesSelected.value = true;
+                                      },
+                                    ),
+                                  )
+                                : const Offstage(),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 5.0, horizontal: 20),
@@ -485,52 +494,65 @@ class _AddListingState extends State<AddListing> {
                                                     .customFields[index]
                                                     .label,
                                               ),
-                                              ListView.builder(
-                                                shrinkWrap: true,
-                                                physics:
-                                                    const NeverScrollableScrollPhysics(),
-                                                itemCount:
-                                                    listingConfigController
-                                                        .listingConfig
-                                                        .value
-                                                        .customFields[index]
-                                                        .options
-                                                        .choices
-                                                        .length,
-                                                itemBuilder:
-                                                    (context, position) {
-                                                  amenities.add(false);
-                                                  return Row(
-                                                    children: [
-                                                      const SizedBox(width: 10),
-                                                      Checkbox(
-                                                        value:
-                                                            amenities[position],
-                                                        onChanged:
-                                                            (bool? value) {
-                                                          setState(() {
-                                                            amenities[
-                                                                    position] =
-                                                                !amenities[
-                                                                    position];
-                                                            if (value!) {
-                                                              myAmenities.add(
-                                                                  "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}");
-                                                            }
-                                                          });
-                                                        },
-                                                        checkColor: white,
-                                                        activeColor: kGreen,
-                                                      ),
-                                                      Text(
-                                                        "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
-                                                        style: const TextStyle(
-                                                            fontSize: 17.0),
-                                                      ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
+                                              pricingUnitSelected.value == false
+                                                  ? ListView.builder(
+                                                      shrinkWrap: true,
+                                                      physics:
+                                                          const NeverScrollableScrollPhysics(),
+                                                      itemCount:
+                                                          listingConfigController
+                                                              .listingConfig
+                                                              .value
+                                                              .customFields[
+                                                                  index]
+                                                              .options
+                                                              .choices
+                                                              .length,
+                                                      itemBuilder:
+                                                          (context, position) {
+                                                        amenities.add(false);
+                                                        return Row(
+                                                          children: [
+                                                            const SizedBox(
+                                                                width: 10),
+                                                            Checkbox(
+                                                              value: amenities[
+                                                                  position],
+                                                              onChanged: (bool?
+                                                                  value) {
+                                                                pricingTypesSelected
+                                                                        .value =
+                                                                    true;
+                                                                amenities[
+                                                                        position] =
+                                                                    !amenities[
+                                                                        position];
+                                                                if (value!) {
+                                                                  myAmenities
+                                                                      .value
+                                                                      .add(
+                                                                          "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].id}");
+                                                                }
+                                                                pricingTypesSelected
+                                                                        .value =
+                                                                    false;
+                                                              },
+                                                              checkColor: white,
+                                                              activeColor:
+                                                                  kGreen,
+                                                            ),
+                                                            Text(
+                                                              "${listingConfigController.listingConfig.value.customFields[index].options.choices[position].name}",
+                                                              style:
+                                                                  const TextStyle(
+                                                                      fontSize:
+                                                                          17.0),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    )
+                                                  : const Offstage(),
                                             ],
                                           )
                                         : listingConfigController
@@ -558,43 +580,55 @@ class _AddListingState extends State<AddListing> {
                                                         color: darkGrey,
                                                         fontSize: 20),
                                                   ),
-                                                  ChipsChoice<Choice>.single(
-                                                    choiceStyle:
-                                                        const C2ChoiceStyle(
-                                                            color: kGreen),
-                                                    wrapped: true,
-                                                    value: selectedFields[index]
-                                                        .choice,
-                                                    choiceItems:
-                                                        C2Choice.listFrom<
-                                                            Choice, Choice>(
-                                                      source:
-                                                          listingConfigController
-                                                              .listingConfig
-                                                              .value
-                                                              .customFields[
+                                                  pricingTypesSelected.value
+                                                      ? ChipsChoice<
+                                                          Choice>.single(
+                                                          choiceStyle:
+                                                              const C2ChoiceStyle(
+                                                                  color:
+                                                                      kGreen),
+                                                          wrapped: true,
+                                                          value: selectedFields[
                                                                   index]
-                                                              .options
-                                                              .choices,
-                                                      value: (i, v) => v,
-                                                      label: (i, v) => v.name,
-                                                    ),
-                                                    onChanged: (val) {
-                                                      setState(() {
-                                                        customField = val;
-                                                        selectedFields.insert(
-                                                            index,
-                                                            SelectedFieldsModel(
-                                                                listingConfigController
-                                                                    .listingConfig
-                                                                    .value
-                                                                    .customFields[
-                                                                        index]
-                                                                    .id,
-                                                                val));
-                                                      });
-                                                    },
-                                                  ),
+                                                              .choice,
+                                                          choiceActiveStyle:
+                                                              const C2ChoiceStyle(
+                                                                  color: Colors
+                                                                      .black),
+                                                          choiceItems:
+                                                              C2Choice.listFrom<
+                                                                  Choice,
+                                                                  Choice>(
+                                                            source: listingConfigController
+                                                                .listingConfig
+                                                                .value
+                                                                .customFields[
+                                                                    index]
+                                                                .options
+                                                                .choices,
+                                                            value: (i, v) => v,
+                                                            label: (i, v) =>
+                                                                v.name,
+                                                          ),
+                                                          onChanged: (val) {
+                                                            pricingTypesSelected
+                                                                .value = false;
+                                                            customField = val;
+                                                            selectedFields.insert(
+                                                                index,
+                                                                SelectedFieldsModel(
+                                                                    listingConfigController
+                                                                        .listingConfig
+                                                                        .value
+                                                                        .customFields[
+                                                                            index]
+                                                                        .id,
+                                                                    val));
+                                                            pricingTypesSelected
+                                                                .value = true;
+                                                          },
+                                                        )
+                                                      : const Offstage(),
                                                 ],
                                               )
                                             : listingConfigController
@@ -623,46 +657,59 @@ class _AddListingState extends State<AddListing> {
                                                             color: darkGrey,
                                                             fontSize: 20),
                                                       ),
-                                                      ChipsChoice<
-                                                          Choice>.single(
-                                                        choiceStyle:
-                                                            const C2ChoiceStyle(
-                                                                color: kGreen),
-                                                        wrapped: true,
-                                                        value: selectedFields[
-                                                                index]
-                                                            .choice,
-                                                        choiceItems:
-                                                            C2Choice.listFrom<
-                                                                Choice, Choice>(
-                                                          source:
-                                                              listingConfigController
-                                                                  .listingConfig
-                                                                  .value
-                                                                  .customFields[
-                                                                      index]
-                                                                  .options
-                                                                  .choices,
-                                                          value: (i, v) => v,
-                                                          label: (i, v) =>
-                                                              v.name,
-                                                        ),
-                                                        onChanged: (val) {
-                                                          setState(() {
-                                                            customField = val;
-                                                            selectedFields.insert(
-                                                                index,
-                                                                SelectedFieldsModel(
-                                                                    listingConfigController
-                                                                        .listingConfig
-                                                                        .value
-                                                                        .customFields[
-                                                                            index]
-                                                                        .id,
-                                                                    val));
-                                                          });
-                                                        },
-                                                      ),
+                                                      pricingTypesSelected.value
+                                                          ? ChipsChoice<
+                                                              Choice>.single(
+                                                              choiceStyle:
+                                                                  const C2ChoiceStyle(
+                                                                      color:
+                                                                          kGreen),
+                                                              wrapped: true,
+                                                              value:
+                                                                  selectedFields[
+                                                                          index]
+                                                                      .choice,
+                                                              choiceActiveStyle:
+                                                                  const C2ChoiceStyle(
+                                                                      color: Colors
+                                                                          .black),
+                                                              choiceItems: C2Choice
+                                                                  .listFrom<
+                                                                      Choice,
+                                                                      Choice>(
+                                                                source: listingConfigController
+                                                                    .listingConfig
+                                                                    .value
+                                                                    .customFields[
+                                                                        index]
+                                                                    .options
+                                                                    .choices,
+                                                                value: (i, v) =>
+                                                                    v,
+                                                                label: (i, v) =>
+                                                                    v.name,
+                                                              ),
+                                                              onChanged: (val) {
+                                                                pricingTypesSelected
+                                                                        .value =
+                                                                    false;
+                                                                customField =
+                                                                    val;
+                                                                selectedFields.insert(
+                                                                    index,
+                                                                    SelectedFieldsModel(
+                                                                        listingConfigController
+                                                                            .listingConfig
+                                                                            .value
+                                                                            .customFields[index]
+                                                                            .id,
+                                                                        val));
+                                                                pricingTypesSelected
+                                                                        .value =
+                                                                    true;
+                                                              },
+                                                            )
+                                                          : const Offstage(),
                                                     ],
                                                   )
                                                 : const Offstage();
@@ -670,10 +717,10 @@ class _AddListingState extends State<AddListing> {
                             ),
                           ],
                         ),
-                      );
-                    })
-                  : const Offstage(),
-            ],
+                      )
+                    : const Offstage(),
+              ],
+            ),
           ),
         ),
       ),
@@ -739,9 +786,7 @@ class _AddListingState extends State<AddListing> {
   _getFromGallery() async {
     List<XFile>? images = await ImagePicker().pickMultiImage();
     for (int i = 0; i < images.length; i++) {
-      setState(() {
-        imageFiles!.addAll(images);
-      });
+      imageFiles!.addAll(images);
     }
   }
 
@@ -771,9 +816,7 @@ class _AddListingState extends State<AddListing> {
                 color: Colors.white,
               ),
               onPressed: () {
-                setState(() {
-                  imageFiles!.removeAt(index);
-                });
+                imageFiles!.removeAt(index);
               },
             ),
           ),
