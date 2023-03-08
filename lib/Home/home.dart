@@ -177,11 +177,11 @@ class _HomeState extends State<Home> {
                                   hasAction = false;
                                 });
                 },
-                children: const <Widget>[
+                children: <Widget>[
                   HomePage(),
-                  CategoriesPage(),
-                  ConversationPage(),
-                  SearchPage(),
+                  const CategoriesPage(),
+                  const ConversationPage(),
+                  const SearchPage(),
                 ],
               ),
             ),

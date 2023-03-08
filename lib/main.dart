@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Controllers/configControllers/config_controller.dart';
+import 'package:lagosabuja/Controllers/my_listings_controller.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:lagosabuja/Bindings/bindings.dart';
 import 'package:lagosabuja/Controllers/featuredListings.dart';
@@ -112,6 +113,7 @@ void main() async {
     Get.put(MyPaymentsController());
     Get.put(PlansController());
     Get.put(UserController());
+    Get.put(MyListingController());
   }
   runApp(const MyApp());
 }

@@ -24,6 +24,7 @@ class CategoriesController extends GetxController {
     );
     if (response.statusCode == 200) {
       categories.value = categoriesFromJson(response.body);
+      print(categories.value.length);
     } else {}
   }
 

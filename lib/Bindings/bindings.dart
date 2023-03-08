@@ -25,5 +25,6 @@ class MyBindings extends Bindings {
         fenix: true);
     Get.lazyPut<SocialSignInController>(() => SocialSignInController(),
         fenix: true);
+    Get.lazyPut<MyListingController>(() => MyListingController(), fenix: true);
   }
 }

@@ -108,6 +108,7 @@ class ListingCard extends StatelessWidget {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     title ?? '',
+                    maxLines: 3,
                     style: const TextStyle(
                       color: darkGrey,
                       fontSize: 14,

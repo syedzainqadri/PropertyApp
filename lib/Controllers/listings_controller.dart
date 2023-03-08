@@ -10,26 +10,72 @@ class ListingController extends GetxController {
   var isLoading = false.obs;
   var allListings = Alllistings().obs;
   final token = GetStorage().read('token');
+  var listOne = List.empty(growable: true).obs;
+  var currentPage = 1.obs;
+  var totalPages = 1.obs;
 
   @override
   onInit() {
-    getAllListing();
+    getAllListing(isRefreshed: true);
     super.onInit();
   }
 
-  getAllListing() async {
-    isLoading.value = true;
-    String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listings';
-    var response = await http.get(
-      Uri.parse(url),
-      headers: <String, String>{
-        'Accept': 'application/json',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-      },
-    );
-    allListings.value = alllistingsFromJson(response.body);
-    print(allListings.value.data!.length);
-    isLoading.value = false;
+  getAllListing({bool isRefreshed = false}) async {
+    if (isRefreshed) {
+      isLoading.value = true;
+      currentPage.value = 1;
+      print("current page number is: ${currentPage.value}");
+    }
+    if (currentPage.value >= totalPages.value) {
+      currentPage.value = totalPages.value;
+      isLoading.value = true;
+      String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listings';
+      var response = await http.get(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Accept': 'application/json',
+          'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        },
+      );
+      allListings.value = alllistingsFromJson(response.body);
+      listOne.value = allListings.value.data!;
+      totalPages.value = allListings.value.pagination!.totalPages;
+      print(allListings.value.data!.length);
+      isLoading.value = false;
+    } else if (currentPage <= 1) {
+      currentPage.value = 1;
+      isLoading.value = true;
+      String url =
+          'https://lagosabuja.com/wp-json/rtcl/v1/listings?page=$currentPage';
+      var response = await http.get(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Accept': 'application/json',
+          'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        },
+      );
+      allListings.value = alllistingsFromJson(response.body);
+      listOne.value = allListings.value.data!;
+      // totalPages.value = allListings.value.
+      print(allListings.value.data!.length);
+      isLoading.value = false;
+    } else {
+      isLoading.value = true;
+      String url =
+          'https://lagosabuja.com/wp-json/rtcl/v1/listings?page=$currentPage';
+      var response = await http.get(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Accept': 'application/json',
+          'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+        },
+      );
+      allListings.value = alllistingsFromJson(response.body);
+      listOne.value = allListings.value.data!;
+      // totalPages.value = allListings.value.
+      print(allListings.value.data!.length);
+      isLoading.value = false;
+    }
   }
 
   addListing(

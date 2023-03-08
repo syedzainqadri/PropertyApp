@@ -69,6 +69,7 @@ dependencies:
   overlay_support: ^2.0.1
   share_plus: ^4.0.10
   pinch_zoom_image_last: ^0.4.1
+  pull_to_refresh: ^2.0.0
 
 dev_dependencies:
   flutter_test:

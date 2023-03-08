@@ -64,7 +64,7 @@ class CategoryListingCard extends StatelessWidget {
               Stack(
                 children: [
                   Container(
-                    width: width * 0.35,
+                    width: width * 0.33,
                     height: height * 0.15,
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(

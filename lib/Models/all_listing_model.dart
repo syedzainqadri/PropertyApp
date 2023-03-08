@@ -12,20 +12,20 @@ String alllistingsToJson(Alllistings data) => json.encode(data.toJson());
 class Alllistings {
   Alllistings({
     this.data,
-    // this.pagination,
+    this.pagination,
   });
 
   List<Datum>? data;
-  // Pagination? pagination;
+  Pagination? pagination;
 
   factory Alllistings.fromJson(Map<String, dynamic> json) => Alllistings(
         data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-        // pagination: Pagination.fromJson(json["pagination"]),
+        pagination: Pagination.fromJson(json["pagination"]),
       );
 
   Map<String, dynamic> toJson() => {
         "data": List<dynamic>.from(data!.map((x) => x.toJson())),
-        // "pagination": pagination!.toJson(),
+        "pagination": pagination!.toJson(),
       };
 }
 
@@ -537,37 +537,37 @@ final titleValues = EnumValues({
   "superite": Title.SUPERITE
 });
 
-// class Pagination {
-//   Pagination({
-//     this.total,
-//     this.count,
-//     this.perPage,
-//     this.currentPage,
-//     this.totalPages,
-//   });
+class Pagination {
+  Pagination({
+    this.total,
+    this.count,
+    this.perPage,
+    this.currentPage,
+    this.totalPages,
+  });
 
-//   var total;
-//   var count;
-//   var perPage;
-//   var currentPage;
-//   var totalPages;
+  var total;
+  var count;
+  var perPage;
+  var currentPage;
+  var totalPages;
 
-//   factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
-//         total: json["total"],
-//         count: json["count"],
-//         perPage: json["per_page"],
-//         currentPage: json["current_page"],
-//         totalPages: json["total_pages"],
-//       );
+  factory Pagination.fromJson(Map<String, dynamic> json) => Pagination(
+        total: json["total"],
+        count: json["count"],
+        perPage: json["per_page"],
+        currentPage: json["current_page"],
+        totalPages: json["total_pages"],
+      );
 
-//   Map<String, dynamic> toJson() => {
-//         "total": total,
-//         "count": count,
-//         "per_page": perPage,
-//         "current_page": currentPage,
-//         "total_pages": totalPages,
-//       };
-// }
+  Map<String, dynamic> toJson() => {
+        "total": total,
+        "count": count,
+        "per_page": perPage,
+        "current_page": currentPage,
+        "total_pages": totalPages,
+      };
+}
 
 class EnumValues<T> {
   Map<String, T> map;
