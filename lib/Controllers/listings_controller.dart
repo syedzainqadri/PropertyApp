@@ -45,6 +45,7 @@ class ListingController extends GetxController {
     } else if (currentPage <= 1) {
       currentPage.value = 1;
       isLoading.value = true;
+      print("current page number is: ${currentPage.value}");
       String url =
           'https://lagosabuja.com/wp-json/rtcl/v1/listings?page=$currentPage';
       var response = await http.get(
@@ -61,6 +62,7 @@ class ListingController extends GetxController {
       isLoading.value = false;
     } else {
       isLoading.value = true;
+      print("current page number is: ${currentPage.value}");
       String url =
           'https://lagosabuja.com/wp-json/rtcl/v1/listings?page=$currentPage';
       var response = await http.get(

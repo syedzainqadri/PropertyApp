@@ -15,7 +15,7 @@ class HomePage extends GetView<ListingController> {
   HomePage({Key? key}) : super(key: key);
   final featuredListingController = Get.find<FeaturedListingController>();
   final categoriesController = Get.find<CategoriesController>();
-  final refreshControoler = RefreshController();
+  final refreshController = RefreshController();
   final height = Get.height;
 
   @override
@@ -159,7 +159,7 @@ class HomePage extends GetView<ListingController> {
                       () => SizedBox(
                         height: height * 0.8,
                         child: SmartRefresher(
-                          controller: refreshControoler,
+                          controller: refreshController,
                           enablePullDown: true,
                           enablePullUp: true,
                           header: const WaterDropHeader(),
@@ -171,8 +171,11 @@ class HomePage extends GetView<ListingController> {
                               body = const Text("Failed to load more");
                             } else if (mode == LoadStatus.canLoading) {
                               body = const Text("Loading...");
-                            } else {
+                            } else if (controller.currentPage.value >=
+                                controller.totalPages.value) {
                               body = const Text("No More Data");
+                            } else {
+                              body = const Text("End Of List");
                             }
                             return SizedBox(
                               height: 55.0,
@@ -222,13 +225,13 @@ class HomePage extends GetView<ListingController> {
   void _onRefresh() async {
     await Future.delayed(const Duration(milliseconds: 1000));
     controller.getAllListing(isRefreshed: true);
-    refreshControoler.refreshCompleted();
+    refreshController.refreshCompleted();
   }
 
   void _onLoading() async {
     await Future.delayed(const Duration(milliseconds: 1000));
     controller.currentPage.value++;
     controller.getAllListing(isRefreshed: false);
-    refreshControoler.refreshCompleted();
+    refreshController.loadComplete();
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Categories/Widgets/CategoryListingCard.dart';
 import 'package:lagosabuja/Controllers/listings_controller.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../AddListings/add_listings.dart';
 import '../Utils/const.dart';
 
@@ -37,6 +38,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   bool showFilters = false;
   bool showSort = false;
+  final RefreshController refreshController = RefreshController();
 
   @override
   void initState() {
@@ -86,32 +88,57 @@ class _CategoryPageState extends State<CategoryPage> {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 8.0),
-                  child: ListView.builder(
-                    itemCount: listingController.allListings.value.data!.length,
-                    itemBuilder: (context, position) {
-                      if (listingController.allListings.value.data![position]
-                                  .categories![0].parent ==
-                              widget.id ||
-                          listingController.allListings.value.data![position]
-                                  .categories![0].termId ==
-                              widget.id) {
-                        return CategoryListingCard(
-                          image: listingController
-                              .allListings.value.data![position].images,
-                          title: listingController
-                              .allListings.value.data![position].title,
-                          city:
-                              '${listingController.allListings.value.data![position].contact!.locations![1].name}, ${listingController.allListings.value.data![position].contact!.locations![0].name}',
-                          price: listingController
-                              .allListings.value.data![position].price,
-                          isFovorite: false,
-                          description: '',
-                          listingId: listingController
-                              .allListings.value.data![position].listingId,
-                        );
+                  child: SmartRefresher(
+                    controller: refreshController,
+                    enablePullDown: true,
+                    enablePullUp: true,
+                    header: const WaterDropHeader(),
+                    footer: CustomFooter(builder: ((context, mode) {
+                      Widget body;
+                      if (mode == LoadStatus.idle) {
+                        body = const Text("Pull Up to Load More");
+                      } else if (mode == LoadStatus.failed) {
+                        body = const Text("Failed to load more");
+                      } else if (mode == LoadStatus.canLoading) {
+                        body = const Text("Loading...");
+                      } else {
+                        body = const Text("No More Data");
                       }
-                      return const Offstage();
-                    },
+                      return SizedBox(
+                        height: 55.0,
+                        child: Center(child: body),
+                      );
+                    })),
+                    onRefresh: _onRefresh,
+                    onLoading: _onLoading,
+                    child: ListView.builder(
+                      itemCount:
+                          listingController.allListings.value.data!.length,
+                      itemBuilder: (context, position) {
+                        if (listingController.allListings.value.data![position]
+                                    .categories![0].parent ==
+                                widget.id ||
+                            listingController.allListings.value.data![position]
+                                    .categories![0].termId ==
+                                widget.id) {
+                          return CategoryListingCard(
+                            image: listingController
+                                .allListings.value.data![position].images,
+                            title: listingController
+                                .allListings.value.data![position].title,
+                            city:
+                                '${listingController.allListings.value.data![position].contact!.locations![1].name}, ${listingController.allListings.value.data![position].contact!.locations![0].name}',
+                            price: listingController
+                                .allListings.value.data![position].price,
+                            isFovorite: false,
+                            description: '',
+                            listingId: listingController
+                                .allListings.value.data![position].listingId,
+                          );
+                        }
+                        return const Offstage();
+                      },
+                    ),
                   ),
                 ),
               ),
@@ -310,5 +337,18 @@ class _CategoryPageState extends State<CategoryPage> {
             : const Offstage(),
       ],
     );
+  }
+
+  void _onRefresh() async {
+    await Future.delayed(const Duration(milliseconds: 1000));
+    listingController.getAllListing(isRefreshed: true);
+    refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    await Future.delayed(const Duration(milliseconds: 1000));
+    listingController.currentPage.value++;
+    listingController.getAllListing(isRefreshed: false);
+    refreshController.refreshCompleted();
   }
 }
