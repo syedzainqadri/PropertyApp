@@ -19,6 +19,7 @@ class MyListingCard extends StatelessWidget {
   var isFovorite;
   var description;
   var listingId;
+  var lable;
 
   MyListingCard(
       {this.image,
@@ -28,6 +29,7 @@ class MyListingCard extends StatelessWidget {
       this.isFovorite,
       this.description,
       this.listingId,
+      this.lable,
       Key? key})
       : super(key: key);
 
@@ -96,7 +98,7 @@ class MyListingCard extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          '$currency:  ' + price.toString(),
+                          lable,
                           style: const TextStyle(
                               overflow: TextOverflow.ellipsis,
                               letterSpacing: .5,

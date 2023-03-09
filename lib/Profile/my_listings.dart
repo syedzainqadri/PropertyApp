@@ -82,26 +82,24 @@ class MyListings extends GetView<MyListingController> {
                                   color: Colors.red,
                                 ),
                                 child: MyListingCard(
-                                    image: controller
-                                        .myListings.value.data![index].images,
-                                    title: controller
-                                        .myListings.value.data![index].title
-                                        .toString(),
-                                    city: controller
-                                        .myListings
-                                        .value
-                                        .data![index]
-                                        .contact!
-                                        .locations![0]
-                                        .name
-                                        .toString(),
-                                    price: controller
-                                        .myListings.value.data![index].price
-                                        .toString(),
-                                    isFovorite: false,
-                                    description: '',
-                                    listingId: controller.myListings.value
-                                        .data![index].listingId),
+                                  image: controller
+                                      .myListings.value.data![index].images,
+                                  title: controller
+                                      .myListings.value.data![index].title
+                                      .toString(),
+                                  city: controller.myListings.value.data![index]
+                                      .contact!.locations![0].name
+                                      .toString(),
+                                  price: controller
+                                      .myListings.value.data![index].price
+                                      .toString(),
+                                  isFovorite: false,
+                                  description: '',
+                                  listingId: controller
+                                      .myListings.value.data![index].listingId,
+                                  lable: controller
+                                      .myListings.value.data![index].status,
+                                ),
                               );
                             },
                           );
