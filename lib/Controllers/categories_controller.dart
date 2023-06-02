@@ -24,12 +24,10 @@ class CategoriesController extends GetxController {
     );
     if (response.statusCode == 200) {
       categories.value = categoriesFromJson(response.body);
-      print(categories.value.length);
     } else {}
   }
 
   getCategoriesByListingType(listingType) async {
-    print(listingType);
     String url =
         'https://lagosabuja.com/wp-json/rtcl/v1/categories?listing_type=$listingType';
     var response = await http.get(
@@ -45,7 +43,6 @@ class CategoriesController extends GetxController {
   }
 
   getSubCategories(categoryId) async {
-    print("sub category id is: $categoryId");
     String url =
         'https://lagosabuja.com/wp-json/rtcl/v1/categories?parent_id=$categoryId';
     var response = await http.get(

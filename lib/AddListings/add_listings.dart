@@ -334,7 +334,6 @@ class AddListing extends StatelessWidget {
                             pricingTypes = PricType();
                             pricingTypes.id = '';
                             pricingTypes.name = '';
-                            print(category.termId);
                           },
                         ),
                       ),
@@ -364,7 +363,6 @@ class AddListing extends StatelessWidget {
 
                             subCategorySelected.value = true;
                             subCategory = val;
-                            print(subCategory.termId);
                           },
                         ),
                       )
@@ -400,7 +398,6 @@ class AddListing extends StatelessWidget {
                                 onChanged: (val) {
                                   pricingTypesSelected.value = false;
                                   pricingTypes = val;
-                                  print(pricingTypes.id);
                                   pricingTypesSelected.value = true;
                                 },
                               ),
@@ -464,7 +461,6 @@ class AddListing extends StatelessWidget {
                                       onChanged: (val) {
                                         pricingTypesSelected.value = false;
                                         priceUnits = val;
-                                        print(priceUnits.id);
                                         pricingTypesSelected.value = true;
                                       },
                                     ),
@@ -813,7 +809,6 @@ class AddListing extends StatelessWidget {
     List<XFile>? images = await ImagePicker().pickMultiImage();
     for (int i = 0; i < images.length; i++) {
       imageFiles.value.addAll(images);
-      print(imageFiles.value);
     }
   }
 
@@ -872,14 +867,10 @@ class AddListing extends StatelessWidget {
     var longitude = currentLocation.longitude.toString();
     box.write('longitude', longitude);
     box.write('latitude', latitude);
-    print(latitude);
-    print(longitude);
     Get.snackbar('Success', "Your Current Location is selected",
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: kGreen,
         colorText: white);
-
-    print(currentLocation.toString());
   }
 }
 

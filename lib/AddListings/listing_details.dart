@@ -77,7 +77,6 @@ class _ListingDetailsState extends State<ListingDetails> {
     Future.delayed(const Duration(seconds: 3))
         .then(((value) => setState(() {})));
     isLoading.value = false;
-    print(isLoading.value);
   }
 
   double height = Get.height;

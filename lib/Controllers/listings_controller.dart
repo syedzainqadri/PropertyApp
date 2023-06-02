@@ -24,7 +24,6 @@ class ListingController extends GetxController {
     if (isRefreshed) {
       isLoading.value = true;
       currentPage.value = 1;
-      print("current page number is: ${currentPage.value}");
     }
     if (currentPage.value >= totalPages.value) {
       currentPage.value = totalPages.value;
@@ -37,15 +36,17 @@ class ListingController extends GetxController {
           'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
         },
       );
+      print('<====== body is ======>');
+      print(response.body);
       allListings.value = alllistingsFromJson(response.body);
+      print('<====== total is ======>');
+      print(allListings.value.pagination!.total);
       listOne.value = allListings.value.data!;
       totalPages.value = allListings.value.pagination!.totalPages;
-      print(allListings.value.data!.length);
       isLoading.value = false;
     } else if (currentPage <= 1) {
       currentPage.value = 1;
       isLoading.value = true;
-      print("current page number is: ${currentPage.value}");
       String url =
           'https://lagosabuja.com/wp-json/rtcl/v1/listings?page=$currentPage';
       var response = await http.get(
@@ -57,12 +58,9 @@ class ListingController extends GetxController {
       );
       allListings.value = alllistingsFromJson(response.body);
       listOne.value = allListings.value.data!;
-      // totalPages.value = allListings.value.
-      print(allListings.value.data!.length);
       isLoading.value = false;
     } else {
       isLoading.value = true;
-      print("current page number is: ${currentPage.value}");
       String url =
           'https://lagosabuja.com/wp-json/rtcl/v1/listings?page=$currentPage';
       var response = await http.get(
@@ -74,8 +72,6 @@ class ListingController extends GetxController {
       );
       allListings.value = alllistingsFromJson(response.body);
       listOne.value = allListings.value.data!;
-      // totalPages.value = allListings.value.
-      print(allListings.value.data!.length);
       isLoading.value = false;
     }
   }
@@ -104,7 +100,6 @@ class ListingController extends GetxController {
       List<SelectedFieldsModel> customFields,
       amenities) async {
     isLoading.value = true;
-    print('locationis $locationId');
     String url = 'https://lagosabuja.com/wp-json/rtcl/v1/listing/form';
 
     var request = http.MultipartRequest('POST', Uri.parse(url));
@@ -153,7 +148,6 @@ class ListingController extends GetxController {
     });
     var res = await request.send();
     var response = await http.Response.fromStream(res);
-    print(response.body);
     isLoading.value = false;
   }
 }

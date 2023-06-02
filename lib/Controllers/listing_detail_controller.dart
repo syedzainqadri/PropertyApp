@@ -14,9 +14,7 @@ class ListingDetailsController extends GetxController {
         'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
       },
     );
-    print("this is the response: ${response.body}");
     listingDetail.value = listingByIdModelFromJson(response.body);
     List<Image> image = listingDetail.value.images!;
-    print(image);
   }
 }

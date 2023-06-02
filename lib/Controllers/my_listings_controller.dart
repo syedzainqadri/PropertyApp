@@ -28,11 +28,8 @@ class MyListingController extends GetxController {
     );
     var json = jsonDecode(response.body);
     var map = Map.from(json);
-    print(map.length);
 
     myListings.value = myListingModelFromJson(response.body);
-    print(myListings.value.data!.length);
-    print(myListings.value.pagination!.total);
     isLoading.value = false;
   }
 }
