@@ -91,7 +91,7 @@ class ListingByIdModel {
         promotions: List<String>.from(json["promotions"].map((x) => x)),
         badges: List<String>.from(json["badges"].map((x) => x)),
         contact: Contact.fromJson(json["contact"]),
-        store: Store.fromJson(json["store"]),
+        // store: Store.fromJson(json["store"]),
         url: json["url"],
         description: json["description"],
         videoUrls: List<dynamic>.from(json["video_urls"].map((x) => x)),
@@ -123,7 +123,7 @@ class ListingByIdModel {
         "promotions": List<dynamic>.from(promotions!.map((x) => x)),
         "badges": List<dynamic>.from(badges!.map((x) => x)),
         "contact": contact!.toJson(),
-        "store": store!.toJson(),
+        // "store": store!.toJson(),
         "url": url,
         "description": description,
         "video_urls": List<dynamic>.from(videoUrls!.map((x) => x)),
@@ -601,7 +601,7 @@ class Related {
     this.promotions,
     this.badges,
     this.contact,
-    this.store,
+    // this.store,
   });
 
   int? listingId;
@@ -623,7 +623,7 @@ class Related {
   List<String>? promotions;
   List<String>? badges;
   Contact? contact;
-  Store? store;
+  // Store? store;
 
   factory Related.fromJson(Map<String, dynamic> json) => Related(
         listingId: json["listing_id"],
@@ -646,7 +646,7 @@ class Related {
         promotions: List<String>.from(json["promotions"].map((x) => x)),
         badges: List<String>.from(json["badges"].map((x) => x)),
         contact: Contact.fromJson(json["contact"]),
-        store: Store.fromJson(json["store"]),
+        // store: Store.fromJson(json["store"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -669,29 +669,29 @@ class Related {
         "promotions": List<dynamic>.from(promotions!.map((x) => x)),
         "badges": List<dynamic>.from(badges!.map((x) => x)),
         "contact": contact!.toJson(),
-        "store": store!.toJson(),
+        // "store": store!.toJson(),
       };
 }
 
-class Store {
-  Store({
-    this.id,
-    this.title,
-  });
+// class Store {
+//   Store({
+//     this.id,
+//     this.title,
+//   });
 
-  int? id;
-  String? title;
+//   int? id;
+//   String? title;
 
-  factory Store.fromJson(Map<String, dynamic> json) => Store(
-        id: json["id"],
-        title: json["title"],
-      );
+//   factory Store.fromJson(Map<String, dynamic> json) => Store(
+//         id: json["id"],
+//         title: json["title"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "title": title,
+//       };
+// }
 
 class Review {
   Review({
