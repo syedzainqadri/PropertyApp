@@ -115,28 +115,36 @@ class _CategoryPageState extends State<CategoryPage> {
                       itemCount:
                           listingController.allListings.value.data!.length,
                       itemBuilder: (context, position) {
-                        if (listingController.allListings.value.data![position]
-                                    .categories![0].parent ==
-                                widget.id ||
-                            listingController.allListings.value.data![position]
-                                    .categories![0].termId ==
-                                widget.id) {
-                          return CategoryListingCard(
-                            image: listingController
-                                .allListings.value.data![position].images,
-                            title: listingController
-                                .allListings.value.data![position].title,
-                            city:
-                                '${listingController.allListings.value.data![position].contact!.locations![1].name}, ${listingController.allListings.value.data![position].contact!.locations![0].name}',
-                            price: listingController
-                                .allListings.value.data![position].price,
-                            isFovorite: false,
-                            description: '',
-                            listingId: listingController
-                                .allListings.value.data![position].listingId,
-                          );
-                        }
-                        return const Offstage();
+                        // if (listingController.allListings.value.data![position]
+                        //             .categories![0].parent ==
+                        //         widget.id ||
+                        //     listingController.allListings.value.data![position]
+                        //             .categories![0].termId ==
+                        //         widget.id) {
+                        return CategoryListingCard(
+                          image: listingController
+                              .allListings.value.data![position].images,
+                          title: listingController
+                              .allListings.value.data![position].title,
+                          city: listingController
+                                      .allListings
+                                      .value
+                                      .data![position]
+                                      .contact!
+                                      .locations!
+                                      .length !=
+                                  2
+                              ? 'Some Where in,${listingController.allListings.value.data![position].contact!.locations![0].name}'
+                              : '${listingController.allListings.value.data![position].contact!.locations![1].name}, ${listingController.allListings.value.data![position].contact!.locations![0].name}',
+                          price: listingController
+                              .allListings.value.data![position].price,
+                          isFovorite: false,
+                          description: '',
+                          listingId: listingController
+                              .allListings.value.data![position].listingId,
+                        );
+                        // }
+                        // return const Offstage();
                       },
                     ),
                   ),
