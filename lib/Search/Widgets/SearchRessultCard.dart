@@ -110,7 +110,14 @@ class SearchResultCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(title),
+                  SizedBox(
+                    width: 200,
+                    child: Text(
+                      title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -122,7 +129,15 @@ class SearchResultCard extends StatelessWidget {
                         size: 17,
                         color: kGreen,
                       ),
-                      Text(city),
+                      SizedBox(
+                        width: 185,
+                        child: Text(
+                          city,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: const TextStyle(fontSize: 12),
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(

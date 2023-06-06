@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lagosabuja/Categories/Widgets/CategoryListingCard.dart';
+import 'package:lagosabuja/Controllers/configControllers/config_controller.dart';
 import 'package:lagosabuja/Controllers/listings_controller.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../AddListings/add_listings.dart';
+import '../Profile/account_subscriptions.dart';
 import '../Utils/const.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -17,6 +19,7 @@ class CategoryPage extends StatefulWidget {
 }
 
 class _CategoryPageState extends State<CategoryPage> {
+  final ConfigController configController = Get.put(ConfigController());
   final ListingController listingController = Get.put(ListingController());
   int _radioValue = 0;
   void _handleRadioValueChange(int value) {
@@ -52,7 +55,29 @@ class _CategoryPageState extends State<CategoryPage> {
         Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Get.to(AddListing());
+              if (configController.config.value.membershipEnabled == true &&
+                  configController.newListingConfig.value.eligible == true) {
+                Get.to(AddListing());
+              } else if (configController.config.value.membershipEnabled !=
+                  true) {
+                Get.snackbar(
+                  'No Membership',
+                  'You do not have a membership yet kindly select one',
+                  snackPosition: SnackPosition.BOTTOM,
+                  backgroundColor: Colors.red,
+                  colorText: white,
+                );
+                //TODO: route the user to Membership
+                Get.to(const AccountSubscription());
+              } else {
+                Get.snackbar(
+                  'Not Eligible',
+                  'You are not Eligible to post, Please buy a package',
+                  snackPosition: SnackPosition.BOTTOM,
+                  backgroundColor: Colors.red,
+                  colorText: white,
+                );
+              }
             },
             child: const Icon(Icons.add),
             foregroundColor: white,

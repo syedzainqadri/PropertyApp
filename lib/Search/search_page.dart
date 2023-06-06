@@ -90,8 +90,17 @@ class _SearchPageState extends State<SearchPage> {
                                 .searchListings.value.data![position].images,
                             title: searchController
                                 .searchListings.value.data![position].title,
-                            city:
-                                '${searchController.searchListings.value.data![position].contact!.locations![1].name}, ${searchController.searchListings.value.data![position].contact!.locations![0].name}',
+                            city: searchController
+                                        .searchListings
+                                        .value
+                                        .data![position]
+                                        .contact!
+                                        .locations!
+                                        .length !=
+                                    2
+                                ? 'Some Where in,${searchController.searchListings.value.data![position].contact!.locations![0].name}'
+                                : '${searchController.searchListings.value.data![position].contact!.locations![1].name}, ${searchController.searchListings.value.data![position].contact!.locations![0].name}',
+                            // '${searchController.searchListings.value.data![position].contact!.locations![1].name}, ${searchController.searchListings.value.data![position].contact!.locations![0].name}',
                             price: searchController
                                 .searchListings.value.data![position].price,
                             isFovorite: false,
