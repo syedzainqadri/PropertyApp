@@ -44,7 +44,7 @@ class Datum {
     this.promotions,
     this.badges,
     this.contact,
-    this.store,
+    // this.store,
     this.renew,
   });
 
@@ -67,7 +67,7 @@ class Datum {
   List<dynamic>? promotions;
   List<String>? badges;
   Contact? contact;
-  Store? store;
+  // Store? store;
   bool? renew;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -92,7 +92,7 @@ class Datum {
         promotions: List<dynamic>.from(json["promotions"].map((x) => x)),
         badges: List<String>.from(json["badges"].map((x) => x)),
         contact: Contact.fromJson(json["contact"]),
-        store: Store.fromJson(json["store"]),
+        // store: Store.fromJson(json["store"]),
         renew: json["renew"],
       );
 
@@ -116,7 +116,7 @@ class Datum {
         "promotions": List<dynamic>.from(promotions!.map((x) => x)),
         "badges": List<dynamic>.from(badges!.map((x) => x)),
         "contact": contact!.toJson(),
-        "store": store!.toJson(),
+        // "store": store!.toJson(),
         "renew": renew,
       };
 }
@@ -382,25 +382,25 @@ class PriceUnit {
       };
 }
 
-class Store {
-  Store({
-    this.id,
-    this.title,
-  });
+// class Store {
+//   Store({
+//     this.id,
+//     this.title,
+//   });
 
-  int? id;
-  String? title;
+//   int? id;
+//   String? title;
 
-  factory Store.fromJson(Map<String, dynamic> json) => Store(
-        id: json["id"],
-        title: json["title"],
-      );
+//   factory Store.fromJson(Map<String, dynamic> json) => Store(
+//         id: json["id"],
+//         title: json["title"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "id": id,
+//         "title": title,
+//       };
+// }
 
 // class Pagination {
 //   Pagination({

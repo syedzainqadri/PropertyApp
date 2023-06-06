@@ -130,7 +130,7 @@ class _HomeState extends State<Home> {
                           } else {
                             Get.snackbar(
                               'Not Eligible',
-                              'You are not Eligible to post',
+                              'You are not Eligible to post, Please buy a package',
                               snackPosition: SnackPosition.BOTTOM,
                               backgroundColor: Colors.red,
                               colorText: white,
