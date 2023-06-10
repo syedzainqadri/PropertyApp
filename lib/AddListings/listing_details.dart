@@ -604,8 +604,8 @@ class _ListingDetailsState extends State<ListingDetails> {
                     icon: Icons.phone,
                   ),
                   BottomSheetButton(
-                    onTap: () {
-                      showDialog(
+                    onTap: () async {
+                      await showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return StatefulBuilder(
@@ -681,7 +681,32 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                 () async {
                                                   if (formKey.currentState!
                                                       .validate()) {
-                                                    sendemailController
+                                                    print('email sent');
+                                                    Get.defaultDialog(
+                                                        title: "",
+                                                        content: Container(
+                                                          color: Colors.white,
+                                                          child: Column(
+                                                            children: const [
+                                                              Center(
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  color: kGreen,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 10,
+                                                              ),
+                                                              Text(
+                                                                "Sending Email",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black38),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ));
+                                                    await sendemailController
                                                         .sendEmail(
                                                             widget.id,
                                                             messageController
@@ -689,6 +714,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                                                             nameController.text,
                                                             emailController
                                                                 .text);
+                                                    Get.back();
                                                   }
                                                 },
                                               ),
@@ -702,6 +728,7 @@ class _ListingDetailsState extends State<ListingDetails> {
                               },
                             );
                           });
+                      Get.back();
                     },
                     width: width * 0.25,
                     height: height * 0.06,
