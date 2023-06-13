@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../Auth/sign_up.dart';
 import 'const.dart';
 
 textField(hintText, obscureText, controller,
@@ -46,7 +44,7 @@ defaultButton(title, onPressed) {
         ),
       ),
       style: ElevatedButton.styleFrom(
-        primary: kGreen,
+        backgroundColor: kGreen,
         elevation: 0.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
@@ -69,7 +67,7 @@ socialButton(title, icon, color, onTap) {
         ),
       ),
       style: ElevatedButton.styleFrom(
-        primary: color,
+        backgroundColor: color,
         elevation: 0.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
@@ -78,9 +76,14 @@ socialButton(title, icon, color, onTap) {
 }
 
 class SignupButton extends StatelessWidget {
-  const SignupButton({
+  SignupButton({
+    required this.text,
+    required this.onPressed,
     Key? key,
   }) : super(key: key);
+
+  String text;
+  dynamic onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -88,18 +91,16 @@ class SignupButton extends StatelessWidget {
       width: double.infinity,
       height: 60,
       child: ElevatedButton(
-        onPressed: () {
-          Get.to(const SignUp());
-        },
+        onPressed: onPressed,
         child: const Text(
-          'Sign Up',
+          'Text',
           style: TextStyle(
             color: kGreen,
             fontSize: 20,
           ),
         ),
         style: ElevatedButton.styleFrom(
-          primary: transparent,
+          backgroundColor: transparent,
           elevation: 0.0,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),

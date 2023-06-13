@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lagosabuja/Controllers/chat_controller.dart';
 import 'package:lagosabuja/Controllers/user_controller.dart';
+import 'package:lagosabuja/Utils/global_widgets.dart';
+import 'package:lagosabuja/main.dart';
 import '../Utils/const.dart';
 
 class ChatUi extends StatefulWidget {
@@ -37,40 +39,51 @@ class _ChatUiState extends State<ChatUi> {
   Widget build(BuildContext context) {
     var _chatController = Get.find<ChatController>();
     return Obx(() => Scaffold(
-          appBar: AppBar(
-            elevation: 0.0,
-            centerTitle: true,
-            backgroundColor: kGreen,
-            title: Text(widget.title),
-            leading: GestureDetector(
-                onTap: () {
-                  Get.back();
-                  box.remove('listingId');
-                },
-                child:
-                    const Icon(Icons.navigate_before, size: 35, color: white)),
-          ),
-          body: Column(
+        appBar: AppBar(
+          elevation: 0.0,
+          centerTitle: true,
+          backgroundColor: kGreen,
+          title: Text(widget.title),
+          leading: GestureDetector(
+              onTap: () {
+                Get.back();
+                box.remove('listingId');
+              },
+              child: const Icon(Icons.navigate_before, size: 35, color: white)),
+        ),
+        body: Obx(
+          () => Column(
             children: [
-              chatController.messagesList.value.messages != null
-                  ? Expanded(
-                      child: Obx(() {
-                        return ListView.builder(
-                            itemCount: _chatController
-                                .messagesList.value.messages!.length,
-                            itemBuilder: (_, pos) {
-                              var sourceId = _chatController
-                                  .messagesList.value.messages![pos].sourceId;
-                              var userId = userController.userModel.value.id;
-                              return int.parse(sourceId!) == userId
-                                  ? sentMessage(_chatController.messagesList
-                                      .value.messages![pos].message)
-                                  : recieveMessage(_chatController.messagesList
-                                      .value.messages![pos].message);
-                            });
+              chatController.userLoggedIn.value == true
+                  ? chatController.messagesList.value.messages != null
+                      ? Expanded(
+                          child: Obx(() {
+                            return ListView.builder(
+                                itemCount: _chatController
+                                    .messagesList.value.messages!.length,
+                                itemBuilder: (_, pos) {
+                                  var sourceId = _chatController.messagesList
+                                      .value.messages![pos].sourceId;
+                                  var userId =
+                                      userController.userModel.value.id;
+                                  return int.parse(sourceId!) == userId
+                                      ? sentMessage(_chatController.messagesList
+                                          .value.messages![pos].message)
+                                      : recieveMessage(_chatController
+                                          .messagesList
+                                          .value
+                                          .messages![pos]
+                                          .message);
+                                });
+                          }),
+                        )
+                      : const Expanded(
+                          child: Center(child: Text('No Messages')))
+                  : SignupButton(
+                      text: 'Login',
+                      onPressed: () {
+                        Get.to(const MyHomePage());
                       }),
-                    )
-                  : const Expanded(child: Center(child: Text('No Messages'))),
               ChatComposer(
                 recordIcon: Icons.send,
                 controller: con,
@@ -94,7 +107,7 @@ class _ChatUiState extends State<ChatUi> {
               ),
             ],
           ),
-        ));
+        )));
   }
 
   sentMessage(message) {

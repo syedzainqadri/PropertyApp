@@ -4,8 +4,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lagosabuja/Auth/sign_up.dart';
 import 'package:lagosabuja/Controllers/configControllers/config_controller.dart';
 import 'package:lagosabuja/Controllers/my_listings_controller.dart';
+import 'package:lagosabuja/Home/home.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:lagosabuja/Bindings/bindings.dart';
 import 'package:lagosabuja/Controllers/featuredListings.dart';
@@ -21,7 +23,6 @@ import 'Auth/sign_in.dart';
 import 'Controllers/favorite_listing_controller.dart';
 import 'Controllers/listing_type_controller.dart';
 import 'Controllers/search_controller.dart';
-import 'Home/home.dart';
 import 'Utils/const.dart';
 import 'Utils/global_widgets.dart';
 import 'package:get_storage/get_storage.dart';
@@ -127,8 +128,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         initialBinding: MyBindings(),
         debugShowCheckedModeBanner: false,
-        home:
-            GetStorage().read('isLoggedIn') ? const Home() : const MyHomePage(),
+        home: const Home(),
       ),
     );
   }
@@ -144,6 +144,19 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.only(left: 28.0, right: 28.0),
         child: Column(
@@ -165,7 +178,12 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               height: 20,
             ),
-            const SignupButton(),
+            SignupButton(
+              text: 'Sign Up',
+              onPressed: () {
+                Get.to(const SignUp());
+              },
+            ),
           ],
         ),
       ),

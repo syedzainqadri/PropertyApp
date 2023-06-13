@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lagosabuja/Categories/Widgets/CategoryListingCard.dart';
 import 'package:lagosabuja/Controllers/configControllers/config_controller.dart';
 import 'package:lagosabuja/Controllers/listings_controller.dart';
+import 'package:lagosabuja/main.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../AddListings/add_listings.dart';
 import '../Profile/account_subscriptions.dart';
@@ -41,6 +43,7 @@ class _CategoryPageState extends State<CategoryPage> {
 
   bool showFilters = false;
   bool showSort = false;
+  var userLoggedIn = false.obs;
   final RefreshController refreshController = RefreshController();
 
   @override
@@ -55,29 +58,57 @@ class _CategoryPageState extends State<CategoryPage> {
         Scaffold(
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              if (configController.config.value.membershipEnabled == true &&
-                  configController.newListingConfig.value.eligible == true) {
-                Get.to(AddListing());
-              } else if (configController.config.value.membershipEnabled !=
-                  true) {
-                Get.snackbar(
-                  'No Membership',
-                  'You do not have a membership yet kindly select one',
-                  snackPosition: SnackPosition.BOTTOM,
-                  backgroundColor: Colors.red,
-                  colorText: white,
-                );
-                //TODO: route the user to Membership
-                Get.to(const AccountSubscription());
+              userLoggedIn.value = GetStorage().read('isLoggedIn');
+              if (userLoggedIn.value == true) {
+                if (configController.config.value.membershipEnabled == true &&
+                    configController.newListingConfig.value.eligible == true) {
+                  Get.to(AddListing());
+                } else if (configController.config.value.membershipEnabled !=
+                    true) {
+                  Get.snackbar(
+                    'No Membership',
+                    'You do not have a membership yet kindly select one',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.red,
+                    colorText: white,
+                  );
+                  //TODO: route the user to Membership
+                  Get.to(const AccountSubscription());
+                } else {
+                  Get.snackbar(
+                    'Not Eligible',
+                    'You are not Eligible to post, Please buy a package',
+                    snackPosition: SnackPosition.BOTTOM,
+                    backgroundColor: Colors.red,
+                    colorText: white,
+                  );
+                }
               } else {
-                Get.snackbar(
-                  'Not Eligible',
-                  'You are not Eligible to post, Please buy a package',
-                  snackPosition: SnackPosition.BOTTOM,
-                  backgroundColor: Colors.red,
-                  colorText: white,
-                );
+                Get.to(const MyHomePage());
               }
+              // if (configController.config.value.membershipEnabled == true &&
+              //     configController.newListingConfig.value.eligible == true) {
+              //   Get.to(AddListing());
+              // } else if (configController.config.value.membershipEnabled !=
+              //     true) {
+              //   Get.snackbar(
+              //     'No Membership',
+              //     'You do not have a membership yet kindly select one',
+              //     snackPosition: SnackPosition.BOTTOM,
+              //     backgroundColor: Colors.red,
+              //     colorText: white,
+              //   );
+              //   //TODO: route the user to Membership
+              //   Get.to(const AccountSubscription());
+              // } else {
+              //   Get.snackbar(
+              //     'Not Eligible',
+              //     'You are not Eligible to post, Please buy a package',
+              //     snackPosition: SnackPosition.BOTTOM,
+              //     backgroundColor: Colors.red,
+              //     colorText: white,
+              //   );
+              // }
             },
             child: const Icon(Icons.add),
             foregroundColor: white,

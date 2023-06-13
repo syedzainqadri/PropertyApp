@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lagosabuja/Controllers/configControllers/config_controller.dart';
 import 'package:lagosabuja/Controllers/user_controller.dart';
+import 'package:lagosabuja/main.dart';
 import '../AddListings/add_listings.dart';
 import '../Categories/categories_page.dart';
 import '../Chat/conversation_page.dart';
@@ -32,6 +34,8 @@ class _HomeState extends State<Home> {
       Get.put(MembershipController());
   final ConfigController configController = Get.put(ConfigController());
   final userController = Get.find<UserController>();
+
+  var userLoggedIn = false.obs;
   @override
   void initState() {
     setState(() {
@@ -66,8 +70,15 @@ class _HomeState extends State<Home> {
                     Obx(() => userController.userModel.value.ppThumbUrl != null
                         ? GestureDetector(
                             onTap: () async {
-                              await membershipController.getMembershipPlans();
-                              Get.to(const Profile());
+                              userLoggedIn.value =
+                                  GetStorage().read('isLoggedIn');
+                              print(userLoggedIn);
+                              if (userLoggedIn.value == true) {
+                                await membershipController.getMembershipPlans();
+                                Get.to(const Profile());
+                              } else {
+                                Get.to(const MyHomePage());
+                              }
                             },
                             child: Container(
                                 width: 30,
@@ -87,8 +98,15 @@ class _HomeState extends State<Home> {
                           )
                         : GestureDetector(
                             onTap: () async {
-                              await membershipController.getMembershipPlans();
-                              Get.to(const Profile());
+                              userLoggedIn.value =
+                                  GetStorage().read('isLoggedIn');
+                              print(userLoggedIn);
+                              if (userLoggedIn.value == true) {
+                                await membershipController.getMembershipPlans();
+                                Get.to(const Profile());
+                              } else {
+                                Get.to(const MyHomePage());
+                              }
                             },
                             child: Container(
                                 width: 30,
@@ -109,32 +127,38 @@ class _HomeState extends State<Home> {
                   ? [
                       GestureDetector(
                         onTap: () {
-                          if (configController.config.value.membershipEnabled ==
-                                  true &&
-                              configController
-                                      .newListingConfig.value.eligible ==
-                                  true) {
-                            Get.to(AddListing());
-                          } else if (configController
-                                  .config.value.membershipEnabled !=
-                              true) {
-                            Get.snackbar(
-                              'No Membership',
-                              'You do not have a membership yet kindly select one',
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: Colors.red,
-                              colorText: white,
-                            );
-                            //TODO: route the user to Membership
-                            Get.to(const AccountSubscription());
+                          userLoggedIn.value = GetStorage().read('isLoggedIn');
+                          if (userLoggedIn.value == true) {
+                            if (configController
+                                        .config.value.membershipEnabled ==
+                                    true &&
+                                configController
+                                        .newListingConfig.value.eligible ==
+                                    true) {
+                              Get.to(AddListing());
+                            } else if (configController
+                                    .config.value.membershipEnabled !=
+                                true) {
+                              Get.snackbar(
+                                'No Membership',
+                                'You do not have a membership yet kindly select one',
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: Colors.red,
+                                colorText: white,
+                              );
+                              //TODO: route the user to Membership
+                              Get.to(const AccountSubscription());
+                            } else {
+                              Get.snackbar(
+                                'Not Eligible',
+                                'You are not Eligible to post, Please buy a package',
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: Colors.red,
+                                colorText: white,
+                              );
+                            }
                           } else {
-                            Get.snackbar(
-                              'Not Eligible',
-                              'You are not Eligible to post, Please buy a package',
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: Colors.red,
-                              colorText: white,
-                            );
+                            Get.to(const MyHomePage());
                           }
                         },
                         child: const Padding(

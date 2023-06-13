@@ -13,9 +13,10 @@ class ChatController extends GetxController {
   final token = GetStorage().read('token');
   var allChats = List<AllChats>.empty(growable: true).obs;
   var messagesList = Messages().obs;
-
+  var userLoggedIn = false.obs;
   @override
   onInit() {
+    userLoggedIn.value = GetStorage().read('isLoggedIn');
     getAllChats();
     super.onInit();
   }
@@ -88,17 +89,19 @@ class ChatController extends GetxController {
   }
 
   getAllChats() async {
-    isLoading.value = true;
-    var response = await http.get(
-      Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my/chat"),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-        'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
-        'Authorization': 'Bearer $token',
-      },
-    );
-    isLoading.value = false;
+    if (userLoggedIn.value == true) {
+      isLoading.value = true;
+      var response = await http.get(
+        Uri.parse("https://lagosabuja.com/wp-json/rtcl/v1/my/chat"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'X-API-KEY': '835c5442-20ca-4d51-9e32-fae11c35fd42',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      isLoading.value = false;
 
-    allChats.value = allChatsFromJson(response.body);
+      allChats.value = allChatsFromJson(response.body);
+    } else {}
   }
 }
