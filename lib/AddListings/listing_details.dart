@@ -61,22 +61,24 @@ class _ListingDetailsState extends State<ListingDetails> {
   var formKey = GlobalKey<FormState>();
 
   checkWishlist() async {
-    isLoading.value = true;
-    for (int i = 0;
-        i < favListingController.favoriteListings.value.data.length;
-        i++) {
-      if (widget.id ==
-          favListingController.favoriteListings.value.data[i].listingId) {
-        isFavorited.value = true;
-      } else if (isFavorited.value == true) {
-        break;
-      } else {
-        isFavorited.value = false;
+    if (favListingController.userLoggedIn.value == true) {
+      isLoading.value = true;
+      for (int i = 0;
+          i < favListingController.favoriteListings.value.data.length;
+          i++) {
+        if (widget.id ==
+            favListingController.favoriteListings.value.data[i].listingId) {
+          isFavorited.value = true;
+        } else if (isFavorited.value == true) {
+          break;
+        } else {
+          isFavorited.value = false;
+        }
       }
+      Future.delayed(const Duration(seconds: 3))
+          .then(((value) => setState(() {})));
+      isLoading.value = false;
     }
-    Future.delayed(const Duration(seconds: 3))
-        .then(((value) => setState(() {})));
-    isLoading.value = false;
   }
 
   double height = Get.height;
@@ -116,8 +118,16 @@ class _ListingDetailsState extends State<ListingDetails> {
                   padding: const EdgeInsets.all(0.0),
                   child: IconButton(
                     onPressed: () {
-                      Get.to(() => ChatUi(
-                          listingId: widget.id, title: widget.title ?? ''));
+                      favListingController.userLoggedIn.value == true
+                          ? Get.to(() => ChatUi(
+                              listingId: widget.id, title: widget.title ?? ''))
+                          : Get.snackbar(
+                              'Please Login', 'Please Login to Send a message',
+                              colorText: Colors.white,
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: Colors.red,
+                              icon:
+                                  const Icon(Icons.error, color: Colors.white));
                     },
                     icon: const Icon(
                       Icons.chat_sharp,

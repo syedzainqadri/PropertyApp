@@ -10,9 +10,11 @@ class FavoriteListingController extends GetxController {
   var isLoading = false.obs;
   var favoriteListings = FavoriteListings().obs;
   final token = GetStorage().read('token');
+  var userLoggedIn = false.obs;
 
   @override
   onInit() {
+    userLoggedIn.value = GetStorage().read('isLoggedIn');
     getMyFavorites();
     super.onInit();
   }
