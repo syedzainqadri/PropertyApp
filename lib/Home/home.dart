@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lagosabuja/Controllers/configControllers/config_controller.dart';
+import 'package:lagosabuja/Controllers/profile_controller.dart';
 import 'package:lagosabuja/Controllers/user_controller.dart';
 import 'package:lagosabuja/main.dart';
 import '../AddListings/add_listings.dart';
@@ -33,7 +34,9 @@ class _HomeState extends State<Home> {
   final MembershipController membershipController =
       Get.put(MembershipController());
   final ConfigController configController = Get.put(ConfigController());
-  final userController = Get.find<UserController>();
+  final ProfileController profileController = Get.put(ProfileController());
+  final UserController userController = Get.put(UserController());
+  // final userController = Get.find<UserController>();
 
   var userLoggedIn = false.obs;
   @override

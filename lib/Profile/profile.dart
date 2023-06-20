@@ -8,6 +8,7 @@ import 'package:lagosabuja/Controllers/profile_controller.dart';
 import 'package:lagosabuja/Controllers/sign_in_controller.dart';
 import 'package:lagosabuja/Profile/orders.dart';
 import 'package:lagosabuja/Profile/payments.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../Auth/sign_in.dart';
 import '../Controllers/user_controller.dart';
 import 'account_details.dart';
@@ -31,6 +32,10 @@ class _ProfileState extends State<Profile> {
   SignInController signInController = Get.put(SignInController());
   bool isLoading = false;
   final signOut = GetStorage();
+  final Uri _termsUrl =
+      Uri.parse('https://lagosabuja.com/terms-and-conditions/');
+  final Uri _privacyUrl =
+      Uri.parse('https://lagosabuja.com/privacy-and-cookies/');
   @override
   void initState() {
     super.initState();
@@ -147,6 +152,10 @@ class _ProfileState extends State<Profile> {
                     "Orders", Icons.shopping_cart, kGreen, Orders()),
                 profileParameters(
                     "Payments", Icons.payment, mediumBlue, MyPayments()),
+                urlLauncher(
+                    "Terms & Conditions", Icons.balance, kGreen, _termsUrl),
+                urlLauncher("Privacy Policy", Icons.privacy_tip, mediumBlue,
+                    _privacyUrl),
                 const SizedBox(
                   height: 15,
                 ),
@@ -216,5 +225,47 @@ class _ProfileState extends State<Profile> {
         ),
       ],
     );
+  }
+
+  urlLauncher(
+    text,
+    icon,
+    color,
+    url,
+  ) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 18.0, top: 8.0, bottom: 8.0),
+          child: GestureDetector(
+            onTap: () {
+              _launchUrl(url);
+            },
+            child: Row(
+              children: [
+                Icon(icon, color: color, size: 30),
+                const SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  text,
+                  style: const TextStyle(color: darkGrey, fontSize: 17),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const Divider(
+          thickness: 0.4,
+          color: mediumGrey,
+        ),
+      ],
+    );
+  }
+
+  Future<void> _launchUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

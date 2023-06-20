@@ -11,6 +11,8 @@ import 'package:lagosabuja/Controllers/listing_type_controller.dart';
 import 'package:lagosabuja/Controllers/listings_controller.dart';
 import 'package:lagosabuja/Controllers/location_controller.dart';
 import 'package:lagosabuja/Controllers/my_listings_controller.dart';
+import 'package:lagosabuja/Controllers/profile_controller.dart';
+import 'package:lagosabuja/Controllers/user_controller.dart';
 import 'package:lagosabuja/Home/home.dart';
 import 'package:lagosabuja/Models/sign_in_model.dart';
 
@@ -36,6 +38,8 @@ class SocialSignInController extends GetxController {
       Get.put(ListingController());
       Get.put(FavoriteListingController());
       Get.put(MyListingController());
+      Get.put(UserController());
+      Get.put(ProfileController());
       Get.put(ChatController());
       Get.put(CategoriesController());
       Get.put(LocationsController());
